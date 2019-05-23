@@ -1,0 +1,129 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterProductReviews
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer\Images $block */
+$element     = $block->getElement();
+$formName    = $block->getFormName();
+$elementName = $element->getName();
+?>
+<div id="template-images-gallery" class="gallery"
+     data-mage-init='{"betterProductReviews/gallery":{}}'
+     data-images="<?php echo $block->escapeHtml($block->getImagesJson()) ?>">
+    <div class="image image-placeholder">
+        <?php /* @escapeNotVerified */
+        echo $block->getUploaderHtml(); ?>
+        <div class="product-image-wrapper">
+            <p class="image-placeholder-text">
+                <?php echo __('Browse to find or drag image here'); ?>
+            </p>
+        </div>
+    </div>
+    <?php foreach ($block->getImageTypes() as $typeData): ?>
+        <input name="<?php echo $block->escapeHtml($typeData['name']) ?>"
+               data-form-part="<?php echo $formName ?>"
+               class="image-<?php echo $block->escapeHtml($typeData['code']) ?>"
+               type="hidden"
+               value="<?php echo $block->escapeHtml($typeData['value']) ?>"/>
+    <?php endforeach; ?>
+    <script id="template-images-gallery-template" data-template="image" type="text/x-magento-template">
+        <div class="image item" data-role="image">
+            <input type="hidden"
+                   name="<?php echo $elementName ?>[<%- data.file_id %>][position]"
+                   value="<%- data.position %>"
+                   data-form-part="<?php echo $formName ?>"
+                   class="position"/>
+            <input type="hidden"
+                   name="<?php echo $elementName ?>[<%- data.file_id %>][file]"
+                   value="<%- data.file %>"
+                   data-form-part="<?php echo $formName ?>"/>
+            <input type="hidden"
+                   name="<?php /* @escapeNotVerified */
+                   echo $elementName ?>[<%- data.file_id %>][label]"
+                   value="<%- data.label %>"
+                   data-form-part="<?php echo $formName ?>"/>
+            <input type="hidden"
+                   name="<?php /* @escapeNotVerified */
+                   echo $elementName ?>[<%- data.file_id %>][removed]"
+                   value="" class="is-removed"
+                   data-form-part="<?php echo $formName ?>"/>
+            <div class="product-image-wrapper">
+                <img class="product-image" data-role="image-element" src="<%- data.url %>"
+                     alt="<%- data.label %>"/>
+                <div class="actions">
+                    <button type="button"
+                            class="action-remove"
+                            data-role="delete-button"
+                            title="<?php echo $block->escapeHtml(__('Delete image')); ?>">
+                        <span><?php echo $block->escapeHtml(__('Delete image')); ?></span>
+                    </button>
+                    <div class="draggable-handle"></div>
+                </div>
+                <div class="image-fade"><span><?php echo $block->escapeHtml(__('Hidden')); ?></span></div>
+            </div>
+            <div class="item-description">
+                <div class="item-title" data-role="img-title"><%- data.label %></div>
+                <div class="item-size">
+                    <span data-role="image-dimens"></span>, <span
+                            data-role="image-size"><%- data.sizeLabel %></span>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script data-role="img-dialog-container-tmpl" type="text/x-magento-template">
+        <div class="image-panel" data-role="dialog">
+        </div>
+    </script>
+    <script data-role="img-dialog-tmpl" type="text/x-magento-template">
+        <div class="image-panel-preview">
+            <img src="<%- data.url %>" alt="<%- data.label %>"/>
+        </div>
+        <div class="image-panel-controls">
+            <strong class="image-name"><%- data.label %></strong>
+            <fieldset class="admin__fieldset fieldset-image-panel">
+                <div class="admin__field field-image-description">
+                    <label class="admin__field-label" for="image-description">
+                        <span><?php /* @escapeNotVerified */
+                            echo __('Alt Text') ?></span>
+                    </label>
+                    <div class="admin__field-control">
+                                <textarea data-role="image-description"
+                                          rows="3"
+                                          class="admin__control-textarea"
+                                          name="<?php /* @escapeNotVerified */
+                                          echo $elementName ?>[<%- data.file_id %>][label]"><%- data.label %></textarea>
+                    </div>
+                </div>
+                <div class="admin__field admin__field-inline field-image-size" data-role="size">
+                    <label class="admin__field-label">
+                        <span><?php echo __('Image Size') ?></span>
+                    </label>
+                    <div class="admin__field-value" data-message="{size}"></div>
+                </div>
+                <div class="admin__field admin__field-inline field-image-resolution" data-role="resolution">
+                    <label class="admin__field-label">
+                        <span><?php echo __('Image Resolution') ?></span>
+                    </label>
+                    <div class="admin__field-value" data-message="{width}^{height} px"></div>
+                </div>
+            </fieldset>
+        </div>
+    </script>
+</div>

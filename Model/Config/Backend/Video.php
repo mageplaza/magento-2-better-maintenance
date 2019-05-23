@@ -19,8 +19,26 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-\Magento\Framework\Component\ComponentRegistrar::register(
-    \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'Mageplaza_BetterMaintenance',
-    __DIR__
-);
+/**
+ * System config image field backend model
+ */
+namespace Mageplaza\BetterMaintenance\Model\Config\Backend;
+
+use Magento\Config\Model\Config\Backend\File;
+
+/**
+ * Class Video
+ * @package Mageplaza\BetterMaintenance\Model\Config\Backend
+ */
+class Video extends File
+{
+    /**
+     * Getter for allowed extensions of uploaded files
+     *
+     * @return string[]
+     */
+    protected function _getAllowedExtensions()
+    {
+        return ['mp4'];
+    }
+}

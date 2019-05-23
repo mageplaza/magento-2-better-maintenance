@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterMaintenance
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mpbettermaintenance>
+            <general>
+                <enabled>0</enabled>
+            </general>
+            <display_setting>
+                <clock_setting>
+                    <social_enabled>0</social_enabled>
+                </clock_setting>
+                <subcribe_setting>
+                    <subcribe_type>none</subcribe_type>
+                </subcribe_setting>
+                <footer_block>
+                    <cms_block>0</cms_block>
+                </footer_block>
+                <social_contact>
+                    <social_enabled>0</social_enabled>
+                </social_contact>
+            </display_setting>
+            <maintenance_setting>
+                <maintenance_progress_enabled>0</maintenance_progress_enabled>
+            </maintenance_setting>
+        </mpbettermaintenance>
+    </default>
+</config>

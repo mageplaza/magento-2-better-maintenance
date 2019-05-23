@@ -1,0 +1,38 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterMaintenance
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/**
+ * @var \Mageplaza\BetterMaintenance\Block\Adminhtml\System\MaintenanceButton $block
+ */
+?>
+<div class="actions actions-maintenance-preview">
+    <button class="button-maintenance-preview" type="button" id="<?= $block->getHtmlId() ?>">
+        <span><?= /* @noEscape */ $block->getButtonLabel() ?></span>
+    </button>
+</div>
+
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        $('#<?= $block->getHtmlId() ?>').on('click', function () {
+            window.open('<?= $block->escapeHtml($block->getButtonUrl()) ?>');
+        })
+    });
+</script>

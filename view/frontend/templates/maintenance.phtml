@@ -1,0 +1,11 @@
+<?php
+use Mageplaza\BetterMaintenance\Helper\Data;
+/**
+ * @var \Mageplaza\BetterMaintenance\Block\Maintenance $block;
+ */
+
+$helper = $this->helper(Data::class);
+
+?>
+<?= $this->getChildHtml('clock_countdown') ?>
+<h2>maintenance page</h2>
