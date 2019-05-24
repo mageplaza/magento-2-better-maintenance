@@ -75,7 +75,10 @@ if (!empty($template)) : ?>
     {
         "#mp-countdown-timer-<?= $timerId ?>": {
             "Mageplaza_BetterMaintenance/js/clock/mpcountdowntimer": {
-                "timer_id": "#mp-countdown-timer-<?= $timerId ?>"
+                "timer_id": "#mp-countdown-timer-<?= $timerId ?>",
+                "timezone": "<?= $block->getTimeZone() ?>",
+                "endtime": "<?= $helper->getConfigGeneral('end_time') ?>",
+                "enabled": <?= $helper->isEnabled() ?>
             }
         }
     }

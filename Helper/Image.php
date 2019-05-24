@@ -33,8 +33,10 @@ use Mageplaza\Core\Helper\Media;
  */
 class Image extends Media
 {
-    const TEMPLATE_MEDIA_PATH = 'mageplaza/bettermaintenance/image';
-    const TEMPLATE_MEDIA_TYPE_IMAGE = 'images';
+    const TEMPLATE_MEDIA_PATH = 'mageplaza/bettermaintenance';
+    const TEMPLATE_MEDIA_TYPE_IMAGE = 'image';
+    const TEMPLATE_MEDIA_TYPE_LOGO = 'logo';
+    const TEMPLATE_MEDIA_TYPE_VIDEO = 'video';
 
     /**
      * Get filename which is not duplicated with other files in media temporary and media directories
@@ -117,6 +119,10 @@ class Image extends Media
         return $this;
     }
 
+    public function getBaseStaticUrl() {
+        return $this->storeManager->getStore()
+                ->getBaseUrl(UrlInterface::URL_TYPE_STATIC);
+    }
     /**
      * @param array $imageEntries
      *

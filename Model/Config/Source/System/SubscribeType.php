@@ -27,9 +27,9 @@ use Magento\Framework\Option\ArrayInterface;
  * Class SubcribeType
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
-class SubcribeType implements ArrayInterface
+class SubscribeType implements ArrayInterface
 {
-    const NONE = 'none';
+    const NONE          = 'none';
     const REGISTER_FORM = 'register_form';
     const EMAIL_FORM    = 'email_form';
 
@@ -40,8 +40,8 @@ class SubcribeType implements ArrayInterface
     {
         return [
             ['value' => self::NONE, 'label' => __('None')],
-            ['value' => self::REGISTER_FORM, 'label' => __('Register Form')],
-            ['value' => self::EMAIL_FORM, 'label' => __('Email Only')]
+            ['value' => self::REGISTER_FORM, 'label' => __('Register Account')],
+            ['value' => self::EMAIL_FORM, 'label' => __('Newsletter Subcribe')]
         ];
     }
 }

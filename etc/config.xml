@@ -24,25 +24,43 @@
     <default>
         <mpbettermaintenance>
             <general>
-                <enabled>0</enabled>
+                <enabled>1</enabled>
+                <redirect_to>maintenance_page</redirect_to>
+                <auto_switch>1</auto_switch>
             </general>
             <display_setting>
                 <clock_setting>
                     <social_enabled>0</social_enabled>
+                    <clock_background_color>#42FFCA</clock_background_color>
+                    <clock_number_color>#000000</clock_number_color>
                 </clock_setting>
                 <subcribe_setting>
-                    <subcribe_type>none</subcribe_type>
+                    <subcribe_type>email_form</subcribe_type>
+                    <button_label>Subcribe</button_label>
                 </subcribe_setting>
                 <footer_block>
                     <cms_block>0</cms_block>
                 </footer_block>
                 <social_contact>
-                    <social_enabled>0</social_enabled>
+                    <social_enabled>1</social_enabled>
                 </social_contact>
             </display_setting>
             <maintenance_setting>
+                <maintenance_route>mpmaintenance</maintenance_route>
+                <maintenance_layout>single</maintenance_layout>
+                <maintenance_title>Under Maintenance</maintenance_title>
+                <maintenance_description>We're currently down for maintenace. Be right back!</maintenance_description>
+                <maintenance_background>image</maintenance_background>
                 <maintenance_progress_enabled>0</maintenance_progress_enabled>
+                <maintenance_progress_value>50</maintenance_progress_value>
             </maintenance_setting>
+            <comingsoon_setting>
+                <comingsoon_route>mpcomingsoon</comingsoon_route>
+                <comingsoon_layout>single</comingsoon_layout>
+                <comingsoon_title>Coming Soon</comingsoon_title>
+                <comingsoon_description>Our new site is coming soon. Stay tuned!</comingsoon_description>
+                <comingsoon_background>image</comingsoon_background>
+            </comingsoon_setting>
         </mpbettermaintenance>
     </default>
 </config>

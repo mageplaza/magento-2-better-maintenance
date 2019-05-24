@@ -30,8 +30,10 @@ define(
                 _create: function () {
                     mpcountdownInterval.setCountdown(
                         $(this.options.timer_id),
-                        this.options.rule,
-                        this.options.rule.timezone
+                        // this.options.rule,
+                        this.options.timezone,
+                        this.options.endtime,
+                        this.options.enabled
                     );
                 }
             }

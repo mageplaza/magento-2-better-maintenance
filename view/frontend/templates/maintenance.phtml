@@ -1,11 +1,165 @@
 <?php
 use Mageplaza\BetterMaintenance\Helper\Data;
+
 /**
- * @var \Mageplaza\BetterMaintenance\Block\Maintenance $block;
+ * @var \Mageplaza\BetterMaintenance\Block\Maintenance $block ;
  */
 
 $helper = $this->helper(Data::class);
 
 ?>
-<?= $this->getChildHtml('clock_countdown') ?>
-<h2>maintenance page</h2>
+<?php if ($helper->getMaintenanceSetting('maintenance_background') === 'image'): ?>
+    <style>
+        .mpbettermaintenance-maintenance-index {
+            background-image: url("<?= $block->getImageUrl() ?>");
+        }
+    </style>
+<?php endif; ?>
+<div id="mpbm-wrapper">
+    <?php if (!empty($helper->getMaintenanceSetting('maintenance_logo'))): ?>
+        <div id="mpbm-logo">
+            <img src="<?= $block->getLogo() ?>" alt="Logo" width="100">
+        </div>
+    <?php endif; ?>
+    <div id="mpbm-page-title" class="mpbm-text">
+        <h1 style="margin-bottom: 0"><?= $block->getPageTitle() ?></h1>
+    </div>
+    <div id="mpbm-page-description" class="mpbm-text">
+        <h3><?= $block->getPageDescription() ?></h3>
+    </div>
+
+    <!--    Clock area-->
+    <?php if ($helper->getClockSetting('clock_enabled')) : ?>
+        <div id="mpbm-clock">
+            <?= $this->getChildHtml('clock_countdown') ?>
+        </div>
+    <?php endif; ?>
+    <?php if ($helper->getMaintenanceSetting('maintenance_progress_enabled')): ?>
+        <div id="mpbm-progress-bar">
+            <div class="row">
+                <div class="mp-md-6">
+                    <div class="progress mp-md-3">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="<?= $block->getProgressValue() ?>"
+                             aria-valuemin="0"
+                             aria-valuemax="100"><?= $block->getProgressValue() ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <!--    Subscribe area-->
+    <?php if ($helper->getSubscribeSetting('subscribe_type') === 'email_form') : ?>
+        <div id="mpbm-subscribe">
+            <?= $this->getChildHtml('subscribe') ?>
+        </div>
+    <?php elseif ($helper->getSubscribeSetting('subscribe_type') === 'register_form') : ?>
+        <div id="mpbm-register">
+            <?= $this->getChildHtml('register') ?>
+        </div>
+    <?php endif; ?>
+
+    <!--    Social area-->
+    <?php if ($helper->getSocialSetting('social_enabled')): ?>
+        <div id="mpbm-social-contact">
+            <div id="mpbm-social-label" style="display: inline-block">
+                <p><?= $block->getSocialLabel() ?></p>
+            </div>
+            <?php foreach ($block->getSocialList() as $value) : ?>
+
+                <?php if ($value['link']) : ?>
+                    <div class="mpbm-social-box" style="display: inline-block">
+                        <a href="<?= $value['link'] ?>">
+                            <img src="<?= $value['img'] ?>" alt="" width="50">
+                        </a>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($block->getBlockCms()) : ?>
+        <div id="mpbm-footer-block">
+            <?= $block->getBlockCms() ?>
+        </div>
+    <?php endif; ?>
+
+</div>
+
+<style>
+    #mpbm-subscribe {
+        margin-bottom: 20px;
+    }
+    #mpbm-progress-bar {
+        margin-bottom: 20px;
+    }
+    #mpbm-clock {
+        margin: 20px auto;
+    }
+    #mpbm-logo {
+        padding-top: 3%;
+    }
+
+    #mpbm-page-title {
+        margin: 40px 0 0 0;
+    }
+
+    #mpbm-wrapper {
+        text-align: center;
+    }
+
+    #mpbm-wrapper li {
+        list-style: none;
+    }
+
+    .mpbm-text {
+        color: <?= $helper->getMaintenanceSetting('maintenance_color') ?>;
+    }
+
+    #mpbm-subscribe .block.newsletter {
+        margin: auto;
+    }
+
+    .progress {
+        margin: auto;
+        height: 45px;
+        width: 40%;
+        background: #FFFFFF;
+        text-align: center;
+        border-radius: 50px;
+    }
+
+    .progress-bar {
+        height: 45px;
+        font-size: 100%;
+        font-weight: bold;
+        border-radius: 50px;
+        line-height: 45px;
+        color: <?= $helper->getMaintenanceSetting('maintenance_progress_label_color') ?>;
+        background-color: <?= $helper->getMaintenanceSetting('maintenance_progress_bar_color') ?>;
+        width: 0;
+    }
+</style>
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+
+        var delay = 500,
+            bar   = $(".progress-bar");
+        bar.delay(delay).animate({
+            width: bar.attr('aria-valuenow') + '%'
+        }, delay);
+
+        bar.prop('Counter', 0).animate({
+            Counter: bar.text()
+        }, {
+            duration: delay,
+            easing: 'swing',
+            step: function (now) {
+                bar.text(Math.ceil(now) + '% ' + '<?= $block->getProgressLabel() ?>');
+            }
+        });
+    });
+</script>

@@ -34,19 +34,21 @@ define(
             /**
              * Create countdown timer
              */
-            setCountdown: function (element, ruleParams, timezone) {
+            setCountdown: function (element, timezone, endTime, enabled) {
+                // console.log(new Date(endTime).getTime());
                 // Set the date we're counting down to
                 var countDownHandler,
-                    enableBeforeCountdown = ruleParams.enable_before_start,
-                    enableWhileCountdown  = ruleParams.enable_while_running,
-                    countDownFromDate     = new Date(ruleParams.from_date).getTime(),
-                    countDownToDate       = new Date(ruleParams.to_date).getTime(),
+                    // enableBeforeCountdown = 0,
+                    // moduleEnabled  = '1',
+                    // countDownFromDate     = 1557248400000,
+                    endTime       = new Date(endTime).getTime(),
                     daysSpan              = element.find('.mp-countdown-days'),
                     hoursSpan             = element.find('.mp-countdown-hours'),
                     minutesSpan           = element.find('.mp-countdown-minutes'),
                     secondsSpan           = element.find('.mp-countdown-seconds');
 
-                if (countDownToDate < new Date().getTime()) {
+                if (endTime < new Date().getTime()) {
+
                     element.remove();
                 }
 
@@ -59,14 +61,14 @@ define(
                             formatDate = newDate.toLocaleString('en-US', {timeZone: timezone}),
                             now        = Date.parse(formatDate),
                             distance   = -1;
-
+                        // console.log(now);
                         // Find the distance between now and the count down date
-                        if (enableBeforeCountdown === '1' && countDownFromDate > now) {
-                            distance = countDownFromDate - now;
-                        }
-
-                        if (enableWhileCountdown === '1' && countDownFromDate < now) {
-                            distance = countDownToDate - now;
+                        // if (enableBeforeCountdown === '1' && countDownFromDate > now) {
+                        //     distance = countDownFromDate - now;
+                        // }
+                        // console.log(enabled);
+                        if (enabled === 1 && endTime > now) {
+                            distance = endTime - now;
                         }
 
 

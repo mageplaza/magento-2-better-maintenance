@@ -29,7 +29,6 @@ use Mageplaza\Core\Helper\AbstractData;
 class Data extends AbstractData
 {
     const CONFIG_MODULE_PATH = 'mpbettermaintenance';
-
     /**
      * Data constructor.
      *
@@ -62,9 +61,9 @@ class Data extends AbstractData
         return $this->getModuleConfig('display_setting/clock_setting/' . $code, $storeId);
     }
 
-    public function getSubcribeSetting($code, $storeId = null)
+    public function getSubscribeSetting($code, $storeId = null)
     {
-        return $this->getModuleConfig('display_setting/subcribe_setting/' . $code, $storeId);
+        return $this->getModuleConfig('display_setting/subscribe_setting/' . $code, $storeId);
     }
 
     public function getSocialSetting($code, $storeId = null)

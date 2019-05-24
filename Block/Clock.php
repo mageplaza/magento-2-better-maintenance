@@ -25,6 +25,7 @@ use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Model\Config\Source\System\ClockTemplate;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 
 /**
  * Class Widget
@@ -37,6 +38,8 @@ class Clock extends Template
      * @var Data
      */
     protected $_helperData;
+
+    protected $_localeDate;
 
     /**
      * Widget constructor.
@@ -51,12 +54,25 @@ class Clock extends Template
     public function __construct
     (
         HelperData $helperData,
+        TimezoneInterface $localeDate,
         Template\Context $context,
         array $data = []
     ) {
         $this->_helperData = $helperData;
+        $this->_localeDate = $localeDate;
         parent::__construct($context, $data);
     }
+
+
+    public function getTimeZone()
+    {
+        return $this->_localeDate->getConfigTimezone();
+    }
+
+//    public function getEndTime()
+//    {
+//        return strtotime($this->_helperData->getConfigGeneral('end_time'));
+//    }
 
     public function getClockTemplate($style)
     {
@@ -84,15 +100,15 @@ class Clock extends Template
         $template1 = '<div class="simple-container">
     <div class="' . $style . ' mp-countdown-clock">
         <span class="' . $style . '-txt1 mp-countdown-days"></span>
-        <span class="' . $style . '-txt2 mp-countdown-txt fs-12">' . __('Days') . '</span>
+        <span class="' . $style . '-txt2 mp-countdown-txt fs-45b">' . __('Days') . '</span>
     </div>
     <div class="' . $style . ' mp-countdown-clock">
         <span class="' . $style . '-txt1 mp-countdown-hours"></span>
-        <span class="' . $style . '-txt2 mp-countdown-txt fs-18">:</span>
+        <span class="' . $style . '-txt2 mp-countdown-txt fs-45">:</span>
     </div>
     <div class="' . $style . ' mp-countdown-clock">
         <span class="' . $style . '-txt1 mp-countdown-minutes"></span>
-        <span class="' . $style . '-txt2 mp-countdown-txt fs-18">:</span>
+        <span class="' . $style . '-txt2 mp-countdown-txt fs-45">:</span>
     </div>
     <div class="' . $style . ' mp-countdown-clock">
         <span class="' . $style . '-txt1 mp-countdown-seconds"></span>
