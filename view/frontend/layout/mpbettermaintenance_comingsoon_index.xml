@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="empty" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Mageplaza_BetterMaintenance::css/style.css"/>
+    </head>
+    <body>
+
+        <!--        <referenceContainer name="page.wrapper" remove="true"/>-->
+        <referenceContainer name="page.wrapper">
+            <referenceContainer name="main.content" remove="true"/>
+            <referenceContainer name="copyright" remove="true"/>
+            <referenceContainer name="content" remove="true"/>
+            <!--            <container name="mpbettermaintenance-maintenance-page">-->
+            <block class="Mageplaza\BetterMaintenance\Block\Comingsoon" name="mpbettermaintenance.comingsoon.page" template="Mageplaza_BetterMaintenance::comingsoon.phtml">
+                <block class="Mageplaza\BetterMaintenance\Block\Clock" name="mpbettermaintenance.clock" as="clock_countdown" template="Mageplaza_BetterMaintenance::clock/timer.phtml"/>
+                <block class="Magento\Newsletter\Block\Subscribe" name="form.subscribe" as="subscribe" template="subscribe.phtml"/>
+                <block class="Magento\Customer\Block\Form\Register" name="customer_form_register" as="register" template="form/register.phtml"/>
+            </block>
+            <!--            </container>-->
+        </referenceContainer>
+    </body>
+</page>

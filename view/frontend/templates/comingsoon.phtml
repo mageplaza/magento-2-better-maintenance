@@ -2,7 +2,7 @@
 use Mageplaza\BetterMaintenance\Helper\Data;
 
 /**
- * @var \Mageplaza\BetterMaintenance\Block\Maintenance $block ;
+ * @var \Mageplaza\BetterMaintenance\Block\Comingsoon $block ;
  */
 
 $helper = $this->helper(Data::class);
@@ -35,21 +35,6 @@ $helper = $this->helper(Data::class);
             <?= $this->getChildHtml('clock_countdown') ?>
         </div>
     <?php endif; ?>
-    <?php if ($helper->getMaintenanceSetting('maintenance_progress_enabled')): ?>
-        <div id="mpbm-progress-bar">
-            <div class="row">
-                <div class="mp-md-6">
-                    <div class="progress mp-md-3">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="<?= $block->getProgressValue() ?>"
-                             aria-valuemin="0"
-                             aria-valuemax="100"><?= $block->getProgressValue() ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
-
     <!--    Subscribe area-->
     <?php if ($helper->getSubscribeSetting('subscribe_type') === 'email_form') : ?>
         <div id="mpbm-subscribe">
@@ -145,12 +130,3 @@ $helper = $this->helper(Data::class);
         width: 0;
     }
 </style>
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Mageplaza_BetterMaintenance/js/progress/bar": {
-                "progressLabel": "<?= $block->getProgressLabel() ?>"
-            }
-        }
-    }
-</script>

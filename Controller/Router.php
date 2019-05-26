@@ -89,7 +89,6 @@ class Router implements RouterInterface
 //        }
 //        var_dump($condition->getContinue());die;
         if ($identifier === $this->_helperData->getMaintenanceSetting('maintenance_route')) {
-//            die('3333');
             $request->setModuleName('mpbettermaintenance')->setControllerName('maintenance')->setActionName('index');
             $request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS, $identifier);
 

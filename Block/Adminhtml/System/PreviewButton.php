@@ -55,10 +55,11 @@ class PreviewButton extends Field
     protected function _getElementHtml(AbstractElement $element)
     {
         $originalData = $element->getOriginalData();
+
         $this->addData(
             [
                 'button_label' => $originalData['button_label'],
-                'button_url'   => $this->getUrl($originalData['button_url'], ['_current' => true]),
+                'button_url'   => $this->getUrl('mpbettermainten/maintenance/index'),
                 'html_id'      => $element->getHtmlId()
             ]
         );

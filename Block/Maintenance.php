@@ -26,18 +26,20 @@ class Maintenance extends Template
         parent::__construct($context, $data);
     }
 
-    public function getLogo()
+    public function getLogo($logo)
     {
-        return $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath(
-            $this->_helperData->getMaintenanceSetting('maintenance_logo'),
+        return $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($logo,
             HelperImage::TEMPLATE_MEDIA_TYPE_LOGO
         ));
     }
 
-    public function getImageUrl()
+    public function getImageUrl($image)
     {
-        return $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath(
-            $this->_helperData->getMaintenanceSetting('maintenance_background_image'),
+        if (empty($image)) {
+            return null;
+        }
+
+        return $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($image,
             HelperImage::TEMPLATE_MEDIA_TYPE_IMAGE
         ));
     }
@@ -111,5 +113,4 @@ class Maintenance extends Template
 
         return $block;
     }
-
 }
