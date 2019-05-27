@@ -34,7 +34,7 @@
                     <comment><![CDATA[Select <strong>Yes</strong> to enable the module]]></comment>
                 </field>
                 <field id="real_time" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Real Time of Store</label>
+                    <label>Real Time of Website</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\RealTime</frontend_model>
                 </field>
                 <field id="end_time" translate="label" sortOrder="30" type="date" showInDefault="1" showInStore="0" >

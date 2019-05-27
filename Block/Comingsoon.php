@@ -21,6 +21,7 @@ class Comingsoon extends Maintenance
 
     public function getPageTitle()
     {
+//        var_dump($this->_request->getFullActionName());die;
         $title = $this->_helperData->getComingSoonSetting('comingsoon_title');
 
         return empty($title) ? self::PAGE_TITLE : $title;

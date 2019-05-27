@@ -4,7 +4,6 @@
         <css src="Mageplaza_BetterMaintenance::css/style.css"/>
     </head>
     <body>
-
         <!--        <referenceContainer name="page.wrapper" remove="true"/>-->
         <referenceContainer name="page.wrapper">
             <referenceContainer name="main.content" remove="true"/>

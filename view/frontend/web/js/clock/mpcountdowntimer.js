@@ -33,7 +33,8 @@ define(
                         // this.options.rule,
                         this.options.timezone,
                         this.options.endtime,
-                        this.options.enabled
+                        this.options.enabled,
+                        this.options.currentTime
                     );
                 }
             }

@@ -78,7 +78,8 @@ if (!empty($template)) : ?>
                 "timer_id": "#mp-countdown-timer-<?= $timerId ?>",
                 "timezone": "<?= $block->getTimeZone() ?>",
                 "endtime": "<?= $helper->getConfigGeneral('end_time') ?>",
-                "enabled": <?= $helper->isEnabled() ?>
+                "enabled": <?= $helper->isEnabled() ?>,
+                "currentTime": "<?= $block->getCurrentTime() ?>"
             }
         }
     }

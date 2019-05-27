@@ -66,7 +66,7 @@ class ColorPicker extends Field
 
         if (!$this->_coreRegistry->registry('colorpicker_loaded')) {
             $html .= '<script type="text/javascript" src="' . $cpPath . '"></script>';
-            $this->_coreRegistry->registry('colorpicker_loaded', 1);
+            $this->_coreRegistry->registry('colorpicker_loaded');
         }
         $html .= '<script type="text/javascript">
                 var el = document.getElementById("' . $element->getHtmlId() . '");

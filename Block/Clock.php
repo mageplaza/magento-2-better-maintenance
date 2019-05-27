@@ -26,6 +26,7 @@ use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Model\Config\Source\System\ClockTemplate;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Magento\Framework\Stdlib\DateTime\DateTime;
 
 /**
  * Class Widget
@@ -41,6 +42,8 @@ class Clock extends Template
 
     protected $_localeDate;
 
+    protected $_date;
+
     /**
      * Widget constructor.
      *
@@ -55,24 +58,25 @@ class Clock extends Template
     (
         HelperData $helperData,
         TimezoneInterface $localeDate,
+        DateTime $date,
         Template\Context $context,
         array $data = []
     ) {
         $this->_helperData = $helperData;
         $this->_localeDate = $localeDate;
+        $this->_date = $date;
         parent::__construct($context, $data);
     }
 
+    public function getCurrentTime()
+    {
+        return $this->_date->gmtDate();
+    }
 
     public function getTimeZone()
     {
         return $this->_localeDate->getConfigTimezone();
     }
-
-//    public function getEndTime()
-//    {
-//        return strtotime($this->_helperData->getConfigGeneral('end_time'));
-//    }
 
     public function getClockTemplate($style)
     {

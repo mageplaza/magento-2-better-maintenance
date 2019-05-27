@@ -21,6 +21,7 @@
 
 namespace Mageplaza\BetterMaintenance\Controller;
 
+use Magento\Framework\App\Action\Forward;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\RouterInterface;
@@ -74,32 +75,21 @@ class Router implements RouterInterface
     public function match(RequestInterface $request)
     {
         $identifier = trim($request->getPathInfo(), '/');
-//        var_dump($identifier);die;
-//        $condition = new \Magento\Framework\DataObject(['identifier' => $identifier, 'continue' => true]);
 
-//        $identifier = $condition->getIdentifier();
-//        if ($condition->getRedirectUrl()) {
-//            $this->_response->setRedirect($condition->getRedirectUrl());
-//            $request->setDispatched(true);
-//            return $this->_actionFactory->create(\Magento\Framework\App\Action\Redirect::class);
-//        }
-
-//        if (!$condition->getContinue()) {
-//            return null;
-//        }
-//        var_dump($condition->getContinue());die;
-        if ($identifier === $this->_helperData->getMaintenanceSetting('maintenance_route')) {
+        if ($identifier === $this->_helperData->getMaintenanceRoute()) {
             $request->setModuleName('mpbettermaintenance')->setControllerName('maintenance')->setActionName('index');
-            $request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS, $identifier);
+            $request->setAlias(Url::REWRITE_REQUEST_PATH_ALIAS, $identifier);
 
-            return $this->_actionFactory->create(\Magento\Framework\App\Action\Forward::class);
+            return $this->_actionFactory->create(Forward::class);
         }
-        if ($identifier === $this->_helperData->getMaintenanceSetting('comingsoon_route')) {
+
+        if ($identifier === $this->_helperData->getComingSoonRoute()) {
             $request->setModuleName('mpbettermaintenance')->setControllerName('comingsoon')->setActionName('index');
-            $request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS, $identifier);
+            $request->setAlias(Url::REWRITE_REQUEST_PATH_ALIAS, $identifier);
 
-            return $this->_actionFactory->create(\Magento\Framework\App\Action\Forward::class);
+            return $this->_actionFactory->create(Forward::class);
         }
+
         return null;
     }
 }

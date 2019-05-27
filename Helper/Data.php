@@ -29,6 +29,9 @@ use Mageplaza\Core\Helper\AbstractData;
 class Data extends AbstractData
 {
     const CONFIG_MODULE_PATH = 'mpbettermaintenance';
+    const MAINTENANCE_ROUTE  = 'mpmaintenance';
+    const COMINGSOON_ROUTE   = 'mpcomingsoon';
+
     /**
      * Data constructor.
      *
@@ -80,4 +83,19 @@ class Data extends AbstractData
     {
         return $this->getModuleConfig('comingsoon_setting/' . $code, $storeId);
     }
+
+    public function getMaintenanceRoute()
+    {
+        $maintenanceRoute = $this->getMaintenanceSetting('maintenance_route');
+
+        return isset($maintenanceRoute) ? $maintenanceRoute : self::MAINTENANCE_ROUTE;
+    }
+
+    public function getComingSoonRoute()
+    {
+        $comingSoonRoute = $this->getComingSoonSetting('comingsoon_route');
+
+        return isset($comingSoonRoute) ? $comingSoonRoute : self::COMINGSOON_ROUTE;
+    }
+
 }

@@ -28,6 +28,7 @@ class Maintenance extends Template
 
     public function getLogo($logo)
     {
+//        var_dump($this->_request->getFullActionName());die;
         return $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($logo,
             HelperImage::TEMPLATE_MEDIA_TYPE_LOGO
         ));

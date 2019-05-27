@@ -34,21 +34,19 @@ define(
             /**
              * Create countdown timer
              */
-            setCountdown: function (element, timezone, endTime, enabled) {
+            setCountdown: function (element, timezone, endTime, enabled, currentTime) {
                 // console.log(new Date(endTime).getTime());
                 // Set the date we're counting down to
+
                 var countDownHandler,
-                    // enableBeforeCountdown = 0,
-                    // moduleEnabled  = '1',
-                    // countDownFromDate     = 1557248400000,
-                    endTime       = new Date(endTime).getTime(),
-                    daysSpan              = element.find('.mp-countdown-days'),
-                    hoursSpan             = element.find('.mp-countdown-hours'),
-                    minutesSpan           = element.find('.mp-countdown-minutes'),
-                    secondsSpan           = element.find('.mp-countdown-seconds');
+                    timeNow = new Date(currentTime).getTime(),
+                    timeEnd     = new Date(endTime).getTime(),
+                    daysSpan    = element.find('.mp-countdown-days'),
+                    hoursSpan   = element.find('.mp-countdown-hours'),
+                    minutesSpan = element.find('.mp-countdown-minutes'),
+                    secondsSpan = element.find('.mp-countdown-seconds');
 
-                if (endTime < new Date().getTime()) {
-
+                if (timeEnd < timeNow) {
                     element.remove();
                 }
 
@@ -61,16 +59,11 @@ define(
                             formatDate = newDate.toLocaleString('en-US', {timeZone: timezone}),
                             now        = Date.parse(formatDate),
                             distance   = -1;
-                        // console.log(now);
-                        // Find the distance between now and the count down date
-                        // if (enableBeforeCountdown === '1' && countDownFromDate > now) {
-                        //     distance = countDownFromDate - now;
-                        // }
-                        // console.log(enabled);
+
                         if (enabled === 1 && endTime > now) {
                             distance = endTime - now;
                         }
-
+                        // console.log(distance);
 
                         // Time calculations for days, hours, minutes and seconds
                         days    = Math.floor(distance / (1000 * 60 * 60 * 24));

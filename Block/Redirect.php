@@ -28,6 +28,7 @@ use Magento\Framework\App\Response\Http;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
+use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 
 /**
  * Class Deal
@@ -35,9 +36,7 @@ use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
  */
 class Redirect extends Template
 {
-    const MAINTENANCE_ROUTE = 'mpmaintenance';
-    const COMINGSOON_ROUTE  = 'mpcomingsoon';
-    protected $_template = "Mageplaza_BetterMaintenance::redirect.phtml";
+    protected $_template = 'Mageplaza_BetterMaintenance::redirect.phtml';
 
     /**
      * @var HelperData
@@ -69,6 +68,8 @@ class Redirect extends Template
      */
     protected $_context;
 
+    protected $_remoteAddress;
+
     /**
      * Action constructor.
      *
@@ -89,6 +90,7 @@ class Redirect extends Template
         Http $response,
         ManagerInterface $messageManager,
         HttpContext $httpContext,
+        RemoteAddress $remoteAddress,
         array $data = []
     ) {
         $this->_helperData     = $helperData;
@@ -97,6 +99,7 @@ class Redirect extends Template
         $this->_response       = $response;
         $this->_messageManager = $messageManager;
         $this->_context        = $httpContext;
+        $this->_remoteAddress = $remoteAddress;
 
         parent::__construct($context, $data);
     }
@@ -111,39 +114,62 @@ class Redirect extends Template
         return $this->_request->getFullActionName();
     }
 
+    public function getWhiteListPage()
+    {
+        $links = preg_split("/(\r\n|\n|\r)/", $this->_helperData->getConfigGeneral('whitelist_page'));
+
+        return $links;
+    }
+
+    public function getWhiteListIp()
+    {
+        return explode(',', $this->_helperData->getConfigGeneral('whitelist_ip'));
+    }
     /**
-     * Action redirect to login page
-     *
-     * @return bool
+     * @return bool|Http
      */
     public function redirectToUrl()
     {
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
-        //        $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
-        //        var_dump($currentUrl);die;
-        //        $loginUrl = $this->getUrl('customer/account/login', ['referer' => base64_encode($currentUrl), 'isForce' => true]);
+        $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+        $currentIp = $this->_remoteAddress->getRemoteAddress();
+
+        foreach ($this->getWhiteListIp() as $value) {
+            if ($currentIp === $value) {
+                return false;
+            }
+        }
+
+        foreach ($this->getWhiteListPage() as $value) {
+            if ($currentUrl === $value) {
+                return false;
+            }
+        }
         switch ($redirectTo) {
             case 'maintenance_page':
-                $route = $this->_helperData->getMaintenanceSetting('maintenance_route');
-                $route = isset($route) ? $route : self::MAINTENANCE_ROUTE;
-                //                $route = 'mpmaintenance/maintenance/index';
+                $route = $this->_helperData->getMaintenanceRoute();
+                $route = isset($route) ? $route : HelperData::MAINTENANCE_ROUTE;
                 break;
             case 'coming_soon_page':
-                $route = $this->_helperData->getMaintenanceSetting('comingsoon_route');
-                $route = isset($route) ? $route : self::COMINGSOON_ROUTE;
-                //                $route = 'mpmaintenance/comingsoon/index';
+                $route = $this->_helperData->getComingSoonRoute();
+                $route = isset($route) ? $route : HelperData::COMINGSOON_ROUTE;
                 break;
             case 'home_page':
                 $route = $this->getBaseUrl();
+                if ($this->getFullActionName() === 'cms_index_index') {
+                    return false;
+                }
                 break;
             default:
-                $route = 'no-route';
+                $route = 'noroute';
+                if ($this->getFullActionName() === 'cms_noroute_index') {
+                    return false;
+                }
                 break;
         }
-        //        $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+
         $url = $this->getUrl($route);
 
         return $this->_response->setRedirect($url)->setHttpResponseCode(503);
-
     }
 }
