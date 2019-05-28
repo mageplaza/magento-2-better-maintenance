@@ -27,6 +27,7 @@ use Magento\Framework\Controller\Result\RawFactory;
 use Magento\Framework\Filesystem;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Mageplaza\BetterMaintenance\Helper\Image;
+use Magento\Framework\App\Config\Value;
 
 /**
  * Class Upload
@@ -62,6 +63,8 @@ class Upload extends Action
      */
     protected $_imageHelper;
 
+    protected $_value;
+
     /**
      * Upload constructor.
      *
@@ -76,12 +79,14 @@ class Upload extends Action
         RawFactory $resultRawFactory,
         UploaderFactory $uploaderFactory,
         Filesystem $filesystem,
-        Image $imageHelper
+        Image $imageHelper,
+        Value $value
     ) {
         $this->resultRawFactory = $resultRawFactory;
         $this->_uploaderFactory = $uploaderFactory;
         $this->_fileSystem = $filesystem;
         $this->_imageHelper = $imageHelper;
+        $this->_value = $value;
 
         parent::__construct($context);
     }
@@ -91,6 +96,7 @@ class Upload extends Action
      */
     public function execute()
     {
+
         try {
             $uploader = $this->_uploaderFactory->create(['fileId' => 'image']);
             $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
@@ -108,7 +114,8 @@ class Upload extends Action
             unset($result['path']);
 
             $result['url'] = $this->_imageHelper->getTmpMediaUrl($result['file']);
-            $result['file'] = $result['file'] . '.tmp';
+            $result['file'] = $result['file'];
+
         } catch (\Exception $e) {
             $result = ['error' => $e->getMessage(), 'errorcode' => $e->getCode()];
         }

@@ -26,6 +26,7 @@ use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Block\Widget;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\View\Element\AbstractBlock;
+use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 
 /**
@@ -48,10 +49,10 @@ class Images extends Widget
      */
     public function __construct(
         Context $context,
-//        Image $imageHelper,
+        HelperImage $imageHelper,
         array $data = []
     ) {
-//        $this->_imageHelper = $imageHelper;
+        $this->_imageHelper = $imageHelper;
 
         parent::__construct($context, $data);
     }
@@ -118,32 +119,32 @@ class Images extends Widget
 //        );
 //    }
 
-//    /**
-//     * @return string
-//     */
-//    public function getImagesJson()
-//    {
-//        $value = $this->getElement()->getImages();
-//        if (is_array($value) && !empty($value)) {
-//            $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
-//            $images = $this->sortImagesByPosition($value);
-//            foreach ($images as $key => &$image) {
-//                $image['url'] = $this->_imageHelper
-//                        ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
-//                try {
-//                    $fileHandler = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
-//                    $image['size'] = $fileHandler['size'];
-//                } catch (\Exception $e) {
-//                    $this->_logger->warning($e);
-//                    unset($images[$key]);
-//                }
-//            }
-//
-//            return HelperData::jsonEncode($images);
-//        }
-//
-//        return '[]';
-//    }
+    /**
+     * @return string
+     */
+    public function getImagesJson()
+    {
+        $value = $this->getElement()->getImages();
+        if (is_array($value) && !empty($value)) {
+            $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
+            $images = $this->sortImagesByPosition($value);
+            foreach ($images as $key => &$image) {
+                $image['url'] = $this->_imageHelper
+                        ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
+                try {
+                    $fileHandler = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
+                    $image['size'] = $fileHandler['size'];
+                } catch (\Exception $e) {
+                    $this->_logger->warning($e);
+                    unset($images[$key]);
+                }
+            }
+
+            return HelperData::jsonEncode($images);
+        }
+
+        return '[]';
+    }
 
     /**
      * Sort images array by position key

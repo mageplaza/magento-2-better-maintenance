@@ -21,14 +21,14 @@
 
 namespace Mageplaza\BetterMaintenance\Model\Config\Backend;
 
-use Magento\Config\Model\Config\Backend\File;
+use Magento\Framework\App\Config\Value;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 
 /**
  * Class ArraySerialized
  * @package Mageplaza\OrderLabels\Model\Config\Backend\Serialized
  */
-class MultipleImages extends File
+class MultipleImages extends Value
 {
     /**
      * @return Value|void
@@ -42,18 +42,17 @@ class MultipleImages extends File
     }
 
     /**
-     * @return $this|Value
+     * @return Value
      */
     public function beforeSave()
     {
-        die('4444');
         $value = $this->getValue();
+
         if (is_array($value)) {
             unset($value['__empty']);
             $this->setValue(HelperData::jsonEncode($value));
         }
-        parent::beforeSave();
 
-        return $this;
+        return parent::beforeSave();
     }
 }

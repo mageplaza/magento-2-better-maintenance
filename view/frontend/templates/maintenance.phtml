@@ -13,6 +13,8 @@ $helper = $this->helper(Data::class);
     <style>
         .mpbettermaintenance-maintenance-index {
             background-image: url("<?= $block->getImageUrl($helper->getMaintenanceSetting('maintenance_background_image')) ?>");
+            background-repeat: no-repeat;
+            background-size: cover;
         }
     </style>
 <?php endif; ?>

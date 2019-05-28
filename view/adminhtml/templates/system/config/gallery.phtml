@@ -25,7 +25,7 @@ $formName    = $block->getFormName();
 $elementName = $element->getName();
 ?>
 <div id="template-images-gallery" class="gallery"
-     data-mage-init='{"betterProductReviews/gallery":{}}'
+     data-mage-init='{"Mageplaza_BetterMaintenance/js/image-gallery":{}}'
      data-images="<?php echo $block->escapeHtml($block->getImagesJson()) ?>">
     <div class="image image-placeholder">
         <?php /* @escapeNotVerified */
@@ -46,22 +46,20 @@ $elementName = $element->getName();
     <script id="template-images-gallery-template" data-template="image" type="text/x-magento-template">
         <div class="image item" data-role="image">
             <input type="hidden"
-                   name="<?php echo $elementName ?>[<%- data.file_id %>][position]"
+                   name="groups[maintenance_setting][fields][maintenance_background_multi_image][value][<%- data.file_id %>][position]"
                    value="<%- data.position %>"
                    data-form-part="<?php echo $formName ?>"
                    class="position"/>
             <input type="hidden"
-                   name="<?php echo $elementName ?>[<%- data.file_id %>][file]"
+                   name="groups[maintenance_setting][fields][maintenance_background_multi_image][value][<%- data.file_id %>][file]"
                    value="<%- data.file %>"
                    data-form-part="<?php echo $formName ?>"/>
             <input type="hidden"
-                   name="<?php /* @escapeNotVerified */
-                   echo $elementName ?>[<%- data.file_id %>][label]"
+                   name="groups[maintenance_setting][fields][maintenance_background_multi_image][value][<%- data.file_id %>][label]"
                    value="<%- data.label %>"
                    data-form-part="<?php echo $formName ?>"/>
             <input type="hidden"
-                   name="<?php /* @escapeNotVerified */
-                   echo $elementName ?>[<%- data.file_id %>][removed]"
+                   name="groups[maintenance_setting][fields][maintenance_background_multi_image][value][<%- data.file_id %>][removed]"
                    value="" class="is-removed"
                    data-form-part="<?php echo $formName ?>"/>
             <div class="product-image-wrapper">
