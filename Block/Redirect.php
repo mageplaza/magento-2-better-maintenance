@@ -29,6 +29,7 @@ use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
+use Magento\Framework\Stdlib\DateTime\DateTime;
 
 /**
  * Class Deal
@@ -70,6 +71,8 @@ class Redirect extends Template
 
     protected $_remoteAddress;
 
+    protected $_date;
+
     /**
      * Action constructor.
      *
@@ -91,6 +94,7 @@ class Redirect extends Template
         ManagerInterface $messageManager,
         HttpContext $httpContext,
         RemoteAddress $remoteAddress,
+        DateTime $date,
         array $data = []
     ) {
         $this->_helperData     = $helperData;
@@ -100,6 +104,7 @@ class Redirect extends Template
         $this->_messageManager = $messageManager;
         $this->_context        = $httpContext;
         $this->_remoteAddress = $remoteAddress;
+        $this->_date = $date;
 
         parent::__construct($context, $data);
     }
@@ -145,6 +150,11 @@ class Redirect extends Template
                 return false;
             }
         }
+
+        if (strtotime($this->_date->gmtDate()) >= strtotime($this->_helperData->getConfigGeneral('end_time'))) {
+            return false;
+        }
+
         switch ($redirectTo) {
             case 'maintenance_page':
                 $route = $this->_helperData->getMaintenanceRoute();
@@ -169,7 +179,8 @@ class Redirect extends Template
         }
 
         $url = $this->getUrl($route);
+        $http = $this->_helperData->getConfigGeneral('maintenance_http_response');
 
-        return $this->_response->setRedirect($url)->setHttpResponseCode(503);
+        return $this->_response->setRedirect($url)->setHttpResponseCode($http);
     }
 }

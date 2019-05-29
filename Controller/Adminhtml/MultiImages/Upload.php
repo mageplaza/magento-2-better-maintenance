@@ -114,7 +114,7 @@ class Upload extends Action
             unset($result['path']);
 
             $result['url'] = $this->_imageHelper->getTmpMediaUrl($result['file']);
-            $result['file'] = $result['file'];
+            $result['file'] = 'tmp' . $result['file'];
 
         } catch (\Exception $e) {
             $result = ['error' => $e->getMessage(), 'errorcode' => $e->getCode()];

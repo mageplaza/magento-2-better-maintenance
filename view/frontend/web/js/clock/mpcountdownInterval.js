@@ -34,12 +34,12 @@ define(
             /**
              * Create countdown timer
              */
-            setCountdown: function (element, timezone, endTime, enabled, currentTime) {
+            setCountdown: function (element, timezone, endTime, enabled, currentTime, baseUrl, autoSwitch) {
                 // console.log(new Date(endTime).getTime());
                 // Set the date we're counting down to
 
                 var countDownHandler,
-                    timeNow = new Date(currentTime).getTime(),
+                    timeNow     = new Date(currentTime).getTime(),
                     timeEnd     = new Date(endTime).getTime(),
                     daysSpan    = element.find('.mp-countdown-days'),
                     hoursSpan   = element.find('.mp-countdown-hours'),
@@ -47,9 +47,12 @@ define(
                     secondsSpan = element.find('.mp-countdown-seconds');
 
                 if (timeEnd < timeNow) {
-                    element.remove();
+                    daysSpan.html(zeroPad(0));
+                    hoursSpan.html(zeroPad(0));
+                    minutesSpan.html(zeroPad(0));
+                    secondsSpan.html(zeroPad(0));
+                    // element.remove();
                 }
-
                 // Update the count down every 1 second
                 countDownHandler = setInterval(
                     function () {
@@ -60,10 +63,10 @@ define(
                             now        = Date.parse(formatDate),
                             distance   = -1;
 
-                        if (enabled === 1 && endTime > now) {
-                            distance = endTime - now;
+                        if (enabled === 1 && timeEnd > now) {
+                            distance = timeEnd - now;
                         }
-                        // console.log(distance);
+                        // console.log(window.location);
 
                         // Time calculations for days, hours, minutes and seconds
                         days    = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -76,11 +79,20 @@ define(
                         hoursSpan.html(zeroPad(hours));
                         minutesSpan.html(zeroPad(minutes));
                         secondsSpan.html(zeroPad(seconds));
-
+                        // console.log(window.location.host);
                         // If the count down is over, hide countdown
                         if (distance < 0) {
                             clearInterval(countDownHandler);
-                            element.hide();
+                            if (autoSwitch === 0) {
+                                daysSpan.html(zeroPad(0));
+                                hoursSpan.html(zeroPad(0));
+                                minutesSpan.html(zeroPad(0));
+                                secondsSpan.html(zeroPad(0));
+                            } else {
+                                window.location.href = baseUrl;
+                            }
+                            // window.location.href = baseUrl;
+                            // element.hide();
                         }
                     },
                     1000

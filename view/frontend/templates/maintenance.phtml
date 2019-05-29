@@ -6,10 +6,44 @@ use Mageplaza\BetterMaintenance\Helper\Data;
  */
 
 $helper = $this->helper(Data::class);
-
+$listImagesUrl = implode(',', $block->getMultipleImagesUrl());
 ?>
 
-<?php if ($helper->getMaintenanceSetting('maintenance_background') === 'image' && $block->getImageUrl($helper->getMaintenanceSetting('maintenance_background_image'))): ?>
+<!--Multiple Image Background-->
+<?php if ($helper->getMaintenanceSetting('maintenance_background') === 'multiple_images'
+    && $block->getImageUrl($helper->getMaintenanceSetting('maintenance_background_multi_image'))): ?>
+    <style>
+        .mpbettermaintenance-maintenance-index {
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition-delay: 2s;
+        }
+    </style>
+    <script>
+        require([
+            'jquery'
+        ], function ($) {
+            var images    = '<?= $listImagesUrl ?>';
+            images        = images.split(',');
+            var nextImage = 0;
+            doSlideshow();
+
+            function doSlideshow () {
+                if (nextImage >= images.length) {
+                    nextImage = 0;
+                }
+                $('.mpbettermaintenance-maintenance-index')
+                .fadeIn('slow', function () {
+                    setTimeout(doSlideshow, 5000);
+                }).css('background-image', 'url("' + images[nextImage++] + '")');
+            }
+        });
+    </script>
+<?php endif; ?>
+
+<!--Single Image Background-->
+<?php if ($helper->getMaintenanceSetting('maintenance_background') === 'image'
+    && $block->getImageUrl($helper->getMaintenanceSetting('maintenance_background_image'))): ?>
     <style>
         .mpbettermaintenance-maintenance-index {
             background-image: url("<?= $block->getImageUrl($helper->getMaintenanceSetting('maintenance_background_image')) ?>");
@@ -18,10 +52,21 @@ $helper = $this->helper(Data::class);
         }
     </style>
 <?php endif; ?>
+
+<!--Video Background-->
+<?php if ($helper->getMaintenanceSetting('maintenance_background') === 'video'
+    && $block->getImageUrl($helper->getMaintenanceSetting('maintenance_background_video'))): ?>
+    <video autoplay muted loop id="mpbm-video">
+        <source src="<?= $block->getVideoUrl($helper->getMaintenanceSetting('maintenance_background_video')) ?>"
+                type="video/mp4">
+    </video>
+<?php endif; ?>
+
 <div id="mpbm-<?= $helper->getMaintenanceSetting('maintenance_layout') ?>-column">
     <?php if (!empty($helper->getMaintenanceSetting('maintenance_logo'))): ?>
         <div id="mpbm-logo">
-            <img src="<?= $block->getLogo($helper->getMaintenanceSetting('maintenance_logo')) ?>" alt="<?= __('Logo') ?>" width="100">
+            <img src="<?= $block->getLogo($helper->getMaintenanceSetting('maintenance_logo')) ?>"
+                 alt="<?= __('Logo') ?>" width="100">
         </div>
     <?php endif; ?>
     <div id="mpbm-page-title" class="mpbm-text">
@@ -91,6 +136,35 @@ $helper = $this->helper(Data::class);
 </div>
 
 <style>
+    /*Single column*/
+    #mpbm-single-column {
+        text-align: center;
+    }
+
+    /*Double column left side*/
+    #mpbm-double_left-column {
+        text-align: center;
+    }
+
+    #mpbm-double_left-column .progress {
+        margin: auto 0px;
+    }
+
+    #mpbm-double_left-column .simple-container {
+        justify-content: left;
+    }
+
+    /*Double column*/
+
+    #mpbm-video {
+        position: fixed;
+        z-index: -1;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+    }
+
     #mpbm-subscribe {
         margin-bottom: 20px;
     }
@@ -109,10 +183,6 @@ $helper = $this->helper(Data::class);
 
     #mpbm-page-title {
         margin: 40px 0 0 0;
-    }
-
-    #mpbm-single-column {
-        text-align: center;
     }
 
     #mpbm-wrapper li {
@@ -155,4 +225,5 @@ $helper = $this->helper(Data::class);
             }
         }
     }
+
 </script>

@@ -40,6 +40,8 @@ class Images extends Widget
      */
     protected $_imageHelper;
 
+    protected $_helperData;
+
     /**
      * Images constructor.
      *
@@ -50,9 +52,11 @@ class Images extends Widget
     public function __construct(
         Context $context,
         HelperImage $imageHelper,
+        HelperData $helperData,
         array $data = []
     ) {
         $this->_imageHelper = $imageHelper;
+        $this->_helperData = $helperData;
 
         parent::__construct($context, $data);
     }
@@ -106,42 +110,70 @@ class Images extends Widget
         return $this->getHtmlId() . 'JsObject';
     }
 
-//    /**
-//     * @return string
-//     */
-//    public function getAddImagesButton()
-//    {
-//        return $this->getButtonHtml(
-//            __('Add New Images'),
-//            $this->getJsObjectName() . '.showUploader()',
-//            'add',
-//            $this->getHtmlId() . '_add_images_button'
-//        );
-//    }
-
     /**
      * @return string
      */
-    public function getImagesJson()
+    public function getImagesMaintenanceJson()
     {
-        $value = $this->getElement()->getImages();
-        if (is_array($value) && !empty($value)) {
-            $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
-            $images = $this->sortImagesByPosition($value);
-            foreach ($images as $key => &$image) {
-                $image['url'] = $this->_imageHelper
-                        ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
-                try {
-                    $fileHandler = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
-                    $image['size'] = $fileHandler['size'];
-                } catch (\Exception $e) {
-                    $this->_logger->warning($e);
-                    unset($images[$key]);
+//        $value = $this->getElement()->getImages();
+//        \Zend_Debug::dump($this->getElement()->getData('config_data'));die;
+        if ($this->_helperData->getMaintenanceSetting('maintenance_background') === 'multiple_images') {
+            $value = HelperData::jsonDecode($this->getElement()->getData('config_data')['mpbettermaintenance/maintenance_setting/maintenance_background_multi_image']);
+            //        \Zend_Debug::dump(HelperData::jsonDecode($value));die;
+            //        $value = HelperData::jsonEncode($value);
+            if (is_array($value) && !empty($value)) {
+                $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
+                $images = $this->sortImagesByPosition($value);
+                foreach ($images as $key => &$image) {
+                    //            \Zend_Debug::dump($this->_imageHelper->getMediaPath($image['file']));die;
+                    $image['url'] = $this->_imageHelper
+                            ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
+                    try {
+                        $fileHandler = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
+                        $image['size'] = $fileHandler['size'];
+                    } catch (\Exception $e) {
+                        $this->_logger->warning($e);
+                        unset($images[$key]);
+                    }
                 }
+                //            \Zend_Debug::dump($images);die;
+                return HelperData::jsonEncode($images);
             }
-
-            return HelperData::jsonEncode($images);
         }
+
+
+        return '[]';
+    }
+
+    public function getImagesComingsoonJson()
+    {
+        //        $value = $this->getElement()->getImages();
+        //        \Zend_Debug::dump($this->getElement()->getData('config_data'));die;
+        if ($this->_helperData->getComingSoonSetting('comingsoon_background') === 'multiple_images') {
+            $value = HelperData::jsonDecode($this->getElement()->getData('config_data')['mpbettermaintenance/comingsoon_setting/comingsoon_background_multi_image']);
+            //        $value = '';
+            //        \Zend_Debug::dump(HelperData::jsonDecode($value));die;
+            //        $value = HelperData::jsonEncode($value);
+            if (is_array($value) && !empty($value)) {
+                $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
+                $images = $this->sortImagesByPosition($value);
+                foreach ($images as $key => &$image) {
+                    //            \Zend_Debug::dump($this->_imageHelper->getMediaPath($image['file']));die;
+                    $image['url'] = $this->_imageHelper
+                            ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
+                    try {
+                        $fileHandler = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
+                        $image['size'] = $fileHandler['size'];
+                    } catch (\Exception $e) {
+                        $this->_logger->warning($e);
+                        unset($images[$key]);
+                    }
+                }
+                //            \Zend_Debug::dump($images);die;
+                return HelperData::jsonEncode($images);
+            }
+        }
+
 
         return '[]';
     }
@@ -165,34 +197,5 @@ class Images extends Widget
         }
 
         return $images;
-    }
-
-    /**
-     * Get image types data
-     *
-     * @return array
-     */
-    public function getImageTypes()
-    {
-        return [
-            'image' => [
-                'code'  => 'images',
-                'value' => ($this->getElement()->getDataObject())
-                    ? $this->getElement()->getDataObject()->getImages() : '',
-                'label' => 'Template Images',
-                'scope' => 'Template Images',
-                'name'  => 'template-images',
-            ]
-        ];
-    }
-
-    /**
-     * Retrieve JSON data
-     *
-     * @return string
-     */
-    public function getImageTypesJson()
-    {
-        return '[]';
     }
 }

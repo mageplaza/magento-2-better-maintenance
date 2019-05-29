@@ -45,6 +45,43 @@ class Maintenance extends Template
         ));
     }
 
+    public function getVideoUrl($video)
+    {
+        if (empty($video)) {
+            return null;
+        }
+
+        return $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($video,
+            HelperImage::TEMPLATE_MEDIA_TYPE_VIDEO
+        ));
+    }
+
+    public function getListMultipleImages() {
+        $data = HelperData::jsonDecode($this->_helperData->getMaintenanceSetting('maintenance_background_multi_image'));
+        $list = [];
+
+        foreach ($data as $key => $value) {
+            $list[] = $value['file'];
+        }
+
+        return $list;
+    }
+
+    public function getMultipleImagesUrl()
+    {
+        $urls = [];
+        $images = $this->getListMultipleImages();
+        if (empty($images)) {
+            return null;
+        }
+
+        foreach($images as $image) {
+            $urls[] = $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($image));
+        }
+
+        return $urls;
+    }
+
     public function getPageTitle()
     {
         $title = $this->_helperData->getMaintenanceSetting('maintenance_title');

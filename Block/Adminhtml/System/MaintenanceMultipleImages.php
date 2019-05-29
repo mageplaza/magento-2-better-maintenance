@@ -35,7 +35,7 @@ use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
  * Class MultipleImages
  * @package Mageplaza\BetterMaintenance\Block\Adminhtml\System
  */
-class MultipleImages extends Field
+class MaintenanceMultipleImages extends Field
 {
     /**
      * @var Registry
@@ -75,7 +75,7 @@ class MultipleImages extends Field
         $html = '';
         $html .= $this->_layout
             ->createBlock('\Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer\Images')
-            ->setTemplate('Mageplaza_BetterMaintenance::system/config/gallery.phtml')
+            ->setTemplate('Mageplaza_BetterMaintenance::system/config/maintenanceGallery.phtml')
             ->setId('media_gallery_content')
             ->setElement($this)
             ->setFormName('edit_form')
@@ -117,8 +117,8 @@ class MultipleImages extends Field
     /**
      * @return string
      */
-    public function getName()
-    {
-        return 'images';
-    }
+//    public function getName()
+//    {
+//        return 'images';
+//    }
 }

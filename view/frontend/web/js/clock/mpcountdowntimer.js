@@ -34,7 +34,9 @@ define(
                         this.options.timezone,
                         this.options.endtime,
                         this.options.enabled,
-                        this.options.currentTime
+                        this.options.currentTime,
+                        this.options.baseUrl,
+                        this.options.autoSwitch
                     );
                 }
             }

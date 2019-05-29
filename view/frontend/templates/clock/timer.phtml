@@ -26,8 +26,8 @@ $helper               = $this->helper(Data::class);
 $clockBackgroundColor = $helper->getClockSetting('clock_background_color');
 $clockNumberColor     = $helper->getClockSetting('clock_number_color');
 
-$template             = $block->getClockTemplate($helper->getClockSetting('clock_template'));
-$timerId              = uniqid('', false);
+$template = $block->getClockTemplate($helper->getClockSetting('clock_template'));
+$timerId  = uniqid('', false);
 
 if (!empty($template)) : ?>
     <div id="mp-countdown-timer-<?= $timerId ?>">
@@ -79,10 +79,13 @@ if (!empty($template)) : ?>
                 "timezone": "<?= $block->getTimeZone() ?>",
                 "endtime": "<?= $helper->getConfigGeneral('end_time') ?>",
                 "enabled": <?= $helper->isEnabled() ?>,
-                "currentTime": "<?= $block->getCurrentTime() ?>"
+                "currentTime": "<?= $block->getCurrentTime() ?>",
+                "baseUrl": "<?= $block->getBaseUrl() ?>",
+                "autoSwitch": <?= $helper->getConfigGeneral('auto_switch') ?>
             }
         }
     }
+
     </script>
 
 <?php endif; ?>

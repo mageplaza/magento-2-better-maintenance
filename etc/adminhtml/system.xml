@@ -244,10 +244,10 @@
                 </field>
                 <field id="maintenance_background_multi_image" translate="label" sortOrder="430" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Select</label>
-                    <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\MultipleImages</frontend_model>
+                    <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\MaintenanceMultipleImages</frontend_model>
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\MultipleImages</backend_model>
-                    <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/image</upload_dir>
-                    <base_url type="media" scope_info="1">mageplaza/bettermaintenance/image</base_url>
+                    <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/tmp</upload_dir>
+                    <base_url type="media" scope_info="1">mageplaza/bettermaintenance/tmp</base_url>
                     <depends>
                         <field id="maintenance_background">multiple_images</field>
                     </depends>
@@ -343,9 +343,10 @@
                 </field>
                 <field id="comingsoon_background_multi_image" translate="label" type="image" sortOrder="610" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Select</label>
-                    <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\MultipleImages</frontend_model>
-                    <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/image</upload_dir>
-                    <base_url type="media" scope_info="1">mageplaza/bettermaintenance/image</base_url>
+                    <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ComingsoonMultipleImages</frontend_model>
+                    <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\MultipleImages</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/tmp</upload_dir>
+                    <base_url type="media" scope_info="1">mageplaza/bettermaintenance/tmp</base_url>
                     <depends>
                         <field id="comingsoon_background">multiple_images</field>
                     </depends>
