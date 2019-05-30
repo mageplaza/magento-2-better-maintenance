@@ -83,42 +83,4 @@ class ComingsoonMultipleImages extends Field
 
         return $html;
     }
-
-    /**
-     * @return mixed
-     */
-    //    public function getDataObject()
-    //    {
-    //        return $this->_coreRegistry->registry('review_data');
-    //    }
-
-    /**
-     * Get product images
-     *
-     * @return array|null
-     */
-    //    public function getImages()
-    //    {
-    //        die('3333');
-    //        $images = ($this->getDataObject()) ? $this->getDataObject()->getMpBprImages() : '';
-    //        if ($images) {
-    //            try {
-    //                $images = HelperData::jsonDecode($images);
-    //            } catch (\Exception $e) {
-    //                $images = [];
-    //            }
-    //        } else {
-    //            $images = [];
-    //        }
-    //
-    //        return 1111;
-    //    }
-
-    /**
-     * @return string
-     */
-    //    public function getName()
-    //    {
-    //        return 'images';
-    //    }
 }
