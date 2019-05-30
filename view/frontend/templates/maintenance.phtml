@@ -5,15 +5,16 @@ use Mageplaza\BetterMaintenance\Helper\Data;
  * @var \Mageplaza\BetterMaintenance\Block\Maintenance $block ;
  */
 
-$helper = $this->helper(Data::class);
-$listImagesUrl = implode(',', $block->getMultipleImagesUrl($helper->getMaintenanceSetting('maintenance_background_multi_image')));
-$subscribeLabel = $helper->getSubscribeSetting('subscribe_label');
+$helper              = $this->helper(Data::class);
+$subscribeLabel      = $helper->getSubscribeSetting('subscribe_label');
 $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 ?>
 
 <!--Multiple Image Background-->
 <?php if ($helper->getMaintenanceSetting('maintenance_background') === 'multiple_images'
     && $block->getImageUrl($helper->getMaintenanceSetting('maintenance_background_multi_image'))): ?>
+    <?php $listImagesUrl = implode(',',
+        $block->getMultipleImagesUrl($helper->getMaintenanceSetting('maintenance_background_multi_image'))); ?>
     <style>
         .mpbettermaintenance-maintenance-index {
             background-repeat: no-repeat;
@@ -71,9 +72,13 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
                  alt="<?= __('Logo') ?>" width="100">
         </div>
     <?php endif; ?>
+
+    <!--    Page Title Area-->
     <div id="mpbm-page-title" class="mpbm-text">
         <h1 style="margin-bottom: 0"><?= $block->getPageTitle() ?></h1>
     </div>
+
+    <!--    Page Description Area-->
     <div id="mpbm-page-description" class="mpbm-text">
         <h3><?= $block->getPageDescription() ?></h3>
     </div>
@@ -84,6 +89,8 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
             <?= $this->getChildHtml('clock_countdown') ?>
         </div>
     <?php endif; ?>
+
+    <!--    Progress Area-->
     <?php if ($helper->getMaintenanceSetting('maintenance_progress_enabled')): ?>
         <div id="mpbm-progress-bar">
             <div class="row">
@@ -147,6 +154,7 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
     .mpbm-text {
         color: <?= $helper->getMaintenanceSetting('maintenance_color') ?>;
     }
+
     .progress-bar {
         height: 45px;
         font-size: 100%;
@@ -166,5 +174,7 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
             }
         }
     }
+
+
 
 </script>

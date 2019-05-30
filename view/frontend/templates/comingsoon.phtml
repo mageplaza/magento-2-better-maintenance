@@ -6,7 +6,6 @@ use Mageplaza\BetterMaintenance\Helper\Data;
  */
 
 $helper = $this->helper(Data::class);
-$listImagesUrl = implode(',', $block->getMultipleImagesUrl($helper->getComingSoonSetting('comingsoon_background_multi_image')));
 $subscribeLabel = $helper->getSubscribeSetting('subscribe_label');
 $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 ?>
@@ -14,6 +13,8 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 <!--Multiple Image Background-->
 <?php if ($helper->getComingSoonSetting('comingsoon_background') === 'multiple_images'
     && $block->getImageUrl($helper->getComingSoonSetting('comingsoon_background_multi_image'))): ?>
+    <?php $listImagesUrl = implode(',',
+        $block->getMultipleImagesUrl($helper->getMaintenanceSetting('maintenance_background_multi_image'))); ?>
     <style>
         .mpbettermaintenance-comingsoon-index {
             background-repeat: no-repeat;
