@@ -56,8 +56,8 @@ class Maintenance extends Template
         ));
     }
 
-    public function getListMultipleImages() {
-        $data = HelperData::jsonDecode($this->_helperData->getMaintenanceSetting('maintenance_background_multi_image'));
+    public function getListMultipleImages($images) {
+        $data = HelperData::jsonDecode($images);
         $list = [];
 
         foreach ($data as $key => $value) {
@@ -67,10 +67,10 @@ class Maintenance extends Template
         return $list;
     }
 
-    public function getMultipleImagesUrl()
+    public function getMultipleImagesUrl($images)
     {
         $urls = [];
-        $images = $this->getListMultipleImages();
+        $images = $this->getListMultipleImages($images);
         if (empty($images)) {
             return null;
         }

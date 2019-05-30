@@ -233,5 +233,147 @@
     text-transform: uppercase;
     display: inline-block;
 }
+/*Single column*/
+#mpbm-single-column {
+    text-align: center;
+}
+
+#mpbm-single-column #mpbm-subscribe .block.newsletter {
+    margin: auto;
+}
+
+/*Double column left side*/
+#mpbm-double_left-column {
+    text-align: left;
+}
+#mpbm-double_left-column .progress {
+    margin: auto 0px;
+}
+
+#mpbm-double_left-column .simple-container {
+    justify-content: left;
+}
+
+#mpbm-double_left-column #mpbm-logo {
+    padding-top: 1%;
+    padding-left: 50px;
+}
+#mpbm-double_left-column #mpbm-social-contact {
+    position: fixed;
+    bottom: 15px;
+    width: 100%;
+    left: 50px;
+}
+
+#mpbm-double_left-column #mpbm-page-title {
+    margin: 135px 0 0 0;
+}
+
+#mpbm-double_left-column #mpbm-page-title {
+    padding-left: 50px;
+}
+#mpbm-double_left-column #mpbm-page-description{
+    padding-left: 50px;
+}
+#mpbm-double_left-column #mpbm-clock{
+    padding-left: 50px;
+}
+#mpbm-double_left-column #mpbm-progress-bar{
+    padding-left: 50px;
+}
+#mpbm-double_left-column #mpbm-subscribe{
+    padding-left: 50px;
+}
+#mpbm-double_left-column #mpbm-register{
+    padding-left: 50px;
+}
+
+/*Double column*/
+
+#mpbm-double-column #mpbm-clock {
+    position: fixed;
+    width: 40%;
+    margin: auto;
+    bottom: 58%;
+}
+
+#mpbm-double-column #mpbm-progress-bar {
+    position: fixed;
+    width: 40%;
+    margin: auto;
+    bottom: 50%;
+}
+
+#mpbm-double-column #mpbm-logo{
+    width: 40%;
+    margin-left: 50%;
+}
+
+#mpbm-double-column #mpbm-page-title{
+    width: 40%;
+    margin-left: 50%;
+    margin-top: 150px;
+}
+#mpbm-double-column #mpbm-page-description{
+    width: 40%;
+    margin-left: 50%;
+}
+#mpbm-double-column #mpbm-subscribe{
+    width: 40%;
+    margin-left: 50%;
+}
+#mpbm-double-column #mpbm-social-contact{
+    width: 40%;
+    margin-left: 50%;
+    position: fixed;
+    bottom: 15px;
+}
+#mpbm-double-column #mpbm-register{
+    width: 40%;
+    margin-left: 50%;
+}
+#mpbm-double-column #mpbm-progress-bar .progress {
+    width: 100%;
+}
 
 
+#mpbm-video {
+    position: fixed;
+    z-index: -1;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#mpbm-subscribe {
+    margin-bottom: 20px;
+}
+
+#mpbm-progress-bar {
+    margin-bottom: 20px;
+}
+
+#mpbm-clock {
+    margin: 20px auto;
+}
+
+#mpbm-logo {
+    padding-top: 3%;
+}
+
+#mpbm-page-title {
+    margin: 40px 0 0 0;
+}
+
+#mpbm-wrapper li {
+    list-style: none;
+}
+.progress {
+    margin: auto;
+    height: 45px;
+    width: 40%;
+    background: #F7F7F7;
+    text-align: center;
+    border-radius: 50px;
+}

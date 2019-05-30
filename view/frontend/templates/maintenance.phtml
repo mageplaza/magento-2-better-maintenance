@@ -6,7 +6,9 @@ use Mageplaza\BetterMaintenance\Helper\Data;
  */
 
 $helper = $this->helper(Data::class);
-$listImagesUrl = implode(',', $block->getMultipleImagesUrl());
+$listImagesUrl = implode(',', $block->getMultipleImagesUrl($helper->getMaintenanceSetting('maintenance_background_multi_image')));
+$subscribeLabel = $helper->getSubscribeSetting('subscribe_label');
+$subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 ?>
 
 <!--Multiple Image Background-->
@@ -100,10 +102,16 @@ $listImagesUrl = implode(',', $block->getMultipleImagesUrl());
     <!--    Subscribe area-->
     <?php if ($helper->getSubscribeSetting('subscribe_type') === 'email_form') : ?>
         <div id="mpbm-subscribe">
+            <?php if ($helper->getSubscribeSetting('subscribe_label')): ?>
+                <h4 style="color: <?= $subscribeLabelColor ?>"><?= $subscribeLabel ?></h4>
+            <?php endif; ?>
             <?= $this->getChildHtml('subscribe') ?>
         </div>
     <?php elseif ($helper->getSubscribeSetting('subscribe_type') === 'register_form') : ?>
         <div id="mpbm-register">
+            <?php if ($helper->getSubscribeSetting('subscribe_label')): ?>
+                <h4 style="color: <?= $subscribeLabelColor ?>"><?= $subscribeLabel ?></h4>
+            <?php endif; ?>
             <?= $this->getChildHtml('register') ?>
         </div>
     <?php endif; ?>
@@ -136,76 +144,9 @@ $listImagesUrl = implode(',', $block->getMultipleImagesUrl());
 </div>
 
 <style>
-    /*Single column*/
-    #mpbm-single-column {
-        text-align: center;
-    }
-
-    /*Double column left side*/
-    #mpbm-double_left-column {
-        text-align: center;
-    }
-
-    #mpbm-double_left-column .progress {
-        margin: auto 0px;
-    }
-
-    #mpbm-double_left-column .simple-container {
-        justify-content: left;
-    }
-
-    /*Double column*/
-
-    #mpbm-video {
-        position: fixed;
-        z-index: -1;
-        right: 0;
-        bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
-    }
-
-    #mpbm-subscribe {
-        margin-bottom: 20px;
-    }
-
-    #mpbm-progress-bar {
-        margin-bottom: 20px;
-    }
-
-    #mpbm-clock {
-        margin: 20px auto;
-    }
-
-    #mpbm-logo {
-        padding-top: 3%;
-    }
-
-    #mpbm-page-title {
-        margin: 40px 0 0 0;
-    }
-
-    #mpbm-wrapper li {
-        list-style: none;
-    }
-
     .mpbm-text {
         color: <?= $helper->getMaintenanceSetting('maintenance_color') ?>;
     }
-
-    #mpbm-subscribe .block.newsletter {
-        margin: auto;
-    }
-
-    .progress {
-        margin: auto;
-        height: 45px;
-        width: 40%;
-        background: #F7F7F7;
-        text-align: center;
-        border-radius: 50px;
-    }
-
     .progress-bar {
         height: 45px;
         font-size: 100%;

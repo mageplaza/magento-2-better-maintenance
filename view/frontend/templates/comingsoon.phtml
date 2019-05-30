@@ -6,15 +6,62 @@ use Mageplaza\BetterMaintenance\Helper\Data;
  */
 
 $helper = $this->helper(Data::class);
-
+$listImagesUrl = implode(',', $block->getMultipleImagesUrl($helper->getComingSoonSetting('comingsoon_background_multi_image')));
+$subscribeLabel = $helper->getSubscribeSetting('subscribe_label');
+$subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 ?>
 
-<?php if ($helper->getComingSoonSetting('comingsoon_background') === 'image' && $block->getImageUrl($helper->getComingSoonSetting('comingsoon_background_image'))): ?>
+<!--Multiple Image Background-->
+<?php if ($helper->getComingSoonSetting('comingsoon_background') === 'multiple_images'
+    && $block->getImageUrl($helper->getComingSoonSetting('comingsoon_background_multi_image'))): ?>
     <style>
         .mpbettermaintenance-comingsoon-index {
-            background-image: url("<?= $block->getImageUrl($helper->getComingSoonSetting('comingsoon_background_image')) ?>");
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition-delay: 2s;
         }
     </style>
+    <script>
+        require([
+            'jquery'
+        ], function ($) {
+            var images    = '<?= $listImagesUrl ?>';
+            images        = images.split(',');
+            var nextImage = 0;
+            doSlideshow();
+
+            function doSlideshow () {
+                if (nextImage >= images.length) {
+                    nextImage = 0;
+                }
+                $('.mpbettermaintenance-comingsoon-index')
+                .fadeIn('slow', function () {
+                    setTimeout(doSlideshow, 5000);
+                }).css('background-image', 'url("' + images[nextImage++] + '")');
+            }
+        });
+    </script>
+<?php endif; ?>
+
+<!--Single Image Background-->
+<?php if ($helper->getComingSoonSetting('comingsoon_background') === 'image'
+    && $block->getImageUrl($helper->getComingSoonSetting('comingsoon_background_image'))): ?>
+    <style>
+        .mpbettermaintenance-comingsoon-index {
+            background-image: url("<?= $block->getImageUrl($helper->getComingSoonSetting('maintenance_background_image')) ?>");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+<?php endif; ?>
+
+<!--Video Background-->
+<?php if ($helper->getComingSoonSetting('maintenance_background') === 'video'
+    && $block->getImageUrl($helper->getComingSoonSetting('maintenance_background_video'))): ?>
+    <video autoplay muted loop id="mpbm-video">
+        <source src="<?= $block->getVideoUrl($helper->getComingSoonSetting('maintenance_background_video')) ?>"
+                type="video/mp4">
+    </video>
 <?php endif; ?>
 <div id="mpbm-<?= $helper->getComingsoonSetting('comingsoon_layout') ?>-column">
     <?php if (!empty($helper->getComingsoonSetting('comingsoon_logo'))): ?>
@@ -38,10 +85,16 @@ $helper = $this->helper(Data::class);
     <!--    Subscribe area-->
     <?php if ($helper->getSubscribeSetting('subscribe_type') === 'email_form') : ?>
         <div id="mpbm-subscribe">
+            <?php if ($helper->getSubscribeSetting('subscribe_label')): ?>
+                <h4 style="color: <?= $subscribeLabelColor ?>"><?= $subscribeLabel ?></h4>
+            <?php endif; ?>
             <?= $this->getChildHtml('subscribe') ?>
         </div>
     <?php elseif ($helper->getSubscribeSetting('subscribe_type') === 'register_form') : ?>
         <div id="mpbm-register">
+            <?php if ($helper->getSubscribeSetting('subscribe_label')): ?>
+                <h4 style="color: <?= $subscribeLabelColor ?>"><?= $subscribeLabel ?></h4>
+            <?php endif; ?>
             <?= $this->getChildHtml('register') ?>
         </div>
     <?php endif; ?>
@@ -74,39 +127,7 @@ $helper = $this->helper(Data::class);
 </div>
 
 <style>
-    #mpbm-subscribe {
-        margin-bottom: 20px;
-    }
-
-    #mpbm-progress-bar {
-        margin-bottom: 20px;
-    }
-
-    #mpbm-clock {
-        margin: 20px auto;
-    }
-
-    #mpbm-logo {
-        padding-top: 3%;
-    }
-
-    #mpbm-page-title {
-        margin: 40px 0 0 0;
-    }
-
-    #mpbm-single-column {
-        text-align: center;
-    }
-
-    #mpbm-wrapper li {
-        list-style: none;
-    }
-
     .mpbm-text {
         color: <?= $helper->getComingsoonSetting('comingsoon_color') ?>;
-    }
-
-    #mpbm-subscribe .block.newsletter {
-        margin: auto;
     }
 </style>
