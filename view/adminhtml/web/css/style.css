@@ -234,11 +234,11 @@
     display: inline-block;
 }
 /*Single column*/
-#mpbm-single-column {
+.single-column-layout {
     text-align: center;
 }
 
-#mpbm-single-column #mpbm-subscribe .block.newsletter {
+.single-column-layout #mpbm-subscribe .block.newsletter {
     margin: auto;
 }
 

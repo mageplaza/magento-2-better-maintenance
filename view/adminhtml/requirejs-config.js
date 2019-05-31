@@ -3,7 +3,7 @@
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Mageplaza.com license that is
+ * This source file is subject to the Mageplaza.com license sliderConfig is
  * available through the world-wide-web at this URL:
  * https://www.mageplaza.com/LICENSE.txt
  *
@@ -13,23 +13,14 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_QuickView
+ * @package     Mageplaza_StoreLocator
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
-
-define([
-    'jquery',
-    'mage/translate',
-], function ($, $t) {
-    'use strict';
-
-    $.widget('mageplaza.data', {
-        _create:function () {
-            var test = $('#mpbettermaintenance_display_setting_clock_setting_clock_background_color').val();
-        }
-    });
-
-    return $.mageplaza.data;
-});
+var config = {
+    paths: {
+        'maintenancePreview': 'Mageplaza_BetterMaintenance/js/preview/maintenance',
+        'comingsoonPreview': 'Mageplaza_BetterMaintenance/js/comingsoon'
+    }
+};
 

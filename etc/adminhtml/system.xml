@@ -158,36 +158,42 @@
                     </field>
                     <field id="social_facebook" translate="label" type="text" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Facebook Page Link</label>
+                        <validate>validate-url</validate>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
                     </field>
                     <field id="social_twitter" translate="label" type="text" sortOrder="280" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Twitter Page Link</label>
+                        <validate>validate-url</validate>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
                     </field>
                     <field id="social_instagram" translate="label" type="text" sortOrder="290" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Instagram Page Link</label>
+                        <validate>validate-url</validate>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
                     </field>
                     <field id="social_google" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Google+ Page Link</label>
+                        <validate>validate-url</validate>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
                     </field>
                     <field id="social_youtube" translate="label" type="text" sortOrder="310" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Youtube Page Link</label>
+                        <validate>validate-url</validate>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
                     </field>
                     <field id="social_pinterest" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Pinterest Page Link</label>
+                        <validate>validate-url</validate>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>

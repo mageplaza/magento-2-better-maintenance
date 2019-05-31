@@ -25,8 +25,10 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Backend::stores">
-                    <resource id="Mageplaza_BetterMaintenance::mpbettermaintenance" title="Mageplaza Better Maintenance" translate="title">
-                        <resource id="Mageplaza_BetterMaintenance::configuration" title="Configuration" translate="title"/>
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Mageplaza_BetterMaintenance::configuration" title="Mageplaza Better Maintenance" translate="title"/>
+                        </resource>
                     </resource>
                 </resource>
             </resource>

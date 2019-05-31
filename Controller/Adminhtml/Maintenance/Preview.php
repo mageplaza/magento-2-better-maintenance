@@ -20,6 +20,7 @@ class Preview extends Action
 
     public function execute()
     {
+//        \Zend_Debug::dump($this->_request->getParam('test'));die;
         return $this->_pageFactory->create();
     }
 }
