@@ -8,6 +8,7 @@ use Magento\Framework\App\Action\Context;
 use Magento\Framework\View\Layout;
 use Magento\Framework\View\Result\PageFactory;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
+use Magento\Framework\Controller\Result\ForwardFactory;
 
 class Index extends Action
 {
@@ -16,6 +17,7 @@ class Index extends Action
     protected $_helperData;
     protected $_maintenanceBlock;
     protected $_urlRewrite;
+    protected $_forwardFactory;
 
     public function __construct
     (
@@ -24,6 +26,7 @@ class Index extends Action
         HelperData $helperData,
         Maintenance $maintenanceBlock,
         UrlRewriteFactory $urlRewrite,
+        ForwardFactory $forwardFactory,
         Context $context
     ) {
         $this->_layout           = $layout;
@@ -31,16 +34,23 @@ class Index extends Action
         $this->_helperData       = $helperData;
         $this->_maintenanceBlock = $maintenanceBlock;
         $this->_urlRewrite       = $urlRewrite;
+        $this->_forwardFactory = $forwardFactory;
         parent::__construct($context);
     }
 
     public function execute()
     {
-        $resultPageLayout = $this->_pageFactory->create();
+        if (!$this->_helperData->isEnabled()) {
+            $this->_forward('noroute');
+        }
 
+        $resultPageLayout = $this->_pageFactory->create();
+        $http = $this->_helperData->getMaintenanceSetting('maintenance_http_response') ?: 200;
+
+//        \Zend_Debug::dump($this->_helperData->getMaintenanceSetting('maintenance_http_response'));die;
+        $this->getResponse()->setHttpResponseCode($http);
         //        $resultPageLayout->getLayout()->getUpdate()->removeHandle('default');
         $resultPageLayout->getConfig()->getTitle()->set($this->_maintenanceBlock->getPageTitle());
-
 
         return $resultPageLayout;
     }

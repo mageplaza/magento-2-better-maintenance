@@ -22,6 +22,7 @@
 namespace Mageplaza\BetterMaintenance\Model\Config\Source\System;
 
 use Magento\Framework\Option\ArrayInterface;
+use Magento\Cms\Model\ResourceModel\Page\CollectionFactory as PageFactory;
 
 /**
  * Class RedirectTo
@@ -30,20 +31,36 @@ use Magento\Framework\Option\ArrayInterface;
 class RedirectTo implements ArrayInterface
 {
     const MAINTENANCE_PAGE = 'maintenance_page';
-    const PAGE_404         = '404_page';
-    const HOME_PAGE        = 'home_page';
     const COMING_SOON_PAGE = 'coming_soon_page';
+
+    protected $_pageFactory;
+
+    public function __construct
+    (
+        PageFactory $pageFactory
+    ) {
+        $this->_pageFactory = $pageFactory;
+    }
 
     /**
      * @return array
      */
     public function toOptionArray()
     {
-        return [
-            ['value' => self::MAINTENANCE_PAGE, 'label' => __('Maintenance Page')],
-            ['value' => self::PAGE_404, 'label' => __('404 Page')],
-            ['value' => self::HOME_PAGE, 'label' => __('Home Page')],
-            ['value' => self::COMING_SOON_PAGE, 'label' => __('Coming Soon Page')],
+        $maintenance = [
+            'value' => self::MAINTENANCE_PAGE,
+            'label' => __('Maintenance Page')
         ];
+
+        $comingSoon = [
+            'value' => self::COMING_SOON_PAGE,
+            'label' => __('Coming Soon Page')
+        ];
+
+        $pageList   = $this->_pageFactory->create()->toOptionIdArray();
+        $pageList[] = $maintenance;
+        $pageList[] = $comingSoon;
+
+        return $pageList;
     }
 }

@@ -66,4 +66,10 @@ class PreviewButton extends Field
 
         return $this->_toHtml();
     }
+
+    public function getDataUrl()
+    {
+//        \Zend_Debug::dump($this->getUrl('mpbettermaintenance/maintenance/preview'));die;
+        return $this->getUrl('mpbettermaintenance/maintenance/preview');
+    }
 }

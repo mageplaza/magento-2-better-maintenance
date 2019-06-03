@@ -32,6 +32,9 @@ class Index extends Action
 
     public function execute()
     {
+        if (!$this->_helperData->isEnabled()) {
+            $this->_forward('noroute');
+        }
         $resultPageLayout = $this->_pageFactory->create();
         $resultPageLayout->getConfig()->getTitle()->set($this->_helperData->getComingSoonSetting('comingsoon_metatitle'));
         $resultPageLayout->getConfig()->setDescription($this->_helperData->getComingSoonSetting('comingsoon_metadescription'));

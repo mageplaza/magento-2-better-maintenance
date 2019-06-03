@@ -76,6 +76,10 @@ class Router implements RouterInterface
     {
         $identifier = trim($request->getPathInfo(), '/');
 
+        if (!$this->_helperData->isEnabled()) {
+            return null;
+        }
+
         if ($identifier === $this->_helperData->getMaintenanceRoute()) {
             $request->setModuleName('mpbettermaintenance')->setControllerName('maintenance')->setActionName('index');
             $request->setAlias(Url::REWRITE_REQUEST_PATH_ALIAS, $identifier);

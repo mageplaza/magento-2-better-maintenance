@@ -103,8 +103,8 @@ class Redirect extends Template
         $this->_response       = $response;
         $this->_messageManager = $messageManager;
         $this->_context        = $httpContext;
-        $this->_remoteAddress = $remoteAddress;
-        $this->_date = $date;
+        $this->_remoteAddress  = $remoteAddress;
+        $this->_date           = $date;
 
         parent::__construct($context, $data);
     }
@@ -130,6 +130,7 @@ class Redirect extends Template
     {
         return explode(',', $this->_helperData->getConfigGeneral('whitelist_ip'));
     }
+
     /**
      * @return bool|Http
      */
@@ -137,7 +138,11 @@ class Redirect extends Template
     {
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
         $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
-        $currentIp = $this->_remoteAddress->getRemoteAddress();
+        $currentIp  = $this->_remoteAddress->getRemoteAddress();
+
+        if (!$this->_helperData->isEnabled()) {
+            return false;
+        }
 
         foreach ($this->getWhiteListIp() as $value) {
             if ($currentIp === $value) {
@@ -164,23 +169,17 @@ class Redirect extends Template
                 $route = $this->_helperData->getComingSoonRoute();
                 $route = isset($route) ? $route : HelperData::COMINGSOON_ROUTE;
                 break;
-            case 'home_page':
-                $route = $this->getBaseUrl();
-                if ($this->getFullActionName() === 'cms_index_index') {
-                    return false;
-                }
-                break;
             default:
-                $route = 'noroute';
-                if ($this->getFullActionName() === 'cms_noroute_index') {
+                $route = $redirectTo;
+                if ($this->_cmsPage->getIdentifier() === $redirectTo) {
                     return false;
                 }
                 break;
         }
 
-        $url = $this->getUrl($route);
-        $http = $this->_helperData->getConfigGeneral('maintenance_http_response');
+        $url  = $this->getUrl($route);
 
-        return $this->_response->setRedirect($url)->setHttpResponseCode($http);
+//        return $this->_response->setRedirect($url)->setHttpResponseCode($http);
+        return $this->_response->setRedirect($url);
     }
 }

@@ -20,11 +20,12 @@
  */
 
 /**
- * @var \Mageplaza\BetterMaintenance\Block\Adminhtml\System\MaintenanceButton $block
+ * @var \Mageplaza\BetterMaintenance\Block\Adminhtml\System\PreviewButton $block
  */
 ?>
 <div class="actions actions-maintenance-preview">
-    <button class="button-maintenance-preview" type="button" id="<?= $block->getHtmlId() ?>">
+    <button class="button-maintenance-preview" data-url="<?= $block->getDataUrl() ?>" type="button"
+            id="<?= $block->getHtmlId() ?>">
         <span><?= /* @noEscape */
             $block->getButtonLabel() ?></span>
     </button>
@@ -33,43 +34,17 @@
 <script type="text/javascript">
     require(['jquery'], function ($) {
         $('#<?= $block->getHtmlId() ?>').on('click', function () {
-            localStorage.setItem('endTime', new Date($('#mpbettermaintenance_general_end_time').val()).getTime());
-            localStorage.setItem('clockEnable', $('#mpbettermaintenance_display_setting_clock_setting_clock_enabled').val());
-            localStorage.setItem('clockStyle', $('#mpbettermaintenance_display_setting_clock_setting_clock_template').val());
-            localStorage.setItem('clockBgColor', $('#mpbettermaintenance_display_setting_clock_setting_clock_background_color').val());
-            localStorage.setItem('clockNumberColor', $('#mpbettermaintenance_display_setting_clock_setting_clock_number_color').val());
-            localStorage.setItem('subscribeType', $('#mpbettermaintenance_display_setting_subscribe_setting_subscribe_type').val());
-            localStorage.setItem('subscribeDes', $('#mpbettermaintenance_display_setting_subscribe_setting_subscribe_label').val());
-            localStorage.setItem('subscribeLabelColor', $('#mpbettermaintenance_display_setting_subscribe_setting_subscribe_label_color').val());
-            localStorage.setItem('subscribeButtonLabel', $('#mpbettermaintenance_display_setting_subscribe_setting_button_label').val());
-            localStorage.setItem('subscribeButtonLabelColor', $('#mpbettermaintenance_display_setting_subscribe_setting_button_label_color').val());
-            localStorage.setItem('subscribeButtonBgColor', $('#mpbettermaintenance_display_setting_subscribe_setting_button_background_color').val());
-            localStorage.setItem('footerBlock', $('#mpbettermaintenance_display_setting_footer_block_cms_block').val());
-            localStorage.setItem('socialEnable', $('#mpbettermaintenance_display_setting_social_contact_social_enabled').val());
-            localStorage.setItem('socialLabel', $('#mpbettermaintenance_display_setting_social_contact_social_label').val());
-            localStorage.setItem('socialLabelColor', $('#mpbettermaintenance_display_setting_social_contact_social_label_color').val());
-            localStorage.setItem('fb', $('#mpbettermaintenance_display_setting_social_contact_social_facebook').val());
-            localStorage.setItem('twitter', $('#mpbettermaintenance_display_setting_social_contact_social_twitter').val());
-            localStorage.setItem('ig', $('#mpbettermaintenance_display_setting_social_contact_social_instagram').val());
-            localStorage.setItem('google', $('#mpbettermaintenance_display_setting_social_contact_social_google').val());
-            localStorage.setItem('youtube', $('#mpbettermaintenance_display_setting_social_contact_social_youtube').val());
-            localStorage.setItem('pinterest', $('#mpbettermaintenance_display_setting_social_contact_social_pinterest').val());
-            localStorage.setItem('mLayout', $('#mpbettermaintenance_maintenance_setting_maintenance_layout').val());
-            localStorage.setItem('mTitle', $('#mpbettermaintenance_maintenance_setting_maintenance_title').val());
-            localStorage.setItem('mDes', $('#mpbettermaintenance_maintenance_setting_maintenance_description').val());
-            localStorage.setItem('mLabelColor', $('#mpbettermaintenance_maintenance_setting_maintenance_color').val());
-            localStorage.setItem('mBgType', $('#mpbettermaintenance_maintenance_setting_maintenance_background').val());
-            localStorage.setItem('progressEnable', $('#mpbettermaintenance_maintenance_setting_maintenance_progress_enabled').val());
-            localStorage.setItem('progressValue', $('#mpbettermaintenance_maintenance_setting_maintenance_progress_value').val());
-            localStorage.setItem('progressLabel', $('#mpbettermaintenance_maintenance_setting_maintenance_progress_label').val());
-            localStorage.setItem('progressLabelColor', $('#mpbettermaintenance_maintenance_setting_maintenance_progress_label_color').val());
-            localStorage.setItem('progressColor', $('#mpbettermaintenance_maintenance_setting_maintenance_progress_bar_color').val());
-            localStorage.setItem('cLayout', $('#mpbettermaintenance_comingsoon_setting_comingsoon_layout').val());
-            localStorage.setItem('cTitle', $('#mpbettermaintenance_comingsoon_setting_comingsoon_title').val());
-            localStorage.setItem('cDes', $('#mpbettermaintenance_comingsoon_setting_comingsoon_description').val());
-            localStorage.setItem('cBgType', $('#mpbettermaintenance_comingsoon_setting_comingsoon_background').val());
-            console.log($('#mpbettermaintenance_maintenance_setting_maintenance_title').val());
-            window.open('<?= $block->escapeHtml($block->getButtonUrl()) ?>');
+            var form = $('<form/>', {
+                action: $(this).data('url'),
+                target: '_blank',
+                method: 'POST'
+            });
+            var data = $('#config-edit-form').serialize();
+            var input = $("<input>").attr("type", "hidden").attr("name", "mydata").val(data);
+            form.append(input);
+            $('body').append(form);
+            form.submit();
+            form.remove();
         })
     });
 </script>
