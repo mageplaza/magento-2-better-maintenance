@@ -22,66 +22,75 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <section id="mpbettermaintenance" translate="label" type="text" sortOrder="350" showInDefault="1" showInWebsite="1" showInStore="0">
+        <section id="mpbettermaintenance" translate="label" type="text" sortOrder="350" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Better Maintenance</label>
             <tab>mageplaza</tab>
             <resource>Mageplaza_BetterMaintenance::configuration</resource>
-            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                 <label>General</label>
-                <field id="enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment><![CDATA[Select <strong>Yes</strong> to enable the module]]></comment>
                 </field>
-                <field id="real_time" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="real_time" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Real Time of Website</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\RealTime</frontend_model>
                 </field>
-                <field id="end_time" translate="label" sortOrder="30" type="date" showInDefault="1" showInStore="0" >
+                <field id="end_time" translate="label" sortOrder="30" type="date" showInDefault="1" showInStore="1" >
                     <label>End Date Time</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\DatePicker</frontend_model>
                 </field>
-                <field id="redirect_to" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="redirect_to" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Redirect To Page</label>
                     <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\RedirectTo</source_model>
                 </field>
-                <field id="auto_switch" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="auto_switch" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Auto Switch to Live Site Mode</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Your website will automatically switch back to Live Site Mode when configured time ends.</comment>
                 </field>
-                <field id="whitelist_ip" translate="label comment" type="textarea" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="whitelist_ip" translate="label comment" type="textarea" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Whitelist IP(s)</label>
                     <comment>Seperate by comma(,)</comment>
                 </field>
-                <field id="whitelist_page" translate="label comment" type="textarea" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="whitelist_page" translate="label comment" type="textarea" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Whitelist Page Link(s)</label>
                     <comment>Seperate by break line(s)</comment>
                 </field>
             </group>
-            <group id="display_setting" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+            <group id="display_setting" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                 <label>Display Setting</label>
-                <group id="clock_setting" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <group id="clock_setting" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Clock Setting</label>
-                    <field id="clock_enabled" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <field id="clock_enabled" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Enable</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="clock_template" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="clock_template" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Countdown Clock Style</label>
                         <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\ClockTemplate</source_model>
                         <depends>
                             <field id="clock_enabled">1</field>
                         </depends>
                     </field>
-                    <field id="clock_background_color" translate="label"  sortOrder="110" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="clock_background_color" translate="label"  sortOrder="110" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Clock Background Color</label>
                         <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                         <depends>
                             <field id="clock_enabled">1</field>
+                            <field id="clock_template" separator=",">circle,square,stack,modern</field>
                         </depends>
                     </field>
-                    <field id="clock_number_color" translate="label"  sortOrder="120" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="clock_inner_color" translate="label"  sortOrder="115" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Clock Inner Background Color</label>
+                        <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
+                        <depends>
+                            <field id="clock_enabled">1</field>
+                            <field id="clock_template">stack</field>
+                        </depends>
+                    </field>
+                    <field id="clock_number_color" translate="label"  sortOrder="120" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Clock Number Color</label>
                         <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                         <depends>
@@ -89,39 +98,39 @@
                         </depends>
                     </field>
                 </group>
-                <group id="subscribe_setting" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <group id="subscribe_setting" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Subscribe Setting</label>
-                    <field id="subscribe_type" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <field id="subscribe_type" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Subscribe Type</label>
                         <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\SubscribeType</source_model>
                     </field>
-                    <field id="subscribe_label" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="subscribe_label" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Subscribe Description</label>
                         <depends>
                             <field id="subscribe_type" separator=",">register_form,email_form</field>
                         </depends>
                     </field>
-                    <field id="subscribe_label_color" translate="label" sortOrder="160" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="subscribe_label_color" translate="label" sortOrder="160" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Subscribe Label Color</label>
                         <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                         <depends>
                             <field id="subscribe_type" separator=",">register_form,email_form</field>
                         </depends>
                     </field>
-                    <field id="button_label" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <field id="button_label" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Button Label</label>
                         <depends>
                             <field id="subscribe_type" separator=",">register_form,email_form</field>
                         </depends>
                     </field>
-                    <field id="button_label_color" translate="label" sortOrder="180" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="button_label_color" translate="label" sortOrder="180" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Button Label Color</label>
                         <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                         <depends>
                             <field id="subscribe_type" separator=",">register_form,email_form</field>
                         </depends>
                     </field>
-                    <field id="button_background_color" translate="label" sortOrder="190" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="button_background_color" translate="label" sortOrder="190" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Button Background Color</label>
                         <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                         <depends>
@@ -129,69 +138,69 @@
                         </depends>
                     </field>
                 </group>
-                <group id="footer_block" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <group id="footer_block" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Footer Block</label>
-                    <field id="cms_block" translate="label comment" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <field id="cms_block" translate="label comment" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Select CMS Block</label>
                         <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\CmsBlock</source_model>
                         <comment>List the links in the selected block in the Whitelist(s) Page Link field below so that customers can access them.</comment>
                     </field>
                 </group>
-                <group id="social_contact" translate="label" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <group id="social_contact" translate="label" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Social Contact</label>
-                    <field id="social_enabled" translate="label" type="select" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <field id="social_enabled" translate="label" type="select" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Enable</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="social_label" translate="label" type="text" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="social_label" translate="label" type="text" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Label</label>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
                     </field>
-                    <field id="social_label_color" translate="label" sortOrder="260" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="social_label_color" translate="label" sortOrder="260" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Label Color</label>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
                         <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                     </field>
-                    <field id="social_facebook" translate="label" type="text" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="social_facebook" translate="label" type="text" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Facebook Page Link</label>
                         <validate>validate-url</validate>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
                     </field>
-                    <field id="social_twitter" translate="label" type="text" sortOrder="280" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="social_twitter" translate="label" type="text" sortOrder="280" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Twitter Page Link</label>
                         <validate>validate-url</validate>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
                     </field>
-                    <field id="social_instagram" translate="label" type="text" sortOrder="290" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="social_instagram" translate="label" type="text" sortOrder="290" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Instagram Page Link</label>
                         <validate>validate-url</validate>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
                     </field>
-                    <field id="social_google" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="social_google" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Google+ Page Link</label>
                         <validate>validate-url</validate>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
                     </field>
-                    <field id="social_youtube" translate="label" type="text" sortOrder="310" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="social_youtube" translate="label" type="text" sortOrder="310" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Youtube Page Link</label>
                         <validate>validate-url</validate>
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
                     </field>
-                    <field id="social_pinterest" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="social_pinterest" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Pinterest Page Link</label>
                         <validate>validate-url</validate>
                         <depends>
@@ -200,37 +209,38 @@
                     </field>
                 </group>
             </group>
-            <group id="maintenance_setting" translate="label" type="text" sortOrder="330" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+            <group id="maintenance_setting" translate="label" type="text" sortOrder="330" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                 <label>Maintenance Page Setting</label>
-                <field id="maintenance_route" translate="label" type="text" sortOrder="340" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="maintenance_route" translate="label" type="text" sortOrder="340" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Page Route</label>
+                    <validate>validate-identifier</validate>
                 </field>
-                <field id="maintenance_layout" translate="label" type="select" sortOrder="350" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="maintenance_layout" translate="label" type="select" sortOrder="350" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Select Layout</label>
                     <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\LayoutOptions</source_model>
                 </field>
-                <field id="maintenance_title" translate="label" type="text" sortOrder="360" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="maintenance_title" translate="label" type="text" sortOrder="360" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Page Title</label>
                 </field>
-                <field id="maintenance_description" translate="label" type="text" sortOrder="370" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="maintenance_description" translate="label" type="text" sortOrder="370" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Page Description</label>
                 </field>
-                <field id="maintenance_color" translate="label" sortOrder="380" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="maintenance_color" translate="label" sortOrder="380" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Label Color</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                 </field>
-                <field id="maintenance_logo" translate="label comment" type="image" sortOrder="390" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="maintenance_logo" translate="label comment" type="image" sortOrder="390" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Logo</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/logo</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/logo</base_url>
                 </field>
-                <field id="maintenance_background" translate="label comment" type="select" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="maintenance_background" translate="label comment" type="select" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Background Type</label>
                     <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\BackgroundType</source_model>
                     <comment>For Video type, please check your upload_max_size PHP value. If the size of uploaded video is greater than this value, the video will not be uploaded.</comment>
                 </field>
-                <field id="maintenance_background_video" translate="label" type="file" sortOrder="410" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="maintenance_background_video" translate="label" type="file" sortOrder="410" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Select</label>
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\Video</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/video</upload_dir>
@@ -239,7 +249,7 @@
                         <field id="maintenance_background">video</field>
                     </depends>
                 </field>
-                <field id="maintenance_background_image" translate="label" type="image" sortOrder="420" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="maintenance_background_image" translate="label" type="image" sortOrder="420" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Select</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/image</upload_dir>
@@ -248,7 +258,7 @@
                         <field id="maintenance_background">image</field>
                     </depends>
                 </field>
-                <field id="maintenance_background_multi_image" translate="label" sortOrder="430" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="maintenance_background_multi_image" translate="label" sortOrder="430" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Select</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\MaintenanceMultipleImages</frontend_model>
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\MultipleImages</backend_model>
@@ -258,78 +268,79 @@
                         <field id="maintenance_background">multiple_images</field>
                     </depends>
                 </field>
-                <field id="maintenance_progress_enabled" translate="label" type="select" sortOrder="440" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="maintenance_progress_enabled" translate="label" type="select" sortOrder="440" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Show Progress Bar</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="maintenance_progress_value" translate="label" type="text" sortOrder="450" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="maintenance_progress_value" translate="label" type="text" sortOrder="450" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Progress Value </label>
                     <depends>
                         <field id="maintenance_progress_enabled">1</field>
                     </depends>
                     <validate>validate-not-negative-number validate-digits-range digits-range-1-100</validate>
                 </field>
-                <field id="maintenance_progress_label" translate="label" type="text" sortOrder="460" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="maintenance_progress_label" translate="label comment" type="text" sortOrder="460" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Label</label>
+                    <comment>Better less than 15 characters.</comment>
                     <depends>
                         <field id="maintenance_progress_enabled">1</field>
                     </depends>
                 </field>
-                <field id="maintenance_progress_label_color" translate="label" sortOrder="470" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="maintenance_progress_label_color" translate="label" sortOrder="470" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Label Color</label>
                     <depends>
                         <field id="maintenance_progress_enabled">1</field>
                     </depends>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                 </field>
-                <field id="maintenance_progress_bar_color" translate="label" sortOrder="480" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="maintenance_progress_bar_color" translate="label" sortOrder="480" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Progress Bar Color</label>
                     <depends>
                         <field id="maintenance_progress_enabled">1</field>
                     </depends>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                 </field>
-                <field id="maintenance_http_response" translate="label" type="select" sortOrder="490" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="maintenance_http_response" translate="label" type="select" sortOrder="490" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>HTTP Response Header</label>
                     <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\HttpResponse</source_model>
                 </field>
-                <field id="maintenance_preview" translate="label" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="maintenance_preview" translate="label" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
                     <button_label>Preview</button_label>
                     <button_url>mpbettermaintenance/maintenance/preview</button_url>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\PreviewButton</frontend_model>
                 </field>
             </group>
-            <group id="comingsoon_setting" translate="label" type="text" sortOrder="510" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+            <group id="comingsoon_setting" translate="label" type="text" sortOrder="510" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                 <label>Coming Soon Page Setting</label>
-                <field id="comingsoon_route" translate="label" type="text" sortOrder="520" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="comingsoon_route" translate="label" type="text" sortOrder="520" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Page Route</label>
                 </field>
-                <field id="comingsoon_layout" translate="label" type="select" sortOrder="530" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="comingsoon_layout" translate="label" type="select" sortOrder="530" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Select Layout</label>
                     <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\LayoutOptions</source_model>
                 </field>
-                <field id="comingsoon_title" translate="label" type="text" sortOrder="540" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="comingsoon_title" translate="label" type="text" sortOrder="540" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Page Title</label>
                 </field>
-                <field id="comingsoon_description" translate="label" type="text" sortOrder="550" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="comingsoon_description" translate="label" type="text" sortOrder="550" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Page Description</label>
                 </field>
-                <field id="comingsoon_color" translate="label" sortOrder="560" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="comingsoon_color" translate="label" sortOrder="560" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Label Color</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                 </field>
-                <field id="comingsoon_logo" translate="label comment" type="image" sortOrder="570" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="comingsoon_logo" translate="label comment" type="image" sortOrder="570" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Logo</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/logo</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/logo</base_url>
                 </field>
-                <field id="comingsoon_background" translate="label comment" type="select" sortOrder="580" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <field id="comingsoon_background" translate="label comment" type="select" sortOrder="580" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Background Type</label>
                     <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\BackgroundType</source_model>
                     <comment>For Video type, please check your upload_max_size PHP value. If the size of uploaded video is greater than this value, the video will not be uploaded.</comment>
                 </field>
-                <field id="comingsoon_background_video" translate="label" type="image" sortOrder="590" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="comingsoon_background_video" translate="label" type="image" sortOrder="590" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Select</label>
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\Video</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/video</upload_dir>
@@ -338,7 +349,7 @@
                         <field id="comingsoon_background">video</field>
                     </depends>
                 </field>
-                <field id="comingsoon_background_image" translate="label" type="image" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="comingsoon_background_image" translate="label" type="image" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Select</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/image</upload_dir>
@@ -347,7 +358,7 @@
                         <field id="comingsoon_background">image</field>
                     </depends>
                 </field>
-                <field id="comingsoon_background_multi_image" translate="label" type="image" sortOrder="610" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="comingsoon_background_multi_image" translate="label" type="image" sortOrder="610" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Select</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ComingsoonMultipleImages</frontend_model>
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\MultipleImages</backend_model>
@@ -357,16 +368,16 @@
                         <field id="comingsoon_background">multiple_images</field>
                     </depends>
                 </field>
-                <field id="comingsoon_metatitle" translate="label" type="text" sortOrder="620" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="comingsoon_metatitle" translate="label" type="text" sortOrder="620" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Meta Title</label>
                 </field>
-                <field id="comingsoon_metadkeywords" translate="label" type="text" sortOrder="630" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="comingsoon_metadkeywords" translate="label" type="text" sortOrder="630" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Meta Keywords</label>
                 </field>
-                <field id="comingsoon_metadescription" translate="label" type="text" sortOrder="640" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="comingsoon_metadescription" translate="label" type="text" sortOrder="640" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Meta Description</label>
                 </field>
-                <field id="comingsoon_preview" translate="label" sortOrder="650" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="comingsoon_preview" translate="label" sortOrder="650" showInDefault="1" showInWebsite="1" showInStore="1">
                     <button_label>Preview</button_label>
                     <button_url>mpbettermaintenance/comingsoon/preview</button_url>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\PreviewButton</frontend_model>

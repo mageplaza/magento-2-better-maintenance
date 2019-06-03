@@ -162,10 +162,16 @@ class Redirect extends Template
 
         switch ($redirectTo) {
             case 'maintenance_page':
+                if ($this->_request->getFullActionName() === 'mpbettermaintenance_maintenance_index') {
+                    return false;
+                }
                 $route = $this->_helperData->getMaintenanceRoute();
                 $route = isset($route) ? $route : HelperData::MAINTENANCE_ROUTE;
                 break;
             case 'coming_soon_page':
+                if ($this->_request->getFullActionName() === 'mpbettermaintenance_comingsoon_index') {
+                    return false;
+                }
                 $route = $this->_helperData->getComingSoonRoute();
                 $route = isset($route) ? $route : HelperData::COMINGSOON_ROUTE;
                 break;

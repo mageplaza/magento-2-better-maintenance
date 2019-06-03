@@ -133,7 +133,7 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 
                 <?php if ($value['link']) : ?>
                     <div class="mpbm-social-box" style="display: inline-block; vertical-align: middle">
-                        <a href="<?= $value['link'] ?>">
+                        <a href="<?= $value['link'] ?>" target="_blank">
                             <img src="<?= $value['img'] ?>" alt="<?= __('Social Logo') ?>" width="20">
                         </a>
                     </div>
@@ -153,6 +153,14 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 <style>
     .mpbm-text {
         color: <?= $helper->getMaintenanceSetting('maintenance_color') ?>;
+    }
+
+    #mpbm-social-label {
+        color: <?= $helper->getSocialSetting('social_label_color') ?>;
+    }
+
+    .stack-txt1 {
+        background: <?= $helper->getClockSetting('clock_inner_color') ?>;
     }
 
     .progress-bar {
@@ -175,4 +183,5 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
             }
         }
     }
+
 </script>

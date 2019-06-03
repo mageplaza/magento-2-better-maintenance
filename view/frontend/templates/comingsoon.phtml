@@ -5,8 +5,8 @@ use Mageplaza\BetterMaintenance\Helper\Data;
  * @var \Mageplaza\BetterMaintenance\Block\Comingsoon $block ;
  */
 
-$helper = $this->helper(Data::class);
-$subscribeLabel = $helper->getSubscribeSetting('subscribe_label');
+$helper              = $this->helper(Data::class);
+$subscribeLabel      = $helper->getSubscribeSetting('subscribe_label');
 $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 ?>
 
@@ -67,7 +67,8 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 <div id="mpbm-<?= $helper->getComingsoonSetting('comingsoon_layout') ?>-column">
     <?php if (!empty($helper->getComingsoonSetting('comingsoon_logo'))): ?>
         <div id="mpbm-logo">
-            <img src="<?= $block->getLogo($helper->getComingsoonSetting('comingsoon_logo')) ?>" alt="<?= __('Logo') ?>" width="100">
+            <img src="<?= $block->getLogo($helper->getComingsoonSetting('comingsoon_logo')) ?>" alt="<?= __('Logo') ?>"
+                 width="100">
         </div>
     <?php endif; ?>
     <div id="mpbm-page-title" class="mpbm-text">
@@ -110,7 +111,7 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 
                 <?php if ($value['link']) : ?>
                     <div class="mpbm-social-box" style="display: inline-block; vertical-align: middle">
-                        <a href="<?= $value['link'] ?>">
+                        <a href="<?= $value['link'] ?>" target="_blank">
                             <img src="<?= $value['img'] ?>" alt="" width="20">
                         </a>
                     </div>
@@ -130,5 +131,13 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 <style>
     .mpbm-text {
         color: <?= $helper->getComingsoonSetting('comingsoon_color') ?>;
+    }
+
+    #mpbm-social-label {
+        color: <?= $helper->getSocialSetting('social_label_color') ?>;
+    }
+
+    .stack-txt1 {
+        background: <?= $helper->getClockSetting('clock_inner_color') ?>;
     }
 </style>

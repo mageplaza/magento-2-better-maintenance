@@ -151,7 +151,6 @@
     font-size: 65px;
     padding: 10px;
     border-radius: 3px;
-    background: #00816A;
     min-width: 30px;
 }
 
@@ -370,6 +369,7 @@
     list-style: none;
 }
 .progress {
+    border: solid 1px #999999;
     margin: auto;
     height: 45px;
     width: 40%;
