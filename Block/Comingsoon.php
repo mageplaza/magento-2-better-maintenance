@@ -20,10 +20,6 @@
  */
 namespace Mageplaza\BetterMaintenance\Block;
 
-use Magento\Framework\View\Element\Template;
-use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
-use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
-
 /**
  * Class Comingsoon
  * @package Mageplaza\BetterMaintenance\Block

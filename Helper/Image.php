@@ -24,7 +24,6 @@ namespace Mageplaza\BetterMaintenance\Helper;
 use Exception;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlInterface;
 use Magento\MediaStorage\Model\File\Uploader;
 use Mageplaza\Core\Helper\Media;
@@ -62,7 +61,7 @@ class Image extends Media
     /**
      * @return string
      */
-    public function getBaseTmpMediaPath()
+    public static function getBaseTmpMediaPath()
     {
         return self::TEMPLATE_MEDIA_PATH . '/tmp';
     }

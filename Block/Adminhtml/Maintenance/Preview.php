@@ -25,7 +25,6 @@ use Magento\Framework\View\Element\Template\Context;
 use Magento\UrlRewrite\Model\UrlRewriteFactory;
 use Mageplaza\BetterMaintenance\Block\Maintenance;
 use Magento\Framework\View\Element\Template;
-use Magento\Framework\View\Layout;
 use Magento\Framework\View\Result\PageFactory;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
@@ -44,11 +43,6 @@ class Preview extends Template
      * @var string
      */
     protected $_template = 'Mageplaza_BetterMaintenance::maintenance/preview.phtml';
-
-    /**
-     * @var Layout
-     */
-    protected $_layout;
 
     /**
      * @var PageFactory
@@ -78,7 +72,6 @@ class Preview extends Template
     /**
      * Preview constructor.
      *
-     * @param Layout $layout
      * @param PageFactory $pageFactory
      * @param HelperData $helperData
      * @param Maintenance $maintenanceBlock
@@ -87,7 +80,6 @@ class Preview extends Template
      * @param Context $context
      */
     public function __construct(
-        Layout $layout,
         PageFactory $pageFactory,
         HelperData $helperData,
         Maintenance $maintenanceBlock,
@@ -95,7 +87,6 @@ class Preview extends Template
         HelperImage $helperImage,
         Context $context
     ) {
-        $this->_layout           = $layout;
         $this->_pageFactory      = $pageFactory;
         $this->_helperData       = $helperData;
         $this->_maintenanceBlock = $maintenanceBlock;
@@ -149,7 +140,7 @@ class Preview extends Template
      */
     public function filterKey($arr)
     {
-        foreach ($this->cleanValue() as $word) {
+        foreach (self::cleanValue() as $word) {
             $arr = str_replace($word, '', $arr);
         }
 

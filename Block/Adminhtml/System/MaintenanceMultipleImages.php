@@ -23,7 +23,6 @@ namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Registry;
-use Magento\Framework\View\Layout;
 use Magento\Backend\Block\Template\Context;
 use Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer\Images;
 
@@ -39,11 +38,6 @@ class MaintenanceMultipleImages extends Field
     protected $_coreRegistry;
 
     /**
-     * @var Layout
-     */
-    protected $_layout;
-
-    /**
      * MaintenanceMultipleImages constructor.
      *
      * @param Registry $coreRegistry
@@ -53,12 +47,10 @@ class MaintenanceMultipleImages extends Field
      */
     public function __construct(
         Registry $coreRegistry,
-        Layout $layout,
         Context $context,
         array $data = []
     ) {
         $this->_coreRegistry = $coreRegistry;
-        $this->_layout       = $layout;
         parent::__construct($context, $data);
     }
 

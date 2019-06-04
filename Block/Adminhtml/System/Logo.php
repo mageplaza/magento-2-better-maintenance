@@ -23,7 +23,6 @@ namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Registry;
-use Magento\Framework\View\Layout;
 use Magento\Backend\Block\Template\Context;
 use Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer\Images;
 
@@ -39,26 +38,18 @@ class Logo extends Field
     protected $_coreRegistry;
 
     /**
-     * @var Layout
-     */
-    protected $_layout;
-
-    /**
      * Logo constructor.
      *
      * @param Registry $coreRegistry
-     * @param Layout $layout
      * @param Context $context
      * @param array $data
      */
     public function __construct(
         Registry $coreRegistry,
-        Layout $layout,
         Context $context,
         array $data = []
     ) {
         $this->_coreRegistry = $coreRegistry;
-        $this->_layout       = $layout;
         parent::__construct($context, $data);
     }
 

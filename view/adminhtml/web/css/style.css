@@ -246,7 +246,7 @@
     text-align: left;
 }
 #mpbm-double_left-column .progress {
-    margin: auto 0px;
+    margin: auto 0;
 }
 
 #mpbm-double_left-column .simple-container {
@@ -404,7 +404,6 @@
 .block.newsletter .field .control {
     display: inline-block;
     text-decoration: none;
-    display: block;
 }
 
 .block.newsletter .field .control:before {
@@ -417,7 +416,6 @@
     line-height: 32px;
     color: #c2c2c2;
     content: '\e61d';
-    font-family: 'luma-icons';
     margin: 0 0 0 8px;
     vertical-align: middle;
     display: inline-block;
@@ -459,7 +457,6 @@ input[type="text"], input[type="password"], input[type="url"], input[type="tel"]
 }
 
 .action.primary {
-    background-image: none;
     background: #1979c3;
     border: 1px solid #1979c3;
     color: #ffffff;
@@ -565,7 +562,7 @@ h1 {
     font-size: 40px;
     font-weight: 300;
     line-height: 1.1;
-    margin-top: 0rem;
+    margin-top: 0;
     margin-bottom: 2rem;
 }
 

@@ -121,7 +121,7 @@ class Images extends Widget
             $value = HelperData::jsonDecode($this->getElement()->getData('config_data')['mpbettermaintenance/maintenance_setting/maintenance_background_multi_image']);
             if (is_array($value) && !empty($value)) {
                 $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
-                $images   = $this->sortImagesByPosition($value);
+                $images   = self::sortImagesByPosition($value);
                 foreach ($images as $key => &$image) {
                     $image['url'] = $this->_imageHelper
                             ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
@@ -150,7 +150,7 @@ class Images extends Widget
             $value = HelperData::jsonDecode($this->getElement()->getData('config_data')['mpbettermaintenance/comingsoon_setting/comingsoon_background_multi_image']);
             if (is_array($value) && !empty($value)) {
                 $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
-                $images   = $this->sortImagesByPosition($value);
+                $images   = self::sortImagesByPosition($value);
                 foreach ($images as $key => &$image) {
                     $image['url'] = $this->_imageHelper
                             ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);

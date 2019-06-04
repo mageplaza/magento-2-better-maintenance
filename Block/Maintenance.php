@@ -143,7 +143,7 @@ class Maintenance extends Template
     public function getMultipleImagesUrl($images)
     {
         $urls   = [];
-        $images = $this->getListMultipleImages($images);
+        $images = self::getListMultipleImages($images);
         if (empty($images)) {
             return null;
         }

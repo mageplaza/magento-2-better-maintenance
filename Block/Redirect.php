@@ -50,11 +50,6 @@ class Redirect extends Template
     protected $_cmsPage;
 
     /**
-     * @var Session
-     */
-    protected $_session;
-
-    /**
      * @var Http
      */
     protected $_response;
@@ -85,7 +80,6 @@ class Redirect extends Template
      * @param Template\Context $context
      * @param HelperData $helperData
      * @param CmsPage $cmsPage
-     * @param Session $session
      * @param Http $response
      * @param ManagerInterface $messageManager
      * @param HttpContext $httpContext
@@ -97,7 +91,6 @@ class Redirect extends Template
         Template\Context $context,
         HelperData $helperData,
         CmsPage $cmsPage,
-        Session $session,
         Http $response,
         ManagerInterface $messageManager,
         HttpContext $httpContext,
@@ -107,7 +100,6 @@ class Redirect extends Template
     ) {
         $this->_helperData     = $helperData;
         $this->_cmsPage        = $cmsPage;
-        $this->_session        = $session;
         $this->_response       = $response;
         $this->_messageManager = $messageManager;
         $this->_context        = $httpContext;
