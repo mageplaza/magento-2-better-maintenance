@@ -18,7 +18,6 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-
 namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 
 use Magento\Config\Block\System\Config\Form\Field;
@@ -44,8 +43,7 @@ class ColorPicker extends Field
      * @param Context $context
      * @param array $data
      */
-    public function __construct
-    (
+    public function __construct(
         Registry $coreRegistry,
         Context $context,
         array $data = []

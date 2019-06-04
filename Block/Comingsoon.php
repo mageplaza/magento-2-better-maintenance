@@ -1,32 +1,51 @@
 <?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  Mageplaza
+ * @package   Mageplaza_BetterMaintenance
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
+ */
 namespace Mageplaza\BetterMaintenance\Block;
 
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
 
+/**
+ * Class Comingsoon
+ * @package Mageplaza\BetterMaintenance\Block
+ */
 class Comingsoon extends Maintenance
 {
     const PAGE_TITLE       = 'Coming Soon';
     const PAGE_DESCRIPTION = 'Our new site is coming soon. Stay tuned!';
 
-    public function __construct(
-        HelperData $helperData,
-        HelperImage $helperImage,
-        Template\Context $context,
-        array $data = []
-    ) {
-        parent::__construct($helperData, $helperImage, $context, $data);
-    }
-
+    /**
+     * @return mixed|string
+     */
     public function getPageTitle()
     {
-//        var_dump($this->_request->getFullActionName());die;
         $title = $this->_helperData->getComingSoonSetting('comingsoon_title');
 
         return empty($title) ? self::PAGE_TITLE : $title;
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getPageDescription()
     {
         $des = $this->_helperData->getMaintenanceSetting('comingsoon_description');

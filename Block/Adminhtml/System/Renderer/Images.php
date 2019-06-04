@@ -14,13 +14,13 @@
  * version in the future.
  *
  * @category  Mageplaza
- * @package   Mageplaza_BetterProductReviews
+ * @package   Mageplaza_BetterMaintenance
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-
 namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer;
 
+use Exception;
 use Magento\Backend\Block\Media\Uploader;
 use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Block\Widget;
@@ -36,17 +36,21 @@ use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 class Images extends Widget
 {
     /**
-     * @var Image
+     * @var HelperImage
      */
     protected $_imageHelper;
 
+    /**
+     * @var HelperData
+     */
     protected $_helperData;
 
     /**
      * Images constructor.
      *
      * @param Context $context
-     * @param Image $imageHelper
+     * @param HelperImage $imageHelper
+     * @param HelperData $helperData
      * @param array $data
      */
     public function __construct(
@@ -56,36 +60,36 @@ class Images extends Widget
         array $data = []
     ) {
         $this->_imageHelper = $imageHelper;
-        $this->_helperData = $helperData;
+        $this->_helperData  = $helperData;
 
         parent::__construct($context, $data);
     }
 
     /**
-     * @return AbstractBlock
+     * @return Widget
      */
     protected function _prepareLayout()
     {
-        $this->addChild('uploader', 'Magento\Backend\Block\Media\Uploader');
+        $this->addChild('uploader', Uploader::class);
 
         $this->getUploader()->getConfig()->setUrl(
             $this->_urlBuilder->addSessionParam()->getUrl('mpbettermaintenance/multiimages/upload')
         )->setFileField(
             'image'
-        )->setFilters([
-            'images' => [
-                'label' => __('Images (.gif, .jpg, .png)'),
-                'files' => ['*.gif', '*.jpg', '*.jpeg', '*.png'],
-            ],
-        ]);
+        )->setFilters(
+            [
+                'images' => [
+                    'label' => __('Images (.gif, .jpg, .png)'),
+                    'files' => ['*.gif', '*.jpg', '*.jpeg', '*.png'],
+                ],
+            ]
+        );
 
         return parent::_prepareLayout();
     }
 
     /**
-     * Retrieve uploader block
-     *
-     * @return bool|Uploader
+     * @return bool|AbstractBlock
      */
     public function getUploader()
     {
@@ -93,8 +97,6 @@ class Images extends Widget
     }
 
     /**
-     * Retrieve uploader block html
-     *
      * @return string
      */
     public function getUploaderHtml()
@@ -115,77 +117,65 @@ class Images extends Widget
      */
     public function getImagesMaintenanceJson()
     {
-//        $value = $this->getElement()->getImages();
-//        \Zend_Debug::dump($this->getElement()->getData('config_data'));die;
         if ($this->_helperData->getMaintenanceSetting('maintenance_background') === 'multiple_images') {
             $value = HelperData::jsonDecode($this->getElement()->getData('config_data')['mpbettermaintenance/maintenance_setting/maintenance_background_multi_image']);
-            //        \Zend_Debug::dump(HelperData::jsonDecode($value));die;
-            //        $value = HelperData::jsonEncode($value);
             if (is_array($value) && !empty($value)) {
                 $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
-                $images = $this->sortImagesByPosition($value);
+                $images   = $this->sortImagesByPosition($value);
                 foreach ($images as $key => &$image) {
-                    //            \Zend_Debug::dump($this->_imageHelper->getMediaPath($image['file']));die;
                     $image['url'] = $this->_imageHelper
                             ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
                     try {
-                        $fileHandler = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
+                        $fileHandler   = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
                         $image['size'] = $fileHandler['size'];
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         $this->_logger->warning($e);
                         unset($images[$key]);
                     }
                 }
-                //            \Zend_Debug::dump($images);die;
+
                 return HelperData::jsonEncode($images);
             }
         }
-
-
-        return '[]';
-    }
-
-    public function getImagesComingsoonJson()
-    {
-        //        $value = $this->getElement()->getImages();
-        //        \Zend_Debug::dump($this->getElement()->getData('config_data'));die;
-        if ($this->_helperData->getComingSoonSetting('comingsoon_background') === 'multiple_images') {
-            $value = HelperData::jsonDecode($this->getElement()->getData('config_data')['mpbettermaintenance/comingsoon_setting/comingsoon_background_multi_image']);
-            //        $value = '';
-            //        \Zend_Debug::dump(HelperData::jsonDecode($value));die;
-            //        $value = HelperData::jsonEncode($value);
-            if (is_array($value) && !empty($value)) {
-                $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
-                $images = $this->sortImagesByPosition($value);
-                foreach ($images as $key => &$image) {
-                    //            \Zend_Debug::dump($this->_imageHelper->getMediaPath($image['file']));die;
-                    $image['url'] = $this->_imageHelper
-                            ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
-                    try {
-                        $fileHandler = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
-                        $image['size'] = $fileHandler['size'];
-                    } catch (\Exception $e) {
-                        $this->_logger->warning($e);
-                        unset($images[$key]);
-                    }
-                }
-                //            \Zend_Debug::dump($images);die;
-                return HelperData::jsonEncode($images);
-            }
-        }
-
 
         return '[]';
     }
 
     /**
-     * Sort images array by position key
-     *
-     * @param array $images
+     * @return string
+     */
+    public function getImagesComingsoonJson()
+    {
+        if ($this->_helperData->getComingSoonSetting('comingsoon_background') === 'multiple_images') {
+            $value = HelperData::jsonDecode($this->getElement()->getData('config_data')['mpbettermaintenance/comingsoon_setting/comingsoon_background_multi_image']);
+            if (is_array($value) && !empty($value)) {
+                $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
+                $images   = $this->sortImagesByPosition($value);
+                foreach ($images as $key => &$image) {
+                    $image['url'] = $this->_imageHelper
+                            ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
+                    try {
+                        $fileHandler   = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
+                        $image['size'] = $fileHandler['size'];
+                    } catch (Exception $e) {
+                        $this->_logger->warning($e);
+                        unset($images[$key]);
+                    }
+                }
+
+                return HelperData::jsonEncode($images);
+            }
+        }
+
+        return '[]';
+    }
+
+    /**
+     * @param $images
      *
      * @return array
      */
-    private function sortImagesByPosition($images)
+    private static function sortImagesByPosition($images)
     {
         if (is_array($images)) {
             usort(

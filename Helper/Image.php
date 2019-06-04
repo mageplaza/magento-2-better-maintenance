@@ -49,8 +49,8 @@ class Image extends Media
     public function getNotDuplicatedFilename($fileName, $descriptionPath)
     {
         $fileMediaName = $descriptionPath . '/' . Uploader::getNewFileName(
-                $this->mediaDirectory->getAbsolutePath($this->getMediaPath($fileName))
-            );
+            $this->mediaDirectory->getAbsolutePath($this->getMediaPath($fileName))
+        );
 
         if ($fileMediaName != $fileName) {
             return $this->getNotDuplicatedFilename($fileMediaName, $descriptionPath);
@@ -101,7 +101,7 @@ class Image extends Media
     public function getBaseTmpMediaUrl()
     {
         return $this->storeManager->getStore()
-                ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $this->getBaseTmpMediaPath();
+            ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $this->getBaseTmpMediaPath();
     }
 
     /**
@@ -119,9 +119,10 @@ class Image extends Media
         return $this;
     }
 
-    public function getBaseStaticUrl() {
+    public function getBaseStaticUrl() 
+    {
         return $this->storeManager->getStore()
-                ->getBaseUrl(UrlInterface::URL_TYPE_STATIC);
+            ->getBaseUrl(UrlInterface::URL_TYPE_STATIC);
     }
     /**
      * @param array $imageEntries
@@ -167,7 +168,8 @@ class Image extends Media
 
                 $pathInfo = pathinfo($file);
                 if (!isset($pathInfo['extension'])
-                    || !in_array(strtolower($pathInfo['extension']), ['jpg', 'jpeg', 'gif', 'png'], true)) {
+                    || !in_array(strtolower($pathInfo['extension']), ['jpg', 'jpeg', 'gif', 'png'], true)
+                ) {
                     unset($imageEntries[$key]);
                     continue;
                 }

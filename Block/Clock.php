@@ -14,14 +14,12 @@
  * version in the future.
  *
  * @category  Mageplaza
- * @package   Mageplaza_CountdownTimer
+ * @package   Mageplaza_BetterMaintenance
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-
 namespace Mageplaza\BetterMaintenance\Block;
 
-use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Model\Config\Source\System\ClockTemplate;
@@ -29,33 +27,36 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 
 /**
- * Class Widget
- *
- * @package Mageplaza\CountdownTimer\Block
+ * Class Clock
+ * @package Mageplaza\BetterMaintenance\Block
  */
 class Clock extends Template
 {
     /**
-     * @var Data
+     * @var HelperData
      */
     protected $_helperData;
 
+    /**
+     * @var TimezoneInterface
+     */
     protected $_localeDate;
 
+    /**
+     * @var DateTime
+     */
     protected $_date;
 
     /**
-     * Widget constructor.
+     * Clock constructor.
      *
+     * @param HelperData $helperData
+     * @param TimezoneInterface $localeDate
+     * @param DateTime $date
      * @param Template\Context $context
-     * @param Data $helperData
-     * @param Registry $registry
-     * @param RulesFactory $ruleFactory
-     * @param ResourceModelRules $resourceModel
      * @param array $data
      */
-    public function __construct
-    (
+    public function __construct(
         HelperData $helperData,
         TimezoneInterface $localeDate,
         DateTime $date,
@@ -64,20 +65,31 @@ class Clock extends Template
     ) {
         $this->_helperData = $helperData;
         $this->_localeDate = $localeDate;
-        $this->_date = $date;
+        $this->_date       = $date;
         parent::__construct($context, $data);
     }
 
+    /**
+     * @return string
+     */
     public function getCurrentTime()
     {
         return $this->_date->gmtDate();
     }
 
+    /**
+     * @return string
+     */
     public function getTimeZone()
     {
         return $this->_localeDate->getConfigTimezone();
     }
 
+    /**
+     * @param $style
+     *
+     * @return string
+     */
     public function getClockTemplate($style)
     {
         $modern = ($style === ClockTemplate::MODERN) ? 'countdown-modern' : '';

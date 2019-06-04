@@ -35,9 +35,9 @@ class Data extends AbstractData
     /**
      * Data constructor.
      *
-     * @param Context $context
+     * @param Context                $context
      * @param ObjectManagerInterface $objectManager
-     * @param StoreManagerInterface $storeManager
+     * @param StoreManagerInterface  $storeManager
      */
     public function __construct(
         Context $context,
@@ -100,8 +100,8 @@ class Data extends AbstractData
     /**
      * Check Ip
      *
-     * @param $ip
-     * @param $range
+     * @param  $ip
+     * @param  $range
      * @return bool
      */
     public function checkIp($ip, $range)

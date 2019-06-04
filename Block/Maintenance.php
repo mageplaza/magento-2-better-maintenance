@@ -1,21 +1,60 @@
 <?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  Mageplaza
+ * @package   Mageplaza_BetterMaintenance
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
+ */
 namespace Mageplaza\BetterMaintenance\Block;
 
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
+use Magento\Cms\Block\Block;
 
+/**
+ * Class Maintenance
+ * @package Mageplaza\BetterMaintenance\Block
+ */
 class Maintenance extends Template
 {
     const PAGE_TITLE       = 'Under Maintenance';
-    const PAGE_DESCRIPTION = 'We\'re currentyly down for maintenace. Be right back!';
+    const PAGE_DESCRIPTION = 'We\'re currently down for maintenance. Be right back!';
     const PROGRESS_VALUE   = 50;
 
+    /**
+     * @var HelperData
+     */
     protected $_helperData;
+
+    /**
+     * @var HelperImage
+     */
     protected $_helperImage;
 
-    public function __construct
-    (
+    /**
+     * Maintenance constructor.
+     *
+     * @param HelperData $helperData
+     * @param HelperImage $helperImage
+     * @param Template\Context $context
+     * @param array $data
+     */
+    public function __construct(
         HelperData $helperData,
         HelperImage $helperImage,
         Template\Context $context,
@@ -26,36 +65,66 @@ class Maintenance extends Template
         parent::__construct($context, $data);
     }
 
+    /**
+     * @param $logo
+     *
+     * @return string
+     */
     public function getLogo($logo)
     {
-        return $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($logo,
-            HelperImage::TEMPLATE_MEDIA_TYPE_LOGO
-        ));
+        return $this->_helperImage->getMediaUrl(
+            $this->_helperImage->getMediaPath(
+                $logo,
+                HelperImage::TEMPLATE_MEDIA_TYPE_LOGO
+            )
+        );
     }
 
+    /**
+     * @param $image
+     *
+     * @return string|null
+     */
     public function getImageUrl($image)
     {
         if (empty($image)) {
             return null;
         }
 
-        return $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($image,
-            HelperImage::TEMPLATE_MEDIA_TYPE_IMAGE
-        ));
+        return $this->_helperImage->getMediaUrl(
+            $this->_helperImage->getMediaPath(
+                $image,
+                HelperImage::TEMPLATE_MEDIA_TYPE_IMAGE
+            )
+        );
     }
 
+    /**
+     * @param $video
+     *
+     * @return string|null
+     */
     public function getVideoUrl($video)
     {
         if (empty($video)) {
             return null;
         }
 
-        return $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($video,
-            HelperImage::TEMPLATE_MEDIA_TYPE_VIDEO
-        ));
+        return $this->_helperImage->getMediaUrl(
+            $this->_helperImage->getMediaPath(
+                $video,
+                HelperImage::TEMPLATE_MEDIA_TYPE_VIDEO
+            )
+        );
     }
 
-    public function getListMultipleImages($images) {
+    /**
+     * @param $images
+     *
+     * @return array
+     */
+    public static function getListMultipleImages($images)
+    {
         $data = HelperData::jsonDecode($images);
         $list = [];
 
@@ -66,21 +135,29 @@ class Maintenance extends Template
         return $list;
     }
 
+    /**
+     * @param $images
+     *
+     * @return array|null
+     */
     public function getMultipleImagesUrl($images)
     {
-        $urls = [];
+        $urls   = [];
         $images = $this->getListMultipleImages($images);
         if (empty($images)) {
             return null;
         }
 
-        foreach($images as $image) {
+        foreach ($images as $image) {
             $urls[] = $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($image));
         }
 
         return $urls;
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getPageTitle()
     {
         $title = $this->_helperData->getMaintenanceSetting('maintenance_title');
@@ -88,6 +165,9 @@ class Maintenance extends Template
         return empty($title) ? self::PAGE_TITLE : $title;
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getPageDescription()
     {
         $des = $this->_helperData->getMaintenanceSetting('maintenance_description');
@@ -95,6 +175,9 @@ class Maintenance extends Template
         return empty($des) ? self::PAGE_DESCRIPTION : $des;
     }
 
+    /**
+     * @return int|mixed
+     */
     public function getProgressValue()
     {
         $value = $this->_helperData->getMaintenanceSetting('maintenance_progress_value');
@@ -102,6 +185,9 @@ class Maintenance extends Template
         return empty($value) ? self::PROGRESS_VALUE : $value;
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getProgressLabel()
     {
         $label = $this->_helperData->getMaintenanceSetting('maintenance_progress_label');
@@ -109,6 +195,9 @@ class Maintenance extends Template
         return isset($label) ? $label : '';
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getSocialLabel()
     {
         $label = $this->_helperData->getSocialSetting('social_label');
@@ -116,6 +205,9 @@ class Maintenance extends Template
         return isset($label) ? $label : '';
     }
 
+    /**
+     * @return array
+     */
     public function getSocialList()
     {
         $list    = [
@@ -138,13 +230,17 @@ class Maintenance extends Template
         return $url;
     }
 
+    /**
+     * @return string|null
+     * @throws LocalizedException
+     */
     public function getBlockCms()
     {
         $blockId = $this->_helperData->getFooterSetting('cms_block');
         if ($blockId === '0') {
             return null;
         }
-        $block = $this->getLayout()->createBlock('Magento\Cms\Block\Block')
+        $block = $this->getLayout()->createBlock(Block::class)
             ->setBlockId($blockId)
             ->toHtml();
 

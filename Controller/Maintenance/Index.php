@@ -19,8 +19,7 @@ class Index extends Action
     protected $_urlRewrite;
     protected $_forwardFactory;
 
-    public function __construct
-    (
+    public function __construct(
         Layout $layout,
         PageFactory $pageFactory,
         HelperData $helperData,
@@ -47,7 +46,7 @@ class Index extends Action
         $resultPageLayout = $this->_pageFactory->create();
         $http = $this->_helperData->getMaintenanceSetting('maintenance_http_response') ?: 200;
 
-//        \Zend_Debug::dump($this->_helperData->getMaintenanceSetting('maintenance_http_response'));die;
+        //        \Zend_Debug::dump($this->_helperData->getMaintenanceSetting('maintenance_http_response'));die;
         $this->getResponse()->setHttpResponseCode($http);
         //        $resultPageLayout->getLayout()->getUpdate()->removeHandle('default');
         $resultPageLayout->getConfig()->getTitle()->set($this->_maintenanceBlock->getPageTitle());

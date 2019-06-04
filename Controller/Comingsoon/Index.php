@@ -15,8 +15,7 @@ class Index extends Action
     protected $_helperData;
     protected $_urlRewrite;
 
-    public function __construct
-    (
+    public function __construct(
         Layout $layout,
         PageFactory $pageFactory,
         HelperData $helperData,

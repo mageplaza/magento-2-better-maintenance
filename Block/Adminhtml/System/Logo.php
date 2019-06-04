@@ -18,21 +18,17 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-
 namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Magento\Framework\Data\Form\Element\CollectionFactory;
-use Magento\Framework\Data\Form\Element\Factory;
-use Magento\Framework\Escaper;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Layout;
 use Magento\Backend\Block\Template\Context;
-use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
+use Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer\Images;
 
 /**
- * Class MultipleImages
+ * Class Logo
  * @package Mageplaza\BetterMaintenance\Block\Adminhtml\System
  */
 class Logo extends Field
@@ -48,33 +44,34 @@ class Logo extends Field
     protected $_layout;
 
     /**
-     * MultipleImages constructor.
+     * Logo constructor.
      *
      * @param Registry $coreRegistry
      * @param Layout $layout
      * @param Context $context
      * @param array $data
      */
-    public function __construct
-    (
+    public function __construct(
         Registry $coreRegistry,
         Layout $layout,
         Context $context,
         array $data = []
     ) {
         $this->_coreRegistry = $coreRegistry;
-        $this->_layout = $layout;
+        $this->_layout       = $layout;
         parent::__construct($context, $data);
     }
 
     /**
+     * @param AbstractElement $element
+     *
      * @return string
      */
     protected function _getElementHtml(AbstractElement $element)
     {
         $html = '';
         $html .= $this->_layout
-            ->createBlock('\Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer\Images')
+            ->createBlock(Images::class)
             ->setTemplate('Mageplaza_BetterMaintenance::system/config/image.phtml')
             ->setId('media_gallery_content')
             ->setElement($this)
@@ -87,7 +84,7 @@ class Logo extends Field
     /**
      * @return string
      */
-    public function getName()
+    public static function getName()
     {
         return 'images';
     }

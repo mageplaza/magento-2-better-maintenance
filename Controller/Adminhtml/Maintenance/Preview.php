@@ -9,8 +9,7 @@ class Preview extends Action
 {
     protected $_pageFactory;
 
-    public function __construct
-    (
+    public function __construct(
         PageFactory $pageFactory,
         Context $context
     ) {

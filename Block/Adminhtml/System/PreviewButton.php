@@ -13,19 +13,18 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_BetterMaintenance
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_BetterMaintenance
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
-
 namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
 /**
- * Class MaintenanceButton
+ * Class PreviewButton
  * @package Mageplaza\BetterMaintenance\Block\Adminhtml\System
  */
 class PreviewButton extends Field
@@ -67,9 +66,13 @@ class PreviewButton extends Field
         return $this->_toHtml();
     }
 
+    /**
+     * @param $url
+     *
+     * @return string
+     */
     public function getDataUrl($url)
     {
-//        \Zend_Debug::dump($this->getUrl('mpbettermaintenance/maintenance/preview'));die;
         return $this->getUrl($url);
     }
 }

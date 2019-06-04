@@ -47,7 +47,7 @@ if ($blockId === 'mpbettermaintenance_maintenance_setting_maintenance_preview') 
                 method: 'POST'
             });
             var data = $('#config-edit-form').serialize();
-            var input = $("<input>").attr("type", "hidden").attr("name", "mydata").val(data);
+            var input = $("<input>").attr("type", "hidden").attr("name", "formData").val(data);
             form.append(input);
             $('body').append(form);
             form.submit();

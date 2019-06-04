@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_RequiredLogin
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_BetterMaintenance
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\BetterMaintenance\Block;
@@ -32,8 +32,8 @@ use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 
 /**
- * Class Deal
- * @package Mageplaza\RequiredLogin\Block
+ * Class Redirect
+ * @package Mageplaza\BetterMaintenance\Block
  */
 class Redirect extends Template
 {
@@ -69,12 +69,18 @@ class Redirect extends Template
      */
     protected $_context;
 
+    /**
+     * @var RemoteAddress
+     */
     protected $_remoteAddress;
 
+    /**
+     * @var DateTime
+     */
     protected $_date;
 
     /**
-     * Action constructor.
+     * Redirect constructor.
      *
      * @param Template\Context $context
      * @param HelperData $helperData
@@ -83,6 +89,8 @@ class Redirect extends Template
      * @param Http $response
      * @param ManagerInterface $messageManager
      * @param HttpContext $httpContext
+     * @param RemoteAddress $remoteAddress
+     * @param DateTime $date
      * @param array $data
      */
     public function __construct(
@@ -110,8 +118,6 @@ class Redirect extends Template
     }
 
     /**
-     * Get full action name
-     *
      * @return mixed
      */
     public function getFullActionName()
@@ -119,6 +125,9 @@ class Redirect extends Template
         return $this->_request->getFullActionName();
     }
 
+    /**
+     * @return array[]|false|string[]
+     */
     public function getWhiteListPage()
     {
         $links = preg_split("/(\r\n|\n|\r)/", $this->_helperData->getConfigGeneral('whitelist_page'));
@@ -126,6 +135,9 @@ class Redirect extends Template
         return $links;
     }
 
+    /**
+     * @return array
+     */
     public function getWhiteListIp()
     {
         return explode(',', $this->_helperData->getConfigGeneral('whitelist_ip'));
@@ -183,9 +195,8 @@ class Redirect extends Template
                 break;
         }
 
-        $url  = $this->getUrl($route);
+        $url = $this->getUrl($route);
 
-//        return $this->_response->setRedirect($url)->setHttpResponseCode($http);
         return $this->_response->setRedirect($url);
     }
 }

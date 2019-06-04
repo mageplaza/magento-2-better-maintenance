@@ -176,6 +176,18 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
     }
 </style>
 
+<?php if ($helper->getSubscribeSetting('subscribe_type') !== 'none') : ?>
+    <script>
+        require([
+            'jquery'
+        ], function ($) {
+            var subBtn = $('.action.primary span');
+            subBtn.text("<?= $helper->getSubscribeSetting('button_label') ?>").css("color", "<?= $helper->getSubscribeSetting('button_label_color') ?>");
+            $('.action.primary').css("background", "<?= $helper->getSubscribeSetting('button_background_color') ?>");
+        });
+    </script>
+<?php endif; ?>
+
 <script type="text/x-magento-init">
     {
         "*": {

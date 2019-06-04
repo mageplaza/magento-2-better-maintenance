@@ -84,7 +84,8 @@
             <div class="row">
                 <div class="mp-md-6">
                     <div class="progress mp-md-3">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="<?= $data['[maintenance_progress_value]'] ?>"
+                        <div class="progress-bar" role="progressbar"
+                             aria-valuenow="<?= $data['[maintenance_progress_value]'] ?>"
                              aria-valuemin="0"
                              aria-valuemax="100"><?= $data['[maintenance_progress_value]'] ?>
                         </div>
@@ -95,22 +96,24 @@
     <?php endif; ?>
 
     <!--    Subscribe area-->
-    <?php $subscribeLabel = $data['[subscribe_label]'] ?>
-    <?php $subscribeLabelColor = $data['[subscribe_label_color]'] ?>
-    <?php if ($data['[subscribe_type]'] === 'email_form') : ?>
-        <div id="mpbm-subscribe">
-            <?php if ($subscribeLabel): ?>
-                <h4 style="color: <?= $subscribeLabelColor ?>"><?= $subscribeLabel ?></h4>
-            <?php endif; ?>
-            <?= $block->getSubscribeBlock() ?>
-        </div>
-    <?php elseif ($data['[subscribe_type]'] === 'register_form') : ?>
-        <div id="mpbm-register">
-            <?php if ($subscribeLabel): ?>
-                <h4 style="color: <?= $subscribeLabelColor ?>"><?= $subscribeLabel ?></h4>
-            <?php endif; ?>
-            <?= $block->getRegisterBlock() ?>
-        </div>
+    <?php if ($data['[subscribe_type]'] !== 'none') : ?>
+        <?php $subscribeLabel = $data['[subscribe_label]'] ?>
+        <?php $subscribeLabelColor = $data['[subscribe_label_color]'] ?>
+        <?php if ($data['[subscribe_type]'] === 'email_form') : ?>
+            <div id="mpbm-subscribe">
+                <?php if ($subscribeLabel): ?>
+                    <h4 style="color: <?= $subscribeLabelColor ?>"><?= $subscribeLabel ?></h4>
+                <?php endif; ?>
+                <?= $block->getSubscribeBlock() ?>
+            </div>
+        <?php elseif ($data['[subscribe_type]'] === 'register_form') : ?>
+            <div id="mpbm-register">
+                <?php if ($subscribeLabel): ?>
+                    <h4 style="color: <?= $subscribeLabelColor ?>"><?= $subscribeLabel ?></h4>
+                <?php endif; ?>
+                <?= $block->getRegisterBlock() ?>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
 
     <!--    Social area-->
@@ -151,6 +154,7 @@
     .stack-txt1 {
         background: <?= $data['[clock_inner_color]'] ?>;
     }
+
     <?php endif; ?>
 
     .progress-bar {
@@ -165,6 +169,18 @@
     }
 </style>
 
+<?php if ($data['[subscribe_type]'] !== 'none') : ?>
+    <script>
+        require([
+            'jquery'
+        ], function ($) {
+            var subBtn = $('.action.primary span');
+            subBtn.text("<?= $data['[button_label]'] ?>").css("color", "<?= $data['[button_label_color]'] ?>");
+            $('.action.primary').css("background", "<?= $data['[button_background_color]'] ?>");
+        });
+    </script>
+<?php endif; ?>
+
 <script type="text/x-magento-init">
     {
         ".mpbm-wrapper": {
@@ -173,5 +189,6 @@
             }
         }
     }
+
 
 </script>

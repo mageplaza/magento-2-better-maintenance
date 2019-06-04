@@ -68,11 +68,11 @@ class Upload extends Action
     /**
      * Upload constructor.
      *
-     * @param Action\Context $context
-     * @param RawFactory $resultRawFactory
+     * @param Action\Context  $context
+     * @param RawFactory      $resultRawFactory
      * @param UploaderFactory $uploaderFactory
-     * @param Filesystem $filesystem
-     * @param Image $imageHelper
+     * @param Filesystem      $filesystem
+     * @param Image           $imageHelper
      */
     public function __construct(
         Action\Context $context,
@@ -107,8 +107,10 @@ class Upload extends Action
              * @var \Magento\Framework\Filesystem\Directory\Read $mediaDirectory
              */
             $mediaDirectory = $this->_fileSystem->getDirectoryRead(DirectoryList::MEDIA);
-            $result = $uploader->save($mediaDirectory
-                ->getAbsolutePath($this->_imageHelper->getBaseTmpMediaPath()));
+            $result = $uploader->save(
+                $mediaDirectory
+                    ->getAbsolutePath($this->_imageHelper->getBaseTmpMediaPath())
+            );
 
             unset($result['tmp_name']);
             unset($result['path']);

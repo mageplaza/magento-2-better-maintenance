@@ -18,7 +18,6 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-
 namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 
 use Magento\Config\Block\System\Config\Form\Field;
@@ -38,6 +37,9 @@ class RealTime extends Field
      */
     protected $_coreRegistry;
 
+    /**
+     * @var DateTime
+     */
     protected $_date;
 
     /**
@@ -48,8 +50,7 @@ class RealTime extends Field
      * @param Context $context
      * @param array $data
      */
-    public function __construct
-    (
+    public function __construct(
         Registry $coreRegistry,
         DateTime $date,
         Context $context,

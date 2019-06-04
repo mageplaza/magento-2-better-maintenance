@@ -28,7 +28,9 @@ define(
 
         $.widget(
             'mage.productGallery', productGallery, {
-                /** add option type image */
+                /**
+                 * add option type image 
+                 */
                 options: {
                     types: {}
                 },
