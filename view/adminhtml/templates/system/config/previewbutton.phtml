@@ -22,10 +22,17 @@
 /**
  * @var \Mageplaza\BetterMaintenance\Block\Adminhtml\System\PreviewButton $block
  */
+$blockId = $block->getHtmlId();
+
+if ($blockId === 'mpbettermaintenance_maintenance_setting_maintenance_preview') {
+    $dataUrl = 'mpbettermaintenance/maintenance/preview';
+} else {
+    $dataUrl = 'mpbettermaintenance/comingsoon/preview';
+}
 ?>
 <div class="actions actions-maintenance-preview">
-    <button class="button-maintenance-preview" data-url="<?= $block->getDataUrl() ?>" type="button"
-            id="<?= $block->getHtmlId() ?>">
+    <button class="button-maintenance-preview" data-url="<?= $block->escapeHtml($block->getDataUrl($dataUrl)) ?>" type="button"
+            id="<?= /* @noEscape */ $blockId ?>">
         <span><?= /* @noEscape */
             $block->getButtonLabel() ?></span>
     </button>

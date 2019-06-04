@@ -1,10 +1,9 @@
 <?php $data = $block->getFormData(); ?>
-
 <!--Multiple Image Background-->
-<?php if ($data['[maintenance_background]'] === 'multiple_images'): ?>
-    <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl('maintenance_background_multi_image')); ?>
+<?php if ($data['[comingsoon_background]'] === 'multiple_images'): ?>
+    <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl('comingsoon_background_multi_image')); ?>
     <style>
-        .mpbettermaintenance-maintenance-preview {
+        .mpbettermaintenance-comingsoon-preview {
             background-repeat: no-repeat;
             background-size: cover;
             transition-delay: 2s;
@@ -23,7 +22,7 @@
                 if (nextImage >= images.length) {
                     nextImage = 0;
                 }
-                $('.mpbettermaintenance-maintenance-preview')
+                $('.mpbettermaintenance-comingsoon-preview')
                 .fadeIn('slow', function () {
                     setTimeout(doSlideshow, 5000);
                 }).css('background-image', 'url("' + images[nextImage++] + '")');
@@ -33,11 +32,11 @@
 <?php endif; ?>
 
 <!--Single Image Background-->
-<?php if ($data['[maintenance_background]'] === 'image'
-    && $block->getImageUrl($data['[maintenance_background_image]'])): ?>
+<?php if ($data['[comingsoon_background]'] === 'image'
+    && $block->getImageUrl($data['[comingsoon_background_image]'])): ?>
     <style>
-        .mpbettermaintenance-maintenance-preview {
-            background-image: url("<?= $block->getImageUrl($data['[maintenance_background_image]']) ?>");
+        .mpbettermaintenance-comingsoon-preview {
+            background-image: url("<?= $block->getImageUrl($data['[comingsoon_background_image]']) ?>");
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -45,52 +44,35 @@
 <?php endif; ?>
 
 <!--Video Background-->
-<?php if ($data['[maintenance_background]'] === 'video'
-    && $block->getVideoUrl($data['[maintenance_background_video]'])): ?>
+<?php if ($data['[comingsoon_background]'] === 'video'
+    && $block->getVideoUrl($data['[comingsoon_background_video]'])): ?>
     <video autoplay muted loop id="mpbm-video">
-        <source src="<?= $block->getVideoUrl($data['[maintenance_background_video]']) ?>"
+        <source src="<?= $block->getVideoUrl($data['[comingsoon_background_video]']) ?>"
                 type="video/mp4">
     </video>
 <?php endif; ?>
-
-<div id="mpbm-<?= $data['[maintenance_layout]'] ?>-column" class="mpbm-preview-wrapper">
-    <?php if (!empty($data['[maintenance_logo]'])): ?>
+<div id="mpbm-<?= $data['[comingsoon_layout]'] ?>-column" class="mpbm-preview-wrapper">
+    <?php if (!empty($data['[comingsoon_logo]'])): ?>
         <div id="mpbm-logo">
-            <img src="<?= $block->getLogo($data['[maintenance_logo]']) ?>"
+            <img src="<?= $block->getLogo($data['[comingsoon_logo]']) ?>"
                  alt="<?= __('Logo') ?>" width="100">
         </div>
     <?php endif; ?>
 
     <!--    Page Title Area-->
     <div id="mpbm-page-title">
-        <h1 class="mpbm-text" style="margin-bottom: 0"><?= $data['[maintenance_title]'] ?></h1>
+        <h1 class="mpbm-text" style="margin-bottom: 0"><?= $data['[comingsoon_title]'] ?></h1>
     </div>
 
     <!--    Page Description Area-->
     <div id="mpbm-page-description">
-        <h3 class="mpbm-text"><?= $data['[maintenance_description]'] ?></h3>
+        <h3 class="mpbm-text"><?= $data['[comingsoon_description]'] ?></h3>
     </div>
 
     <!--    Clock area-->
     <?php if ($data['[clock_enabled]']) : ?>
         <div id="mpbm-clock">
             <?= $block->getClockBlock() ?>
-        </div>
-    <?php endif; ?>
-
-    <!--    Progress Area-->
-    <?php if ($data['[maintenance_progress_enabled]']): ?>
-        <div id="mpbm-progress-bar">
-            <div class="row">
-                <div class="mp-md-6">
-                    <div class="progress mp-md-3">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="<?= $data['[maintenance_progress_value]'] ?>"
-                             aria-valuemin="0"
-                             aria-valuemax="100"><?= $data['[maintenance_progress_value]'] ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     <?php endif; ?>
 
@@ -140,7 +122,7 @@
 
 <style>
     .mpbm-text {
-        color: <?= $data['[maintenance_color]'] ?>;
+        color: <?= $data['[comingsoon_color]'] ?>;
     }
 
     #mpbm-social-label {
@@ -152,25 +134,12 @@
         background: <?= $data['[clock_inner_color]'] ?>;
     }
     <?php endif; ?>
-
-    .progress-bar {
-        height: 45px;
-        font-size: 100%;
-        font-weight: bold;
-        border-radius: 50px;
-        line-height: 45px;
-        color: <?= $data['[maintenance_progress_label_color]'] ?>;
-        background-color: <?= $data['[maintenance_progress_bar_color]'] ?>;
-        width: 0;
-    }
 </style>
 
 <script type="text/x-magento-init">
     {
         ".mpbm-wrapper": {
-            "maintenancePreview": {
-                "progressLabel": "<?= $data['[maintenance_progress_label]'] ?>"
-            }
+            "maintenancePreview": {}
         }
     }
 

@@ -24,79 +24,101 @@ define([
 ], function ($, $t) {
     'use strict';
 
+    function zeroPad (num) {
+        return num < 10
+            ? '0' + num
+            : num
+            ;
+    }
+
     $.widget('mageplaza.maintenancePreview', {
         _create: function () {
-            var layout = localStorage['mLayout'];
-
-            var wrapper = $('#mpbm-column');
-
-            switch (layout){
-                case 'single':
-                    wrapper.addClass('single-column-layout');
-                    break;
-                case 'double':
-                    wrapper.addClass('double-column-layout');
-                    break;
-                default:
-                    wrapper.addClass('double-left-column-layout');
-                    break;
-            }
-
-            var pageTitle = '<div id="mpbm-page-title"><h1 class="mpbm-text" style="margin-bottom: 0">';
-            pageTitle += localStorage['mTitle'] + '</h1></div><div id="mpbm-page-description"><h3 class="mpbm-text">';
-            pageTitle += localStorage['mDes'] + '</h3></div>';
-
-            if (localStorage['clockEnable']) {
-                pageTitle += this.clockTemplate();
-            }
-
-            wrapper.html(pageTitle);
-
-            $('.mpbm-text').css('color', localStorage['mLabelColor']);
+            this.progressBar();
+            this.setCountdown();
         },
 
-        clockTemplate: function () {
+        progressBar: function () {
+            var delay         = 500,
+                bar           = $(".progress-bar"),
+                progressLabel = this.options.progressLabel;
+            bar.delay(delay).animate({
+                width: bar.attr('aria-valuenow') + '%'
+            }, delay);
 
-            var clockStyle = localStorage['clockStyle'];
-            var modern     = clockStyle === 'modern' ? 'countdown-modern' : '';
+            bar.prop('Counter', 0).animate({
+                Counter: bar.text()
+            }, {
+                duration: delay,
+                easing: 'swing',
+                step: function (now) {
+                    bar.text(Math.ceil(now) + '% ' + progressLabel);
+                }
+            });
+        },
 
-            var template = '<div id="mpbm-clock"><div class="flex-box ' + modern + '">' +
-                '<div class="' + clockStyle + ' mp-countdown-clock">' +
-                '<span class="' + clockStyle + '-txt1 mp-countdown-days"></span>' +
-                '<span class="' + clockStyle + '-txt2 mp-countdown-txt">' + $t('Days') + '</span>' +
-                '</div>' +
-                '<div class="' + clockStyle + ' mp-countdown-clock">' +
-                '<span class="' + clockStyle + '-txt1 mp-countdown-hours"></span>' +
-                '<span class="' + clockStyle + '-txt2 mp-countdown-txt">' + $t('Hours') + '</span>' +
-                '</div>' +
-                '<div class="' + clockStyle + ' mp-countdown-clock">' +
-                '<span class="' + clockStyle + '-txt1 mp-countdown-minutes"></span>' +
-                '<span class="' + clockStyle + '-txt2 mp-countdown-txt">' + $t('Minutes') + '</span>' +
-                '</div>' +
-                '<div class="' + clockStyle + ' mp-countdown-clock">' +
-                '<span class="' + clockStyle + '-txt1 mp-countdown-seconds"></span>' +
-                '<span class="' + clockStyle + '-txt2 mp-countdown-txt">' + $t('Seconds') + '</span>' +
-                '</div></div></div>';
+        setCountdown: function () {
+            var element     = $(this.options.timer_id),
+                timezone    = this.options.timezone,
+                endTime     = this.options.endtime,
+                currentTime = this.options.currentTime;
 
-            var template1 = '<div id="mpbm-clock"><div class="simple-container">' +
-                '<div class="' + clockStyle + ' mp-countdown-clock">' +
-                '<span class="' + clockStyle + '-txt1 mp-countdown-days"></span>' +
-                '<span class="' + clockStyle + '-txt2 mp-countdown-txt fs-45b">' + $t('Days') + '</span>' +
-                '</div>' +
-                '<div class="' + clockStyle + ' mp-countdown-clock">' +
-                '<span class="' + clockStyle + '-txt1 mp-countdown-hours"></span>' +
-                '<span class="' + clockStyle + '-txt2 mp-countdown-txt fs-45">:</span>' +
-                '</div>' +
-                '<div class="' + clockStyle + ' mp-countdown-clock">' +
-                '<span class="' + clockStyle + '-txt1 mp-countdown-minutes"></span>' +
-                '<span class="' + clockStyle + '-txt2 mp-countdown-txt fs-45">:</span>' +
-                '</div>' +
-                '<div class="' + clockStyle + ' mp-countdown-clock">' +
-                '<span class="' + clockStyle + '-txt1 mp-countdown-seconds"></span>' +
-                '</div></div></div>';
+            var countDownHandler,
+                timeNow     = new Date(currentTime).getTime(),
+                timeEnd     = new Date(endTime).getTime(),
+                daysSpan    = element.find('.mp-countdown-days'),
+                hoursSpan   = element.find('.mp-countdown-hours'),
+                minutesSpan = element.find('.mp-countdown-minutes'),
+                secondsSpan = element.find('.mp-countdown-seconds');
 
-            return clockStyle === 'simple' ? template1 : template;
+            if (timeEnd < timeNow) {
+                daysSpan.html(zeroPad(0));
+                hoursSpan.html(zeroPad(0));
+                minutesSpan.html(zeroPad(0));
+                secondsSpan.html(zeroPad(0));
+                // element.remove();
+            }
+            // Update the count down every 1 second
+            countDownHandler = setInterval(
+                function () {
+                    // Get from date and time
+                    var days, hours, minutes, seconds,
+                        newDate    = new Date(),
+                        formatDate = newDate.toLocaleString('en-US', {timeZone: timezone}),
+                        now        = Date.parse(formatDate),
+                        distance   = -1;
+
+                    if (timeEnd > now) {
+                        distance = timeEnd - now;
+                    }
+                    // console.log(window.location);
+
+                    // Time calculations for days, hours, minutes and seconds
+                    days    = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    hours   = Math.floor(distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+                    minutes = Math.floor(distance % (1000 * 60 * 60) / (1000 * 60));
+                    seconds = Math.floor(distance % (1000 * 60) / 1000);
+
+                    // Output the result in element
+                    daysSpan.html(zeroPad(days));
+                    hoursSpan.html(zeroPad(hours));
+                    minutesSpan.html(zeroPad(minutes));
+                    secondsSpan.html(zeroPad(seconds));
+                    // console.log(window.location.host);
+                    // If the count down is over, hide countdown
+                    if (distance < 0) {
+                        clearInterval(countDownHandler);
+                        daysSpan.html(zeroPad(0));
+                        hoursSpan.html(zeroPad(0));
+                        minutesSpan.html(zeroPad(0));
+                        secondsSpan.html(zeroPad(0));
+                        // window.location.href = baseUrl;
+                        // element.hide();
+                    }
+                },
+                1000
+            );
         }
+
     });
 
     return $.mageplaza.maintenancePreview;

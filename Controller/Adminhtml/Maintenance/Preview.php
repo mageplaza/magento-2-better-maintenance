@@ -20,9 +20,6 @@ class Preview extends Action
 
     public function execute()
     {
-//        $a = [];
-//        \Zend_Debug::dump($this->getRequest()->getParams());
-//        \Zend_Debug::dump(parse_str($this->getRequest()->getPostValue('mydata'), []));die('xx');
         return $this->_pageFactory->create();
     }
 }

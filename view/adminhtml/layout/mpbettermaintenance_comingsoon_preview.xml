@@ -6,7 +6,7 @@
     <body>
         <referenceContainer name="menu.wrapper" remove="true"/>
         <container>
-            <block class="Mageplaza\BetterMaintenance\Block\Adminhtml\ComingSoon\Preview" name="mpbettermaintenance.comingsoon.page"/>
+            <block class="Mageplaza\BetterMaintenance\Block\Adminhtml\Comingsoon\Preview" name="mpbettermaintenance.comingsoon.page"/>
         </container>
     </body>
 </page>

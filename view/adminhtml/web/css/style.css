@@ -151,7 +151,6 @@
     font-size: 65px;
     padding: 10px;
     border-radius: 3px;
-    background: #00816A;
     min-width: 30px;
 }
 
@@ -234,11 +233,11 @@
     display: inline-block;
 }
 /*Single column*/
-.single-column-layout {
+#mpbm-single-column {
     text-align: center;
 }
 
-.single-column-layout #mpbm-subscribe .block.newsletter {
+#mpbm-single-column #mpbm-subscribe .block.newsletter {
     margin: auto;
 }
 
@@ -259,7 +258,6 @@
     padding-left: 50px;
 }
 #mpbm-double_left-column #mpbm-social-contact {
-    position: fixed;
     bottom: 15px;
     width: 100%;
     left: 50px;
@@ -276,7 +274,7 @@
     padding-left: 50px;
 }
 #mpbm-double_left-column #mpbm-clock{
-    padding-left: 50px;
+    padding-right: 58%;
 }
 #mpbm-double_left-column #mpbm-progress-bar{
     padding-left: 50px;
@@ -370,10 +368,211 @@
     list-style: none;
 }
 .progress {
+    border: solid 1px #999999;
     margin: auto;
     height: 45px;
     width: 40%;
     background: #F7F7F7;
     text-align: center;
     border-radius: 50px;
+}
+
+.block.newsletter .title {
+    display: none;
+}
+
+.block.newsletter .form.subscribe {
+    display: table;
+    width: 100%;
+}
+
+.block.newsletter .field {
+    margin: 0;
+}
+
+.block.newsletter .label {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.block.newsletter .field .control {
+    display: inline-block;
+    text-decoration: none;
+    display: block;
+}
+
+.block.newsletter .field .control:before {
+    position: absolute;
+}
+
+.block.newsletter .field .control:before {
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    line-height: 32px;
+    color: #c2c2c2;
+    content: '\e61d';
+    font-family: 'luma-icons';
+    margin: 0 0 0 8px;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: normal;
+    overflow: hidden;
+    speak: none;
+    text-align: center;
+}
+
+.block.newsletter input {
+    padding-left: 35px;
+}
+
+input[type="text"], input[type="password"], input[type="url"], input[type="tel"], input[type="search"], input[type="number"], input[type="datetime"], input[type="email"] {
+    background: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #c2c2c2;
+    border-radius: 1px;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    height: 32px;
+    line-height: 1.42857143;
+    padding: 0 9px;
+    vertical-align: baseline;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.block.newsletter .actions {
+    display: table-cell;
+    vertical-align: top;
+    width: 1%;
+}
+
+.block.newsletter .action.subscribe {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    margin-left: -1px;
+}
+
+.action.primary {
+    background-image: none;
+    background: #1979c3;
+    border: 1px solid #1979c3;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    padding: 7px 15px;
+    font-size: 1.4rem;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+@media only screen and (min-width: 768px) {
+    .block.newsletter {
+        width: 34%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .form.password.reset, .form.send.confirmation, .form.password.forget, .form.create.account {
+        min-width: 600px;
+        width: 50%;
+    }
+    .legend {
+        border-bottom: 1px solid #c5c5c5;
+    }
+}
+
+.fieldset {
+    border: 0;
+    margin: 0 0 40px;
+    padding: 0;
+    letter-spacing: -.31em;
+}
+
+.fieldset > .legend {
+    margin: 0 0 20px;
+    padding: 0 0 10px;
+    width: 100%;
+    box-sizing: border-box;
+    float: left;
+    font-weight: 300;
+    line-height: 1.2;
+    font-size: 1.8rem;
+}
+
+.account .legend {
+    border-bottom: 1px solid #c6c6c6;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+}
+
+.fieldset > * {
+    letter-spacing: normal;
+}
+
+.account .legend > span {
+    font-size: 2.2rem;
+    font-weight: 300;
+}
+
+.legend > span {
+    margin-right: 5px;
+}
+
+.fieldset > .legend + br {
+    clear: both;
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.fieldset > .field, .fieldset > .fields > .field {
+    margin: 0 0 20px;
+}
+
+.fieldset > .field > .label, .fieldset > .fields > .field > .label {
+    font-weight: 600;
+}
+
+.fieldset > .field > .label, .fieldset > .fields > .field > .label {
+    margin: 0 0 8px;
+    display: inline-block;
+}
+
+input[type="text"], input[type="password"], input[type="url"], input[type="tel"], input[type="search"], input[type="number"], input[type="datetime"], input[type="email"] {
+    background: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #c2c2c2;
+    border-radius: 1px;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    height: 32px;
+    line-height: 1.42857143;
+    padding: 0 9px;
+    vertical-align: baseline;
+    width: 100%;
+    box-sizing: border-box;
+}
+h1 {
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1.1;
+    margin-top: 0rem;
+    margin-bottom: 2rem;
+}
+
+h3 {
+    font-weight: 600;
+    line-height: 1.1;
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }

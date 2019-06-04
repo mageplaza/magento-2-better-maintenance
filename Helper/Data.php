@@ -97,5 +97,53 @@ class Data extends AbstractData
 
         return isset($comingSoonRoute) ? $comingSoonRoute : self::COMINGSOON_ROUTE;
     }
+    /**
+     * Check Ip
+     *
+     * @param $ip
+     * @param $range
+     * @return bool
+     */
+    public function checkIp($ip, $range)
+    {
+        if (strpos($range, '*') !== false) {
+            $low = $high = $range;
+            if (strpos($range, '-') !== false) {
+                list($low, $high) = explode('-', $range, 2);
+            }
+            $low   = str_replace('*', '0', $low);
+            $high  = str_replace('*', '255', $high);
+            $range = $low . '-' . $high;
+        }
+        if (strpos($range, '-') !== false) {
+            list($low, $high) = explode('-', $range, 2);
 
+            return $this->ipCompare($ip, $low, 1) && $this->ipcompare($ip, $high, -1);
+        }
+
+        return $this->ipCompare($ip, $range);
+    }
+
+    /**
+     * @param $ip1
+     * @param $ip2
+     * @param int $op
+     * @return bool
+     */
+    private function ipCompare($ip1, $ip2, $op = 0)
+    {
+        $ip1Arr = explode('.', $ip1);
+        $ip2Arr = explode('.', $ip2);
+
+        for ($i = 0; $i < 4; $i++) {
+            if ($ip1Arr[$i] < $ip2Arr[$i]) {
+                return ($op == -1);
+            }
+            if ($ip1Arr[$i] > $ip2Arr[$i]) {
+                return ($op == 1);
+            }
+        }
+
+        return ($op == 0);
+    }
 }

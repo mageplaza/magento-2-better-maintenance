@@ -258,7 +258,6 @@
     padding-left: 50px;
 }
 #mpbm-double_left-column #mpbm-social-contact {
-    position: fixed;
     bottom: 15px;
     width: 100%;
     left: 50px;
@@ -275,7 +274,7 @@
     padding-left: 50px;
 }
 #mpbm-double_left-column #mpbm-clock{
-    padding-left: 50px;
+    padding-right: 58%;
 }
 #mpbm-double_left-column #mpbm-progress-bar{
     padding-left: 50px;

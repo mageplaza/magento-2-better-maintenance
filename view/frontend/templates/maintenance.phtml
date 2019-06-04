@@ -58,7 +58,7 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 
 <!--Video Background-->
 <?php if ($helper->getMaintenanceSetting('maintenance_background') === 'video'
-    && $block->getImageUrl($helper->getMaintenanceSetting('maintenance_background_video'))): ?>
+    && $block->getVideoUrl($helper->getMaintenanceSetting('maintenance_background_video'))): ?>
     <video autoplay muted loop id="mpbm-video">
         <source src="<?= $block->getVideoUrl($helper->getMaintenanceSetting('maintenance_background_video')) ?>"
                 type="video/mp4">
@@ -109,14 +109,14 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
     <!--    Subscribe area-->
     <?php if ($helper->getSubscribeSetting('subscribe_type') === 'email_form') : ?>
         <div id="mpbm-subscribe">
-            <?php if ($helper->getSubscribeSetting('subscribe_label')): ?>
+            <?php if ($subscribeLabel): ?>
                 <h4 style="color: <?= $subscribeLabelColor ?>"><?= $subscribeLabel ?></h4>
             <?php endif; ?>
             <?= $this->getChildHtml('subscribe') ?>
         </div>
     <?php elseif ($helper->getSubscribeSetting('subscribe_type') === 'register_form') : ?>
         <div id="mpbm-register">
-            <?php if ($helper->getSubscribeSetting('subscribe_label')): ?>
+            <?php if ($subscribeLabel): ?>
                 <h4 style="color: <?= $subscribeLabelColor ?>"><?= $subscribeLabel ?></h4>
             <?php endif; ?>
             <?= $this->getChildHtml('register') ?>
@@ -147,7 +147,6 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
             <?= $block->getBlockCms() ?>
         </div>
     <?php endif; ?>
-
 </div>
 
 <style>
@@ -159,9 +158,11 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
         color: <?= $helper->getSocialSetting('social_label_color') ?>;
     }
 
+    <?php if ($helper->getClockSetting('clock_template') === 'stack') : ?>
     .stack-txt1 {
         background: <?= $helper->getClockSetting('clock_inner_color') ?>;
     }
+    <?php endif; ?>
 
     .progress-bar {
         height: 45px;

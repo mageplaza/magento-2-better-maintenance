@@ -145,7 +145,7 @@ class Redirect extends Template
         }
 
         foreach ($this->getWhiteListIp() as $value) {
-            if ($currentIp === $value) {
+            if ($this->_helperData->checkIp($currentIp, $value)) {
                 return false;
             }
         }

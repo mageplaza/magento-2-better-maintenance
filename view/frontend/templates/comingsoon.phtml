@@ -58,7 +58,7 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 
 <!--Video Background-->
 <?php if ($helper->getComingSoonSetting('maintenance_background') === 'video'
-    && $block->getImageUrl($helper->getComingSoonSetting('maintenance_background_video'))): ?>
+    && $block->getVideoUrl($helper->getComingSoonSetting('maintenance_background_video'))): ?>
     <video autoplay muted loop id="mpbm-video">
         <source src="<?= $block->getVideoUrl($helper->getComingSoonSetting('maintenance_background_video')) ?>"
                 type="video/mp4">
@@ -137,7 +137,9 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
         color: <?= $helper->getSocialSetting('social_label_color') ?>;
     }
 
+    <?php if ($helper->getClockSetting('clock_template') === 'stack') : ?>
     .stack-txt1 {
         background: <?= $helper->getClockSetting('clock_inner_color') ?>;
     }
+    <?php endif; ?>
 </style>
