@@ -36,7 +36,7 @@
                 </clock_setting>
                 <subcribe_setting>
                     <subcribe_type>email_form</subcribe_type>
-                    <button_label>Subcribe</button_label>
+                    <button_label>Subscribe</button_label>
                 </subcribe_setting>
                 <footer_block>
                     <cms_block>0</cms_block>

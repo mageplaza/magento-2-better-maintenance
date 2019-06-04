@@ -14,33 +14,32 @@
  * version in the future.
  *
  * @category  Mageplaza
- * @package   Mageplaza_BetterProductReviews
+ * @package   Mageplaza_BetterMaintenance
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\BetterMaintenance\Controller\Adminhtml\MultiImages;
 
+use Exception;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\Result\Raw;
 use Magento\Framework\Controller\Result\RawFactory;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Filesystem;
+use Magento\Framework\Filesystem\Directory\Read;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Mageplaza\BetterMaintenance\Helper\Image;
 use Magento\Framework\App\Config\Value;
 
 /**
  * Class Upload
- *
- * @package Mageplaza\BetterProductReviews\Controller\Adminhtml\Review
+ * @package Mageplaza\BetterMaintenance\Controller\Adminhtml\MultiImages
  */
 class Upload extends Action
 {
-    /**
-     * Authorization level of a basic admin session
-     *
-     * @see _isAllowed()
-     */
     const ADMIN_RESOURCE = 'Magento_Catalog::products';
 
     /**
@@ -63,16 +62,20 @@ class Upload extends Action
      */
     protected $_imageHelper;
 
+    /**
+     * @var Value
+     */
     protected $_value;
 
     /**
      * Upload constructor.
      *
-     * @param Action\Context  $context
-     * @param RawFactory      $resultRawFactory
+     * @param Action\Context $context
+     * @param RawFactory $resultRawFactory
      * @param UploaderFactory $uploaderFactory
-     * @param Filesystem      $filesystem
-     * @param Image           $imageHelper
+     * @param Filesystem $filesystem
+     * @param Image $imageHelper
+     * @param Value $value
      */
     public function __construct(
         Action\Context $context,
@@ -84,19 +87,18 @@ class Upload extends Action
     ) {
         $this->resultRawFactory = $resultRawFactory;
         $this->_uploaderFactory = $uploaderFactory;
-        $this->_fileSystem = $filesystem;
-        $this->_imageHelper = $imageHelper;
-        $this->_value = $value;
+        $this->_fileSystem      = $filesystem;
+        $this->_imageHelper     = $imageHelper;
+        $this->_value           = $value;
 
         parent::__construct($context);
     }
 
     /**
-     * @return \Magento\Framework\Controller\Result\Raw
+     * @return ResponseInterface|Raw|ResultInterface
      */
     public function execute()
     {
-
         try {
             $uploader = $this->_uploaderFactory->create(['fileId' => 'image']);
             $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
@@ -104,10 +106,10 @@ class Upload extends Action
             $uploader->setFilesDispersion(true);
 
             /**
-             * @var \Magento\Framework\Filesystem\Directory\Read $mediaDirectory
+             * @var Read $mediaDirectory
              */
             $mediaDirectory = $this->_fileSystem->getDirectoryRead(DirectoryList::MEDIA);
-            $result = $uploader->save(
+            $result         = $uploader->save(
                 $mediaDirectory
                     ->getAbsolutePath($this->_imageHelper->getBaseTmpMediaPath())
             );
@@ -115,14 +117,14 @@ class Upload extends Action
             unset($result['tmp_name']);
             unset($result['path']);
 
-            $result['url'] = $this->_imageHelper->getTmpMediaUrl($result['file']);
+            $result['url']  = $this->_imageHelper->getTmpMediaUrl($result['file']);
             $result['file'] = 'tmp' . $result['file'];
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $result = ['error' => $e->getMessage(), 'errorcode' => $e->getCode()];
         }
         /**
-         * @var \Magento\Framework\Controller\Result\Raw $response
+         * @var Raw $response
          */
         $response = $this->resultRawFactory->create();
         $response->setHeader('Content-type', 'text/plain');

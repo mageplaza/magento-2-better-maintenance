@@ -14,7 +14,7 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_BetterProductReviews
+ * @package     Mageplaza_BetterMaintenance
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
@@ -26,13 +26,12 @@ $elementName = $element->getName();
 ?>
 <div id="template-images-gallery" class="gallery"
      data-mage-init='{"Mageplaza_BetterMaintenance/js/image-gallery":{}}'
-     data-images="<?php echo $block->escapeHtml($block->getImagesMaintenanceJson()) ?>">
+     data-images="<?= $block->escapeHtml($block->getImagesMaintenanceJson()) ?>">
     <div class="image image-placeholder">
-        <?php /* @escapeNotVerified */
-        echo $block->getUploaderHtml(); ?>
+        <?= $block->getUploaderHtml() ?>
         <div class="product-image-wrapper">
             <p class="image-placeholder-text">
-                <?php echo __('Browse to find or drag image here'); ?>
+                <?= __('Browse to find or drag image here') ?>
             </p>
         </div>
     </div>
@@ -41,20 +40,20 @@ $elementName = $element->getName();
             <input type="hidden"
                    name="groups[maintenance_setting][fields][maintenance_background_multi_image][value][<%- data.file_id %>][position]"
                    value="<%- data.position %>"
-                   data-form-part="<?php echo $formName ?>"
+                   data-form-part="<?= /* @noEscape */ $formName ?>"
                    class="position"/>
             <input type="hidden"
                    name="groups[maintenance_setting][fields][maintenance_background_multi_image][value][<%- data.file_id %>][file]"
                    value="<%- data.file %>"
-                   data-form-part="<?php echo $formName ?>"/>
+                   data-form-part="<?= /* @noEscape */ $formName ?>"/>
             <input type="hidden"
                    name="groups[maintenance_setting][fields][maintenance_background_multi_image][value][<%- data.file_id %>][label]"
                    value="<%- data.label %>"
-                   data-form-part="<?php echo $formName ?>"/>
+                   data-form-part="<?= /* @noEscape */ $formName ?>"/>
             <input type="hidden"
                    name="groups[maintenance_setting][fields][maintenance_background_multi_image][value][<%- data.file_id %>][removed]"
                    value="" class="is-removed"
-                   data-form-part="<?php echo $formName ?>"/>
+                   data-form-part="<?= /* @noEscape */ $formName ?>"/>
             <div class="product-image-wrapper">
                 <img class="product-image" data-role="image-element" src="<%- data.url %>"
                      alt="<%- data.label %>"/>
@@ -62,12 +61,12 @@ $elementName = $element->getName();
                     <button type="button"
                             class="action-remove"
                             data-role="delete-button"
-                            title="<?php echo $block->escapeHtml(__('Delete image')); ?>">
-                        <span><?php echo $block->escapeHtml(__('Delete image')); ?></span>
+                            title="<?= $block->escapeHtml(__('Delete image')) ?>">
+                        <span><?= $block->escapeHtml(__('Delete image')) ?></span>
                     </button>
                     <div class="draggable-handle"></div>
                 </div>
-                <div class="image-fade"><span><?php echo $block->escapeHtml(__('Hidden')); ?></span></div>
+                <div class="image-fade"><span><?= $block->escapeHtml(__('Hidden')) ?></span></div>
             </div>
             <div class="item-description">
                 <div class="item-title" data-role="img-title"><%- data.label %></div>

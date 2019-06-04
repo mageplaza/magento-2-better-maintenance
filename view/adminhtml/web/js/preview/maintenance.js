@@ -13,24 +13,22 @@
  * version in the future.
  *
  * @category  Mageplaza
- * @package   Mageplaza_QuickView
+ * @package   Mageplaza_BetterMaintenance
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 define(
     [
-    'jquery',
-    'mage/translate'
-    ], function ($, $t) {
+        'jquery'
+    ], function ($) {
         'use strict';
 
-        function zeroPad(num) 
-        {
+        function zeroPad (num) {
             return num < 10
-            ? '0' + num
-            : num
-            ;
+                ? '0' + num
+                : num
+                ;
         }
 
         $.widget(
@@ -42,8 +40,8 @@ define(
 
                 progressBar: function () {
                     var delay         = 500,
-                    bar           = $(".progress-bar"),
-                    progressLabel = this.options.progressLabel;
+                        bar           = $(".progress-bar"),
+                        progressLabel = this.options.progressLabel;
                     bar.delay(delay).animate(
                         {
                             width: bar.attr('aria-valuenow') + '%'
@@ -65,39 +63,38 @@ define(
 
                 setCountdown: function () {
                     var element     = $(this.options.timer_id),
-                    timezone    = this.options.timezone,
-                    endTime     = this.options.endtime,
-                    currentTime = this.options.currentTime;
+                        timezone    = this.options.timezone,
+                        endTime     = this.options.endtime,
+                        currentTime = this.options.currentTime;
 
                     var countDownHandler,
-                    timeNow     = new Date(currentTime).getTime(),
-                    timeEnd     = new Date(endTime).getTime(),
-                    daysSpan    = element.find('.mp-countdown-days'),
-                    hoursSpan   = element.find('.mp-countdown-hours'),
-                    minutesSpan = element.find('.mp-countdown-minutes'),
-                    secondsSpan = element.find('.mp-countdown-seconds');
+                        timeNow     = new Date(currentTime).getTime(),
+                        timeEnd     = new Date(endTime).getTime(),
+                        daysSpan    = element.find('.mp-countdown-days'),
+                        hoursSpan   = element.find('.mp-countdown-hours'),
+                        minutesSpan = element.find('.mp-countdown-minutes'),
+                        secondsSpan = element.find('.mp-countdown-seconds');
 
                     if (timeEnd < timeNow) {
                         daysSpan.html(zeroPad(0));
                         hoursSpan.html(zeroPad(0));
                         minutesSpan.html(zeroPad(0));
                         secondsSpan.html(zeroPad(0));
-                        // element.remove();
                     }
+
                     // Update the count down every 1 second
                     countDownHandler = setInterval(
                         function () {
                             // Get from date and time
                             var days, hours, minutes, seconds,
-                            newDate    = new Date(),
-                            formatDate = newDate.toLocaleString('en-US', {timeZone: timezone}),
-                            now        = Date.parse(formatDate),
-                            distance   = -1;
+                                newDate    = new Date(),
+                                formatDate = newDate.toLocaleString('en-US', {timeZone: timezone}),
+                                now        = Date.parse(formatDate),
+                                distance   = -1;
 
                             if (timeEnd > now) {
                                 distance = timeEnd - now;
                             }
-                            // console.log(window.location);
 
                             // Time calculations for days, hours, minutes and seconds
                             days    = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -110,7 +107,7 @@ define(
                             hoursSpan.html(zeroPad(hours));
                             minutesSpan.html(zeroPad(minutes));
                             secondsSpan.html(zeroPad(seconds));
-                            // console.log(window.location.host);
+
                             // If the count down is over, hide countdown
                             if (distance < 0) {
                                 clearInterval(countDownHandler);
@@ -118,8 +115,6 @@ define(
                                 hoursSpan.html(zeroPad(0));
                                 minutesSpan.html(zeroPad(0));
                                 secondsSpan.html(zeroPad(0));
-                                // window.location.href = baseUrl;
-                                // element.hide();
                             }
                         },
                         1000
@@ -132,4 +127,3 @@ define(
         return $.mageplaza.maintenancePreview;
     }
 );
-

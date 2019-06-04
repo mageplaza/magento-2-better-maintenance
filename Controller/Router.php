@@ -14,7 +14,7 @@
  * version in the future.
  *
  * @category  Mageplaza
- * @package   Mageplaza_Shopbybrand
+ * @package   Mageplaza_BetterMaintenance
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
@@ -23,6 +23,7 @@ namespace Mageplaza\BetterMaintenance\Controller;
 
 use Magento\Framework\App\Action\Forward;
 use Magento\Framework\App\ActionFactory;
+use Magento\Framework\App\ActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\RouterInterface;
 use Magento\Framework\Url;
@@ -31,28 +32,31 @@ use Magento\Framework\App\ResponseInterface;
 
 /**
  * Class Router
- *
- * @package Mageplaza\Shopbybrand\Controller
+ * @package Mageplaza\BetterMaintenance\Controller
  */
 class Router implements RouterInterface
 {
     /**
-     * @var \Magento\Framework\App\ActionFactory
+     * @var ActionFactory
      */
     protected $_actionFactory;
 
     /**
-     * @var \Mageplaza\Shopbybrand\Helper\Data
+     * @var HelperData
      */
     protected $_helperData;
 
+    /**
+     * @var ResponseInterface
+     */
     protected $_response;
 
     /**
      * Router constructor.
      *
-     * @param \Magento\Framework\App\ActionFactory $actionFactory
-     * @param \Mageplaza\Shopbybrand\Helper\Data   $helper
+     * @param ActionFactory $actionFactory
+     * @param HelperData $helperData
+     * @param ResponseInterface $response
      */
     public function __construct(
         ActionFactory $actionFactory,
@@ -60,16 +64,14 @@ class Router implements RouterInterface
         ResponseInterface $response
     ) {
         $this->_actionFactory = $actionFactory;
-        $this->_helperData = $helperData;
-        $this->_response = $response;
+        $this->_helperData    = $helperData;
+        $this->_response      = $response;
     }
 
     /**
-     * Validate and Match Brand Page and modify request
+     * @param RequestInterface $request
      *
-     * @param \Magento\Framework\App\RequestInterface $request
-     *
-     * @return \Magento\Framework\App\ActionInterface|null
+     * @return ActionInterface|null
      */
     public function match(RequestInterface $request)
     {

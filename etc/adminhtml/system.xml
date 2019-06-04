@@ -372,7 +372,7 @@
                 <field id="comingsoon_metatitle" translate="label" type="text" sortOrder="620" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Meta Title</label>
                 </field>
-                <field id="comingsoon_metadkeywords" translate="label" type="text" sortOrder="630" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="comingsoon_metakeywords" translate="label" type="text" sortOrder="630" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Meta Keywords</label>
                 </field>
                 <field id="comingsoon_metadescription" translate="label" type="text" sortOrder="640" showInDefault="1" showInWebsite="1" showInStore="1">

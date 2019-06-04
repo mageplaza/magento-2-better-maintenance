@@ -18,14 +18,12 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-
 namespace Mageplaza\BetterMaintenance\Model\Config\Source\System;
 
 use Magento\Framework\Option\ArrayInterface;
 
 /**
- * Class SubcribeType
- *
+ * Class SubscribeType
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class SubscribeType implements ArrayInterface
@@ -42,7 +40,7 @@ class SubscribeType implements ArrayInterface
         return [
             ['value' => self::NONE, 'label' => __('None')],
             ['value' => self::REGISTER_FORM, 'label' => __('Register Account')],
-            ['value' => self::EMAIL_FORM, 'label' => __('Newsletter Subcribe')]
+            ['value' => self::EMAIL_FORM, 'label' => __('Newsletter Subscribe')]
         ];
     }
 }

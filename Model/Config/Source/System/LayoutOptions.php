@@ -18,20 +18,18 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-
 namespace Mageplaza\BetterMaintenance\Model\Config\Source\System;
 
 use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class LayoutOptions
- *
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class LayoutOptions implements ArrayInterface
 {
-    const SINGLE_COLUMN = 'single';
-    const DOUBLE_COLUMN = 'double';
+    const SINGLE_COLUMN      = 'single';
+    const DOUBLE_COLUMN      = 'double';
     const DOUBLE_LEFT_COLUMN = 'double_left';
 
     /**

@@ -23,7 +23,6 @@ namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 
 /**
  * Class DatePicker
@@ -32,23 +31,15 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 class DatePicker extends Field
 {
     /**
-     * @var TimezoneInterface
-     */
-    protected $timezone;
-
-    /**
      * DatePicker constructor.
      *
      * @param Context $context
-     * @param TimezoneInterface $timezone
      * @param array $data
      */
     public function __construct(
         Context $context,
-        TimezoneInterface $timezone,
         array $data = []
     ) {
-        $this->timezone = $timezone;
         parent::__construct($context, $data);
     }
 
@@ -59,8 +50,8 @@ class DatePicker extends Field
      */
     public function render(AbstractElement $element)
     {
-        $element->setDateFormat($this->timezone->getDateFormat());
-        $element->setTimeFormat($this->timezone->getTimeFormat());
+        $element->setDateFormat($this->_localeDate->getDateFormat());
+        $element->setTimeFormat($this->_localeDate->getTimeFormat());
         $element->setShowsTime(true);
 
         return parent::render($element);

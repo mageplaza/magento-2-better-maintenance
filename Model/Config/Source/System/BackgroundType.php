@@ -18,14 +18,12 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-
 namespace Mageplaza\BetterMaintenance\Model\Config\Source\System;
 
 use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class BackgroundType
- *
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class BackgroundType implements ArrayInterface

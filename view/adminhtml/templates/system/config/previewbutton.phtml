@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_BetterMaintenance
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_BetterMaintenance
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 /**
@@ -31,8 +31,9 @@ if ($blockId === 'mpbettermaintenance_maintenance_setting_maintenance_preview') 
 }
 ?>
 <div class="actions actions-maintenance-preview">
-    <button class="button-maintenance-preview" data-url="<?= $block->escapeHtml($block->getDataUrl($dataUrl)) ?>" type="button"
-            id="<?= /* @noEscape */ $blockId ?>">
+    <button class="button-maintenance-preview" data-url="<?= $block->escapeHtml($block->getDataUrl($dataUrl)) ?>"
+            type="button"
+            id="<?= $block->escapeHtml($blockId) ?>">
         <span><?= /* @noEscape */
             $block->getButtonLabel() ?></span>
     </button>
@@ -40,13 +41,13 @@ if ($blockId === 'mpbettermaintenance_maintenance_setting_maintenance_preview') 
 
 <script type="text/javascript">
     require(['jquery'], function ($) {
-        $('#<?= $block->getHtmlId() ?>').on('click', function () {
-            var form = $('<form/>', {
+        $('#<?= /* @noEscape */ $block->getHtmlId() ?>').on('click', function () {
+            var form  = $('<form/>', {
                 action: $(this).data('url'),
                 target: '_blank',
                 method: 'POST'
             });
-            var data = $('#config-edit-form').serialize();
+            var data  = $('#config-edit-form').serialize();
             var input = $("<input>").attr("type", "hidden").attr("name", "formData").val(data);
             form.append(input);
             $('body').append(form);

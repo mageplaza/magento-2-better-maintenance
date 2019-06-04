@@ -18,14 +18,12 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-
 namespace Mageplaza\BetterMaintenance\Model\Config\Source\System;
 
 use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class WebsiteMode
- *
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class WebsiteMode implements ArrayInterface

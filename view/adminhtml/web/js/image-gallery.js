@@ -13,7 +13,7 @@
  * version in the future.
  *
  * @category  Mageplaza
- * @package   Mageplaza_BetterProductReviews
+ * @package   Mageplaza_BetterMaintenance
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
@@ -29,7 +29,7 @@ define(
         $.widget(
             'mage.productGallery', productGallery, {
                 /**
-                 * add option type image 
+                 * add option type image
                  */
                 options: {
                     types: {}
@@ -52,5 +52,3 @@ define(
         return $.mage.productGallery;
     }
 );
-
-

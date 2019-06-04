@@ -13,14 +13,12 @@
  * version in the future.
  *
  * @category  Mageplaza
- * @package   Mageplaza_StoreLocator
+ * @package   Mageplaza_BetterMaintenance
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
 var config = {
     paths: {
-        'maintenancePreview': 'Mageplaza_BetterMaintenance/js/preview/maintenance',
-        'comingsoonPreview': 'Mageplaza_BetterMaintenance/js/comingsoon'
+        'maintenancePreview': 'Mageplaza_BetterMaintenance/js/preview/maintenance'
     }
 };
-

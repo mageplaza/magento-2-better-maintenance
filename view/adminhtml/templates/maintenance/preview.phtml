@@ -1,3 +1,24 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  Mageplaza
+ * @package   Mageplaza_BetterMaintenance
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
+ */
+?>
 <?php $data = $block->getFormData(); ?>
 
 <!--Multiple Image Background-->
@@ -14,7 +35,7 @@
         require([
             'jquery'
         ], function ($) {
-            var images    = '<?= $listImagesUrl ?>';
+            var images    = '<?= /* @noEscape */ $listImagesUrl ?>';
             images        = images.split(',');
             var nextImage = 0;
             doSlideshow();
@@ -37,7 +58,7 @@
     && $block->getImageUrl($data['[maintenance_background_image]'])): ?>
     <style>
         .mpbettermaintenance-maintenance-preview {
-            background-image: url("<?= $block->getImageUrl($data['[maintenance_background_image]']) ?>");
+            background-image: url("<?= /* @noEscape */ $block->getImageUrl($data['[maintenance_background_image]']) ?>");
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -48,7 +69,8 @@
 <?php if ($data['[maintenance_background]'] === 'video'
     && $block->getVideoUrl($data['[maintenance_background_video]'])): ?>
     <video autoplay muted loop id="mpbm-video">
-        <source src="<?= $block->getVideoUrl($data['[maintenance_background_video]']) ?>"
+        <source src="<?= /* @noEscape */
+        $block->getVideoUrl($data['[maintenance_background_video]']) ?>"
                 type="video/mp4">
     </video>
 <?php endif; ?>
@@ -56,25 +78,29 @@
 <div id="mpbm-<?= $data['[maintenance_layout]'] ?>-column" class="mpbm-preview-wrapper">
     <?php if (!empty($data['[maintenance_logo]'])): ?>
         <div id="mpbm-logo">
-            <img src="<?= $block->getLogo($data['[maintenance_logo]']) ?>"
+            <img src="<?= /* @noEscape */
+            $block->getLogo($data['[maintenance_logo]']) ?>"
                  alt="<?= __('Logo') ?>" width="100">
         </div>
     <?php endif; ?>
 
     <!--    Page Title Area-->
     <div id="mpbm-page-title">
-        <h1 class="mpbm-text" style="margin-bottom: 0"><?= $data['[maintenance_title]'] ?></h1>
+        <h1 class="mpbm-text" style="margin-bottom: 0"><?= /* @noEscape */
+            $data['[maintenance_title]'] ?></h1>
     </div>
 
     <!--    Page Description Area-->
     <div id="mpbm-page-description">
-        <h3 class="mpbm-text"><?= $data['[maintenance_description]'] ?></h3>
+        <h3 class="mpbm-text"><?= /* @noEscape */
+            $data['[maintenance_description]'] ?></h3>
     </div>
 
     <!--    Clock area-->
     <?php if ($data['[clock_enabled]']) : ?>
         <div id="mpbm-clock">
-            <?= $block->getClockBlock() ?>
+            <?= /* @noEscape */
+            $block->getClockBlock() ?>
         </div>
     <?php endif; ?>
 
@@ -85,9 +111,11 @@
                 <div class="mp-md-6">
                     <div class="progress mp-md-3">
                         <div class="progress-bar" role="progressbar"
-                             aria-valuenow="<?= $data['[maintenance_progress_value]'] ?>"
+                             aria-valuenow="<?= /* @noEscape */
+                             $data['[maintenance_progress_value]'] ?>"
                              aria-valuemin="0"
-                             aria-valuemax="100"><?= $data['[maintenance_progress_value]'] ?>
+                             aria-valuemax="100"><?= /* @noEscape */
+                            $data['[maintenance_progress_value]'] ?>
                         </div>
                     </div>
                 </div>
@@ -102,16 +130,20 @@
         <?php if ($data['[subscribe_type]'] === 'email_form') : ?>
             <div id="mpbm-subscribe">
                 <?php if ($subscribeLabel): ?>
-                    <h4 style="color: <?= $subscribeLabelColor ?>"><?= $subscribeLabel ?></h4>
+                    <h4 style="color: <?= $subscribeLabelColor ?>"><?= /* @noEscape */
+                        $subscribeLabel ?></h4>
                 <?php endif; ?>
-                <?= $block->getSubscribeBlock() ?>
+                <?= /* @noEscape */
+                $block->getSubscribeBlock() ?>
             </div>
         <?php elseif ($data['[subscribe_type]'] === 'register_form') : ?>
             <div id="mpbm-register">
                 <?php if ($subscribeLabel): ?>
-                    <h4 style="color: <?= $subscribeLabelColor ?>"><?= $subscribeLabel ?></h4>
+                    <h4 style="color: <?= $subscribeLabelColor ?>"><?= /* @noEscape */
+                        $subscribeLabel ?></h4>
                 <?php endif; ?>
-                <?= $block->getRegisterBlock() ?>
+                <?= /* @noEscape */
+                $block->getRegisterBlock() ?>
             </div>
         <?php endif; ?>
     <?php endif; ?>
@@ -120,13 +152,16 @@
     <?php if ($data['[social_enabled]']): ?>
         <div id="mpbm-social-contact">
             <div id="mpbm-social-label" style="display: inline-block">
-                <p><?= $data['[social_label]'] ?></p>
+                <p><?= /* @noEscape */
+                    $data['[social_label]'] ?></p>
             </div>
             <?php foreach ($block->getSocialList() as $value) : ?>
                 <?php if ($value['link']) : ?>
                     <div class="mpbm-social-box" style="display: inline-block; vertical-align: middle">
-                        <a href="<?= $value['link'] ?>" target="_blank">
-                            <img src="<?= $value['img'] ?>" alt="<?= __('Social Logo') ?>" width="20">
+                        <a href="<?= /* @noEscape */
+                        $value['link'] ?>" target="_blank">
+                            <img src="<?= /* @noEscape */
+                            $value['img'] ?>" alt="<?= __('Social Logo') ?>" width="20">
                         </a>
                     </div>
                 <?php endif; ?>
@@ -136,23 +171,24 @@
 
     <?php if ($block->getBlockCms()) : ?>
         <div id="mpbm-footer-block">
-            <?= $block->getBlockCms() ?>
+            <?= /* @noEscape */
+            $block->getBlockCms() ?>
         </div>
     <?php endif; ?>
 </div>
 
 <style>
     .mpbm-text {
-        color: <?= $data['[maintenance_color]'] ?>;
+        color: <?= /* @noEscape */ $data['[maintenance_color]'] ?>;
     }
 
     #mpbm-social-label {
-        color: <?= $data['[social_label_color]'] ?>;
+        color: <?= /* @noEscape */ $data['[social_label_color]'] ?>;
     }
 
     <?php if ($data['[clock_template]'] === 'stack') : ?>
     .stack-txt1 {
-        background: <?= $data['[clock_inner_color]'] ?>;
+        background: <?= /* @noEscape */ $data['[clock_inner_color]'] ?>;
     }
 
     <?php endif; ?>
@@ -163,8 +199,8 @@
         font-weight: bold;
         border-radius: 50px;
         line-height: 45px;
-        color: <?= $data['[maintenance_progress_label_color]'] ?>;
-        background-color: <?= $data['[maintenance_progress_bar_color]'] ?>;
+        color: <?= /* @noEscape */ $data['[maintenance_progress_label_color]'] ?>;
+        background-color: <?= /* @noEscape */ $data['[maintenance_progress_bar_color]'] ?>;
         width: 0;
     }
 </style>
@@ -175,8 +211,8 @@
             'jquery'
         ], function ($) {
             var subBtn = $('.action.primary span');
-            subBtn.text("<?= $data['[button_label]'] ?>").css("color", "<?= $data['[button_label_color]'] ?>");
-            $('.action.primary').css("background", "<?= $data['[button_background_color]'] ?>");
+            subBtn.text("<?= /* @noEscape */ $data['[button_label]'] ?>").css("color", "<?= /* @noEscape */ $data['[button_label_color]'] ?>");
+            $('.action.primary').css("background", "<?= /* @noEscape */ $data['[button_background_color]'] ?>");
         });
     </script>
 <?php endif; ?>
@@ -185,10 +221,14 @@
     {
         ".mpbm-wrapper": {
             "maintenancePreview": {
-                "progressLabel": "<?= $data['[maintenance_progress_label]'] ?>"
+                "progressLabel": "<?= /* @noEscape */
+    $data['[maintenance_progress_label]'] ?>"
             }
         }
     }
+
+
+
 
 
 </script>

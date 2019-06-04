@@ -18,7 +18,6 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-
 namespace Mageplaza\BetterMaintenance\Model\Config\Source\System;
 
 use Magento\Framework\Option\ArrayInterface;
@@ -26,7 +25,6 @@ use Magento\Cms\Model\ResourceModel\Page\CollectionFactory as PageFactory;
 
 /**
  * Class RedirectTo
- *
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class RedirectTo implements ArrayInterface
@@ -34,8 +32,16 @@ class RedirectTo implements ArrayInterface
     const MAINTENANCE_PAGE = 'maintenance_page';
     const COMING_SOON_PAGE = 'coming_soon_page';
 
+    /**
+     * @var PageFactory
+     */
     protected $_pageFactory;
 
+    /**
+     * RedirectTo constructor.
+     *
+     * @param PageFactory $pageFactory
+     */
     public function __construct(
         PageFactory $pageFactory
     ) {

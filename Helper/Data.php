@@ -21,11 +21,12 @@
 
 namespace Mageplaza\BetterMaintenance\Helper;
 
-use Magento\Framework\App\Helper\Context;
-use Magento\Framework\ObjectManagerInterface;
-use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\AbstractData;
 
+/**
+ * Class Data
+ * @package Mageplaza\BetterMaintenance\Helper
+ */
 class Data extends AbstractData
 {
     const CONFIG_MODULE_PATH = 'mpbettermaintenance';
@@ -33,20 +34,11 @@ class Data extends AbstractData
     const COMINGSOON_ROUTE   = 'mpcomingsoon';
 
     /**
-     * Data constructor.
+     * @param string $code
+     * @param null $storeId
      *
-     * @param Context                $context
-     * @param ObjectManagerInterface $objectManager
-     * @param StoreManagerInterface  $storeManager
+     * @return array|mixed
      */
-    public function __construct(
-        Context $context,
-        ObjectManagerInterface $objectManager,
-        StoreManagerInterface $storeManager
-    ) {
-        parent::__construct($context, $objectManager, $storeManager);
-    }
-
     public function getConfigGeneral($code = '', $storeId = null)
     {
         $code = ($code !== '') ? '/' . $code : '';
@@ -54,36 +46,75 @@ class Data extends AbstractData
         return $this->getConfigValue(static::CONFIG_MODULE_PATH . '/general' . $code, $storeId);
     }
 
+    /**
+     * @param $code
+     * @param null $storeId
+     *
+     * @return mixed
+     */
     public function getFooterSetting($code, $storeId = null)
     {
         return $this->getModuleConfig('display_setting/footer_block/' . $code, $storeId);
     }
 
+    /**
+     * @param $code
+     * @param null $storeId
+     *
+     * @return mixed
+     */
     public function getClockSetting($code, $storeId = null)
     {
         return $this->getModuleConfig('display_setting/clock_setting/' . $code, $storeId);
     }
 
+    /**
+     * @param $code
+     * @param null $storeId
+     *
+     * @return mixed
+     */
     public function getSubscribeSetting($code, $storeId = null)
     {
         return $this->getModuleConfig('display_setting/subscribe_setting/' . $code, $storeId);
     }
 
+    /**
+     * @param $code
+     * @param null $storeId
+     *
+     * @return mixed
+     */
     public function getSocialSetting($code, $storeId = null)
     {
         return $this->getModuleConfig('display_setting/social_contact/' . $code, $storeId);
     }
 
+    /**
+     * @param $code
+     * @param null $storeId
+     *
+     * @return mixed
+     */
     public function getMaintenanceSetting($code, $storeId = null)
     {
         return $this->getModuleConfig('maintenance_setting/' . $code, $storeId);
     }
 
+    /**
+     * @param $code
+     * @param null $storeId
+     *
+     * @return mixed
+     */
     public function getComingSoonSetting($code, $storeId = null)
     {
         return $this->getModuleConfig('comingsoon_setting/' . $code, $storeId);
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getMaintenanceRoute()
     {
         $maintenanceRoute = $this->getMaintenanceSetting('maintenance_route');
@@ -91,17 +122,20 @@ class Data extends AbstractData
         return isset($maintenanceRoute) ? $maintenanceRoute : self::MAINTENANCE_ROUTE;
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getComingSoonRoute()
     {
         $comingSoonRoute = $this->getComingSoonSetting('comingsoon_route');
 
         return isset($comingSoonRoute) ? $comingSoonRoute : self::COMINGSOON_ROUTE;
     }
+
     /**
-     * Check Ip
+     * @param $ip
+     * @param $range
      *
-     * @param  $ip
-     * @param  $range
      * @return bool
      */
     public function checkIp($ip, $range)
@@ -118,32 +152,33 @@ class Data extends AbstractData
         if (strpos($range, '-') !== false) {
             list($low, $high) = explode('-', $range, 2);
 
-            return $this->ipCompare($ip, $low, 1) && $this->ipcompare($ip, $high, -1);
+            return self::ipCompare($ip, $low, 1) && self::ipcompare($ip, $high, -1);
         }
 
-        return $this->ipCompare($ip, $range);
+        return self::ipCompare($ip, $range);
     }
 
     /**
      * @param $ip1
      * @param $ip2
      * @param int $op
+     *
      * @return bool
      */
-    private function ipCompare($ip1, $ip2, $op = 0)
+    private static function ipCompare($ip1, $ip2, $op = 0)
     {
         $ip1Arr = explode('.', $ip1);
         $ip2Arr = explode('.', $ip2);
 
         for ($i = 0; $i < 4; $i++) {
             if ($ip1Arr[$i] < $ip2Arr[$i]) {
-                return ($op == -1);
+                return ($op === -1);
             }
             if ($ip1Arr[$i] > $ip2Arr[$i]) {
-                return ($op == 1);
+                return ($op === 1);
             }
         }
 
-        return ($op == 0);
+        return ($op === 0);
     }
 }

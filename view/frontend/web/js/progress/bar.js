@@ -1,6 +1,6 @@
 define(
     [
-    'jquery'
+        'jquery'
     ], function ($) {
         "use strict";
 
@@ -8,9 +8,9 @@ define(
             'mageplaza.progressBar',
             {
                 _create: function () {
-                    var delay = 500,
-                    bar   = $(".progress-bar"),
-                    progressLabel = this.options.progressLabel;
+                    var delay         = 500,
+                        bar           = $(".progress-bar"),
+                        progressLabel = this.options.progressLabel;
                     bar.delay(delay).animate(
                         {
                             width: bar.attr('aria-valuenow') + '%'

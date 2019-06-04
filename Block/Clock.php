@@ -23,7 +23,6 @@ namespace Mageplaza\BetterMaintenance\Block;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Model\Config\Source\System\ClockTemplate;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 
 /**
@@ -38,11 +37,6 @@ class Clock extends Template
     protected $_helperData;
 
     /**
-     * @var TimezoneInterface
-     */
-    protected $_localeDate;
-
-    /**
      * @var DateTime
      */
     protected $_date;
@@ -51,20 +45,17 @@ class Clock extends Template
      * Clock constructor.
      *
      * @param HelperData $helperData
-     * @param TimezoneInterface $localeDate
      * @param DateTime $date
      * @param Template\Context $context
      * @param array $data
      */
     public function __construct(
         HelperData $helperData,
-        TimezoneInterface $localeDate,
         DateTime $date,
         Template\Context $context,
         array $data = []
     ) {
         $this->_helperData = $helperData;
-        $this->_localeDate = $localeDate;
         $this->_date       = $date;
         parent::__construct($context, $data);
     }

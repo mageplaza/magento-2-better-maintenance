@@ -18,25 +18,18 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-
-/**
- * System config image field backend model
- */
 namespace Mageplaza\BetterMaintenance\Model\Config\Backend;
 
 use Magento\Config\Model\Config\Backend\File;
 
 /**
  * Class Video
- *
  * @package Mageplaza\BetterMaintenance\Model\Config\Backend
  */
 class Video extends File
 {
     /**
-     * Getter for allowed extensions of uploaded files
-     *
-     * @return string[]
+     * @return array
      */
     protected function _getAllowedExtensions()
     {

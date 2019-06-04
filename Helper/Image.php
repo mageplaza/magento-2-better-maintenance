@@ -14,45 +14,45 @@
  * version in the future.
  *
  * @category  Mageplaza
- * @package   Mageplaza_BetterProductReviews
+ * @package   Mageplaza_BetterMaintenance
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\BetterMaintenance\Helper;
 
+use Exception;
+use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlInterface;
 use Magento\MediaStorage\Model\File\Uploader;
 use Mageplaza\Core\Helper\Media;
 
 /**
  * Class Image
- *
- * @package Mageplaza\BetterProductReviews\Helper
+ * @package Mageplaza\BetterMaintenance\Helper
  */
 class Image extends Media
 {
-    const TEMPLATE_MEDIA_PATH = 'mageplaza/bettermaintenance';
+    const TEMPLATE_MEDIA_PATH       = 'mageplaza/bettermaintenance';
     const TEMPLATE_MEDIA_TYPE_IMAGE = 'image';
-    const TEMPLATE_MEDIA_TYPE_LOGO = 'logo';
+    const TEMPLATE_MEDIA_TYPE_LOGO  = 'logo';
     const TEMPLATE_MEDIA_TYPE_VIDEO = 'video';
 
     /**
-     * Get filename which is not duplicated with other files in media temporary and media directories
-     *
-     * @param string $fileName
-     * @param string $descriptionPath
+     * @param $fileName
+     * @param $descriptionPath
      *
      * @return string
      */
     public function getNotDuplicatedFilename($fileName, $descriptionPath)
     {
         $fileMediaName = $descriptionPath . '/' . Uploader::getNewFileName(
-            $this->mediaDirectory->getAbsolutePath($this->getMediaPath($fileName))
-        );
+                $this->mediaDirectory->getAbsolutePath($this->getMediaPath($fileName))
+            );
 
-        if ($fileMediaName != $fileName) {
+        if ($fileMediaName !== $fileName) {
             return $this->getNotDuplicatedFilename($fileMediaName, $descriptionPath);
         }
 
@@ -60,9 +60,6 @@ class Image extends Media
     }
 
     /**
-     * Filesystem directory path of temporary product images
-     * relatively to media folder
-     *
      * @return string
      */
     public function getBaseTmpMediaPath()
@@ -71,10 +68,7 @@ class Image extends Media
     }
 
     /**
-     * Part of URL of temporary product images
-     * relatively to media folder
-     *
-     * @param string $file
+     * @param $file
      *
      * @return string
      */
@@ -87,7 +81,6 @@ class Image extends Media
      * @param $file
      *
      * @return string
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getTmpMediaUrl($file)
     {
@@ -96,19 +89,18 @@ class Image extends Media
 
     /**
      * @return string
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getBaseTmpMediaUrl()
     {
         return $this->storeManager->getStore()
-            ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $this->getBaseTmpMediaPath();
+                ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $this->getBaseTmpMediaPath();
     }
 
     /**
-     * @param array $data
+     * @param $data
      *
      * @return $this
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function uploadImages(&$data)
     {
@@ -119,16 +111,21 @@ class Image extends Media
         return $this;
     }
 
-    public function getBaseStaticUrl() 
+    /**
+     * @return mixed
+     */
+    public function getBaseStaticUrl()
     {
         return $this->storeManager->getStore()
             ->getBaseUrl(UrlInterface::URL_TYPE_STATIC);
     }
+
     /**
-     * @param array $imageEntries
+     * @param $imageEntries
      *
      * @return array
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
+     * @throws FileSystemException
      */
     protected function processImagesGallery($imageEntries)
     {
@@ -139,7 +136,7 @@ class Image extends Media
             }
 
             $fileName = $image['file'];
-            $pos = strpos($fileName, '.tmp');
+            $pos      = strpos($fileName, '.tmp');
 
             if ((isset($image['removed']) && $image['removed'])) {
                 /**
@@ -149,7 +146,7 @@ class Image extends Media
 
                 if ($pos === false) {
                     $filePath = $this->getMediaPath($image['file']);
-                    $file = $this->mediaDirectory->getRelativePath($filePath);
+                    $file     = $this->mediaDirectory->getRelativePath($filePath);
                     if ($this->mediaDirectory->isFile($file)) {
                         $this->mediaDirectory->delete($filePath);
                     }
@@ -160,7 +157,7 @@ class Image extends Media
                  */
                 $fileName = substr($fileName, 0, $pos);
                 $filePath = $this->getTmpMediaPath($fileName);
-                $file = $this->mediaDirectory->getRelativePath($filePath);
+                $file     = $this->mediaDirectory->getRelativePath($filePath);
                 if (!$this->mediaDirectory->isFile($file)) {
                     unset($imageEntries[$key]);
                     continue;
@@ -174,17 +171,17 @@ class Image extends Media
                     continue;
                 }
 
-                $fileName = Uploader::getCorrectFileName($pathInfo['basename']);
+                $fileName       = Uploader::getCorrectFileName($pathInfo['basename']);
                 $dispretionPath = Uploader::getDispretionPath($fileName);
-                $fileName = $dispretionPath . '/' . $fileName;
+                $fileName       = $dispretionPath . '/' . $fileName;
 
-                $fileName = $this->getNotDuplicatedFilename($fileName, $dispretionPath);
+                $fileName        = $this->getNotDuplicatedFilename($fileName, $dispretionPath);
                 $destinationFile = $this->getMediaPath($fileName);
 
                 try {
                     $this->mediaDirectory->renameFile($file, $destinationFile);
                     $image['file'] = str_replace('\\', '/', $fileName);
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     throw new LocalizedException(__('We couldn\'t move this file: %1.', $e->getMessage()));
                 }
             }

@@ -13,7 +13,7 @@
  * version in the future.
  *
  * @category  Mageplaza
- * @package   Mageplaza_CountdownTimer
+ * @package   Mageplaza_BetterMaintenance
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
@@ -30,7 +30,6 @@ define(
                 _create: function () {
                     mpcountdownInterval.setCountdown(
                         $(this.options.timer_id),
-                        // this.options.rule,
                         this.options.timezone,
                         this.options.endtime,
                         this.options.enabled,
