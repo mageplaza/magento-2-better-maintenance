@@ -363,7 +363,7 @@
     margin: 40px 0 0 0;
 }
 
-#mpbm-wrapper li {
+#mpbm-preview-wrapper li {
     list-style: none;
 }
 .progress {
@@ -575,4 +575,8 @@ h3 {
 
 .actions-toolbar>.secondary .action.back {
     display: none;
+}
+
+.form.create.account {
+    margin: auto;
 }

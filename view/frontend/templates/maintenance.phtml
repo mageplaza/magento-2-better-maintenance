@@ -81,7 +81,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
     </video>
 <?php endif; ?>
 
-<div id="mpbm-<?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_layout') ?>-column">
+<div id="mpbm-<?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_layout') ?>-column" class="mpbm-wrapper">
     <?php if (!empty($block->getMaintenanceSetting('maintenance_logo'))) : ?>
         <div id="mpbm-logo">
             <img src="<?= /* @noEscape */ $block->getLogo($block->getMaintenanceSetting('maintenance_logo')) ?>"
@@ -112,7 +112,8 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
             <div class="row">
                 <div class="mp-md-6">
                     <div class="progress mp-md-3">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="<?= /* @noEscape */ $block->getProgressValue() ?>"
+                        <div class="progress-bar" role="progressbar"
+                             aria-valuenow="<?= /* @noEscape */ $block->getProgressValue() ?>"
                              aria-valuemin="0"
                              aria-valuemax="100">
                         </div>

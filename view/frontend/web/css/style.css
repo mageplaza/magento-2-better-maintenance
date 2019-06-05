@@ -302,6 +302,10 @@
     bottom: 50%;
 }
 
+#mpbm-double-column .block.newsletter {
+    width: 68%;
+}
+
 #mpbm-double-column #mpbm-logo{
     width: 40%;
     margin-left: 50%;
@@ -374,4 +378,8 @@
     background: #F7F7F7;
     text-align: center;
     border-radius: 50px;
+}
+
+.form.create.account {
+    margin: auto;
 }

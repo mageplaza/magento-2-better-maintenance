@@ -30,7 +30,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 <!--Multiple Image Background-->
 <?php if ($block->getComingSoonSetting('comingsoon_background') === 'multiple_images'
     && $block->getImageUrl($block->getComingSoonSetting('comingsoon_background_multi_image'))) : ?>
-    <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl($block->getComingSoonSetting('maintenance_background_multi_image'))); ?>
+    <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl($block->getComingSoonSetting('comingsoon_background_multi_image'))); ?>
     <style>
         .mpbettermaintenance-comingsoon-index {
             background-repeat: no-repeat;
@@ -65,7 +65,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
     && $block->getImageUrl($block->getComingSoonSetting('comingsoon_background_image'))) : ?>
     <style>
         .mpbettermaintenance-comingsoon-index {
-            background-image: url("<?= /* @noEscape */ $block->getImageUrl($block->getComingSoonSetting('maintenance_background_image')) ?>");
+            background-image: url("<?= /* @noEscape */ $block->getImageUrl($block->getComingSoonSetting('comingsoon_background_image')) ?>");
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -76,11 +76,11 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 <?php if ($block->getComingSoonSetting('maintenance_background') === 'video'
     && $block->getVideoUrl($block->getComingSoonSetting('maintenance_background_video'))) : ?>
     <video autoplay muted loop id="mpbm-video">
-        <source src="<?= /* @noEscape */ $block->getVideoUrl($block->getComingSoonSetting('maintenance_background_video')) ?>"
+        <source src="<?= /* @noEscape */ $block->getVideoUrl($block->getComingSoonSetting('comingsoon_background_video')) ?>"
                 type="video/mp4">
     </video>
 <?php endif; ?>
-<div id="mpbm-<?= /* @noEscape */ $block->getComingSoonSetting('comingsoon_layout') ?>-column">
+<div id="mpbm-<?= /* @noEscape */ $block->getComingSoonSetting('comingsoon_layout') ?>-column" class="mpbm-wrapper">
     <?php if (!empty($block->getComingSoonSetting('comingsoon_logo'))) : ?>
         <div id="mpbm-logo">
             <img src="<?= /* @noEscape */ $block->getLogo($block->getComingSoonSetting('comingsoon_logo')) ?>" alt="<?= /* @noEscape */ __('Logo') ?>"
