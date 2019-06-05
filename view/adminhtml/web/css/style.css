@@ -401,6 +401,7 @@
 }
 
 .block.newsletter .field .control {
+    width: 100%;
     display: inline-block;
     text-decoration: none;
 }
