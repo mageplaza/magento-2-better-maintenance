@@ -159,7 +159,7 @@ class Redirect extends Template
             }
         }
 
-        if (strtotime($this->_date->gmtDate()) >= strtotime($this->_helperData->getConfigGeneral('end_time'))) {
+        if (strtotime($this->_localeDate->date()->format('m/d/Y H:i A')) >= strtotime($this->_helperData->getConfigGeneral('end_time'))) {
             return false;
         }
 

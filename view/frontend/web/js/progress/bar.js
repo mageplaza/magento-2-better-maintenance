@@ -19,7 +19,7 @@ define(
 
                     bar.prop('Counter', 0).animate(
                         {
-                            Counter: bar.text()
+                            Counter: bar.attr('aria-valuenow')
                         }, {
                             duration: delay,
                             easing: 'swing',
