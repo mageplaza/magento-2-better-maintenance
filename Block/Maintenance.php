@@ -279,9 +279,11 @@ class Maintenance extends Template
 
     /**
      * @param $code
+     *
+     * @return mixed
      */
     public function getClockSetting($code)
     {
-        $this->_helperData->getClockSetting($code);
+        return $this->_helperData->getClockSetting($code);
     }
 }
