@@ -18,22 +18,19 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-use Mageplaza\BetterMaintenance\Helper\Data;
 
 /**
  * @var \Mageplaza\BetterMaintenance\Block\Comingsoon $block ;
  */
 
-$helper              = $this->helper(Data::class);
-$subscribeLabel      = $helper->getSubscribeSetting('subscribe_label');
-$subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
+$subscribeLabel      = $block->getSubscribeSetting('subscribe_label');
+$subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 ?>
 
 <!--Multiple Image Background-->
-<?php if ($helper->getComingSoonSetting('comingsoon_background') === 'multiple_images'
-    && $block->getImageUrl($helper->getComingSoonSetting('comingsoon_background_multi_image'))): ?>
-    <?php $listImagesUrl = implode(',',
-        $block->getMultipleImagesUrl($helper->getMaintenanceSetting('maintenance_background_multi_image'))); ?>
+<?php if ($block->getComingSoonSetting('comingsoon_background') === 'multiple_images'
+    && $block->getImageUrl($block->getComingSoonSetting('comingsoon_background_multi_image'))) : ?>
+    <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl($block->getComingSoonSetting('maintenance_background_multi_image'))); ?>
     <style>
         .mpbettermaintenance-comingsoon-index {
             background-repeat: no-repeat;
@@ -48,9 +45,9 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
             var images    = '<?= /* @noEscape */ $listImagesUrl ?>';
             images        = images.split(',');
             var nextImage = 0;
-            doSlideshow();
+            doSlideShow();
 
-            function doSlideshow () {
+            function doSlideShow () {
                 if (nextImage >= images.length) {
                     nextImage = 0;
                 }
@@ -64,11 +61,11 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 <?php endif; ?>
 
 <!--Single Image Background-->
-<?php if ($helper->getComingSoonSetting('comingsoon_background') === 'image'
-    && $block->getImageUrl($helper->getComingSoonSetting('comingsoon_background_image'))): ?>
+<?php if ($block->getComingSoonSetting('comingsoon_background') === 'image'
+    && $block->getImageUrl($block->getComingSoonSetting('comingsoon_background_image'))) : ?>
     <style>
         .mpbettermaintenance-comingsoon-index {
-            background-image: url("<?= /* @noEscape */ $block->getImageUrl($helper->getComingSoonSetting('maintenance_background_image')) ?>");
+            background-image: url("<?= /* @noEscape */ $block->getImageUrl($block->getComingSoonSetting('maintenance_background_image')) ?>");
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -76,17 +73,17 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 <?php endif; ?>
 
 <!--Video Background-->
-<?php if ($helper->getComingSoonSetting('maintenance_background') === 'video'
-    && $block->getVideoUrl($helper->getComingSoonSetting('maintenance_background_video'))): ?>
+<?php if ($block->getComingSoonSetting('maintenance_background') === 'video'
+    && $block->getVideoUrl($block->getComingSoonSetting('maintenance_background_video'))) : ?>
     <video autoplay muted loop id="mpbm-video">
-        <source src="<?= /* @noEscape */ $block->getVideoUrl($helper->getComingSoonSetting('maintenance_background_video')) ?>"
+        <source src="<?= /* @noEscape */ $block->getVideoUrl($block->getComingSoonSetting('maintenance_background_video')) ?>"
                 type="video/mp4">
     </video>
 <?php endif; ?>
-<div id="mpbm-<?= /* @noEscape */ $helper->getComingsoonSetting('comingsoon_layout') ?>-column">
-    <?php if (!empty($helper->getComingsoonSetting('comingsoon_logo'))): ?>
+<div id="mpbm-<?= /* @noEscape */ $block->getComingSoonSetting('comingsoon_layout') ?>-column">
+    <?php if (!empty($block->getComingSoonSetting('comingsoon_logo'))) : ?>
         <div id="mpbm-logo">
-            <img src="<?= /* @noEscape */ $block->getLogo($helper->getComingsoonSetting('comingsoon_logo')) ?>" alt="<?= __('Logo') ?>"
+            <img src="<?= /* @noEscape */ $block->getLogo($block->getComingSoonSetting('comingsoon_logo')) ?>" alt="<?= /* @noEscape */ __('Logo') ?>"
                  width="100">
         </div>
     <?php endif; ?>
@@ -98,30 +95,30 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
     </div>
 
     <!--    Clock area-->
-    <?php if ($helper->getClockSetting('clock_enabled')) : ?>
+    <?php if ($block->getClockSetting('clock_enabled')) : ?>
         <div id="mpbm-clock">
-            <?= /* @noEscape */ $this->getChildHtml('clock_countdown') ?>
+            <?= /* @noEscape */ $block->getChildHtml('clock_countdown') ?>
         </div>
     <?php endif; ?>
     <!--    Subscribe area-->
-    <?php if ($helper->getSubscribeSetting('subscribe_type') === 'email_form') : ?>
+    <?php if ($block->getSubscribeSetting('subscribe_type') === 'email_form') : ?>
         <div id="mpbm-subscribe">
-            <?php if ($helper->getSubscribeSetting('subscribe_label')): ?>
+            <?php if ($block->getSubscribeSetting('subscribe_label')) : ?>
                 <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
             <?php endif; ?>
-            <?= /* @noEscape */ $this->getChildHtml('subscribe') ?>
+            <?= /* @noEscape */ $block->getChildHtml('subscribe') ?>
         </div>
-    <?php elseif ($helper->getSubscribeSetting('subscribe_type') === 'register_form') : ?>
+    <?php elseif ($block->getSubscribeSetting('subscribe_type') === 'register_form') : ?>
         <div id="mpbm-register">
-            <?php if ($helper->getSubscribeSetting('subscribe_label')): ?>
+            <?php if ($block->getSubscribeSetting('subscribe_label')) : ?>
                 <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
             <?php endif; ?>
-            <?= /* @noEscape */ $this->getChildHtml('register') ?>
+            <?= /* @noEscape */ $block->getChildHtml('register') ?>
         </div>
     <?php endif; ?>
 
     <!--    Social area-->
-    <?php if ($helper->getSocialSetting('social_enabled')): ?>
+    <?php if ($block->getSocialSetting('social_enabled')) : ?>
         <div id="mpbm-social-contact">
             <div id="mpbm-social-label" style="display: inline-block">
                 <p><?= /* @noEscape */ $block->getSocialLabel() ?></p>
@@ -147,31 +144,31 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 
 </div>
 
-<?php if ($helper->getSubscribeSetting('subscribe_type') !== 'none') : ?>
+<?php if ($block->getSubscribeSetting('subscribe_type') !== 'none') : ?>
     <script>
         require([
             'jquery'
         ], function ($) {
             var subBtn = $('.action.primary span');
-            subBtn.text("<?= /* @noEscape */ $helper->getSubscribeSetting('button_label') ?>")
-            .css("color", "<?= /* @noEscape */ $helper->getSubscribeSetting('button_label_color') ?>");
-            $('.action.primary').css("background", "<?= /* @noEscape */ $helper->getSubscribeSetting('button_background_color') ?>");
+            subBtn.text("<?= /* @noEscape */ $block->getSubscribeSetting('button_label') ?>")
+            .css("color", "<?= /* @noEscape */ $block->getSubscribeSetting('button_label_color') ?>");
+            $('.action.primary').css("background", "<?= /* @noEscape */ $block->getSubscribeSetting('button_background_color') ?>");
         });
     </script>
 <?php endif; ?>
 
 <style>
     .mpbm-text {
-        color: <?= /* @noEscape */ $helper->getComingsoonSetting('comingsoon_color') ?>;
+        color: <?= /* @noEscape */ $block->getComingSoonSetting('comingsoon_color') ?>;
     }
 
     #mpbm-social-label {
-        color: <?= /* @noEscape */ $helper->getSocialSetting('social_label_color') ?>;
+        color: <?= /* @noEscape */ $block->getSocialSetting('social_label_color') ?>;
     }
 
-    <?php if ($helper->getClockSetting('clock_template') === 'stack') : ?>
+    <?php if ($block->getClockSetting('clock_template') === 'stack') : ?>
     .stack-txt1 {
-        background: <?= /* @noEscape */ $helper->getClockSetting('clock_inner_color') ?>;
+        background: <?= /* @noEscape */ $block->getClockSetting('clock_inner_color') ?>;
     }
     <?php endif; ?>
 </style>

@@ -31,19 +31,6 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 class DatePicker extends Field
 {
     /**
-     * DatePicker constructor.
-     *
-     * @param Context $context
-     * @param array $data
-     */
-    public function __construct(
-        Context $context,
-        array $data = []
-    ) {
-        parent::__construct($context, $data);
-    }
-
-    /**
      * @param AbstractElement $element
      *
      * @return string

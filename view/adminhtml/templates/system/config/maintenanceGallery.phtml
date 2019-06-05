@@ -31,7 +31,7 @@ $elementName = $element->getName();
         <?= $block->getUploaderHtml() ?>
         <div class="product-image-wrapper">
             <p class="image-placeholder-text">
-                <?= __('Browse to find or drag image here') ?>
+                <?= /* @noEscape */ __('Browse to find or drag image here') ?>
             </p>
         </div>
     </div>

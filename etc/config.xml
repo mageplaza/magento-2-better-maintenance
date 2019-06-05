@@ -34,10 +34,10 @@
                     <clock_background_color>#42FFCA</clock_background_color>
                     <clock_number_color>#000000</clock_number_color>
                 </clock_setting>
-                <subcribe_setting>
-                    <subcribe_type>email_form</subcribe_type>
+                <subscribe_setting>
+                    <subscribe_type>email_form</subscribe_type>
                     <button_label>Subscribe</button_label>
-                </subcribe_setting>
+                </subscribe_setting>
                 <footer_block>
                     <cms_block>0</cms_block>
                 </footer_block>

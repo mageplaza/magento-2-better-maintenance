@@ -24,6 +24,7 @@ namespace Mageplaza\BetterMaintenance\Helper;
 use Exception;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlInterface;
 use Magento\MediaStorage\Model\File\Uploader;
 use Mageplaza\Core\Helper\Media;
@@ -47,9 +48,8 @@ class Image extends Media
      */
     public function getNotDuplicatedFilename($fileName, $descriptionPath)
     {
-        $fileMediaName = $descriptionPath . '/' . Uploader::getNewFileName(
-                $this->mediaDirectory->getAbsolutePath($this->getMediaPath($fileName))
-            );
+        $fileMediaName = $descriptionPath . '/'
+            . Uploader::getNewFileName($this->mediaDirectory->getAbsolutePath($this->getMediaPath($fileName)));
 
         if ($fileMediaName !== $fileName) {
             return $this->getNotDuplicatedFilename($fileMediaName, $descriptionPath);
@@ -73,7 +73,7 @@ class Image extends Media
      */
     public function getTmpMediaPath($file)
     {
-        return $this->getBaseTmpMediaPath() . '/' . $this->_prepareFile($file);
+        return self::getBaseTmpMediaPath() . '/' . $this->_prepareFile($file);
     }
 
     /**
@@ -88,11 +88,12 @@ class Image extends Media
 
     /**
      * @return string
+     * @throws NoSuchEntityException
      */
     public function getBaseTmpMediaUrl()
     {
         return $this->storeManager->getStore()
-                ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $this->getBaseTmpMediaPath();
+                ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . self::getBaseTmpMediaPath();
     }
 
     /**
@@ -112,6 +113,7 @@ class Image extends Media
 
     /**
      * @return mixed
+     * @throws NoSuchEntityException
      */
     public function getBaseStaticUrl()
     {

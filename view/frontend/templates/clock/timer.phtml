@@ -19,14 +19,11 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-use Mageplaza\BetterMaintenance\Helper\Data;
-
 /** @var \Mageplaza\BetterMaintenance\Block\Clock $block */
-$helper               = $this->helper(Data::class);
-$clockBackgroundColor = $helper->getClockSetting('clock_background_color');
-$clockNumberColor     = $helper->getClockSetting('clock_number_color');
+$clockBackgroundColor = $block->getClockSetting('clock_background_color');
+$clockNumberColor     = $block->getClockSetting('clock_number_color');
 
-$template = $block->getClockTemplate($helper->getClockSetting('clock_template'));
+$template = $block->getClockTemplate($block->getClockSetting('clock_template'));
 $timerId  = uniqid('', false);
 
 if (!empty($template)) : ?>
@@ -55,14 +52,16 @@ if (!empty($template)) : ?>
             color: <?= /* @noEscape */ $clockNumberColor ?>;
         }
 
-        <?php if (strpos($template, 'circle') !== false || strpos($template, 'square') !== false || strpos($template, 'stack') !== false): ?>
+        <?php if (strpos($template, 'circle') !== false
+        || strpos($template, 'square') !== false
+        || strpos($template, 'stack') !== false) : ?>
         #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-clock {
             background-color: <?= /* @noEscape */ $clockBackgroundColor ?>;
             border-color: <?= /* @noEscape */ $clockBackgroundColor ?>;
         }
 
         <?php endif; ?>
-        <?php if (strpos($template, 'modern') !== false): ?>
+        <?php if (strpos($template, 'modern') !== false) : ?>
         #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .countdown-modern {
             background: <?= /* @noEscape */ $clockBackgroundColor ?>;
             border-color: <?= /* @noEscape */ $clockBackgroundColor ?>;
@@ -77,11 +76,11 @@ if (!empty($template)) : ?>
             "Mageplaza_BetterMaintenance/js/clock/mpcountdowntimer": {
                 "timer_id": "#mp-countdown-timer-<?= /* @noEscape */ $timerId ?>",
                 "timezone": "<?= /* @noEscape */ $block->getTimeZone() ?>",
-                "endtime": "<?= /* @noEscape */ $helper->getConfigGeneral('end_time') ?>",
-                "enabled": <?= /* @noEscape */ $helper->isEnabled() ?>,
+                "endtime": "<?= /* @noEscape */ $block->getConfigGeneral('end_time') ?>",
+                "enabled": <?= /* @noEscape */ $block->isEnabled() ?>,
                 "currentTime": "<?= /* @noEscape */ $block->getCurrentTime() ?>",
                 "baseUrl": "<?= /* @noEscape */ $block->getBaseUrl() ?>",
-                "autoSwitch": <?= /* @noEscape */ $helper->getConfigGeneral('auto_switch') ?>
+                "autoSwitch": <?= /* @noEscape */ $block->getConfigGeneral('auto_switch') ?>
             }
         }
     }

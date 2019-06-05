@@ -22,7 +22,6 @@
 namespace Mageplaza\BetterMaintenance\Block;
 
 use Magento\Cms\Model\Page as CmsPage;
-use Magento\Customer\Model\Session;
 use Magento\Framework\App\Http\Context as HttpContext;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\Message\ManagerInterface;
@@ -177,7 +176,7 @@ class Redirect extends Template
                     return false;
                 }
                 $route = $this->_helperData->getComingSoonRoute();
-                $route = isset($route) ? $route : HelperData::COMINGSOON_ROUTE;
+                $route = isset($route) ? $route : HelperData::COMING_SOON_ROUTE;
                 break;
             default:
                 $route = $redirectTo;

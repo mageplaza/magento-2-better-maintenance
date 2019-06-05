@@ -124,4 +124,32 @@ class Clock extends Template
 
         return ($style === ClockTemplate::SIMPLE) ? $template1 : $template;
     }
+
+    /**
+     * @param $code
+     *
+     * @return array|mixed
+     */
+    public function getConfigGeneral($code)
+    {
+        return $this->_helperData->getConfigGeneral($code);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return $this->_helperData->isEnabled();
+    }
+
+    /**
+     * @param $code
+     *
+     * @return mixed
+     */
+    public function getClockSetting($code)
+    {
+        return $this->_helperData->getClockSetting($code);
+    }
 }

@@ -39,6 +39,12 @@ use Magento\Customer\Block\Form\Register;
  */
 class Preview extends Template
 {
+    const PAGE_TITLE       = 'Under Maintenance';
+    const PAGE_DESCRIPTION = 'We\'re currently down for maintenance. Be right back!';
+    const PROGRESS_VALUE   = '50';
+    const PAGE_LAYOUT      = 'single';
+    const SUBSCRIBE_TYPE   = 'email_form';
+
     /**
      * @var string
      */
@@ -114,6 +120,56 @@ class Preview extends Template
     }
 
     /**
+     * @return mixed|string
+     */
+    public function getPageTitle()
+    {
+        return $this->getFormData()['[maintenance_title]'] === '1'
+            ? self::PAGE_TITLE
+            : $this->getFormData()['[maintenance_title]'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getPageLayout()
+    {
+        return $this->getFormData()['[maintenance_background]'] !== '1'
+            ? $this->getFormData()['[maintenance_background]']
+            : self::PAGE_LAYOUT;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPageDes()
+    {
+        return $this->getFormData()['[maintenance_description]'] !== '1'
+            ? $this->getFormData()['[maintenance_description]']
+            : self::PAGE_DESCRIPTION;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProgressValue()
+    {
+        return $this->getFormData()['[maintenance_progress_value]'] !== '1'
+            ? $this->getFormData()['[maintenance_progress_value]']
+            : self::PROGRESS_VALUE;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getSubscribeType()
+    {
+        return $this->getFormData()['[subscribe_type]'] !== '1'
+            ? $this->getFormData()['[subscribe_type]']
+            : self::SUBSCRIBE_TYPE;
+    }
+
+    /**
      * @return array
      */
     public static function cleanValue()
@@ -129,7 +185,8 @@ class Preview extends Template
             '[social_contact]',
             '[maintenance_setting]',
             '[comingsoon_setting]',
-            '[general]'
+            '[general]',
+            '[inherit]'
         ];
     }
 
@@ -273,7 +330,7 @@ class Preview extends Template
     {
         $list = [];
         foreach ($this->getFormData() as $key => $value) {
-            if (strpos($key, $type) && strpos($key, '[file]')) {
+            if (strpos($key, $type) === true && strpos($key, '[file]') === true) {
                 $list[] = $value;
             }
         }

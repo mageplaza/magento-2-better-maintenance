@@ -21,7 +21,7 @@
 ?>
 <?php $data = $block->getFormData(); ?>
 <!--Multiple Image Background-->
-<?php if ($data['[comingsoon_background]'] === 'multiple_images'): ?>
+<?php if ($data['[comingsoon_background]'] === 'multiple_images') : ?>
     <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl('comingsoon_background_multi_image')); ?>
     <style>
         .mpbettermaintenance-comingsoon-preview {
@@ -37,9 +37,9 @@
             var images    = '<?= /* @noEscape */ $listImagesUrl ?>';
             images        = images.split(',');
             var nextImage = 0;
-            doSlideshow();
+            doSlideShow();
 
-            function doSlideshow () {
+            function doSlideShow () {
                 if (nextImage >= images.length) {
                     nextImage = 0;
                 }
@@ -54,7 +54,7 @@
 
 <!--Single Image Background-->
 <?php if ($data['[comingsoon_background]'] === 'image'
-    && $block->getImageUrl($data['[comingsoon_background_image]'])): ?>
+    && $block->getImageUrl($data['[comingsoon_background_image]'])) : ?>
     <style>
         .mpbettermaintenance-comingsoon-preview {
             background-image: url("<?= /* @noEscape */ $block->getImageUrl($data['[comingsoon_background_image]']) ?>");
@@ -66,17 +66,17 @@
 
 <!--Video Background-->
 <?php if ($data['[comingsoon_background]'] === 'video'
-    && $block->getVideoUrl($data['[comingsoon_background_video]'])): ?>
+    && $block->getVideoUrl($data['[comingsoon_background_video]'])) : ?>
     <video autoplay muted loop id="mpbm-video">
         <source src="<?= /* @noEscape */ $block->getVideoUrl($data['[comingsoon_background_video]']) ?>"
                 type="video/mp4">
     </video>
 <?php endif; ?>
-<div id="mpbm-<?= $data['[comingsoon_layout]'] ?>-column" class="mpbm-preview-wrapper">
-    <?php if (!empty($data['[comingsoon_logo]'])): ?>
+<div id="mpbm-<?= /* @noEscape */ $block->getPageLayout() ?>-column" class="mpbm-preview-wrapper">
+    <?php if (!empty($data['[comingsoon_logo]'])) : ?>
         <div id="mpbm-logo">
             <img src="<?= /* @noEscape */ $block->getLogo($data['[comingsoon_logo]']) ?>"
-                 alt="<?= __('Logo') ?>" width="100">
+                 alt="<?= /* @noEscape */ __('Logo') ?>" width="100">
         </div>
     <?php endif; ?>
 
@@ -91,27 +91,29 @@
     </div>
 
     <!--    Clock area-->
-    <?php if ($data['[clock_enabled]']) : ?>
+    <?php if (array_key_exists('[clock_number_color]', $data) && $data['[clock_enabled]']) : ?>
         <div id="mpbm-clock">
             <?= /* @noEscape */ $block->getClockBlock() ?>
         </div>
     <?php endif; ?>
 
     <!--    Subscribe area-->
-    <?php if ($data['[subscribe_type]'] !== 'none') : ?>
+    <?php if (array_key_exists('[subscribe_label]', $data) && $block->getSubscribeType() !== 'none') : ?>
         <?php $subscribeLabel = $data['[subscribe_label]'] ?>
         <?php $subscribeLabelColor = $data['[subscribe_label_color]'] ?>
-        <?php if ($data['[subscribe_type]'] === 'email_form') : ?>
+        <?php if ($block->getSubscribeType() === 'email_form') : ?>
             <div id="mpbm-subscribe">
-                <?php if ($subscribeLabel): ?>
-                    <h4 style="color: <?= $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
+                <?php if ($subscribeLabel) : ?>
+                    <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>">
+                        <?= /* @noEscape */ $subscribeLabel ?></h4>
                 <?php endif; ?>
                 <?= /* @noEscape */ $block->getSubscribeBlock() ?>
             </div>
-        <?php elseif ($data['[subscribe_type]'] === 'register_form') : ?>
+        <?php elseif ($block->getSubscribeType() === 'register_form') : ?>
             <div id="mpbm-register">
-                <?php if ($subscribeLabel): ?>
-                    <h4 style="color: <?= $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
+                <?php if ($subscribeLabel) : ?>
+                    <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>">
+                        <?= /* @noEscape */ $subscribeLabel ?></h4>
                 <?php endif; ?>
                 <?= /* @noEscape */ $block->getRegisterBlock() ?>
             </div>
@@ -119,7 +121,7 @@
     <?php endif; ?>
 
     <!--    Social area-->
-    <?php if ($data['[social_enabled]']): ?>
+    <?php if ($data['[social_enabled]']) : ?>
         <div id="mpbm-social-contact">
             <div id="mpbm-social-label" style="display: inline-block">
                 <p><?= /* @noEscape */ $data['[social_label]'] ?></p>
@@ -128,7 +130,7 @@
                 <?php if ($value['link']) : ?>
                     <div class="mpbm-social-box" style="display: inline-block; vertical-align: middle">
                         <a href="<?= /* @noEscape */ $value['link'] ?>" target="_blank">
-                            <img src="<?= /* @noEscape */ $value['img'] ?>" alt="<?= __('Social Logo') ?>" width="20">
+                            <img src="<?= /* @noEscape */ $value['img'] ?>" alt="<?= /* @noEscape */ __('Social Logo') ?>" width="20">
                         </a>
                     </div>
                 <?php endif; ?>
@@ -152,7 +154,7 @@
         color: <?= /* @noEscape */ $data['[social_label_color]'] ?>;
     }
 
-    <?php if ($data['[clock_template]'] === 'stack') : ?>
+    <?php if (array_key_exists('[clock_number_color]', $data) && $data['[clock_template]'] === 'stack') : ?>
     .stack-txt1 {
         background: <?= /* @noEscape */ $data['[clock_inner_color]'] ?>;
     }
@@ -160,13 +162,14 @@
     <?php endif; ?>
 </style>
 
-<?php if ($data['[subscribe_type]'] !== 'none') : ?>
+<?php if (array_key_exists('[subscribe_label]', $data) && $block->getSubscribeType() !== 'none') : ?>
     <script>
         require([
             'jquery'
         ], function ($) {
             var subBtn = $('.action.primary span');
-            subBtn.text("<?= /* @noEscape */ $data['[button_label]'] ?>").css("color", "<?= /* @noEscape */ $data['[button_label_color]'] ?>");
+            subBtn.text("<?= /* @noEscape */ $data['[button_label]'] ?>")
+            .css("color", "<?= /* @noEscape */ $data['[button_label_color]'] ?>");
             $('.action.primary').css("background", "<?= /* @noEscape */ $data['[button_background_color]'] ?>");
         });
     </script>
@@ -174,7 +177,7 @@
 
 <script type="text/x-magento-init">
     {
-        ".mpbm-wrapper": {
+        ".mpbm-preview-wrapper": {
             "maintenancePreview": {}
         }
     }

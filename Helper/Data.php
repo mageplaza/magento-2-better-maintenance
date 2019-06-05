@@ -31,7 +31,7 @@ class Data extends AbstractData
 {
     const CONFIG_MODULE_PATH = 'mpbettermaintenance';
     const MAINTENANCE_ROUTE  = 'mpmaintenance';
-    const COMINGSOON_ROUTE   = 'mpcomingsoon';
+    const COMING_SOON_ROUTE   = 'mpcomingsoon';
 
     /**
      * @param string $code
@@ -129,7 +129,7 @@ class Data extends AbstractData
     {
         $comingSoonRoute = $this->getComingSoonSetting('comingsoon_route');
 
-        return isset($comingSoonRoute) ? $comingSoonRoute : self::COMINGSOON_ROUTE;
+        return isset($comingSoonRoute) ? $comingSoonRoute : self::COMING_SOON_ROUTE;
     }
 
     /**

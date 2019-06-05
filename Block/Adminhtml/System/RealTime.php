@@ -69,9 +69,9 @@ class RealTime extends Field
     protected function _getElementHtml(AbstractElement $element)
     {
         $html = '';
-        $html .= $this->_date->gmtDate('F j, Y');
+        $html .= $this->_localeDate->date()->format('F j, Y');
         $html .= '<br>';
-        $html .= $this->_date->gmtDate('g:i A');
+        $html .= $this->_localeDate->date()->format('g:i A');
 
         return $html;
     }

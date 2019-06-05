@@ -41,7 +41,6 @@ class MaintenanceMultipleImages extends Field
      * MaintenanceMultipleImages constructor.
      *
      * @param Registry $coreRegistry
-     * @param Layout $layout
      * @param Context $context
      * @param array $data
      */

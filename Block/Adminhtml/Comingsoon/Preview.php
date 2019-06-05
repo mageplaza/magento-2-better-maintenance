@@ -28,6 +28,9 @@ use Mageplaza\BetterMaintenance\Block\Adminhtml\Maintenance\Preview as MPreview;
  */
 class Preview extends MPreview
 {
+    const PAGE_TITLE       = 'Coming Soon';
+    const PAGE_DESCRIPTION = 'Our new site is coming soon. Stay tuned!';
+
     /**
      * @var string
      */

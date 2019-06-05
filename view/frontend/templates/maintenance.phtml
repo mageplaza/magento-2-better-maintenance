@@ -18,22 +18,19 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-use Mageplaza\BetterMaintenance\Helper\Data;
 
 /**
  * @var \Mageplaza\BetterMaintenance\Block\Maintenance $block ;
  */
 
-$helper              = $this->helper(Data::class);
-$subscribeLabel      = $helper->getSubscribeSetting('subscribe_label');
-$subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
+$subscribeLabel      = $block->getSubscribeSetting('subscribe_label');
+$subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 ?>
 
 <!--Multiple Image Background-->
-<?php if ($helper->getMaintenanceSetting('maintenance_background') === 'multiple_images'
-    && $block->getImageUrl($helper->getMaintenanceSetting('maintenance_background_multi_image'))): ?>
-    <?php $listImagesUrl = implode(',',
-        $block->getMultipleImagesUrl($helper->getMaintenanceSetting('maintenance_background_multi_image'))); ?>
+<?php if ($block->getMaintenanceSetting('maintenance_background') === 'multiple_images'
+    && $block->getImageUrl($block->getMaintenanceSetting('maintenance_background_multi_image'))) : ?>
+    <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl($block->getMaintenanceSetting('maintenance_background_multi_image'))); ?>
     <style>
         .mpbettermaintenance-maintenance-index {
             background-repeat: no-repeat;
@@ -48,9 +45,9 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
             var images    = '<?= /* @noEscape */ $listImagesUrl ?>';
             images        = images.split(',');
             var nextImage = 0;
-            doSlideshow();
+            doSlideShow();
 
-            function doSlideshow () {
+            function doSlideShow () {
                 if (nextImage >= images.length) {
                     nextImage = 0;
                 }
@@ -64,11 +61,11 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 <?php endif; ?>
 
 <!--Single Image Background-->
-<?php if ($helper->getMaintenanceSetting('maintenance_background') === 'image'
-    && $block->getImageUrl($helper->getMaintenanceSetting('maintenance_background_image'))): ?>
+<?php if ($block->getMaintenanceSetting('maintenance_background') === 'image'
+    && $block->getImageUrl($block->getMaintenanceSetting('maintenance_background_image'))) : ?>
     <style>
         .mpbettermaintenance-maintenance-index {
-            background-image: url("<?= /* @noEscape */ $block->getImageUrl($helper->getMaintenanceSetting('maintenance_background_image')) ?>");
+            background-image: url("<?= /* @noEscape */ $block->getImageUrl($block->getMaintenanceSetting('maintenance_background_image')) ?>");
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -76,19 +73,19 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 <?php endif; ?>
 
 <!--Video Background-->
-<?php if ($helper->getMaintenanceSetting('maintenance_background') === 'video'
-    && $block->getVideoUrl($helper->getMaintenanceSetting('maintenance_background_video'))): ?>
+<?php if ($block->getMaintenanceSetting('maintenance_background') === 'video'
+    && $block->getVideoUrl($block->getMaintenanceSetting('maintenance_background_video'))) : ?>
     <video autoplay muted loop id="mpbm-video">
-        <source src="<?= /* @noEscape */ $block->getVideoUrl($helper->getMaintenanceSetting('maintenance_background_video')) ?>"
+        <source src="<?= /* @noEscape */ $block->getVideoUrl($block->getMaintenanceSetting('maintenance_background_video')) ?>"
                 type="video/mp4">
     </video>
 <?php endif; ?>
 
-<div id="mpbm-<?= /* @noEscape */ $helper->getMaintenanceSetting('maintenance_layout') ?>-column">
-    <?php if (!empty($helper->getMaintenanceSetting('maintenance_logo'))): ?>
+<div id="mpbm-<?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_layout') ?>-column">
+    <?php if (!empty($block->getMaintenanceSetting('maintenance_logo'))) : ?>
         <div id="mpbm-logo">
-            <img src="<?= /* @noEscape */ $block->getLogo($helper->getMaintenanceSetting('maintenance_logo')) ?>"
-                 alt="<?= __('Logo') ?>" width="100">
+            <img src="<?= /* @noEscape */ $block->getLogo($block->getMaintenanceSetting('maintenance_logo')) ?>"
+                 alt="<?= /* @noEscape */  __('Logo') ?>" width="100">
         </div>
     <?php endif; ?>
 
@@ -103,14 +100,14 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
     </div>
 
     <!--    Clock area-->
-    <?php if ($helper->getClockSetting('clock_enabled')) : ?>
+    <?php if ($block->getClockSetting('clock_enabled')) : ?>
         <div id="mpbm-clock">
-            <?= /* @noEscape */ $this->getChildHtml('clock_countdown') ?>
+            <?= /* @noEscape */ $block->getChildHtml('clock_countdown') ?>
         </div>
     <?php endif; ?>
 
     <!--    Progress Area-->
-    <?php if ($helper->getMaintenanceSetting('maintenance_progress_enabled')): ?>
+    <?php if ($block->getMaintenanceSetting('maintenance_progress_enabled')) : ?>
         <div id="mpbm-progress-bar">
             <div class="row">
                 <div class="mp-md-6">
@@ -126,24 +123,24 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
     <?php endif; ?>
 
     <!--    Subscribe area-->
-    <?php if ($helper->getSubscribeSetting('subscribe_type') === 'email_form') : ?>
+    <?php if ($block->getSubscribeSetting('subscribe_type') === 'email_form') : ?>
         <div id="mpbm-subscribe">
-            <?php if ($subscribeLabel): ?>
+            <?php if ($subscribeLabel) : ?>
                 <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
             <?php endif; ?>
-            <?= /* @noEscape */ $this->getChildHtml('subscribe') ?>
+            <?= /* @noEscape */ $block->getChildHtml('subscribe') ?>
         </div>
-    <?php elseif ($helper->getSubscribeSetting('subscribe_type') === 'register_form') : ?>
+    <?php elseif ($block->getSubscribeSetting('subscribe_type') === 'register_form') : ?>
         <div id="mpbm-register">
-            <?php if ($subscribeLabel): ?>
+            <?php if ($subscribeLabel) : ?>
                 <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
             <?php endif; ?>
-            <?= $this->getChildHtml('register') ?>
+            <?= $block->getChildHtml('register') ?>
         </div>
     <?php endif; ?>
 
     <!--    Social area-->
-    <?php if ($helper->getSocialSetting('social_enabled')): ?>
+    <?php if ($block->getSocialSetting('social_enabled')) : ?>
         <div id="mpbm-social-contact">
             <div id="mpbm-social-label" style="display: inline-block">
                 <p><?= /* @noEscape */ $block->getSocialLabel() ?></p>
@@ -153,7 +150,7 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
                 <?php if ($value['link']) : ?>
                     <div class="mpbm-social-box" style="display: inline-block; vertical-align: middle">
                         <a href="<?= /* @noEscape */ $value['link'] ?>" target="_blank">
-                            <img src="<?= /* @noEscape */ $value['img'] ?>" alt="<?= __('Social Logo') ?>" width="20">
+                            <img src="<?= /* @noEscape */ $value['img'] ?>" alt="<?= /* @noEscape */ __('Social Logo') ?>" width="20">
                         </a>
                     </div>
                 <?php endif; ?>
@@ -170,16 +167,16 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
 
 <style>
     .mpbm-text {
-        color: <?= /* @noEscape */ $helper->getMaintenanceSetting('maintenance_color') ?>;
+        color: <?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_color') ?>;
     }
 
     #mpbm-social-label {
-        color: <?= /* @noEscape */ $helper->getSocialSetting('social_label_color') ?>;
+        color: <?= /* @noEscape */ $block->getSocialSetting('social_label_color') ?>;
     }
 
-    <?php if ($helper->getClockSetting('clock_template') === 'stack') : ?>
+    <?php if ($block->getClockSetting('clock_template') === 'stack') : ?>
     .stack-txt1 {
-        background: <?= /* @noEscape */ $helper->getClockSetting('clock_inner_color') ?>;
+        background: <?= /* @noEscape */ $block->getClockSetting('clock_inner_color') ?>;
     }
 
     <?php endif; ?>
@@ -190,21 +187,21 @@ $subscribeLabelColor = $helper->getSubscribeSetting('subscribe_label_color');
         font-weight: bold;
         border-radius: 50px;
         line-height: 45px;
-        color: <?= /* @noEscape */ $helper->getMaintenanceSetting('maintenance_progress_label_color') ?>;
-        background-color: <?= /* @noEscape */ $helper->getMaintenanceSetting('maintenance_progress_bar_color') ?>;
+        color: <?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_progress_label_color') ?>;
+        background-color: <?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_progress_bar_color') ?>;
         width: 0;
     }
 </style>
 
-<?php if ($helper->getSubscribeSetting('subscribe_type') !== 'none') : ?>
+<?php if ($block->getSubscribeSetting('subscribe_type') !== 'none') : ?>
     <script>
         require([
             'jquery'
         ], function ($) {
             var subBtn = $('.action.primary span');
-            subBtn.text("<?= /* @noEscape */ $helper->getSubscribeSetting('button_label') ?>")
-            .css("color", "<?= /* @noEscape */ $helper->getSubscribeSetting('button_label_color') ?>");
-            $('.action.primary').css("background", "<?= /* @noEscape */ $helper->getSubscribeSetting('button_background_color') ?>");
+            subBtn.text("<?= /* @noEscape */ $block->getSubscribeSetting('button_label') ?>")
+            .css("color", "<?= /* @noEscape */ $block->getSubscribeSetting('button_label_color') ?>");
+            $('.action.primary').css("background", "<?= /* @noEscape */ $block->getSubscribeSetting('button_background_color') ?>");
         });
     </script>
 <?php endif; ?>

@@ -41,7 +41,6 @@ class ComingsoonMultipleImages extends Field
      * ComingsoonMultipleImages constructor.
      *
      * @param Registry $coreRegistry
-     * @param Layout $layout
      * @param Context $context
      * @param array $data
      */

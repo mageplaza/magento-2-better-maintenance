@@ -48,4 +48,14 @@ class Comingsoon extends Maintenance
 
         return empty($des) ? self::PAGE_DESCRIPTION : $des;
     }
+
+    /**
+     * @param $code
+     *
+     * @return mixed
+     */
+    public function getComingSoonSetting($code)
+    {
+        return $this->_helperData->getComingSoonSetting($code);
+    }
 }

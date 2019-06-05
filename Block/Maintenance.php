@@ -246,4 +246,42 @@ class Maintenance extends Template
 
         return $block;
     }
+
+    /**
+     * @param $code
+     *
+     * @return mixed
+     */
+    public function getMaintenanceSetting($code)
+    {
+        return $this->_helperData->getMaintenanceSetting($code);
+    }
+
+    /**
+     * @param $code
+     *
+     * @return mixed
+     */
+    public function getSubscribeSetting($code)
+    {
+        return $this->_helperData->getSubscribeSetting($code);
+    }
+
+    /**
+     * @param $code
+     *
+     * @return mixed
+     */
+    public function getSocialSetting($code)
+    {
+        return $this->_helperData->getSocialSetting($code);
+    }
+
+    /**
+     * @param $code
+     */
+    public function getClockSetting($code)
+    {
+        $this->_helperData->getClockSetting($code);
+    }
 }
