@@ -35,4 +35,24 @@ class Preview extends MPreview
      * @var string
      */
     protected $_template = 'Mageplaza_BetterMaintenance::comingsoon/preview.phtml';
+
+    /**
+     * @return mixed|string
+     */
+    public function getPageTitle()
+    {
+        return $this->getFormData()['[comingsoon_title]'] === '1'
+            ? self::PAGE_TITLE
+            : $this->getFormData()['[comingsoon_title]'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getPageDes()
+    {
+        return $this->getFormData()['[comingsoon_description]'] !== '1'
+            ? $this->getFormData()['[comingsoon_description]']
+            : self::PAGE_DESCRIPTION;
+    }
 }

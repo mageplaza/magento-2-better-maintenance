@@ -45,7 +45,7 @@
                 }
                 $('.mpbettermaintenance-comingsoon-preview')
                 .fadeIn('slow', function () {
-                    setTimeout(doSlideshow, 5000);
+                    setTimeout(doSlideShow, 5000);
                 }).css('background-image', 'url("' + images[nextImage++] + '")');
             }
         });
@@ -72,7 +72,7 @@
                 type="video/mp4">
     </video>
 <?php endif; ?>
-<div id="mpbm-<?= /* @noEscape */ $block->getPageLayout() ?>-column" class="mpbm-preview-wrapper">
+<div id="mpbm-<?= /* @noEscape */ $block->getPageLayout('[comingsoon_layout]') ?>-column" class="mpbm-preview-wrapper">
     <?php if (!empty($data['[comingsoon_logo]'])) : ?>
         <div id="mpbm-logo">
             <img src="<?= /* @noEscape */ $block->getLogo($data['[comingsoon_logo]']) ?>"

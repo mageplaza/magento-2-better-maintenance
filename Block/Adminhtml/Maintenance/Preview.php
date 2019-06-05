@@ -132,10 +132,10 @@ class Preview extends Template
     /**
      * @return string
      */
-    public function getPageLayout()
+    public function getPageLayout($code)
     {
-        return $this->getFormData()['[maintenance_background]'] !== '1'
-            ? $this->getFormData()['[maintenance_background]']
+        return $this->getFormData()[$code] !== '1'
+            ? $this->getFormData()[$code]
             : self::PAGE_LAYOUT;
     }
 

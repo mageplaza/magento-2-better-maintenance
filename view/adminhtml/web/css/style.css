@@ -323,7 +323,6 @@
 #mpbm-double-column #mpbm-social-contact{
     width: 40%;
     margin-left: 50%;
-    position: fixed;
     bottom: 15px;
 }
 #mpbm-double-column #mpbm-register{
@@ -572,4 +571,8 @@ h3 {
     font-size: 1.8rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
+}
+
+.actions-toolbar>.secondary .action.back {
+    display: none;
 }

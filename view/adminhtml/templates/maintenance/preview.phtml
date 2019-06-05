@@ -46,7 +46,7 @@
                 }
                 $('.mpbettermaintenance-maintenance-preview')
                 .fadeIn('slow', function () {
-                    setTimeout(doSlideshow, 5000);
+                    setTimeout(doSlideShow, 5000);
                 }).css('background-image', 'url("' + images[nextImage++] + '")');
             }
         });
@@ -75,7 +75,7 @@
     </video>
 <?php endif; ?>
 
-<div id="mpbm-<?=  /* @noEscape */ $block->getPageLayout() ?>-column" class="mpbm-preview-wrapper">
+<div id="mpbm-<?=  /* @noEscape */ $block->getPageLayout('[maintenance_layout]') ?>-column" class="mpbm-preview-wrapper">
     <?php if (!empty($data['[maintenance_logo]'])) : ?>
         <div id="mpbm-logo">
             <img src="<?= /* @noEscape */
