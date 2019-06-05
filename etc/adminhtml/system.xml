@@ -315,6 +315,7 @@
                 <label>Coming Soon Page Setting</label>
                 <field id="comingsoon_route" translate="label" type="text" sortOrder="520" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Page Route</label>
+                    <validate>validate-identifier</validate>
                 </field>
                 <field id="comingsoon_layout" translate="label" type="select" sortOrder="530" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Select Layout</label>
