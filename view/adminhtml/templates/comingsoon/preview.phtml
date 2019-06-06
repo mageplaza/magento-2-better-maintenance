@@ -82,12 +82,12 @@
 
     <!--    Page Title Area-->
     <div id="mpbm-page-title">
-        <h1 class="mpbm-text" style="margin-bottom: 0"><?= /* @noEscape */ $data['[comingsoon_title]'] ?></h1>
+        <h1 class="mpbm-text" style="margin-bottom: 0"><?= /* @noEscape */ $block->getPageTitle() ?></h1>
     </div>
 
     <!--    Page Description Area-->
     <div id="mpbm-page-description">
-        <h3 class="mpbm-text"><?= /* @noEscape */ $data['[comingsoon_description]'] ?></h3>
+        <h3 class="mpbm-text"><?= /* @noEscape */ $block->getPageDes() ?></h3>
     </div>
 
     <!--    Clock area-->
@@ -168,7 +168,7 @@
             'jquery'
         ], function ($) {
             var subBtn = $('.action.primary span');
-            subBtn.text("<?= /* @noEscape */ $data['[button_label]'] ?>")
+            subBtn.text("<?= /* @noEscape */ $block->getSubscribeLabel() ?>")
             .css("color", "<?= /* @noEscape */ $data['[button_label_color]'] ?>");
             $('.action.primary').css("background", "<?= /* @noEscape */ $data['[button_background_color]'] ?>");
         });

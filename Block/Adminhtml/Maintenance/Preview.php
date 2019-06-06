@@ -44,6 +44,7 @@ class Preview extends Template
     const PROGRESS_VALUE   = '50';
     const PAGE_LAYOUT      = 'single';
     const SUBSCRIBE_TYPE   = 'email_form';
+    const SUBSCRIBE_LABEL  = 'Subscribe';
 
     /**
      * @var string
@@ -167,6 +168,16 @@ class Preview extends Template
         return $this->getFormData()['[subscribe_type]'] !== '1'
             ? $this->getFormData()['[subscribe_type]']
             : self::SUBSCRIBE_TYPE;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getSubscribeLabel()
+    {
+        return $this->getFormData()['[button_label]'] === '1'
+            ? self::SUBSCRIBE_LABEL
+            : $this->getFormData()['[button_label]'];
     }
 
     /**
@@ -295,7 +306,7 @@ class Preview extends Template
         $block = $this->getLayout()
             ->createBlock(Register::class)
             ->setData('area', 'frontend')
-            ->setTemplate('form/register.phtml')
+            ->setTemplate('Magento_Customer::form/register.phtml')
             ->toHtml();
 
         return $block;

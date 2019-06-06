@@ -210,7 +210,7 @@
             'jquery'
         ], function ($) {
             var subBtn = $('.action.primary span');
-            subBtn.text("<?= /* @noEscape */ $data['[button_label]'] ?>")
+            subBtn.text("<?= /* @noEscape */ $block->getSubscribeLabel() ?>")
             .css("color", "<?= /* @noEscape */ $data['[button_label_color]'] ?>");
             $('.action.primary').css("background", "<?= /* @noEscape */ $data['[button_background_color]'] ?>");
         });

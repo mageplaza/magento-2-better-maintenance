@@ -28,6 +28,7 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\View\Element\AbstractBlock;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
+use Magento\Framework\ObjectManagerInterface;
 
 /**
  * Class Images
@@ -46,21 +47,29 @@ class Images extends Widget
     protected $_helperData;
 
     /**
+     * @var ObjectManager
+     */
+    protected $_objectManager;
+
+    /**
      * Images constructor.
      *
      * @param Context $context
      * @param HelperImage $imageHelper
      * @param HelperData $helperData
+     * @param ObjectManagerInterface $objectManager
      * @param array $data
      */
     public function __construct(
         Context $context,
         HelperImage $imageHelper,
         HelperData $helperData,
+        ObjectManagerInterface $objectManager,
         array $data = []
     ) {
-        $this->_imageHelper = $imageHelper;
-        $this->_helperData  = $helperData;
+        $this->_imageHelper   = $imageHelper;
+        $this->_helperData    = $helperData;
+        $this->_objectManager = $objectManager;
 
         parent::__construct($context, $data);
     }
@@ -70,7 +79,16 @@ class Images extends Widget
      */
     protected function _prepareLayout()
     {
-        $this->addChild('uploader', Uploader::class);
+        if ($this->_helperData->versionCompare('2.3.1')) {
+            $uploadConfig = $this->_objectManager->get('\Magento\Backend\Block\DataProviders\ImageUploadConfig');
+            $this->addChild(
+                'uploader',
+                Uploader::class,
+                ['image_upload_config_data' => $uploadConfig]
+            );
+        } else {
+            $this->addChild('uploader', Uploader::class);
+        }
 
         $this->getUploader()->getConfig()->setUrl(
             $this->_urlBuilder->addSessionParam()->getUrl('mpbettermaintenance/multiimages/upload')
