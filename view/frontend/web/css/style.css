@@ -492,6 +492,11 @@
 .mpbm-wrapper li {
     list-style: none;
 }
+
+.mpbm-wrapper .action.primary {
+    border: none;
+}
+
 .progress {
     border: solid 1px #999999;
     margin: auto;

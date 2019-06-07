@@ -150,7 +150,7 @@ class Redirect extends Template
             }
         }
 
-        if (strtotime($this->_localeDate->date()->format('m/d/Y H:i A')) >= strtotime($this->_helperData->getConfigGeneral('end_time'))) {
+        if (strtotime($this->_localeDate->date()->format('m/d/Y H:i:s')) >= strtotime($this->_helperData->getConfigGeneral('end_time'))) {
             return false;
         }
 
@@ -178,7 +178,7 @@ class Redirect extends Template
         }
 
         $url = $this->getUrl($route);
-
+//        return false;
         return $this->_response->setRedirect($url);
     }
 }

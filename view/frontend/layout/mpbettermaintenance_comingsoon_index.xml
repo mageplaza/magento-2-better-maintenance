@@ -26,6 +26,7 @@
     </head>
     <body>
         <referenceContainer name="page.wrapper">
+            <block class="Magento\Framework\View\Element\FormKey" name="formkey"/>
             <referenceContainer name="main.content" remove="true"/>
             <referenceContainer name="copyright" remove="true"/>
             <referenceContainer name="content" remove="true"/>

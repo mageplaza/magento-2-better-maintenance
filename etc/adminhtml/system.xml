@@ -37,7 +37,7 @@
                     <label>Real Time of Website</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\RealTime</frontend_model>
                 </field>
-                <field id="end_time" translate="label" sortOrder="30" type="date" showInDefault="1" showInStore="1">
+                <field id="end_time" translate="label" sortOrder="30" type="date" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>End Date Time</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\DatePicker</frontend_model>
                 </field>
