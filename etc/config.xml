@@ -30,19 +30,24 @@
             </general>
             <display_setting>
                 <clock_setting>
-                    <social_enabled>0</social_enabled>
-                    <clock_background_color>#42FFCA</clock_background_color>
-                    <clock_number_color>#000000</clock_number_color>
+                    <clock_enabled>1</clock_enabled>
+                    <clock_template>simple</clock_template>
+                    <clock_background_color>#000000</clock_background_color>
+                    <clock_number_color>#FFFFFF</clock_number_color>
                 </clock_setting>
                 <subscribe_setting>
                     <subscribe_type>email_form</subscribe_type>
+                    <subscribe_label_color>#000000</subscribe_label_color>
                     <button_label>Subscribe</button_label>
+                    <button_label_color>#000000</button_label_color>
+                    <button_background_color>#FFFFFF</button_background_color>
                 </subscribe_setting>
                 <footer_block>
                     <cms_block>0</cms_block>
                 </footer_block>
                 <social_contact>
                     <social_enabled>1</social_enabled>
+                    <social_label_color>#000000</social_label_color>
                 </social_contact>
             </display_setting>
             <maintenance_setting>
@@ -50,15 +55,20 @@
                 <maintenance_layout>single</maintenance_layout>
                 <maintenance_title>Under Maintenance</maintenance_title>
                 <maintenance_description>We're currently down for maintenace. Be right back!</maintenance_description>
+                <maintenance_color>#000000</maintenance_color>
                 <maintenance_background>image</maintenance_background>
                 <maintenance_progress_enabled>0</maintenance_progress_enabled>
                 <maintenance_progress_value>50</maintenance_progress_value>
+                <maintenance_progress_label_color>#FFFFFF</maintenance_progress_label_color>
+                <maintenance_progress_bar_color>#000000</maintenance_progress_bar_color>
+                <maintenance_http_response>200</maintenance_http_response>
             </maintenance_setting>
             <comingsoon_setting>
                 <comingsoon_route>mpcomingsoon</comingsoon_route>
                 <comingsoon_layout>single</comingsoon_layout>
                 <comingsoon_title>Coming Soon</comingsoon_title>
                 <comingsoon_description>Our new site is coming soon. Stay tuned!</comingsoon_description>
+                <comingsoon_color>#FFFFFF</comingsoon_color>
                 <comingsoon_background>image</comingsoon_background>
             </comingsoon_setting>
         </mpbettermaintenance>

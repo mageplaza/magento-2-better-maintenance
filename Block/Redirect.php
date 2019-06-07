@@ -27,7 +27,6 @@ use Magento\Framework\App\Response\Http;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
-use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 
 /**
@@ -64,11 +63,6 @@ class Redirect extends Template
     protected $_context;
 
     /**
-     * @var RemoteAddress
-     */
-    protected $_remoteAddress;
-
-    /**
      * @var DateTime
      */
     protected $_date;
@@ -82,7 +76,6 @@ class Redirect extends Template
      * @param Http $response
      * @param ManagerInterface $messageManager
      * @param HttpContext $httpContext
-     * @param RemoteAddress $remoteAddress
      * @param DateTime $date
      * @param array $data
      */
@@ -93,7 +86,6 @@ class Redirect extends Template
         Http $response,
         ManagerInterface $messageManager,
         HttpContext $httpContext,
-        RemoteAddress $remoteAddress,
         DateTime $date,
         array $data = []
     ) {
@@ -102,7 +94,6 @@ class Redirect extends Template
         $this->_response       = $response;
         $this->_messageManager = $messageManager;
         $this->_context        = $httpContext;
-        $this->_remoteAddress  = $remoteAddress;
         $this->_date           = $date;
 
         parent::__construct($context, $data);
@@ -141,7 +132,7 @@ class Redirect extends Template
     {
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
         $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
-        $currentIp  = $this->_remoteAddress->getRemoteAddress();
+        $currentIp  = $this->_request->getClientIp();
 
         if (!$this->_helperData->isEnabled()) {
             return false;
