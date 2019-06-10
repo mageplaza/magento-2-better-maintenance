@@ -18,8 +18,13 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
+/**
+ * @var \Mageplaza\BetterMaintenance\Block\Adminhtml\Comingsoon\Preview $block ;
+ */
+$data = $block->getFormData();
 ?>
-<?php $data = $block->getFormData(); ?>
+
 <!--Multiple Image Background-->
 <?php if ($data['[comingsoon_background]'] === 'multiple_images') : ?>
     <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl('comingsoon_background_multi_image')); ?>
@@ -72,7 +77,11 @@
                 type="video/mp4">
     </video>
 <?php endif; ?>
+
+<!--WRAPPER-->
 <div id="mpbm-<?= /* @noEscape */ $block->getPageLayout('[comingsoon_layout]') ?>-column" class="mpbm-preview-wrapper">
+
+    <!--    Logo-->
     <?php if (!empty($data['[comingsoon_logo]'])) : ?>
         <div id="mpbm-logo">
             <img src="<?= $block->escapeHtmlAttr($block->getLogo($data['[comingsoon_logo]'])) ?>"
@@ -138,6 +147,7 @@
         </div>
     <?php endif; ?>
 
+    <!--    CMS Block-->
     <?php if ($block->getBlockCms()) : ?>
         <div id="mpbm-footer-block">
             <?= /* @noEscape */ $block->getBlockCms() ?>

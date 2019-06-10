@@ -81,7 +81,10 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
     </video>
 <?php endif; ?>
 
+<!--WRAPPER-->
 <div id="mpbm-<?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_layout') ?>-column" class="mpbm-wrapper">
+
+    <!--    Logo-->
     <?php if (!empty($block->getMaintenanceSetting('maintenance_logo'))) : ?>
         <div id="mpbm-logo">
             <img src="<?= $block->escapeHtmlAttr($block->getLogo($block->getMaintenanceSetting('maintenance_logo'))) ?>"
@@ -158,6 +161,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
         </div>
     <?php endif; ?>
 
+    <!--    CMS Block-->
     <?php if ($block->getBlockCms()) : ?>
         <div id="mpbm-footer-block">
             <?= /* @noEscape */ $block->getBlockCms() ?>
