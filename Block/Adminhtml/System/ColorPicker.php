@@ -60,12 +60,7 @@ class ColorPicker extends Field
     protected function _getElementHtml(AbstractElement $element)
     {
         $html   = $element->getElementHtml();
-        $cpPath = $this->getViewFileUrl('Mageplaza_Core::js/jscolor.min.js');
 
-        if (!$this->_coreRegistry->registry('colorpicker_loaded')) {
-            $html .= '<script type="text/javascript" src="' . $cpPath . '"></script>';
-            $this->_coreRegistry->registry('colorpicker_loaded');
-        }
         $html .= '<script type="text/javascript">
                 var el = document.getElementById("' . $element->getHtmlId() . '");
                 el.className = el.className + " jscolor{hash:true}";

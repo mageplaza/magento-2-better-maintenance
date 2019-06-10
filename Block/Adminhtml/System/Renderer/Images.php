@@ -25,6 +25,7 @@ use Magento\Backend\Block\Media\Uploader;
 use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Block\Widget;
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\AbstractBlock;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
@@ -132,6 +133,7 @@ class Images extends Widget
 
     /**
      * @return string
+     * @throws NoSuchEntityException
      */
     public function getImagesMaintenanceJson()
     {
@@ -161,6 +163,7 @@ class Images extends Widget
 
     /**
      * @return string
+     * @throws NoSuchEntityException
      */
     public function getImagesComingsoonJson()
     {
@@ -205,5 +208,18 @@ class Images extends Widget
         }
 
         return $images;
+    }
+
+    /**
+     * Copy from the Magento core.
+     *
+     * @param string $string
+     * @param bool $escapeSingleQuote
+     *
+     * @return string
+     */
+    public function escapeHtmlAttr($string, $escapeSingleQuote = true)
+    {
+        return $this->_escaper->escapeHtmlAttr($string, $escapeSingleQuote);
     }
 }

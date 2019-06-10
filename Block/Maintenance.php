@@ -21,6 +21,7 @@
 namespace Mageplaza\BetterMaintenance\Block;
 
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
@@ -67,8 +68,8 @@ class Maintenance extends Template
 
     /**
      * @param $logo
-     *
      * @return string
+     * @throws NoSuchEntityException
      */
     public function getLogo($logo)
     {
@@ -82,8 +83,8 @@ class Maintenance extends Template
 
     /**
      * @param $image
-     *
      * @return string|null
+     * @throws NoSuchEntityException
      */
     public function getImageUrl($image)
     {
@@ -101,8 +102,8 @@ class Maintenance extends Template
 
     /**
      * @param $video
-     *
      * @return string|null
+     * @throws NoSuchEntityException
      */
     public function getVideoUrl($video)
     {
@@ -137,8 +138,8 @@ class Maintenance extends Template
 
     /**
      * @param $images
-     *
      * @return array|null
+     * @throws NoSuchEntityException
      */
     public function getMultipleImagesUrl($images)
     {
@@ -285,5 +286,18 @@ class Maintenance extends Template
     public function getClockSetting($code)
     {
         return $this->_helperData->getClockSetting($code);
+    }
+
+    /**
+     * Copy from the Magento core.
+     *
+     * @param string $string
+     * @param bool $escapeSingleQuote
+     *
+     * @return string
+     */
+    public function escapeHtmlAttr($string, $escapeSingleQuote = true)
+    {
+        return $this->_escaper->escapeHtmlAttr($string, $escapeSingleQuote);
     }
 }

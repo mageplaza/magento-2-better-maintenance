@@ -20,7 +20,8 @@
  */
 
 /** @var \Mageplaza\BetterMaintenance\Block\Adminhtml\Clock $block */
-$template = $block->getClockTemplate($block->getFormData()['[clock_template]']);
+$style = $block->getFormData()['[clock_template]'] === '1' ? 'simple' : $block->getFormData()['[clock_template]'];
+$template = $block->getClockTemplate($style);
 $timerId  = uniqid('', false);
 if (strpos($template, 'simple') === false) {
     $clockBackgroundColor = $block->getFormData()['[clock_background_color]'];

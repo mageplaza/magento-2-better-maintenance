@@ -33,7 +33,7 @@ if ($blockId === 'mpbettermaintenance_maintenance_setting_maintenance_preview') 
 <div class="actions actions-maintenance-preview">
     <button class="button-maintenance-preview primary" data-url="<?= $block->escapeHtml($block->getDataUrl($dataUrl)) ?>"
             type="button"
-            id="<?= $block->escapeHtml($blockId) ?>">
+            id="<?= $block->escapeHtmlAttr($blockId) ?>">
         <span><?= /* @noEscape */
             $block->getButtonLabel() ?></span>
     </button>
@@ -48,7 +48,9 @@ if ($blockId === 'mpbettermaintenance_maintenance_setting_maintenance_preview') 
                 method: 'POST'
             });
             var data  = $('#config-edit-form').serialize();
+            var formKey = $("<input>").attr("type", "hidden").attr("name", "form_key").val('<?= $block->escapeJs($block->getFormKey()) ?>');
             var input = $("<input>").attr("type", "hidden").attr("name", "formData").val(data);
+            form.append(formKey);
             form.append(input);
             $('body').append(form);
             form.submit();

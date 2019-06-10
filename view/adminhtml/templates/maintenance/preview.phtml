@@ -69,8 +69,7 @@
 <?php if ($data['[maintenance_background]'] === 'video'
     && $block->getVideoUrl($data['[maintenance_background_video]'])) : ?>
     <video autoplay muted loop id="mpbm-video">
-        <source src="<?= /* @noEscape */
-        $block->getVideoUrl($data['[maintenance_background_video]']) ?>"
+        <source src="<?= $block->escapeHtmlAttr($block->getVideoUrl($data['[maintenance_background_video]'])) ?>"
                 type="video/mp4">
     </video>
 <?php endif; ?>
@@ -78,8 +77,7 @@
 <div id="mpbm-<?=  /* @noEscape */ $block->getPageLayout('[maintenance_layout]') ?>-column" class="mpbm-preview-wrapper">
     <?php if (!empty($data['[maintenance_logo]'])) : ?>
         <div id="mpbm-logo">
-            <img src="<?= /* @noEscape */
-            $block->getLogo($data['[maintenance_logo]']) ?>"
+            <img src="<?= $block->escapeHtmlAttr($block->getLogo($data['[maintenance_logo]'])) ?>"
                  alt="<?= /* @noEscape */ __('Logo') ?>" width="100">
         </div>
     <?php endif; ?>
@@ -111,7 +109,7 @@
                 <div class="mp-md-6">
                     <div class="progress mp-md-3">
                         <div class="progress-bar" role="progressbar"
-                             aria-valuenow="<?= /* @noEscape */ $block->getProgressValue() ?>"
+                             aria-valuenow="<?= $block->escapeHtmlAttr($block->getProgressValue()) ?>"
                              aria-valuemin="0"
                              aria-valuemax="100">
                         </div>
@@ -156,10 +154,8 @@
             <?php foreach ($block->getSocialList() as $value) : ?>
                 <?php if ($value['link']) : ?>
                     <div class="mpbm-social-box" style="display: inline-block; vertical-align: middle">
-                        <a href="<?= /* @noEscape */
-                        $value['link'] ?>" target="_blank">
-                            <img src="<?= /* @noEscape */
-                            $value['img'] ?>" alt="<?= /* @noEscape */ __('Social Logo') ?>" width="20">
+                        <a href="<?= $block->escapeHtmlAttr($value['link']) ?>" target="_blank">
+                            <img src="<?= $block->escapeHtmlAttr($value['img']) ?>" alt="<?= /* @noEscape */ __('Social Logo') ?>" width="20">
                         </a>
                     </div>
                 <?php endif; ?>

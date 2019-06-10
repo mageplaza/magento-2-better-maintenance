@@ -591,6 +591,10 @@ input[type="text"], input[type="password"], input[type="url"], input[type="tel"]
     vertical-align: middle;
 }
 
+.action.primary:hover {
+    box-shadow: none;
+}
+
 @media only screen and (min-width: 768px) {
     .block.newsletter {
         width: 34%;

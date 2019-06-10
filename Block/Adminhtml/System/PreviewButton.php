@@ -75,4 +75,17 @@ class PreviewButton extends Field
     {
         return $this->getUrl($url);
     }
+
+    /**
+     * Copy from the Magento core.
+     *
+     * @param string $string
+     * @param bool $escapeSingleQuote
+     *
+     * @return string
+     */
+    public function escapeHtmlAttr($string, $escapeSingleQuote = true)
+    {
+        return $this->_escaper->escapeHtmlAttr($string, $escapeSingleQuote);
+    }
 }

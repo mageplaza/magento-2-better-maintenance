@@ -27,7 +27,6 @@
     <body>
         <referenceContainer name="menu.wrapper" remove="true"/>
         <container>
-            <block class="Magento\Framework\View\Element\FormKey" name="formkey"/>
             <block class="Mageplaza\BetterMaintenance\Block\Adminhtml\Maintenance\Preview" name="mpbettermaintenance.maintenance.page"/>
         </container>
     </body>

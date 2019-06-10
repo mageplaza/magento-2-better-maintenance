@@ -68,14 +68,14 @@
 <?php if ($data['[comingsoon_background]'] === 'video'
     && $block->getVideoUrl($data['[comingsoon_background_video]'])) : ?>
     <video autoplay muted loop id="mpbm-video">
-        <source src="<?= /* @noEscape */ $block->getVideoUrl($data['[comingsoon_background_video]']) ?>"
+        <source src="<?= $block->escapeHtmlAttr($block->getVideoUrl($data['[comingsoon_background_video]'])) ?>"
                 type="video/mp4">
     </video>
 <?php endif; ?>
 <div id="mpbm-<?= /* @noEscape */ $block->getPageLayout('[comingsoon_layout]') ?>-column" class="mpbm-preview-wrapper">
     <?php if (!empty($data['[comingsoon_logo]'])) : ?>
         <div id="mpbm-logo">
-            <img src="<?= /* @noEscape */ $block->getLogo($data['[comingsoon_logo]']) ?>"
+            <img src="<?= $block->escapeHtmlAttr($block->getLogo($data['[comingsoon_logo]'])) ?>"
                  alt="<?= /* @noEscape */ __('Logo') ?>" width="100">
         </div>
     <?php endif; ?>
@@ -129,8 +129,8 @@
             <?php foreach ($block->getSocialList() as $value) : ?>
                 <?php if ($value['link']) : ?>
                     <div class="mpbm-social-box" style="display: inline-block; vertical-align: middle">
-                        <a href="<?= /* @noEscape */ $value['link'] ?>" target="_blank">
-                            <img src="<?= /* @noEscape */ $value['img'] ?>" alt="<?= /* @noEscape */ __('Social Logo') ?>" width="20">
+                        <a href="<?= $block->escapeHtmlAttr($value['link']) ?>" target="_blank">
+                            <img src="<?= $block->escapeHtmlAttr($value['img']) ?>" alt="<?= /* @noEscape */ __('Social Logo') ?>" width="20">
                         </a>
                     </div>
                 <?php endif; ?>

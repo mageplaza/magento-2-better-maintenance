@@ -78,8 +78,8 @@ class Image extends Media
 
     /**
      * @param $file
-     *
      * @return string
+     * @throws NoSuchEntityException
      */
     public function getTmpMediaUrl($file)
     {

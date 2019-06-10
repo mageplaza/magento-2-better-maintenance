@@ -21,6 +21,7 @@
 namespace Mageplaza\BetterMaintenance\Block\Adminhtml\Maintenance;
 
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\UrlRewrite\Model\UrlRewriteFactory;
 use Mageplaza\BetterMaintenance\Block\Maintenance;
@@ -131,7 +132,8 @@ class Preview extends Template
     }
 
     /**
-     * @return string
+     * @param $code
+     * @return mixed|string
      */
     public function getPageLayout($code)
     {
@@ -217,8 +219,8 @@ class Preview extends Template
 
     /**
      * @param $logo
-     *
      * @return string
+     * @throws NoSuchEntityException
      */
     public function getLogo($logo)
     {
@@ -314,8 +316,8 @@ class Preview extends Template
 
     /**
      * @param $image
-     *
      * @return string|null
+     * @throws NoSuchEntityException
      */
     public function getImageUrl($image)
     {
@@ -324,8 +326,8 @@ class Preview extends Template
 
     /**
      * @param $video
-     *
      * @return string|null
+     * @throws NoSuchEntityException
      */
     public function getVideoUrl($video)
     {
@@ -351,8 +353,8 @@ class Preview extends Template
 
     /**
      * @param $type
-     *
      * @return array
+     * @throws NoSuchEntityException
      */
     public function getMultipleImagesUrl($type)
     {
@@ -363,5 +365,29 @@ class Preview extends Template
         }
 
         return $urls;
+    }
+
+    /**
+     * Copy from the Magento core.
+     *
+     * @param string $string
+     * @param bool $escapeSingleQuote
+     *
+     * @return string
+     */
+    public function escapeHtmlAttr($string, $escapeSingleQuote = true)
+    {
+        return $this->_escaper->escapeHtmlAttr($string, $escapeSingleQuote);
+    }
+
+    /**
+     * Copy from the Magento core.
+     *
+     * @param string $string
+     * @return string
+     */
+    public function escapeJs($string)
+    {
+        return $this->_escaper->escapeJs($string);
     }
 }

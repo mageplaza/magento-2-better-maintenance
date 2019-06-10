@@ -26,7 +26,7 @@ $elementName = $element->getName();
 ?>
 <div id="template-images-gallery" class="gallery"
      data-mage-init='{"Mageplaza_BetterMaintenance/js/image-gallery":{}}'
-     data-images="<?= $block->escapeHtml($block->getImagesMaintenanceJson()) ?>">
+     data-images="<?= $block->escapeHtmlAttr($block->getImagesMaintenanceJson()) ?>">
     <div class="image image-placeholder">
         <?= $block->getUploaderHtml() ?>
         <div class="product-image-wrapper">
@@ -40,20 +40,20 @@ $elementName = $element->getName();
             <input type="hidden"
                    name="groups[maintenance_setting][fields][maintenance_background_multi_image][value][<%- data.file_id %>][position]"
                    value="<%- data.position %>"
-                   data-form-part="<?= /* @noEscape */ $formName ?>"
+                   data-form-part="<?= $block->escapeHtmlAttr($formName) ?>"
                    class="position"/>
             <input type="hidden"
                    name="groups[maintenance_setting][fields][maintenance_background_multi_image][value][<%- data.file_id %>][file]"
                    value="<%- data.file %>"
-                   data-form-part="<?= /* @noEscape */ $formName ?>"/>
+                   data-form-part="<?= $block->escapeHtmlAttr($formName) ?>"/>
             <input type="hidden"
                    name="groups[maintenance_setting][fields][maintenance_background_multi_image][value][<%- data.file_id %>][label]"
                    value="<%- data.label %>"
-                   data-form-part="<?= /* @noEscape */ $formName ?>"/>
+                   data-form-part="<?= $block->escapeHtmlAttr($formName) ?>"/>
             <input type="hidden"
                    name="groups[maintenance_setting][fields][maintenance_background_multi_image][value][<%- data.file_id %>][removed]"
                    value="" class="is-removed"
-                   data-form-part="<?= /* @noEscape */ $formName ?>"/>
+                   data-form-part="<?= $block->escapeHtmlAttr($formName) ?>"/>
             <div class="product-image-wrapper">
                 <img class="product-image" data-role="image-element" src="<%- data.url %>"
                      alt="<%- data.label %>"/>
@@ -61,7 +61,7 @@ $elementName = $element->getName();
                     <button type="button"
                             class="action-remove"
                             data-role="delete-button"
-                            title="<?= $block->escapeHtml(__('Delete image')) ?>">
+                            title="<?= $block->escapeHtmlAttr(__('Delete image')) ?>">
                         <span><?= $block->escapeHtml(__('Delete image')) ?></span>
                     </button>
                     <div class="draggable-handle"></div>

@@ -76,14 +76,14 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 <?php if ($block->getComingSoonSetting('maintenance_background') === 'video'
     && $block->getVideoUrl($block->getComingSoonSetting('maintenance_background_video'))) : ?>
     <video autoplay muted loop id="mpbm-video">
-        <source src="<?= /* @noEscape */ $block->getVideoUrl($block->getComingSoonSetting('comingsoon_background_video')) ?>"
+        <source src="<?= $block->escapeHtmlAttr($block->getVideoUrl($block->getComingSoonSetting('comingsoon_background_video'))) ?>"
                 type="video/mp4">
     </video>
 <?php endif; ?>
 <div id="mpbm-<?= /* @noEscape */ $block->getComingSoonSetting('comingsoon_layout') ?>-column" class="mpbm-wrapper">
     <?php if (!empty($block->getComingSoonSetting('comingsoon_logo'))) : ?>
         <div id="mpbm-logo">
-            <img src="<?= /* @noEscape */ $block->getLogo($block->getComingSoonSetting('comingsoon_logo')) ?>" alt="<?= /* @noEscape */ __('Logo') ?>"
+            <img src="<?= $block->escapeHtmlAttr($block->getLogo($block->getComingSoonSetting('comingsoon_logo'))) ?>" alt="<?= /* @noEscape */ __('Logo') ?>"
                  width="100">
         </div>
     <?php endif; ?>
@@ -127,8 +127,8 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 
                 <?php if ($value['link']) : ?>
                     <div class="mpbm-social-box" style="display: inline-block; vertical-align: middle">
-                        <a href="<?= /* @noEscape */ $value['link'] ?>" target="_blank">
-                            <img src="<?= /* @noEscape */ $value['img'] ?>" alt="" width="20">
+                        <a href="<?= $block->escapeHtmlAttr($value['link']) ?>" target="_blank">
+                            <img src="<?= $block->escapeHtmlAttr($value['img']) ?>" alt="<?= /* @noEscape */ __('Social logo') ?>" width="20">
                         </a>
                     </div>
                 <?php endif; ?>

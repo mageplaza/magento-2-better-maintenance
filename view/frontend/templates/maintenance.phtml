@@ -76,7 +76,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 <?php if ($block->getMaintenanceSetting('maintenance_background') === 'video'
     && $block->getVideoUrl($block->getMaintenanceSetting('maintenance_background_video'))) : ?>
     <video autoplay muted loop id="mpbm-video">
-        <source src="<?= /* @noEscape */ $block->getVideoUrl($block->getMaintenanceSetting('maintenance_background_video')) ?>"
+        <source src="<?= $block->escapeHtmlAttr($block->getVideoUrl($block->getMaintenanceSetting('maintenance_background_video'))) ?>"
                 type="video/mp4">
     </video>
 <?php endif; ?>
@@ -84,7 +84,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 <div id="mpbm-<?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_layout') ?>-column" class="mpbm-wrapper">
     <?php if (!empty($block->getMaintenanceSetting('maintenance_logo'))) : ?>
         <div id="mpbm-logo">
-            <img src="<?= /* @noEscape */ $block->getLogo($block->getMaintenanceSetting('maintenance_logo')) ?>"
+            <img src="<?= $block->escapeHtmlAttr($block->getLogo($block->getMaintenanceSetting('maintenance_logo'))) ?>"
                  alt="<?= /* @noEscape */  __('Logo') ?>" width="100">
         </div>
     <?php endif; ?>
@@ -113,7 +113,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
                 <div class="mp-md-6">
                     <div class="progress mp-md-3">
                         <div class="progress-bar" role="progressbar"
-                             aria-valuenow="<?= /* @noEscape */ $block->getProgressValue() ?>"
+                             aria-valuenow="<?= $block->escapeHtmlAttr($block->getProgressValue()) ?>"
                              aria-valuemin="0"
                              aria-valuemax="100">
                         </div>
@@ -147,11 +147,10 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
                 <p><?= /* @noEscape */ $block->getSocialLabel() ?></p>
             </div>
             <?php foreach ($block->getSocialList() as $value) : ?>
-
                 <?php if ($value['link']) : ?>
                     <div class="mpbm-social-box" style="display: inline-block; vertical-align: middle">
-                        <a href="<?= /* @noEscape */ $value['link'] ?>" target="_blank">
-                            <img src="<?= /* @noEscape */ $value['img'] ?>" alt="<?= /* @noEscape */ __('Social Logo') ?>" width="20">
+                        <a href="<?= $block->escapeHtmlAttr($value['link']) ?>" target="_blank">
+                            <img src="<?= $block->escapeHtmlAttr($value['img']) ?>" alt="<?= /* @noEscape */ __('Social Logo') ?>" width="20">
                         </a>
                     </div>
                 <?php endif; ?>
