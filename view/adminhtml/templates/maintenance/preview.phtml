@@ -30,7 +30,10 @@ $data = $block->getFormData();
     <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl('maintenance_background_multi_image')); ?>
     <style>
         .mpbettermaintenance-maintenance-preview {
-            background-repeat: no-repeat;
+            background: no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
             background-size: cover;
             transition-delay: 2s;
         }
@@ -62,8 +65,10 @@ $data = $block->getFormData();
     && $block->getImageUrl($data['[maintenance_background_image]'])) : ?>
     <style>
         .mpbettermaintenance-maintenance-preview {
-            background-image: url("<?= /* @noEscape */ $block->getImageUrl($data['[maintenance_background_image]']) ?>");
-            background-repeat: no-repeat;
+            background: url("<?= /* @noEscape */ $block->getImageUrl($data['[maintenance_background_image]']) ?>") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
             background-size: cover;
         }
     </style>

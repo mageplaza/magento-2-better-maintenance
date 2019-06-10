@@ -33,7 +33,10 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
     <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl($block->getMaintenanceSetting('maintenance_background_multi_image'))); ?>
     <style>
         .mpbettermaintenance-maintenance-index {
-            background-repeat: no-repeat;
+            background: no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
             background-size: cover;
             transition-delay: 2s;
         }
@@ -65,8 +68,10 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
     && $block->getImageUrl($block->getMaintenanceSetting('maintenance_background_image'))) : ?>
     <style>
         .mpbettermaintenance-maintenance-index {
-            background-image: url("<?= /* @noEscape */ $block->getImageUrl($block->getMaintenanceSetting('maintenance_background_image')) ?>");
-            background-repeat: no-repeat;
+            background: url("<?= /* @noEscape */ $block->getImageUrl($block->getMaintenanceSetting('maintenance_background_image')) ?>") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
             background-size: cover;
         }
     </style>
