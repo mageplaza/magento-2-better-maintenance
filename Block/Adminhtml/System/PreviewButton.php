@@ -88,4 +88,15 @@ class PreviewButton extends Field
     {
         return $this->_escaper->escapeHtmlAttr($string, $escapeSingleQuote);
     }
+
+    /**
+     * Copy from the Magento core.
+     *
+     * @param string $string
+     * @return string
+     */
+    public function escapeJs($string)
+    {
+        return $this->_escaper->escapeJs($string);
+    }
 }

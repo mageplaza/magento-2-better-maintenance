@@ -61,15 +61,9 @@ class DatePicker extends Field
     {
         $html = $element->getElementHtml();
 
-        //check datepicker set or not
-        if (!$this->_coreRegistry->registry('datepicker_loaded')) {
-            $this->_coreRegistry->registry('datepicker_loaded');
-        }
-
-        //add icon on datepicker
         $html .= '<button type="button" style="display:none;" class="ui-datepicker-trigger '
-            . 'v-middle"><span>Select Date</span></button>';
-        // add datepicker with element by jquery
+            . 'v-middle"></button>';
+
         $html .= '<script type="text/javascript">
         require(["jquery", "jquery/ui", "mage/calendar"], function ($) {
             $(document).ready(function () {
