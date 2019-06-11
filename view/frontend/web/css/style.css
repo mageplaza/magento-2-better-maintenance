@@ -245,7 +245,7 @@
     margin: auto;
 }
 
-#mpbm-single-column .actions-toolbar .primary {
+#mpbm-single-column .mpbm-subscribe-box .actions-toolbar .primary {
     float: none;
 }
 
@@ -502,7 +502,7 @@
     list-style: none;
 }
 
-.mpbm-wrapper .action.primary {
+.mpbm-wrapper .mpbm-subscribe-box .action.primary {
     border: none;
     padding: 8px 15px;
 }
@@ -517,6 +517,6 @@
     border-radius: 50px;
 }
 
-.actions-toolbar .action.submit.primary {
+.mpbm-subscribe-box .actions-toolbar .action.submit.primary {
     margin: 0 0 20px 0;
 }

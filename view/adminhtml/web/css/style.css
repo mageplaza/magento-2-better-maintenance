@@ -245,7 +245,7 @@
     margin: auto;
 }
 
-#mpbm-single-column .actions-toolbar .primary {
+#mpbm-single-column .mpbm-subscribe-box .actions-toolbar .primary {
     float: none;
 }
 
@@ -711,6 +711,6 @@ h3 {
     display: none;
 }
 
-.actions-toolbar .action.submit.primary {
+.mpbm-subscribe-box .actions-toolbar .action.submit.primary {
     margin: 0 0 20px 0;
 }

@@ -136,7 +136,7 @@ $data = $block->getFormData();
         <?php $subscribeLabel = $data['[subscribe_label]'] ?>
         <?php $subscribeLabelColor = $data['[subscribe_label_color]'] ?>
         <?php if ($block->getSubscribeType() === 'email_form') : ?>
-            <div id="mpbm-subscribe">
+            <div id="mpbm-subscribe" class="mpbm-subscribe-box">
                 <?php if ($subscribeLabel) : ?>
                     <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */
                         $subscribeLabel ?></h4>
@@ -145,7 +145,7 @@ $data = $block->getFormData();
                 $block->getSubscribeBlock() ?>
             </div>
         <?php elseif ($block->getSubscribeType() === 'register_form') : ?>
-            <div id="mpbm-register">
+            <div id="mpbm-register" class="mpbm-subscribe-box">
                 <?php if ($subscribeLabel) : ?>
                     <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */
                         $subscribeLabel ?></h4>
@@ -219,10 +219,10 @@ $data = $block->getFormData();
         require([
             'jquery'
         ], function ($) {
-            var subBtn = $('.action.primary span');
+            var subBtn = $('.mpbm-subscribe-box .action.primary span');
             subBtn.text("<?= /* @noEscape */ $block->getSubscribeLabel() ?>")
             .css("color", "<?= /* @noEscape */ $data['[button_label_color]'] ?>");
-            $('.action.primary').css("background", "<?= /* @noEscape */ $data['[button_background_color]'] ?>");
+            $('.mpbm-subscribe-box .action.primary').css("background", "<?= /* @noEscape */ $data['[button_background_color]'] ?>");
         });
     </script>
 <?php endif; ?>
