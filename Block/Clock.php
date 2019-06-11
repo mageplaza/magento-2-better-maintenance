@@ -65,7 +65,7 @@ class Clock extends Template
      */
     public function getCurrentTime()
     {
-        return $this->_date->gmtDate();
+        return $this->_localeDate->date()->format('m/d/Y H:i:s');
     }
 
     /**

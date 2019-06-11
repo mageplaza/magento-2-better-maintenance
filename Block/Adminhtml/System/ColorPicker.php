@@ -61,6 +61,11 @@ class ColorPicker extends Field
     {
         $html   = $element->getElementHtml();
 
+        if (!$this->_coreRegistry->registry('colorpicker_loaded')) {
+            $html .= '<script type="text/javascript" src="' . $cpPath . '"></script>';
+            $this->_coreRegistry->registry('colorpicker_loaded');
+        }
+
         $html .= '<script type="text/javascript">
                 var el = document.getElementById("' . $element->getHtmlId() . '");
                 el.className = el.className + " jscolor{hash:true}";

@@ -178,7 +178,7 @@ class Redirect extends Template
         }
 
         $url = $this->getUrl($route);
-//        return false;
+
         return $this->_response->setRedirect($url);
     }
 }

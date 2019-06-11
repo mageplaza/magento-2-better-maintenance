@@ -18,10 +18,13 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\Registry;
+use Magento\Backend\Block\Template\Context;
 
 /**
  * Class DatePicker
@@ -30,16 +33,56 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 class DatePicker extends Field
 {
     /**
+     * @var Registry
+     */
+    protected $_coreRegistry;
+
+    /**
+     * DatePicker constructor.
+     * @param Context $context
+     * @param Registry $coreRegistry
+     * @param array $data
+     */
+    public function __construct(
+        Context $context,
+        Registry $coreRegistry,
+        array $data = []
+    )
+    {
+        $this->_coreRegistry = $coreRegistry;
+        parent::__construct($context, $data);
+    }
+
+    /**
      * @param AbstractElement $element
-     *
      * @return string
      */
-    public function render(AbstractElement $element)
+    protected function _getElementHtml(AbstractElement $element)
     {
-        $element->setDateFormat($this->_localeDate->getDateFormat());
-        $element->setTimeFormat($this->_localeDate->getTimeFormat());
-        $element->setShowsTime(true);
+        $html = $element->getElementHtml();
 
-        return parent::render($element);
+        //check datepicker set or not
+        if (!$this->_coreRegistry->registry('datepicker_loaded')) {
+            $this->_coreRegistry->registry('datepicker_loaded');
+        }
+
+        //add icon on datepicker
+        $html .= '<button type="button" style="display:none;" class="ui-datepicker-trigger '
+            . 'v-middle"><span>Select Date</span></button>';
+        // add datepicker with element by jquery
+        $html .= '<script type="text/javascript">
+        require(["jquery", "jquery/ui", "mage/calendar"], function ($) {
+            $(document).ready(function () {
+                $("#' . $element->getHtmlId() . '").datetimepicker({dateFormat: "m/d/y", ampm: true});
+                var picker = $(".ui-datepicker-trigger");
+                picker.removeAttr("style");
+                picker.click(function(){
+                    $("#' . $element->getHtmlId() . '").focus();
+                });
+            });
+        });
+        </script>';
+
+        return $html;
     }
 }

@@ -245,6 +245,14 @@
     margin: auto;
 }
 
+#mpbm-single-column .actions-toolbar .primary {
+    float: none;
+}
+
+#mpbm-single-column .form-create-account .actions-toolbar {
+    text-align: center;
+}
+
 @media only screen and (max-width: 600px) {
     #mpbm-single-column .simple-txt1 {
         font-size: 45px;
@@ -580,13 +588,12 @@ input[type="text"], input[type="password"], input[type="url"], input[type="tel"]
 
 .action.primary {
     background: #1979c3;
-    border: none;
     color: #ffffff;
     cursor: pointer;
     display: inline-block;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 600;
-    padding: 7px 15px;
+    padding: 8px 15px;
     font-size: 1.4rem;
     box-sizing: border-box;
     vertical-align: middle;
@@ -702,4 +709,8 @@ h3 {
 
 .actions-toolbar>.secondary .action.back {
     display: none;
+}
+
+.actions-toolbar .action.submit.primary {
+    margin: 0 0 20px 0;
 }

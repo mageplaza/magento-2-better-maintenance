@@ -245,6 +245,14 @@
     margin: auto;
 }
 
+#mpbm-single-column .actions-toolbar .primary {
+    float: none;
+}
+
+#mpbm-single-column .form-create-account .actions-toolbar {
+    text-align: center;
+}
+
 @media only screen and (max-width: 600px) {
     #mpbm-single-column .simple-txt1 {
         font-size: 45px;
@@ -495,7 +503,7 @@
 }
 
 .mpbm-wrapper .action.primary {
-    border: none;
+    padding: 8px 15px;
 }
 
 .progress {
@@ -506,4 +514,8 @@
     background: #F7F7F7;
     text-align: center;
     border-radius: 50px;
+}
+
+.actions-toolbar .action.submit.primary {
+    margin: 0 0 20px 0;
 }
