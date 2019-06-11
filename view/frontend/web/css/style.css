@@ -503,6 +503,7 @@
 }
 
 .mpbm-wrapper .action.primary {
+    border: none;
     padding: 8px 15px;
 }
 
