@@ -278,7 +278,7 @@
                     <depends>
                         <field id="maintenance_progress_enabled">1</field>
                     </depends>
-                    <validate>validate-not-negative-number validate-digits-range digits-range-1-100</validate>
+                    <validate>validate-digits validate-not-negative-number validate-digits-range digits-range-1-100</validate>
                 </field>
                 <field id="maintenance_progress_label" translate="label comment" type="text" sortOrder="460" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Label</label>
@@ -343,7 +343,7 @@
                     <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\BackgroundType</source_model>
                     <comment>For Video type, please check your upload_max_size PHP value. If the size of uploaded video is greater than this value, the video will not be uploaded.</comment>
                 </field>
-                <field id="comingsoon_background_video" translate="label" type="image" sortOrder="590" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="comingsoon_background_video" translate="label" type="file" sortOrder="590" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Select</label>
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\Video</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/video</upload_dir>
