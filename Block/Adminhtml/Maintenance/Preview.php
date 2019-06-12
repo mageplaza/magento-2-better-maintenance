@@ -124,6 +124,56 @@ class Preview extends Template
     /**
      * @return mixed|string
      */
+    public function getSubscribeDes()
+    {
+        $label = $this->getFormData()['[subscribe_label]'];
+
+        return $label === '1' ? '' : $label;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getSubscribeDesColor()
+    {
+        $color = $this->getFormData()['[subscribe_label_color]'];
+
+        return $color === '1' ? '#000000' : $color;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getProgressLabelColor()
+    {
+        $color = $this->getFormData()['[maintenance_progress_label_color]'];
+
+        return $color === '1' ? '#FFFFFF' : $color;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getProgressBarColor()
+    {
+        $color = $this->getFormData()['[maintenance_progress_bar_color]'];
+
+        return $color === '1' ? '#000000' : $color;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getSocialLabel()
+    {
+        $label = $this->getFormData()['[social_label]'];
+
+        return $label === '1' ? '' : $label;
+    }
+
+    /**
+     * @return mixed|string
+     */
     public function getPageTitle()
     {
         return $this->getFormData()['[maintenance_title]'] === '1'

@@ -115,21 +115,19 @@ $data = $block->getFormData();
 
     <!--    Subscribe area-->
     <?php if (array_key_exists('[subscribe_label]', $data) && $block->getSubscribeType() !== 'none') : ?>
-        <?php $subscribeLabel = $data['[subscribe_label]'] === '1' ? '' : $data['[subscribe_label]'] ?>
-        <?php $subscribeLabelColor = $data['[subscribe_label_color]'] === '1' ? '#000000' :  $data['[subscribe_label_color]'] ?>
         <?php if ($block->getSubscribeType() === 'email_form') : ?>
             <div id="mpbm-subscribe" class="mpbm-subscribe-box">
-                <?php if ($subscribeLabel) : ?>
-                    <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>">
-                        <?= /* @noEscape */ $subscribeLabel ?></h4>
+                <?php if ($block->getSubscribeDes()) : ?>
+                    <h4 style="color: <?= /* @noEscape */ $block->getSubscribeDesColor() ?>">
+                        <?= /* @noEscape */ $block->getSubscribeDes() ?></h4>
                 <?php endif; ?>
                 <?= /* @noEscape */ $block->getSubscribeBlock() ?>
             </div>
         <?php elseif ($block->getSubscribeType() === 'register_form') : ?>
             <div id="mpbm-register" class="mpbm-subscribe-box">
-                <?php if ($subscribeLabel) : ?>
-                    <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>">
-                        <?= /* @noEscape */ $subscribeLabel ?></h4>
+                <?php if ($block->getSubscribeDes()) : ?>
+                    <h4 style="color: <?= /* @noEscape */ $block->getSubscribeDesColor() ?>">
+                        <?= /* @noEscape */ $block->getSubscribeDes() ?></h4>
                 <?php endif; ?>
                 <?= /* @noEscape */ $block->getRegisterBlock() ?>
             </div>
@@ -140,10 +138,10 @@ $data = $block->getFormData();
     <?php if ($data['[social_enabled]']) : ?>
         <div id="mpbm-social-contact">
             <div id="mpbm-social-label" style="display: inline-block">
-                <p><?= /* @noEscape */ $data['[social_label]'] ?></p>
+                <p><?= /* @noEscape */ $block->getSocialLabel() ?></p>
             </div>
             <?php foreach ($block->getSocialList() as $value) : ?>
-                <?php if ($value['link']) : ?>
+                <?php if ($value['link'] && $value['link'] !== '1') : ?>
                     <div class="mpbm-social-box" style="display: inline-block; vertical-align: middle">
                         <a href="<?= $block->escapeHtmlAttr($value['link']) ?>" target="_blank">
                             <img src="<?= $block->escapeHtmlAttr($value['img']) ?>" alt="<?= /* @noEscape */ __('Social Logo') ?>" width="20">
