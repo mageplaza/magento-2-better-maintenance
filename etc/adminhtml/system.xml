@@ -119,6 +119,7 @@
                     </field>
                     <field id="button_label" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Button Label</label>
+                        <comment>Better less than 15 characters.</comment>
                         <depends>
                             <field id="subscribe_type" separator=",">register_form,email_form</field>
                         </depends>

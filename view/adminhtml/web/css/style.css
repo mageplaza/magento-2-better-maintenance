@@ -253,6 +253,10 @@
     text-align: center;
 }
 
+#mpbm-single-column .block.newsletter .actions {
+    width: 24%;
+}
+
 @media only screen and (max-width: 600px) {
     #mpbm-single-column .simple-txt1 {
         font-size: 45px;
@@ -264,6 +268,10 @@
 
     #mpbm-single-column .fs-45 {
         font-size: 20px;
+    }
+
+    #mpbm-single-column .block.newsletter .actions {
+        width: 43%;
     }
 }
 
@@ -313,6 +321,9 @@
 #mpbm-double_left-column #mpbm-register{
     padding-left: 50px;
 }
+#mpbm-double_left-column .block.newsletter .actions {
+    width: 25%;
+}
 
 @media only screen and (max-width: 600px) {
     #mpbm-double_left-column #mpbm-clock {
@@ -334,6 +345,10 @@
 
     #mpbm-double_left-column #mpbm-clock {
         padding-right: 30%;
+    }
+
+    #mpbm-double_left-column .block.newsletter .actions {
+        width: 45%;
     }
 }
 
@@ -382,6 +397,9 @@
 }
 #mpbm-double-column #mpbm-progress-bar .progress {
     width: 100%;
+}
+#mpbm-double-column .block.newsletter .actions {
+    width: 27%;
 }
 
 @media only screen and (max-width: 600px) {
@@ -461,6 +479,14 @@
     #mpbm-double-column #mpbm-progress-bar {
         bottom: 35%;
         margin: auto 10px;
+    }
+
+    #mpbm-double-column .block.newsletter .actions {
+        width: 49%;
+    }
+
+    #mpbm-double-column .block.newsletter {
+        width: 100%;
     }
 }
 
@@ -577,7 +603,6 @@ input[type="text"], input[type="password"], input[type="url"], input[type="tel"]
 .block.newsletter .actions {
     display: table-cell;
     vertical-align: top;
-    width: 1%;
 }
 
 .block.newsletter .action.subscribe {
@@ -593,19 +618,25 @@ input[type="text"], input[type="password"], input[type="url"], input[type="tel"]
     display: inline-block;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 600;
-    padding: 8px 15px;
+    padding: 7px 15px;
     font-size: 1.4rem;
     box-sizing: border-box;
     vertical-align: middle;
+    border: none;
 }
 
 .action.primary:hover {
+    border: 1px solid #006bb4;
     box-shadow: none;
 }
 
 @media only screen and (min-width: 768px) {
     .block.newsletter {
-        width: 34%;
+         width: 34%;
+     }
+
+    #mpbm-double-column .block.newsletter {
+        width: 75%;
     }
 }
 

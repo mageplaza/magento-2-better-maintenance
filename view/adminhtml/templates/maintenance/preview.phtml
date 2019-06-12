@@ -61,7 +61,8 @@ $data = $block->getFormData();
 <?php endif; ?>
 
 <!--Single Image Background-->
-<?php if ($data['[maintenance_background]'] === 'image'
+<?php if (array_key_exists('[maintenance_background_image]', $data)
+    && $data['[maintenance_background]'] === 'image'
     && $block->getImageUrl($data['[maintenance_background_image]'])) : ?>
     <style>
         .mpbettermaintenance-maintenance-preview {
@@ -75,7 +76,8 @@ $data = $block->getFormData();
 <?php endif; ?>
 
 <!--Video Background-->
-<?php if ($data['[maintenance_background]'] === 'video'
+<?php if (array_key_exists('[maintenance_background_video]', $data)
+    &&$data['[maintenance_background]'] === 'video'
     && $block->getVideoUrl($data['[maintenance_background_video]'])) : ?>
     <video autoplay muted loop id="mpbm-video">
         <source src="<?= $block->escapeHtmlAttr($block->getVideoUrl($data['[maintenance_background_video]'])) ?>"

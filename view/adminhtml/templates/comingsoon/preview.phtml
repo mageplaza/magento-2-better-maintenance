@@ -61,7 +61,8 @@ $data = $block->getFormData();
 <?php endif; ?>
 
 <!--Single Image Background-->
-<?php if ($data['[comingsoon_background]'] === 'image'
+<?php if (array_key_exists('[comingsoon_background_image]', $data)
+    && $data['[comingsoon_background]'] === 'image'
     && $block->getImageUrl($data['[comingsoon_background_image]'])) : ?>
     <style>
         .mpbettermaintenance-comingsoon-preview {
@@ -75,7 +76,8 @@ $data = $block->getFormData();
 <?php endif; ?>
 
 <!--Video Background-->
-<?php if ($data['[comingsoon_background]'] === 'video'
+<?php if (array_key_exists('[comingsoon_background_video]', $data)
+    && $data['[comingsoon_background]'] === 'video'
     && $block->getVideoUrl($data['[comingsoon_background_video]'])) : ?>
     <video autoplay muted loop id="mpbm-video">
         <source src="<?= $block->escapeHtmlAttr($block->getVideoUrl($data['[comingsoon_background_video]'])) ?>"
