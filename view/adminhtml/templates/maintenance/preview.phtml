@@ -203,14 +203,16 @@ $data = $block->getFormData();
     <?php endif; ?>
 
     <?php if (array_key_exists('[maintenance_progress_value]', $data) && $data['[maintenance_progress_enabled]']) : ?>
+    <?php $labelColor = $data['[maintenance_progress_label_color]']; ?>
+    <?php $barColor   = $data['[maintenance_progress_bar_color]']; ?>
     .progress-bar {
         height: 43px;
         font-size: 100%;
         font-weight: bold;
         border-radius: 50px;
         line-height: 45px;
-        color: <?= /* @noEscape */ $data['[maintenance_progress_label_color]'] ?>;
-        background-color: <?= /* @noEscape */ $data['[maintenance_progress_bar_color]'] ?>;
+        color: <?= /* @noEscape */ $labelColor === '1' ? '#FFFFFF' : $labelColor ?>;
+        background-color: <?= /* @noEscape */ $barColor === '1' ? '#000000' : $barColor ?>;
         width: 0;
     }
     <?php endif; ?>

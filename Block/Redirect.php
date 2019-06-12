@@ -130,6 +130,7 @@ class Redirect extends Template
      */
     public function redirectToUrl()
     {
+        $this->_response->setNoCacheHeaders();
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
         $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
         $currentIp  = $this->_request->getClientIp();
