@@ -358,14 +358,14 @@
     position: fixed;
     width: 40%;
     margin: auto;
-    bottom: 58%;
+    bottom: 92%;
 }
 
 #mpbm-double-column #mpbm-progress-bar {
     position: fixed;
     width: 40%;
     margin: auto;
-    bottom: 50%;
+    bottom: 87%;
 }
 
 #mpbm-double-column #mpbm-logo{
@@ -472,12 +472,12 @@
     }
 
     #mpbm-double-column #mpbm-clock {
-        bottom: 44%;
+        bottom: 91%;
         margin: auto 10px;
     }
 
     #mpbm-double-column #mpbm-progress-bar {
-        bottom: 35%;
+        bottom: 89%;
         margin: auto 10px;
     }
 

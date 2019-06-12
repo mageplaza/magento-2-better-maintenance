@@ -135,8 +135,8 @@ $data = $block->getFormData();
 
     <!--    Subscribe area-->
     <?php if (array_key_exists('[subscribe_label]', $data) && $block->getSubscribeType() !== 'none') : ?>
-        <?php $subscribeLabel = $data['[subscribe_label]'] ?>
-        <?php $subscribeLabelColor = $data['[subscribe_label_color]'] ?>
+        <?php $subscribeLabel = $data['[subscribe_label]'] === '1' ? '' : $data['[subscribe_label]'] ?>
+        <?php $subscribeLabelColor = $data['[subscribe_label_color]'] === '1' ? '#000000' :  $data['[subscribe_label_color]'] ?>
         <?php if ($block->getSubscribeType() === 'email_form') : ?>
             <div id="mpbm-subscribe" class="mpbm-subscribe-box">
                 <?php if ($subscribeLabel) : ?>

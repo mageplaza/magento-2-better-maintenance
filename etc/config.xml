@@ -54,7 +54,7 @@
                 <maintenance_route>mpmaintenance</maintenance_route>
                 <maintenance_layout>single</maintenance_layout>
                 <maintenance_title>Under Maintenance</maintenance_title>
-                <maintenance_description>We're currently down for maintenace. Be right back!</maintenance_description>
+                <maintenance_description>We're currently down for maintenance. Be right back!</maintenance_description>
                 <maintenance_color>#000000</maintenance_color>
                 <maintenance_background>image</maintenance_background>
                 <maintenance_progress_enabled>0</maintenance_progress_enabled>
