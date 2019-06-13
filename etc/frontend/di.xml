@@ -27,7 +27,7 @@
                 <item name="maintenanceRouter" xsi:type="array">
                     <item name="class" xsi:type="string">Mageplaza\BetterMaintenance\Controller\Router</item>
                     <item name="disable" xsi:type="boolean">false</item>
-                    <item name="sortOrder" xsi:type="string">40</item>
+                    <item name="sortOrder" xsi:type="string">60</item>
                 </item>
             </argument>
         </arguments>
