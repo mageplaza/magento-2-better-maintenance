@@ -309,7 +309,6 @@
                 <field id="maintenance_preview" translate="label comment" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
                     <button_label>Preview</button_label>
                     <comment>Save configuration before previewing for image changes.</comment>
-<!--                    <button_url>mpbettermaintenance/maintenance/preview</button_url>-->
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\PreviewButton</frontend_model>
                 </field>
             </group>
@@ -384,7 +383,6 @@
                 <field id="comingsoon_preview" translate="label comment" sortOrder="650" showInDefault="1" showInWebsite="1" showInStore="1">
                     <button_label>Preview</button_label>
                     <comment>Save configuration before previewing for image changes.</comment>
-<!--                    <button_url>mpbettermaintenance/comingsoon/preview</button_url>-->
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\PreviewButton</frontend_model>
                 </field>
             </group>

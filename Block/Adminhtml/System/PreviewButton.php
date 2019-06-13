@@ -72,7 +72,6 @@ class PreviewButton extends Field
         $this->addData(
             [
                 'button_label' => $originalData['button_label'],
-//                'button_url'   => $this->getUrl($originalData['button_url'], ['_current' => true]),
                 'html_id'      => $element->getHtmlId()
             ]
         );
@@ -87,7 +86,6 @@ class PreviewButton extends Field
      */
     public function getDataUrl($url)
     {
-//        return $this->getUrl($url);
         return $this->_frontendUrl->getUrl(
             $url,
             ['_nosid' => true, 'form_key' => $this->getFormKey()]
