@@ -26,10 +26,10 @@ $data = $block->getFormData();
 ?>
 
 <!--Multiple Image Background-->
-<?php if ($data['[maintenance_background]'] === 'multiple_images') : ?>
-    <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl('maintenance_background_multi_image')); ?>
+<?php if ($block->getBgType('[maintenance_background]') === 'multiple_images') : ?>
+    <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl('[maintenance_background_multi_image]')); ?>
     <style>
-        .mpbettermaintenance-maintenance-preview {
+        .mpbettermaintenance-preview-maintenance {
             background: no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -51,7 +51,7 @@ $data = $block->getFormData();
                 if (nextImage >= images.length) {
                     nextImage = 0;
                 }
-                $('.mpbettermaintenance-maintenance-preview')
+                $('.mpbettermaintenance-preview-maintenance')
                     .fadeIn('slow', function () {
                         setTimeout(doSlideShow, 5000);
                     }).css('background-image', 'url("' + images[nextImage++] + '")');
@@ -62,10 +62,10 @@ $data = $block->getFormData();
 
 <!--Single Image Background-->
 <?php if (array_key_exists('[maintenance_background_image]', $data)
-    && $data['[maintenance_background]'] === 'image'
+    && $block->getBgType('[maintenance_background]') === 'image'
     && $block->getImageUrl($data['[maintenance_background_image]'])) : ?>
     <style>
-        .mpbettermaintenance-maintenance-preview {
+        .mpbettermaintenance-preview-maintenance {
             background: url("<?= /* @noEscape */ $block->getImageUrl($data['[maintenance_background_image]']) ?>") no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -77,7 +77,7 @@ $data = $block->getFormData();
 
 <!--Video Background-->
 <?php if (array_key_exists('[maintenance_background_video]', $data)
-    &&$data['[maintenance_background]'] === 'video'
+    && $block->getBgType('[maintenance_background]') === 'video'
     && $block->getVideoUrl($data['[maintenance_background_video]'])) : ?>
     <video autoplay muted loop id="mpbm-video">
         <source src="<?= $block->escapeHtmlAttr($block->getVideoUrl($data['[maintenance_background_video]'])) ?>"

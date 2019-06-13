@@ -24,9 +24,9 @@ $style = $block->getFormData()['[clock_template]'] === '1' ? 'simple' : $block->
 $template = $block->getClockTemplate($style);
 $timerId  = uniqid('', false);
 if (strpos($template, 'simple') === false) {
-    $clockBackgroundColor = $block->getFormData()['[clock_background_color]'];
+    $clockBackgroundColor = $block->getClockBgColor();
 }
-$clockNumberColor     = $block->getFormData()['[clock_number_color]'];
+$clockNumberColor     = $block->getClockNumberColor();
 
 if (!empty($template)) : ?>
     <div id="mp-countdown-timer-<?= /* @noEscape */ $timerId ?>">

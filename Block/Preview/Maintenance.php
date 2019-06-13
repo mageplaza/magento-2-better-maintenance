@@ -46,6 +46,7 @@ class Maintenance extends Template
     const PAGE_LAYOUT      = 'single';
     const SUBSCRIBE_TYPE   = 'email_form';
     const SUBSCRIBE_LABEL  = 'Subscribe';
+    const BG_TYPE          = 'image';
 
     /**
      * @var PageFactory
@@ -117,6 +118,18 @@ class Maintenance extends Template
     }
 
     /**
+     * @param $code
+     *
+     * @return mixed|string
+     */
+    public function getBgType($code)
+    {
+        $type = $this->getFormData()[$code];
+
+        return $type === '1' ? self::BG_TYPE : $type;
+    }
+
+    /**
      * @return mixed|string
      */
     public function getSubscribeDes()
@@ -133,7 +146,7 @@ class Maintenance extends Template
     {
         $color = $this->getFormData()['[subscribe_label_color]'];
 
-        return $color === '1' ? '#000000' : $color;
+        return $color === '1' ? '#FFFFFF' : $color;
     }
 
     /**
@@ -412,7 +425,7 @@ class Maintenance extends Template
     {
         $list = [];
         foreach ($this->getFormData() as $key => $value) {
-            if (strpos($key, $type) === true && strpos($key, '[file]') === true) {
+            if (!is_bool(strpos($key, $type)) && !is_bool(strpos($key, '[file]'))) {
                 $list[] = $value;
             }
         }
@@ -424,7 +437,6 @@ class Maintenance extends Template
      * @param $type
      *
      * @return array
-     * @throws NoSuchEntityException
      */
     public function getMultipleImagesUrl($type)
     {

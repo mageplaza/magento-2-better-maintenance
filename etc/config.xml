@@ -33,7 +33,7 @@
                     <clock_enabled>1</clock_enabled>
                     <clock_template>simple</clock_template>
                     <clock_background_color>#000000</clock_background_color>
-                    <clock_number_color>#000000</clock_number_color>
+                    <clock_number_color>#FFFFFF</clock_number_color>
                 </clock_setting>
                 <subscribe_setting>
                     <subscribe_type>email_form</subscribe_type>

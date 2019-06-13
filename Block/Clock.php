@@ -33,6 +33,9 @@ use Mageplaza\BetterMaintenance\Block\Preview\Maintenance as PreviewBlock;
  */
 class Clock extends Template
 {
+    const CLOCK_NUMBER_COLOR = '#000000';
+    const CLOCK_BG_COLOR     = '#FFFFFF';
+
     /**
      * @var HelperData
      */
@@ -169,5 +172,25 @@ class Clock extends Template
     public function getFormData()
     {
         return $this->_previewBlock->getFormData();
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getClockNumberColor()
+    {
+        $color = $this->getFormData()['[clock_number_color]'];
+
+        return $color === '1' ? self::CLOCK_NUMBER_COLOR : $color;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getClockBgColor()
+    {
+        $color = $this->getFormData()['[clock_background_color]'];
+
+        return $color === '1' ? self::CLOCK_BG_COLOR : $color;
     }
 }
