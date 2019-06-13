@@ -26,7 +26,7 @@ $elementName = $element->getName();
 ?>
 <div id="template-images-gallery" class="gallery"
      data-mage-init='{"Mageplaza_BetterMaintenance/js/image-gallery":{}}'
-     data-images="<?= $block->escapeHtmlAttr($block->getImagesMaintenanceJson()) ?>">
+     data-images="<?= $block->escapeHtmlAttr($block->getImagesJson('mpbettermaintenance/maintenance_setting/maintenance_background_multi_image')) ?>">
     <div class="image image-placeholder">
         <?= $block->getUploaderHtml() ?>
         <div class="product-image-wrapper">

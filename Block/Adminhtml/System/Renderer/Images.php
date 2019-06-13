@@ -135,40 +135,11 @@ class Images extends Widget
      * @return string
      * @throws NoSuchEntityException
      */
-    public function getImagesMaintenanceJson()
+    public function getImagesJson($code)
     {
-        if ($this->_helperData->getMaintenanceSetting('maintenance_background') === 'multiple_images') {
-            $value = HelperData::jsonDecode($this->getElement()->getData('config_data')['mpbettermaintenance/maintenance_setting/maintenance_background_multi_image']);
-            if (is_array($value) && !empty($value)) {
-                $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
-                $images   = self::sortImagesByPosition($value);
-                foreach ($images as $key => &$image) {
-                    $image['url'] = $this->_imageHelper
-                            ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
-                    try {
-                        $fileHandler   = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
-                        $image['size'] = $fileHandler['size'];
-                    } catch (Exception $e) {
-                        $this->_logger->warning($e);
-                        unset($images[$key]);
-                    }
-                }
-
-                return HelperData::jsonEncode($images);
-            }
-        }
-
-        return '[]';
-    }
-
-    /**
-     * @return string
-     * @throws NoSuchEntityException
-     */
-    public function getImagesComingsoonJson()
-    {
-        if ($this->_helperData->getComingSoonSetting('comingsoon_background') === 'multiple_images') {
-            $value = HelperData::jsonDecode($this->getElement()->getData('config_data')['mpbettermaintenance/comingsoon_setting/comingsoon_background_multi_image']);
+        $data = $this->getElement()->getData('config_data');
+        if (array_key_exists($code, $data)) {
+            $value = HelperData::jsonDecode($data[$code]);
             if (is_array($value) && !empty($value)) {
                 $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
                 $images   = self::sortImagesByPosition($value);

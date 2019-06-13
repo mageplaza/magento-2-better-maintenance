@@ -40,13 +40,14 @@ use Magento\Customer\Block\Form\Register;
  */
 class Maintenance extends Template
 {
-    const PAGE_TITLE       = 'Under Maintenance';
-    const PAGE_DESCRIPTION = 'We\'re currently down for maintenance. Be right back!';
-    const PROGRESS_VALUE   = '50';
-    const PAGE_LAYOUT      = 'single';
-    const SUBSCRIBE_TYPE   = 'email_form';
-    const SUBSCRIBE_LABEL  = 'Subscribe';
-    const BG_TYPE          = 'image';
+    const PAGE_TITLE          = 'Under Maintenance';
+    const PAGE_DESCRIPTION    = 'We\'re currently down for maintenance. Be right back!';
+    const PROGRESS_VALUE      = '50';
+    const PAGE_LAYOUT         = 'single';
+    const SUBSCRIBE_TYPE      = 'email_form';
+    const SUBSCRIBE_LABEL     = 'Subscribe';
+    const BG_TYPE             = 'image';
+    const DEFAULT_LABEL_COLOR = '#000000';
 
     /**
      * @var PageFactory
@@ -122,6 +123,18 @@ class Maintenance extends Template
      *
      * @return mixed|string
      */
+    public function getLabelColor($code)
+    {
+        $color = $this->getFormData()[$code];
+
+        return $color === '1' ? self::DEFAULT_LABEL_COLOR : $color;
+    }
+
+    /**
+     * @param $code
+     *
+     * @return mixed|string
+     */
     public function getBgType($code)
     {
         $type = $this->getFormData()[$code];
@@ -146,7 +159,7 @@ class Maintenance extends Template
     {
         $color = $this->getFormData()['[subscribe_label_color]'];
 
-        return $color === '1' ? '#FFFFFF' : $color;
+        return $color === '1' ? '#000000' : $color;
     }
 
     /**

@@ -68,7 +68,7 @@
                 <comingsoon_layout>single</comingsoon_layout>
                 <comingsoon_title>Coming Soon</comingsoon_title>
                 <comingsoon_description>Our new site is coming soon. Stay tuned!</comingsoon_description>
-                <comingsoon_color>#FFFFFF</comingsoon_color>
+                <comingsoon_color>#000000</comingsoon_color>
                 <comingsoon_background>image</comingsoon_background>
             </comingsoon_setting>
         </mpbettermaintenance>

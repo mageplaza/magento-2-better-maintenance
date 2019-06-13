@@ -183,7 +183,7 @@ $data = $block->getFormData();
 
 <style>
     .mpbm-text {
-        color: <?= /* @noEscape */ $data['[maintenance_color]'] ?>;
+        color: <?= /* @noEscape */ $block->getLabelColor('[maintenance_color]') ?>;
     }
 
     #mpbm-social-label {

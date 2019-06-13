@@ -162,7 +162,7 @@ $data = $block->getFormData();
 
 <style>
     .mpbm-text {
-        color: <?= /* @noEscape */ $data['[comingsoon_color]'] ?>;
+        color: <?= /* @noEscape */ $block->getLabelColor('[comingsoon_color]') ?>;
     }
 
     #mpbm-social-label {

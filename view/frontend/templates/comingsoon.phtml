@@ -78,8 +78,8 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 <?php endif; ?>
 
 <!--Video Background-->
-<?php if ($block->getComingSoonSetting('maintenance_background') === 'video'
-    && $block->getVideoUrl($block->getComingSoonSetting('maintenance_background_video'))) : ?>
+<?php if ($block->getComingSoonSetting('comingsoon_background') === 'video'
+    && $block->getVideoUrl($block->getComingSoonSetting('comingsoon_background_video'))) : ?>
     <video autoplay muted loop id="mpbm-video">
         <source src="<?= $block->escapeHtmlAttr($block->getVideoUrl($block->getComingSoonSetting('comingsoon_background_video'))) ?>"
                 type="video/mp4">

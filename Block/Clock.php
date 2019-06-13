@@ -33,8 +33,8 @@ use Mageplaza\BetterMaintenance\Block\Preview\Maintenance as PreviewBlock;
  */
 class Clock extends Template
 {
-    const CLOCK_NUMBER_COLOR = '#000000';
-    const CLOCK_BG_COLOR     = '#FFFFFF';
+    const CLOCK_NUMBER_COLOR = '#FFFFFF';
+    const CLOCK_BG_COLOR     = '#000000';
 
     /**
      * @var HelperData
