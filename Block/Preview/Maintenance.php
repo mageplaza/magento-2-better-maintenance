@@ -18,27 +18,27 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
-namespace Mageplaza\BetterMaintenance\Block\Adminhtml\Maintenance;
+namespace Mageplaza\BetterMaintenance\Block\Preview;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\UrlRewrite\Model\UrlRewriteFactory;
-use Mageplaza\BetterMaintenance\Block\Maintenance;
+use Mageplaza\BetterMaintenance\Block\Maintenance as BlockMaintenance;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Result\PageFactory;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
 use Magento\Cms\Block\Block;
-use Mageplaza\BetterMaintenance\Block\Adminhtml\Clock;
+use Mageplaza\BetterMaintenance\Block\Clock;
 use Magento\Newsletter\Block\Subscribe;
 use Magento\Customer\Block\Form\Register;
 
 /**
- * Class Preview
- * @package Mageplaza\BetterMaintenance\Block\Adminhtml\Maintenance
+ * Class Maintenance
+ * @package Mageplaza\BetterMaintenance\Block\Preview
  */
-class Preview extends Template
+class Maintenance extends Template
 {
     const PAGE_TITLE       = 'Under Maintenance';
     const PAGE_DESCRIPTION = 'We\'re currently down for maintenance. Be right back!';
@@ -46,11 +46,6 @@ class Preview extends Template
     const PAGE_LAYOUT      = 'single';
     const SUBSCRIBE_TYPE   = 'email_form';
     const SUBSCRIBE_LABEL  = 'Subscribe';
-
-    /**
-     * @var string
-     */
-    protected $_template = 'Mageplaza_BetterMaintenance::maintenance/preview.phtml';
 
     /**
      * @var PageFactory
@@ -82,7 +77,7 @@ class Preview extends Template
      *
      * @param PageFactory $pageFactory
      * @param HelperData $helperData
-     * @param Maintenance $maintenanceBlock
+     * @param BlockMaintenance $maintenanceBlock
      * @param UrlRewriteFactory $urlRewrite
      * @param HelperImage $helperImage
      * @param Context $context
@@ -90,7 +85,7 @@ class Preview extends Template
     public function __construct(
         PageFactory $pageFactory,
         HelperData $helperData,
-        Maintenance $maintenanceBlock,
+        BlockMaintenance $maintenanceBlock,
         UrlRewriteFactory $urlRewrite,
         HelperImage $helperImage,
         Context $context
@@ -183,6 +178,7 @@ class Preview extends Template
 
     /**
      * @param $code
+     *
      * @return mixed|string
      */
     public function getPageLayout($code)
@@ -233,6 +229,26 @@ class Preview extends Template
     }
 
     /**
+     * @return mixed|string
+     */
+    public function getSubscribeBtnColor()
+    {
+        $color = $this->getFormData()['[button_label_color]'];
+
+        return $color === '1' ? '#000000' : $color;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getSubscribeBtnBgColor()
+    {
+        $color = $this->getFormData()['[button_background_color]'];
+
+        return $color === '1' ? '#FFFFFF' : $color;
+    }
+
+    /**
      * @return array
      */
     public static function cleanValue()
@@ -269,6 +285,7 @@ class Preview extends Template
 
     /**
      * @param $logo
+     *
      * @return string
      * @throws NoSuchEntityException
      */
@@ -328,7 +345,7 @@ class Preview extends Template
     {
         $block = $this->getLayout()
             ->createBlock(Clock::class)
-            ->setTemplate('Mageplaza_BetterMaintenance::clock/timer.phtml')
+            ->setTemplate('Mageplaza_BetterMaintenance::preview/clock/timer.phtml')
             ->toHtml();
 
         return $block;
@@ -366,6 +383,7 @@ class Preview extends Template
 
     /**
      * @param $image
+     *
      * @return string|null
      * @throws NoSuchEntityException
      */
@@ -376,6 +394,7 @@ class Preview extends Template
 
     /**
      * @param $video
+     *
      * @return string|null
      * @throws NoSuchEntityException
      */
@@ -403,6 +422,7 @@ class Preview extends Template
 
     /**
      * @param $type
+     *
      * @return array
      * @throws NoSuchEntityException
      */
@@ -434,6 +454,7 @@ class Preview extends Template
      * Copy from the Magento core.
      *
      * @param string $string
+     *
      * @return string
      */
     public function escapeJs($string)

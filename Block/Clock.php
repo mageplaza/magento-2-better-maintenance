@@ -18,12 +18,14 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\BetterMaintenance\Block;
 
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Model\Config\Source\System\ClockTemplate;
 use Magento\Framework\Stdlib\DateTime\DateTime;
+use Mageplaza\BetterMaintenance\Block\Preview\Maintenance as PreviewBlock;
 
 /**
  * Class Clock
@@ -42,21 +44,29 @@ class Clock extends Template
     protected $_date;
 
     /**
+     * @var PreviewBlock
+     */
+    protected $_previewBlock;
+
+    /**
      * Clock constructor.
      *
      * @param HelperData $helperData
      * @param DateTime $date
+     * @param PreviewBlock $previewBlock
      * @param Template\Context $context
      * @param array $data
      */
     public function __construct(
         HelperData $helperData,
         DateTime $date,
+        PreviewBlock $previewBlock,
         Template\Context $context,
         array $data = []
     ) {
-        $this->_helperData = $helperData;
-        $this->_date       = $date;
+        $this->_helperData   = $helperData;
+        $this->_date         = $date;
+        $this->_previewBlock = $previewBlock;
         parent::__construct($context, $data);
     }
 
@@ -151,5 +161,13 @@ class Clock extends Template
     public function getClockSetting($code)
     {
         return $this->_helperData->getClockSetting($code);
+    }
+
+    /**
+     * @return array
+     */
+    public function getFormData()
+    {
+        return $this->_previewBlock->getFormData();
     }
 }

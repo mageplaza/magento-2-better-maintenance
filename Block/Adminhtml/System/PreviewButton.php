@@ -22,6 +22,8 @@ namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\Url;
+use Magento\Backend\Block\Template\Context;
 
 /**
  * Class PreviewButton
@@ -33,6 +35,18 @@ class PreviewButton extends Field
      * @var string
      */
     protected $_template = 'system/config/previewbutton.phtml';
+
+    protected $_frontendUrl;
+
+
+    public function __construct(
+        Url $frontendUrl,
+        Context $context,
+        array $data = []
+    ) {
+        $this->_frontendUrl = $frontendUrl;
+        parent::__construct($context, $data);
+    }
 
     /**
      * @param AbstractElement $element
@@ -58,7 +72,7 @@ class PreviewButton extends Field
         $this->addData(
             [
                 'button_label' => $originalData['button_label'],
-                'button_url'   => $this->getUrl($originalData['button_url'], ['_current' => true]),
+//                'button_url'   => $this->getUrl($originalData['button_url'], ['_current' => true]),
                 'html_id'      => $element->getHtmlId()
             ]
         );
@@ -73,7 +87,11 @@ class PreviewButton extends Field
      */
     public function getDataUrl($url)
     {
-        return $this->getUrl($url);
+//        return $this->getUrl($url);
+        return $this->_frontendUrl->getUrl(
+            $url,
+            ['_nosid' => true, 'form_key' => $this->getFormKey()]
+        );
     }
 
     /**
