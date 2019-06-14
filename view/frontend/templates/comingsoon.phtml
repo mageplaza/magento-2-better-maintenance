@@ -29,8 +29,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 
 <!--Multiple Image Background-->
 <?php if ($block->getComingSoonSetting('comingsoon_background') === 'multiple_images'
-    && $block->getImageUrl($block->getComingSoonSetting('comingsoon_background_multi_image'))) : ?>
-    <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl($block->getComingSoonSetting('comingsoon_background_multi_image'))); ?>
+    && $listImagesUrl = implode(',', $block->getMultipleImagesUrl($block->getComingSoonSetting('comingsoon_background_multi_image')))) : ?>
     <style>
         .mpbettermaintenance-comingsoon-index {
             background: no-repeat center center fixed;

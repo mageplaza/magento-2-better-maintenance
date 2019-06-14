@@ -351,7 +351,7 @@
     position: absolute;
     width: 40%;
     margin: auto;
-    bottom: 470px;
+    top: 470px;
 }
 
 #mpbm-double-column .block.newsletter {
@@ -387,6 +387,10 @@
 }
 #mpbm-double-column #mpbm-progress-bar .progress {
     width: 100%;
+}
+
+#mpbm-double-column .block.newsletter .actions {
+    width: 25%;
 }
 
 @media only screen and (max-width: 600px) {
