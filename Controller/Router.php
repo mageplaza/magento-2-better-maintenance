@@ -84,13 +84,17 @@ class Router implements RouterInterface
         if ($identifier === $this->_helperData->getMaintenanceRoute()) {
             $request->setModuleName('mpbettermaintenance')->setControllerName('maintenance')->setActionName('index');
             $request->setAlias(Url::REWRITE_REQUEST_PATH_ALIAS, $identifier);
+
+            return $this->_actionFactory->create(Forward::class);
         }
 
         if ($identifier === $this->_helperData->getComingSoonRoute()) {
             $request->setModuleName('mpbettermaintenance')->setControllerName('comingsoon')->setActionName('index');
             $request->setAlias(Url::REWRITE_REQUEST_PATH_ALIAS, $identifier);
+
+            return $this->_actionFactory->create(Forward::class);
         }
 
-        return $this->_actionFactory->create(Forward::class);
+        return null;
     }
 }

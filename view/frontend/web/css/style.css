@@ -344,14 +344,14 @@
     position: absolute;
     width: 40%;
     margin: auto;
-    bottom: 88%;
+    top: 250px;
 }
 
 #mpbm-double-column #mpbm-progress-bar {
     position: absolute;
     width: 40%;
     margin: auto;
-    bottom: 84%;
+    bottom: 470px;
 }
 
 #mpbm-double-column .block.newsletter {
@@ -459,12 +459,11 @@
     }
 
     #mpbm-double-column #mpbm-clock {
-        bottom: 91%;
         margin: auto 10px;
     }
 
     #mpbm-double-column #mpbm-progress-bar {
-        bottom: 89%;
+        top: 440px;
         margin: auto 10px;
     }
 }
