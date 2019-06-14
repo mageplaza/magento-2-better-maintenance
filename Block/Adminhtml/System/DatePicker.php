@@ -28,6 +28,7 @@ use Magento\Backend\Block\Template\Context;
 
 /**
  * Class DatePicker
+ *
  * @package Mageplaza\BetterMaintenance\Block\Adminhtml\System
  */
 class DatePicker extends Field
@@ -39,16 +40,16 @@ class DatePicker extends Field
 
     /**
      * DatePicker constructor.
-     * @param Context $context
+     *
+     * @param Context  $context
      * @param Registry $coreRegistry
-     * @param array $data
+     * @param array    $data
      */
     public function __construct(
         Context $context,
         Registry $coreRegistry,
         array $data = []
-    )
-    {
+    ) {
         $this->_coreRegistry = $coreRegistry;
         parent::__construct($context, $data);
     }

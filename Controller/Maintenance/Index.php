@@ -34,6 +34,7 @@ use Magento\Framework\Controller\Result\ForwardFactory;
 
 /**
  * Class Index
+ *
  * @package Mageplaza\BetterMaintenance\Controller\Maintenance
  */
 class Index extends Action
@@ -71,13 +72,13 @@ class Index extends Action
     /**
      * Index constructor.
      *
-     * @param Layout $layout
-     * @param PageFactory $pageFactory
-     * @param HelperData $helperData
-     * @param Maintenance $maintenanceBlock
+     * @param Layout            $layout
+     * @param PageFactory       $pageFactory
+     * @param HelperData        $helperData
+     * @param Maintenance       $maintenanceBlock
      * @param UrlRewriteFactory $urlRewrite
-     * @param ForwardFactory $forwardFactory
-     * @param Context $context
+     * @param ForwardFactory    $forwardFactory
+     * @param Context           $context
      */
     public function __construct(
         Layout $layout,

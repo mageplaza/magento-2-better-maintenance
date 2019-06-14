@@ -24,6 +24,7 @@ use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class LayoutOptions
+ *
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class LayoutOptions implements ArrayInterface

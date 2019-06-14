@@ -27,6 +27,7 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 
 /**
  * Class ColorPicker
+ *
  * @package Mageplaza\BetterMaintenance\Block\Adminhtml\System
  */
 class ColorPicker extends Field
@@ -40,8 +41,8 @@ class ColorPicker extends Field
      * ColorPicker constructor.
      *
      * @param Registry $coreRegistry
-     * @param Context $context
-     * @param array $data
+     * @param Context  $context
+     * @param array    $data
      */
     public function __construct(
         Registry $coreRegistry,

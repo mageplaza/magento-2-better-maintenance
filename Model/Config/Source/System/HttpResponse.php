@@ -24,6 +24,7 @@ use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class HttpResponse
+ *
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class HttpResponse implements ArrayInterface

@@ -25,7 +25,6 @@ use Magento\Backend\Block\Media\Uploader;
 use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Block\Widget;
 use Magento\Framework\App\Filesystem\DirectoryList;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\AbstractBlock;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
@@ -33,6 +32,7 @@ use Magento\Framework\ObjectManagerInterface;
 
 /**
  * Class Images
+ *
  * @package Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer
  */
 class Images extends Widget
@@ -55,11 +55,11 @@ class Images extends Widget
     /**
      * Images constructor.
      *
-     * @param Context $context
-     * @param HelperImage $imageHelper
-     * @param HelperData $helperData
+     * @param Context                $context
+     * @param HelperImage            $imageHelper
+     * @param HelperData             $helperData
      * @param ObjectManagerInterface $objectManager
-     * @param array $data
+     * @param array                  $data
      */
     public function __construct(
         Context $context,
@@ -132,8 +132,9 @@ class Images extends Widget
     }
 
     /**
+     * @param $code
+     *
      * @return string
-     * @throws NoSuchEntityException
      */
     public function getImagesJson($code)
     {
@@ -145,7 +146,7 @@ class Images extends Widget
                 $images   = self::sortImagesByPosition($value);
                 foreach ($images as $key => &$image) {
                     $image['url'] = $this->_imageHelper
-                            ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
+                        ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
                     try {
                         $fileHandler   = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
                         $image['size'] = $fileHandler['size'];
@@ -185,7 +186,7 @@ class Images extends Widget
      * Copy from the Magento core.
      *
      * @param string $string
-     * @param bool $escapeSingleQuote
+     * @param bool   $escapeSingleQuote
      *
      * @return string
      */

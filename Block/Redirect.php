@@ -31,6 +31,7 @@ use Magento\Framework\Stdlib\DateTime\DateTime;
 
 /**
  * Class Redirect
+ *
  * @package Mageplaza\BetterMaintenance\Block
  */
 class Redirect extends Template
@@ -71,13 +72,13 @@ class Redirect extends Template
      * Redirect constructor.
      *
      * @param Template\Context $context
-     * @param HelperData $helperData
-     * @param CmsPage $cmsPage
-     * @param Http $response
+     * @param HelperData       $helperData
+     * @param CmsPage          $cmsPage
+     * @param Http             $response
      * @param ManagerInterface $messageManager
-     * @param HttpContext $httpContext
-     * @param DateTime $date
-     * @param array $data
+     * @param HttpContext      $httpContext
+     * @param DateTime         $date
+     * @param array            $data
      */
     public function __construct(
         Template\Context $context,
@@ -156,26 +157,26 @@ class Redirect extends Template
         }
 
         switch ($redirectTo) {
-            case 'maintenance_page':
-                if ($this->_request->getFullActionName() === 'mpbettermaintenance_maintenance_index') {
-                    return false;
-                }
-                $route = $this->_helperData->getMaintenanceRoute();
-                $route = isset($route) ? $route : HelperData::MAINTENANCE_ROUTE;
-                break;
-            case 'coming_soon_page':
-                if ($this->_request->getFullActionName() === 'mpbettermaintenance_comingsoon_index') {
-                    return false;
-                }
-                $route = $this->_helperData->getComingSoonRoute();
-                $route = isset($route) ? $route : HelperData::COMING_SOON_ROUTE;
-                break;
-            default:
-                $route = $redirectTo;
-                if ($this->_cmsPage->getIdentifier() === $redirectTo) {
-                    return false;
-                }
-                break;
+        case 'maintenance_page':
+            if ($this->_request->getFullActionName() === 'mpbettermaintenance_maintenance_index') {
+                return false;
+            }
+            $route = $this->_helperData->getMaintenanceRoute();
+            $route = isset($route) ? $route : HelperData::MAINTENANCE_ROUTE;
+            break;
+        case 'coming_soon_page':
+            if ($this->_request->getFullActionName() === 'mpbettermaintenance_comingsoon_index') {
+                return false;
+            }
+            $route = $this->_helperData->getComingSoonRoute();
+            $route = isset($route) ? $route : HelperData::COMING_SOON_ROUTE;
+            break;
+        default:
+            $route = $redirectTo;
+            if ($this->_cmsPage->getIdentifier() === $redirectTo) {
+                return false;
+            }
+            break;
         }
 
         $url = $this->getUrl($route);

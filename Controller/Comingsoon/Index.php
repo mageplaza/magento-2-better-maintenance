@@ -32,6 +32,7 @@ use Magento\Framework\App\Action\Action;
 
 /**
  * Class Index
+ *
  * @package Mageplaza\BetterMaintenance\Controller\Comingsoon
  */
 class Index extends Action
@@ -59,11 +60,11 @@ class Index extends Action
     /**
      * Index constructor.
      *
-     * @param Layout $layout
-     * @param PageFactory $pageFactory
-     * @param HelperData $helperData
+     * @param Layout            $layout
+     * @param PageFactory       $pageFactory
+     * @param HelperData        $helperData
      * @param UrlRewriteFactory $urlRewrite
-     * @param Context $context
+     * @param Context           $context
      */
     public function __construct(
         Layout $layout,
@@ -88,7 +89,9 @@ class Index extends Action
             $this->_forward('noroute');
         }
         $resultPageLayout = $this->_pageFactory->create();
-        $resultPageLayout->getConfig()->getTitle()->set($this->_helperData->getComingSoonSetting('comingsoon_metatitle'));
+        $metaTitle = $this->_helperData->getComingSoonSetting('comingsoon_metatitle');
+        $pageTitle = $metaTitle ?: $this->_helperData->getComingSoonSetting('comingsoon_title');
+        $resultPageLayout->getConfig()->getTitle()->set($pageTitle);
         $resultPageLayout->getConfig()->setDescription($this->_helperData->getComingSoonSetting('comingsoon_metadescription'));
         $resultPageLayout->getConfig()->setKeywords($this->_helperData->getComingSoonSetting('comingsoon_metakeywords'));
 

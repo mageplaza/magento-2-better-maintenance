@@ -27,6 +27,7 @@ use Magento\Backend\Block\Template\Context;
 
 /**
  * Class PreviewButton
+ *
  * @package Mageplaza\BetterMaintenance\Block\Adminhtml\System
  */
 class PreviewButton extends Field
@@ -36,9 +37,18 @@ class PreviewButton extends Field
      */
     protected $_template = 'system/config/previewbutton.phtml';
 
+    /**
+     * @var Url
+     */
     protected $_frontendUrl;
 
-
+    /**
+     * PreviewButton constructor.
+     *
+     * @param Url $frontendUrl
+     * @param Context $context
+     * @param array $data
+     */
     public function __construct(
         Url $frontendUrl,
         Context $context,
@@ -96,7 +106,7 @@ class PreviewButton extends Field
      * Copy from the Magento core.
      *
      * @param string $string
-     * @param bool $escapeSingleQuote
+     * @param bool   $escapeSingleQuote
      *
      * @return string
      */
@@ -108,7 +118,7 @@ class PreviewButton extends Field
     /**
      * Copy from the Magento core.
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public function escapeJs($string)

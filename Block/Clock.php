@@ -29,6 +29,7 @@ use Mageplaza\BetterMaintenance\Block\Preview\Maintenance as PreviewBlock;
 
 /**
  * Class Clock
+ *
  * @package Mageplaza\BetterMaintenance\Block
  */
 class Clock extends Template
@@ -54,11 +55,11 @@ class Clock extends Template
     /**
      * Clock constructor.
      *
-     * @param HelperData $helperData
-     * @param DateTime $date
-     * @param PreviewBlock $previewBlock
+     * @param HelperData       $helperData
+     * @param DateTime         $date
+     * @param PreviewBlock     $previewBlock
      * @param Template\Context $context
-     * @param array $data
+     * @param array            $data
      */
     public function __construct(
         HelperData $helperData,

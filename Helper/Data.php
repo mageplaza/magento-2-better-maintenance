@@ -25,6 +25,7 @@ use Mageplaza\Core\Helper\AbstractData;
 
 /**
  * Class Data
+ *
  * @package Mageplaza\BetterMaintenance\Helper
  */
 class Data extends AbstractData
@@ -35,7 +36,7 @@ class Data extends AbstractData
 
     /**
      * @param string $code
-     * @param null $storeId
+     * @param null   $storeId
      *
      * @return array|mixed
      */

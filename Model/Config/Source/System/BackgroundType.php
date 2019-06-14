@@ -24,6 +24,7 @@ use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class BackgroundType
+ *
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class BackgroundType implements ArrayInterface

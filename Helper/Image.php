@@ -31,6 +31,7 @@ use Mageplaza\Core\Helper\Media;
 
 /**
  * Class Image
+ *
  * @package Mageplaza\BetterMaintenance\Helper
  */
 class Image extends Media
@@ -93,7 +94,7 @@ class Image extends Media
     public function getBaseTmpMediaUrl()
     {
         return $this->storeManager->getStore()
-                ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . self::getBaseTmpMediaPath();
+            ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . self::getBaseTmpMediaPath();
     }
 
     /**
@@ -139,7 +140,7 @@ class Image extends Media
             $fileName = $image['file'];
             $pos      = strpos($fileName, '.tmp');
 
-            if ((isset($image['removed']) && $image['removed'])) {
+            if (isset($image['removed'])) {
                 /**
                  * Remove image
                  */

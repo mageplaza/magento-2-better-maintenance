@@ -24,6 +24,7 @@ use Mageplaza\BetterMaintenance\Block\Preview\Maintenance as MPreview;
 
 /**
  * Class Comingsoon
+ *
  * @package Mageplaza\BetterMaintenance\Block\Preview
  */
 class Comingsoon extends MPreview

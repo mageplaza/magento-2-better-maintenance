@@ -32,6 +32,7 @@ use Magento\Framework\App\ResponseInterface;
 
 /**
  * Class Router
+ *
  * @package Mageplaza\BetterMaintenance\Controller
  */
 class Router implements RouterInterface
@@ -54,8 +55,8 @@ class Router implements RouterInterface
     /**
      * Router constructor.
      *
-     * @param ActionFactory $actionFactory
-     * @param HelperData $helperData
+     * @param ActionFactory     $actionFactory
+     * @param HelperData        $helperData
      * @param ResponseInterface $response
      */
     public function __construct(

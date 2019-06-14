@@ -28,6 +28,7 @@ use Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer\Images;
 
 /**
  * Class Logo
+ *
  * @package Mageplaza\BetterMaintenance\Block\Adminhtml\System
  */
 class Logo extends Field
@@ -41,8 +42,8 @@ class Logo extends Field
      * Logo constructor.
      *
      * @param Registry $coreRegistry
-     * @param Context $context
-     * @param array $data
+     * @param Context  $context
+     * @param array    $data
      */
     public function __construct(
         Registry $coreRegistry,

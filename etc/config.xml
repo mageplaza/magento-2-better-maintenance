@@ -32,15 +32,15 @@
                 <clock_setting>
                     <clock_enabled>1</clock_enabled>
                     <clock_template>simple</clock_template>
-                    <clock_background_color>#000000</clock_background_color>
-                    <clock_number_color>#FFFFFF</clock_number_color>
+                    <clock_background_color>#999999</clock_background_color>
+                    <clock_number_color>#000000</clock_number_color>
                 </clock_setting>
                 <subscribe_setting>
                     <subscribe_type>email_form</subscribe_type>
                     <subscribe_label_color>#000000</subscribe_label_color>
                     <button_label>Subscribe</button_label>
-                    <button_label_color>#000000</button_label_color>
-                    <button_background_color>#FFFFFF</button_background_color>
+                    <button_label_color>#FFFFFF</button_label_color>
+                    <button_background_color>#000000</button_background_color>
                 </subscribe_setting>
                 <footer_block>
                     <cms_block>0</cms_block>

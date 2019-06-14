@@ -36,6 +36,7 @@ use Magento\Framework\App\Config\Value;
 
 /**
  * Class Upload
+ *
  * @package Mageplaza\BetterMaintenance\Controller\Adminhtml\MultiImages
  */
 class Upload extends Action
@@ -70,12 +71,12 @@ class Upload extends Action
     /**
      * Upload constructor.
      *
-     * @param Action\Context $context
-     * @param RawFactory $resultRawFactory
+     * @param Action\Context  $context
+     * @param RawFactory      $resultRawFactory
      * @param UploaderFactory $uploaderFactory
-     * @param Filesystem $filesystem
-     * @param Image $imageHelper
-     * @param Value $value
+     * @param Filesystem      $filesystem
+     * @param Image           $imageHelper
+     * @param Value           $value
      */
     public function __construct(
         Action\Context $context,
@@ -114,8 +115,7 @@ class Upload extends Action
                     ->getAbsolutePath(Image::getBaseTmpMediaPath())
             );
 
-            unset($result['tmp_name']);
-            unset($result['path']);
+            unset($result['tmp_name'], $result['path']);
 
             $result['url']  = $this->_imageHelper->getTmpMediaUrl($result['file']);
             $result['file'] = 'tmp' . $result['file'];

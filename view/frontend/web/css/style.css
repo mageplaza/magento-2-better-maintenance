@@ -393,7 +393,13 @@
     width: 25%;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 768px) and (max-width: 1644px) {
+    #mpbm-double-column #mpbm-progress-bar {
+        top: 600px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
     #mpbm-double-column .simple-txt1 {
         font-size: 20px;
     }
@@ -467,7 +473,7 @@
     }
 
     #mpbm-double-column #mpbm-progress-bar {
-        top: 440px;
+        top: 390px;
         margin: auto 10px;
     }
 }

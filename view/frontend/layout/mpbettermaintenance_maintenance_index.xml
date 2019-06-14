@@ -32,6 +32,7 @@
             <referenceContainer name="content" remove="true"/>
             <block class="Mageplaza\BetterMaintenance\Block\Redirect" name="mpbettermaintenance.redirect" ifconfig="mpbettermaintenance/general/enabled"/>
             <block class="Mageplaza\BetterMaintenance\Block\Maintenance" name="mpbettermaintenance.maintenance.page" template="Mageplaza_BetterMaintenance::maintenance.phtml">
+                <block class="Mageplaza\BetterMaintenance\Block\Background" name="mpbettermaintenance.background" as="background" template="Mageplaza_BetterMaintenance::background.phtml"/>
                 <block class="Mageplaza\BetterMaintenance\Block\Clock" name="mpbettermaintenance.clock" as="clock_countdown" template="Mageplaza_BetterMaintenance::clock/timer.phtml"/>
                 <block class="Magento\Newsletter\Block\Subscribe" name="form.subscribe" as="subscribe" template="subscribe.phtml"/>
                 <block class="Magento\Customer\Block\Form\Register" name="customer_form_register" as="register" template="form/register.phtml"/>

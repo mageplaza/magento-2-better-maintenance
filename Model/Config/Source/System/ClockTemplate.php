@@ -24,6 +24,7 @@ use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class ClockTemplate
+ *
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class ClockTemplate implements ArrayInterface

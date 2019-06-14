@@ -36,6 +36,7 @@ use Magento\Customer\Block\Form\Register;
 
 /**
  * Class Maintenance
+ *
  * @package Mageplaza\BetterMaintenance\Block\Preview
  */
 class Maintenance extends Template
@@ -46,7 +47,6 @@ class Maintenance extends Template
     const PAGE_LAYOUT         = 'single';
     const SUBSCRIBE_TYPE      = 'email_form';
     const SUBSCRIBE_LABEL     = 'Subscribe';
-    const BG_TYPE             = 'image';
     const DEFAULT_LABEL_COLOR = '#000000';
 
     /**
@@ -77,12 +77,12 @@ class Maintenance extends Template
     /**
      * Preview constructor.
      *
-     * @param PageFactory $pageFactory
-     * @param HelperData $helperData
-     * @param BlockMaintenance $maintenanceBlock
+     * @param PageFactory       $pageFactory
+     * @param HelperData        $helperData
+     * @param BlockMaintenance  $maintenanceBlock
      * @param UrlRewriteFactory $urlRewrite
-     * @param HelperImage $helperImage
-     * @param Context $context
+     * @param HelperImage       $helperImage
+     * @param Context           $context
      */
     public function __construct(
         PageFactory $pageFactory,
@@ -128,18 +128,6 @@ class Maintenance extends Template
         $color = $this->getFormData()[$code];
 
         return $color === '1' ? self::DEFAULT_LABEL_COLOR : $color;
-    }
-
-    /**
-     * @param $code
-     *
-     * @return mixed|string
-     */
-    public function getBgType($code)
-    {
-        $type = $this->getFormData()[$code];
-
-        return $type === '1' ? self::BG_TYPE : $type;
     }
 
     /**
@@ -261,7 +249,7 @@ class Maintenance extends Template
     {
         $color = $this->getFormData()['[button_label_color]'];
 
-        return $color === '1' ? '#000000' : $color;
+        return $color === '1' ? '#FFFFFF' : $color;
     }
 
     /**
@@ -271,7 +259,7 @@ class Maintenance extends Template
     {
         $color = $this->getFormData()['[button_background_color]'];
 
-        return $color === '1' ? '#FFFFFF' : $color;
+        return $color === '1' ? '#000000' : $color;
     }
 
     /**
@@ -466,7 +454,7 @@ class Maintenance extends Template
      * Copy from the Magento core.
      *
      * @param string $string
-     * @param bool $escapeSingleQuote
+     * @param bool   $escapeSingleQuote
      *
      * @return string
      */

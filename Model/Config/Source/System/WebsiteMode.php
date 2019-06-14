@@ -24,6 +24,7 @@ use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class WebsiteMode
+ *
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class WebsiteMode implements ArrayInterface

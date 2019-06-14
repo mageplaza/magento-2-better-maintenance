@@ -22,6 +22,7 @@ namespace Mageplaza\BetterMaintenance\Block;
 
 /**
  * Class Comingsoon
+ *
  * @package Mageplaza\BetterMaintenance\Block
  */
 class Comingsoon extends Maintenance

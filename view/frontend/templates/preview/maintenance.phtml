@@ -25,65 +25,8 @@
 $data = $block->getFormData();
 ?>
 
-<!--Multiple Image Background-->
-<?php if ($block->getBgType('[maintenance_background]') === 'multiple_images') : ?>
-    <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl('[maintenance_background_multi_image]')); ?>
-    <style>
-        .mpbettermaintenance-preview-maintenance {
-            background: no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            transition-delay: 2s;
-        }
-    </style>
-    <script>
-        require([
-            'jquery'
-        ], function ($) {
-            var images    = '<?= /* @noEscape */ $listImagesUrl ?>';
-            images        = images.split(',');
-            var nextImage = 0;
-            doSlideShow();
-
-            function doSlideShow () {
-                if (nextImage >= images.length) {
-                    nextImage = 0;
-                }
-                $('.mpbettermaintenance-preview-maintenance')
-                    .fadeIn('slow', function () {
-                        setTimeout(doSlideShow, 5000);
-                    }).css('background-image', 'url("' + images[nextImage++] + '")');
-            }
-        });
-    </script>
-<?php endif; ?>
-
-<!--Single Image Background-->
-<?php if (array_key_exists('[maintenance_background_image]', $data)
-    && $block->getBgType('[maintenance_background]') === 'image'
-    && $block->getImageUrl($data['[maintenance_background_image]'])) : ?>
-    <style>
-        .mpbettermaintenance-preview-maintenance {
-            background: url("<?= /* @noEscape */ $block->getImageUrl($data['[maintenance_background_image]']) ?>") no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
-    </style>
-<?php endif; ?>
-
-<!--Video Background-->
-<?php if (array_key_exists('[maintenance_background_video]', $data)
-    && $block->getBgType('[maintenance_background]') === 'video'
-    && $block->getVideoUrl($data['[maintenance_background_video]'])) : ?>
-    <video autoplay muted loop id="mpbm-video">
-        <source src="<?= $block->escapeHtmlAttr($block->getVideoUrl($data['[maintenance_background_video]'])) ?>"
-                type="video/mp4">
-    </video>
-<?php endif; ?>
+<!--BACKGROUND-->
+<?= /* @noEscape */ $block->getChildHtml('background') ?>
 
 <!--WRAPPER-->
 <div id="mpbm-<?=  /* @noEscape */ $block->getPageLayout('[maintenance_layout]') ?>-column" class="mpbm-wrapper mpbm-preview-wrapper">

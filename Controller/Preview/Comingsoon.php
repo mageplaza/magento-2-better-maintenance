@@ -29,6 +29,7 @@ use Magento\Framework\View\Result\PageFactory;
 
 /**
  * Class Comingsoon
+ *
  * @package Mageplaza\BetterMaintenance\Controller\Preview
  */
 class Comingsoon extends Action
@@ -41,13 +42,13 @@ class Comingsoon extends Action
     /**
      * Comingsoon constructor.
      *
-     * @param Context $context
+     * @param Context     $context
      * @param PageFactory $pageFactory
      */
     public function __construct(
         Context $context,
-        PageFactory $pageFactory)
-    {
+        PageFactory $pageFactory
+    ) {
         $this->_pageFactory = $pageFactory;
         parent::__construct($context);
     }

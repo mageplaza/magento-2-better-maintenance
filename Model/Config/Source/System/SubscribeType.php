@@ -24,6 +24,7 @@ use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class SubscribeType
+ *
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class SubscribeType implements ArrayInterface

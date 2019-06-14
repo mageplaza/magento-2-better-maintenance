@@ -28,6 +28,7 @@ use Magento\Framework\Stdlib\DateTime\DateTime;
 
 /**
  * Class RealTime
+ *
  * @package Mageplaza\BetterMaintenance\Block\Adminhtml\System
  */
 class RealTime extends Field
@@ -47,8 +48,8 @@ class RealTime extends Field
      *
      * @param Registry $coreRegistry
      * @param DateTime $date
-     * @param Context $context
-     * @param array $data
+     * @param Context  $context
+     * @param array    $data
      */
     public function __construct(
         Registry $coreRegistry,

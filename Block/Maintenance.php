@@ -29,6 +29,7 @@ use Magento\Cms\Block\Block;
 
 /**
  * Class Maintenance
+ *
  * @package Mageplaza\BetterMaintenance\Block
  */
 class Maintenance extends Template
@@ -50,10 +51,10 @@ class Maintenance extends Template
     /**
      * Maintenance constructor.
      *
-     * @param HelperData $helperData
-     * @param HelperImage $helperImage
+     * @param HelperData       $helperData
+     * @param HelperImage      $helperImage
      * @param Template\Context $context
-     * @param array $data
+     * @param array            $data
      */
     public function __construct(
         HelperData $helperData,
@@ -68,8 +69,8 @@ class Maintenance extends Template
 
     /**
      * @param $logo
+     *
      * @return string
-     * @throws NoSuchEntityException
      */
     public function getLogo($logo)
     {
@@ -83,8 +84,8 @@ class Maintenance extends Template
 
     /**
      * @param $image
+     *
      * @return string|null
-     * @throws NoSuchEntityException
      */
     public function getImageUrl($image)
     {
@@ -102,8 +103,8 @@ class Maintenance extends Template
 
     /**
      * @param $video
+     *
      * @return string|null
-     * @throws NoSuchEntityException
      */
     public function getVideoUrl($video)
     {
@@ -138,8 +139,8 @@ class Maintenance extends Template
 
     /**
      * @param $images
+     *
      * @return array|null
-     * @throws NoSuchEntityException
      */
     public function getMultipleImagesUrl($images)
     {
@@ -292,7 +293,7 @@ class Maintenance extends Template
      * Copy from the Magento core.
      *
      * @param string $string
-     * @param bool $escapeSingleQuote
+     * @param bool   $escapeSingleQuote
      *
      * @return string
      */

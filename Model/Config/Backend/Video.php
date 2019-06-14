@@ -24,6 +24,7 @@ use Magento\Config\Model\Config\Backend\File;
 
 /**
  * Class Video
+ *
  * @package Mageplaza\BetterMaintenance\Model\Config\Backend
  */
 class Video extends File

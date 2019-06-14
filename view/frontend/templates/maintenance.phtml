@@ -27,64 +27,7 @@ $subscribeLabel      = $block->getSubscribeSetting('subscribe_label');
 $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 ?>
 
-<!--Multiple Image Background-->
-<?php if ($block->getMaintenanceSetting('maintenance_background') === 'multiple_images'
-    && $block->getMultipleImagesUrl($block->getMaintenanceSetting('maintenance_background_multi_image'))) : ?>
-    <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl($block->getMaintenanceSetting('maintenance_background_multi_image'))) ?>
-    <style>
-        .mpbettermaintenance-maintenance-index {
-            background: no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            transition-delay: 2s;
-        }
-    </style>
-    <script>
-        require([
-            'jquery'
-        ], function ($) {
-            var images    = '<?= /* @noEscape */ $listImagesUrl ?>';
-            images        = images.split(',');
-            var nextImage = 0;
-            doSlideShow();
-
-            function doSlideShow () {
-                if (nextImage >= images.length) {
-                    nextImage = 0;
-                }
-                $('.mpbettermaintenance-maintenance-index')
-                .fadeIn('slow', function () {
-                    setTimeout(doSlideShow, 5000);
-                }).css('background-image', 'url("' + images[nextImage++] + '")');
-            }
-        });
-    </script>
-<?php endif; ?>
-
-<!--Single Image Background-->
-<?php if ($block->getMaintenanceSetting('maintenance_background') === 'image'
-    && $block->getImageUrl($block->getMaintenanceSetting('maintenance_background_image'))) : ?>
-    <style>
-        .mpbettermaintenance-maintenance-index {
-            background: url("<?= /* @noEscape */ $block->getImageUrl($block->getMaintenanceSetting('maintenance_background_image')) ?>") no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
-    </style>
-<?php endif; ?>
-
-<!--Video Background-->
-<?php if ($block->getMaintenanceSetting('maintenance_background') === 'video'
-    && $block->getVideoUrl($block->getMaintenanceSetting('maintenance_background_video'))) : ?>
-    <video autoplay muted loop id="mpbm-video">
-        <source src="<?= $block->escapeHtmlAttr($block->getVideoUrl($block->getMaintenanceSetting('maintenance_background_video'))) ?>"
-                type="video/mp4">
-    </video>
-<?php endif; ?>
+<?= /* @noEscape */ $block->getChildHtml('background') ?>
 
 <!--WRAPPER-->
 <div id="mpbm-<?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_layout') ?>-column" class="mpbm-wrapper">

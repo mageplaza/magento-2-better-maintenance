@@ -26,6 +26,7 @@ use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 
 /**
  * Class MultipleImages
+ *
  * @package Mageplaza\BetterMaintenance\Model\Config\Backend
  */
 class MultipleImages extends Value
@@ -39,7 +40,9 @@ class MultipleImages extends Value
         $files = [];
 
         /* looping through array */
-        /** @var array $value */
+        /**
+ * @var array $value 
+*/
         foreach ($value as $key => $item) {
             if (!empty($files) && in_array($item['file'], $files, true)) {
                 unset($value[$key]);

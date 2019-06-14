@@ -28,6 +28,7 @@ use Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer\Images;
 
 /**
  * Class MaintenanceMultipleImages
+ *
  * @package Mageplaza\BetterMaintenance\Block\Adminhtml\System
  */
 class MaintenanceMultipleImages extends Field
@@ -41,8 +42,8 @@ class MaintenanceMultipleImages extends Field
      * MaintenanceMultipleImages constructor.
      *
      * @param Registry $coreRegistry
-     * @param Context $context
-     * @param array $data
+     * @param Context  $context
+     * @param array    $data
      */
     public function __construct(
         Registry $coreRegistry,

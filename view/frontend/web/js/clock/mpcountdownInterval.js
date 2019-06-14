@@ -23,7 +23,8 @@ define(
     function () {
         'use strict';
 
-        function zeroPad (num) {
+        function zeroPad(num) 
+        {
             return num < 10
                 ? '0' + num
                 : num

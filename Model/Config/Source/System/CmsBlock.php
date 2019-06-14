@@ -25,6 +25,7 @@ use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class CmsBlock
+ *
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class CmsBlock implements ArrayInterface

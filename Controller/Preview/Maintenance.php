@@ -29,6 +29,7 @@ use Magento\Framework\View\Result\PageFactory;
 
 /**
  * Class Maintenance
+ *
  * @package Mageplaza\BetterMaintenance\Controller\Preview
  */
 class Maintenance extends Action
@@ -41,13 +42,13 @@ class Maintenance extends Action
     /**
      * Maintenance constructor.
      *
-     * @param Context $context
+     * @param Context     $context
      * @param PageFactory $pageFactory
      */
     public function __construct(
         Context $context,
-        PageFactory $pageFactory)
-    {
+        PageFactory $pageFactory
+    ) {
         $this->_pageFactory = $pageFactory;
         parent::__construct($context);
     }

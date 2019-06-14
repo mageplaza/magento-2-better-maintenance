@@ -25,6 +25,7 @@ use Magento\Cms\Model\ResourceModel\Page\CollectionFactory as PageFactory;
 
 /**
  * Class RedirectTo
+ *
  * @package Mageplaza\BetterMaintenance\Model\Config\Source\System
  */
 class RedirectTo implements ArrayInterface
