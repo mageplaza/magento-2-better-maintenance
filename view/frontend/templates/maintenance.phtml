@@ -29,7 +29,8 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 
 <!--Multiple Image Background-->
 <?php if ($block->getMaintenanceSetting('maintenance_background') === 'multiple_images'
-    && $listImagesUrl = implode(',', $block->getMultipleImagesUrl($block->getMaintenanceSetting('maintenance_background_multi_image')))) : ?>
+    && $block->getMultipleImagesUrl($block->getMaintenanceSetting('maintenance_background_multi_image'))) : ?>
+    <?php $listImagesUrl = implode(',', $block->getMultipleImagesUrl($block->getMaintenanceSetting('maintenance_background_multi_image'))) ?>
     <style>
         .mpbettermaintenance-maintenance-index {
             background: no-repeat center center fixed;

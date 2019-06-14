@@ -353,7 +353,7 @@ class Maintenance extends Template
     public function getBlockCms()
     {
         $blockId = $this->getFormData()['[footer_block][cms_block]'];
-        if ($blockId === '0') {
+        if ($blockId === '0' || $blockId === '1') {
             return null;
         }
         $block = $this->getLayout()->createBlock(Block::class)
