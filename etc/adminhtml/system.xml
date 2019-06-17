@@ -52,11 +52,11 @@
                 </field>
                 <field id="whitelist_ip" translate="label comment" type="textarea" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Whitelist IP(s)</label>
-                    <comment>Seperate by comma(,)</comment>
+                    <comment>Separated by comma(s).</comment>
                 </field>
                 <field id="whitelist_page" translate="label comment" type="textarea" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Whitelist Page Link(s)</label>
-                    <comment>Seperate by break line(s)</comment>
+                    <comment>Separated by break line(s).</comment>
                 </field>
             </group>
             <group id="display_setting" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -101,17 +101,17 @@
                 <group id="subscribe_setting" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Subscribe Setting</label>
                     <field id="subscribe_type" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Subscribe Type</label>
+                        <label>Subscription Type</label>
                         <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\SubscribeType</source_model>
                     </field>
                     <field id="subscribe_label" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Subscribe Description</label>
+                        <label>Subscription Description</label>
                         <depends>
                             <field id="subscribe_type" separator=",">register_form,email_form</field>
                         </depends>
                     </field>
                     <field id="subscribe_label_color" translate="label" sortOrder="160" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Subscribe Description Color</label>
+                        <label>Description Text Color</label>
                         <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                         <depends>
                             <field id="subscribe_type" separator=",">register_form,email_form</field>
@@ -125,7 +125,7 @@
                         </depends>
                     </field>
                     <field id="button_label_color" translate="label" sortOrder="180" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Button Label Color</label>
+                        <label>Button Text Color</label>
                         <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                         <depends>
                             <field id="subscribe_type" separator=",">register_form,email_form</field>
@@ -144,7 +144,7 @@
                     <field id="cms_block" translate="label comment" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Select CMS Block</label>
                         <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\CmsBlock</source_model>
-                        <comment>List the links in the selected block in the Whitelist(s) Page Link field below so that customers can access them.</comment>
+                        <comment>Selected CMS Block(s) are the footer(s) of the Maitenance / Coming Soon Page. Therefore, it is recommended to select CMS Block Link(s) as Whitelist Page Link (s) so that customers can access.</comment>
                     </field>
                 </group>
                 <group id="social_contact" translate="label" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -227,12 +227,13 @@
                     <label>Page Description</label>
                 </field>
                 <field id="maintenance_color" translate="label" sortOrder="380" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Label Color</label>
+                    <label>Text Color</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                 </field>
                 <field id="maintenance_logo" translate="label comment" type="image" sortOrder="390" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Logo</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <comment><![CDATA[Supported formats: gif, jpg, jpeg, png.<br>Recommend size: less than 2MB.]]></comment>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/logo</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/logo</base_url>
                 </field>
@@ -242,29 +243,32 @@
                     <comment>For Video type, please check your upload_max_size PHP value. If the size of uploaded video is greater than this value, the video will not be uploaded.</comment>
                 </field>
                 <field id="maintenance_background_video" translate="label" type="file" sortOrder="410" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Select</label>
+                    <label>Upload File</label>
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\Video</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/video</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/video</base_url>
+                    <comment><![CDATA[Supported formats: mp4]]></comment>
                     <depends>
                         <field id="maintenance_background">video</field>
                     </depends>
                 </field>
                 <field id="maintenance_background_image" translate="label" type="image" sortOrder="420" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Select</label>
+                    <label>Upload File</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/image</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/image</base_url>
+                    <comment><![CDATA[Supported formats: gif, jpg, jpeg, png.<br>Recommend size: less than 2MB.]]></comment>
                     <depends>
                         <field id="maintenance_background">image</field>
                     </depends>
                 </field>
                 <field id="maintenance_background_multi_image" translate="label" sortOrder="430" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Select</label>
+                    <label>Upload File</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\MaintenanceMultipleImages</frontend_model>
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\MultipleImages</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/tmp</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/tmp</base_url>
+                    <comment><![CDATA[Supported formats: gif, jpg, jpeg, png.<br>Recommend size: less than 2MB.]]></comment>
                     <depends>
                         <field id="maintenance_background">multiple_images</field>
                     </depends>
@@ -308,7 +312,7 @@
                 </field>
                 <field id="maintenance_preview" translate="label comment" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
                     <button_label>Preview</button_label>
-                    <comment>Save configuration before previewing for image changes.</comment>
+                    <comment>If uploading files, please save configuration before preview.</comment>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\PreviewButton</frontend_model>
                 </field>
             </group>
@@ -329,13 +333,14 @@
                     <label>Page Description</label>
                 </field>
                 <field id="comingsoon_color" translate="label" sortOrder="560" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Label Color</label>
+                    <label>Text Color</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                 </field>
                 <field id="comingsoon_logo" translate="label comment" type="image" sortOrder="570" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Logo</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/logo</upload_dir>
+                    <comment><![CDATA[Supported formats: gif, jpg, jpeg, png.<br>Recommend size: less than 2MB.]]></comment>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/logo</base_url>
                 </field>
                 <field id="comingsoon_background" translate="label comment" type="select" sortOrder="580" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -344,7 +349,7 @@
                     <comment>For Video type, please check your upload_max_size PHP value. If the size of uploaded video is greater than this value, the video will not be uploaded.</comment>
                 </field>
                 <field id="comingsoon_background_video" translate="label" type="file" sortOrder="590" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Select</label>
+                    <label>Upload File</label>
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\Video</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/video</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/video</base_url>
@@ -353,19 +358,21 @@
                     </depends>
                 </field>
                 <field id="comingsoon_background_image" translate="label" type="image" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Select</label>
+                    <label>Upload File</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/image</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/image</base_url>
+                    <comment><![CDATA[Supported formats: gif, jpg, jpeg, png.<br>Recommend size: less than 2MB.]]></comment>
                     <depends>
                         <field id="comingsoon_background">image</field>
                     </depends>
                 </field>
                 <field id="comingsoon_background_multi_image" translate="label" type="image" sortOrder="610" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Select</label>
+                    <label>Upload File</label>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ComingsoonMultipleImages</frontend_model>
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\MultipleImages</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/tmp</upload_dir>
+                    <comment><![CDATA[Supported formats: gif, jpg, jpeg, png.<br>Recommend size: less than 2MB.]]></comment>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/tmp</base_url>
                     <depends>
                         <field id="comingsoon_background">multiple_images</field>
@@ -382,7 +389,7 @@
                 </field>
                 <field id="comingsoon_preview" translate="label comment" sortOrder="650" showInDefault="1" showInWebsite="1" showInStore="1">
                     <button_label>Preview</button_label>
-                    <comment>Save configuration before previewing for image changes.</comment>
+                    <comment>If uploading files, please save configuration before preview.</comment>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\PreviewButton</frontend_model>
                 </field>
             </group>

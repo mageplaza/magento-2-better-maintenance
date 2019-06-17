@@ -40,8 +40,8 @@ class SubscribeType implements ArrayInterface
     {
         return [
             ['value' => self::NONE, 'label' => __('None')],
-            ['value' => self::REGISTER_FORM, 'label' => __('Register Account')],
-            ['value' => self::EMAIL_FORM, 'label' => __('Newsletter Subscribe')]
+            ['value' => self::REGISTER_FORM, 'label' => __('Account Registration')],
+            ['value' => self::EMAIL_FORM, 'label' => __('Newsletter Subscription')]
         ];
     }
 }
