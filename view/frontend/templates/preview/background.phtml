@@ -25,7 +25,7 @@
 $data = $block->getFormData();
 ?>
 <!--Multiple Image Background-->
-<?php if ($block->getBgType()) : ?>
+<?php if ($block->getBgType() === 'multiple_images') : ?>
     <?php $listImagesUrl = $block->getListImagesUrls(); ?>
     <style>
         .mpbettermaintenance-preview-<?= /* @noEscape */ $block->getPage() ?> {
