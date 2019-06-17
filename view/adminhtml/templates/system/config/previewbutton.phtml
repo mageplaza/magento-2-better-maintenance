@@ -45,7 +45,7 @@ if ($blockId === 'mpbettermaintenance_maintenance_setting_maintenance_preview') 
             var form  = $('<form/>', {
                 action: $(this).data('url'),
                 target: '_blank',
-                method: 'GET'
+                method: 'POST'
             });
             var data  = $('#config-edit-form').serialize();
             var formKey = $("<input>").attr("type", "hidden").attr("name", "form_key").val('<?= $block->escapeJs($block->getFormKey()) ?>');
