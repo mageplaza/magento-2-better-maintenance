@@ -233,7 +233,7 @@
                 <field id="maintenance_logo" translate="label comment" type="image" sortOrder="390" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Logo</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
-                    <comment><![CDATA[Supported formats: gif, jpg, jpeg, png.<br>Recommend size: less than 2MB.]]></comment>
+                    <comment><![CDATA[Supported image formats: gif, jpg, jpeg, png.<br>Recommended size: less than 2MB.]]></comment>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/logo</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/logo</base_url>
                 </field>
@@ -247,7 +247,7 @@
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\Video</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/video</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/video</base_url>
-                    <comment><![CDATA[Supported formats: mp4]]></comment>
+                    <comment><![CDATA[Supported video formats: mp4]]></comment>
                     <depends>
                         <field id="maintenance_background">video</field>
                     </depends>
@@ -257,7 +257,7 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/image</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/image</base_url>
-                    <comment><![CDATA[Supported formats: gif, jpg, jpeg, png.<br>Recommend size: less than 2MB.]]></comment>
+                    <comment><![CDATA[Supported image formats: gif, jpg, jpeg, png.<br>Recommended size: less than 2MB.]]></comment>
                     <depends>
                         <field id="maintenance_background">image</field>
                     </depends>
@@ -268,7 +268,7 @@
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\MultipleImages</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/tmp</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/tmp</base_url>
-                    <comment><![CDATA[Supported formats: gif, jpg, jpeg, png.<br>Recommend size: less than 2MB.]]></comment>
+                    <comment><![CDATA[Supported image formats: gif, jpg, jpeg, png.<br>Recommended size: less than 2MB.]]></comment>
                     <depends>
                         <field id="maintenance_background">multiple_images</field>
                     </depends>
@@ -340,7 +340,7 @@
                     <label>Logo</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/logo</upload_dir>
-                    <comment><![CDATA[Supported formats: gif, jpg, jpeg, png.<br>Recommend size: less than 2MB.]]></comment>
+                    <comment><![CDATA[Supported image formats: gif, jpg, jpeg, png.<br>Recommended size: less than 2MB.]]></comment>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/logo</base_url>
                 </field>
                 <field id="comingsoon_background" translate="label comment" type="select" sortOrder="580" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -353,7 +353,7 @@
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\Video</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/video</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/video</base_url>
-                    <comment><![CDATA[Supported formats: mp4]]></comment>
+                    <comment><![CDATA[Supported video formats: mp4]]></comment>
                     <depends>
                         <field id="comingsoon_background">video</field>
                     </depends>
@@ -363,7 +363,7 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/image</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/image</base_url>
-                    <comment><![CDATA[Supported formats: gif, jpg, jpeg, png.<br>Recommend size: less than 2MB.]]></comment>
+                    <comment><![CDATA[Supported image formats: gif, jpg, jpeg, png.<br>Recommended size: less than 2MB.]]></comment>
                     <depends>
                         <field id="comingsoon_background">image</field>
                     </depends>
@@ -373,7 +373,7 @@
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ComingsoonMultipleImages</frontend_model>
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\MultipleImages</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/tmp</upload_dir>
-                    <comment><![CDATA[Supported formats: gif, jpg, jpeg, png.<br>Recommend size: less than 2MB.]]></comment>
+                    <comment><![CDATA[Supported image formats: gif, jpg, jpeg, png.<br>Recommended size: less than 2MB.]]></comment>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/tmp</base_url>
                     <depends>
                         <field id="comingsoon_background">multiple_images</field>
