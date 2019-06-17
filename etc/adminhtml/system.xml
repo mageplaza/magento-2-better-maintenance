@@ -353,6 +353,7 @@
                     <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\Video</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">mageplaza/bettermaintenance/video</upload_dir>
                     <base_url type="media" scope_info="1">mageplaza/bettermaintenance/video</base_url>
+                    <comment><![CDATA[Supported formats: mp4]]></comment>
                     <depends>
                         <field id="comingsoon_background">video</field>
                     </depends>
