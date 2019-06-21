@@ -25,10 +25,7 @@ define(
 
         function zeroPad(num) 
         {
-            return num < 10
-                ? '0' + num
-                : num
-                ;
+            return num < 10 ? '0' + num : num;
         }
 
         return {
