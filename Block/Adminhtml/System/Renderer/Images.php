@@ -143,7 +143,7 @@ class Images extends Widget
             $value = HelperData::jsonDecode($data[$code]);
             if (is_array($value) && !empty($value)) {
                 $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
-                $images   = self::sortImagesByPosition($value);
+                $images   = $this->sortImagesByPosition($value);
                 foreach ($images as $key => &$image) {
                     $image['url'] = $this->_imageHelper
                         ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
@@ -168,7 +168,7 @@ class Images extends Widget
      *
      * @return array
      */
-    private static function sortImagesByPosition($images)
+    private function sortImagesByPosition($images)
     {
         if (is_array($images)) {
             usort(

@@ -76,7 +76,7 @@ class Logo extends Field
     /**
      * @return string
      */
-    public static function getName()
+    public function getName()
     {
         return 'images';
     }

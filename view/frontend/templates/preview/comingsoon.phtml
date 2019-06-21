@@ -113,7 +113,7 @@ $data = $block->getFormData();
     }
 
     <?php if (array_key_exists('[clock_number_color]', $data) && $data['[clock_template]'] === 'stack') : ?>
-    <?php $inner = $data['[clock_inner_color]'] ?>
+        <?php $inner = $data['[clock_inner_color]'] ?>
     .stack-txt1 {
         background: <?= /* @noEscape */ $inner === '1' ? '#FFFFFF' : $inner ?>;
     }

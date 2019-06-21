@@ -92,8 +92,10 @@ class Index extends Action
         $metaTitle = $this->_helperData->getComingSoonSetting('comingsoon_metatitle');
         $pageTitle = $metaTitle ?: $this->_helperData->getComingSoonSetting('comingsoon_title');
         $resultPageLayout->getConfig()->getTitle()->set($pageTitle);
-        $resultPageLayout->getConfig()->setDescription($this->_helperData->getComingSoonSetting('comingsoon_metadescription'));
-        $resultPageLayout->getConfig()->setKeywords($this->_helperData->getComingSoonSetting('comingsoon_metakeywords'));
+        $resultPageLayout->getConfig()
+            ->setDescription($this->_helperData->getComingSoonSetting('comingsoon_metadescription'));
+        $resultPageLayout->getConfig()
+            ->setKeywords($this->_helperData->getComingSoonSetting('comingsoon_metakeywords'));
 
         return $resultPageLayout;
     }

@@ -75,6 +75,24 @@ class Maintenance extends Template
     protected $_helperImage;
 
     /**
+     * @var array
+     */
+    public $cleanValue = [
+        '[groups]',
+        'groups',
+        '[clock_setting]',
+        '[display_setting]',
+        '[fields]',
+        '[value]',
+        '[subscribe_setting]',
+        '[social_contact]',
+        '[maintenance_setting]',
+        '[comingsoon_setting]',
+        '[general]',
+        '[inherit]'
+    ];
+
+    /**
      * Preview constructor.
      *
      * @param PageFactory       $pageFactory
@@ -263,34 +281,13 @@ class Maintenance extends Template
     }
 
     /**
-     * @return array
-     */
-    public static function cleanValue()
-    {
-        return [
-            '[groups]',
-            'groups',
-            '[clock_setting]',
-            '[display_setting]',
-            '[fields]',
-            '[value]',
-            '[subscribe_setting]',
-            '[social_contact]',
-            '[maintenance_setting]',
-            '[comingsoon_setting]',
-            '[general]',
-            '[inherit]'
-        ];
-    }
-
-    /**
      * @param $arr
      *
      * @return mixed
      */
     public function filterKey($arr)
     {
-        foreach (self::cleanValue() as $word) {
+        foreach ($this->cleanValue as $word) {
             $arr = str_replace($word, '', $arr);
         }
 
@@ -426,7 +423,7 @@ class Maintenance extends Template
     {
         $list = [];
         foreach ($this->getFormData() as $key => $value) {
-            if (!is_bool(strpos($key, $type)) && !is_bool(strpos($key, '[file]'))) {
+            if (strpos($key, $type) !== false && strpos($key, '[file]') !== false) {
                 $list[] = $value;
             }
         }

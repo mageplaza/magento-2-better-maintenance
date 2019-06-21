@@ -153,10 +153,10 @@ class Data extends AbstractData
         if (strpos($range, '-') !== false) {
             list($low, $high) = explode('-', $range, 2);
 
-            return self::ipCompare($ip, $low, 1) && self::ipcompare($ip, $high, -1);
+            return $this->ipCompare($ip, $low, 1) && $this->ipcompare($ip, $high, -1);
         }
 
-        return self::ipCompare($ip, $range);
+        return $this->ipCompare($ip, $range);
     }
 
     /**
@@ -166,7 +166,7 @@ class Data extends AbstractData
      *
      * @return bool
      */
-    private static function ipCompare($ip1, $ip2, $op = 0)
+    private function ipCompare($ip1, $ip2, $op = 0)
     {
         $ip1Arr = explode('.', $ip1);
         $ip2Arr = explode('.', $ip2);

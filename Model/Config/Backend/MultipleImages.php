@@ -41,8 +41,8 @@ class MultipleImages extends Value
 
         /* looping through array */
         /**
- * @var array $value 
-*/
+         * @var array $value
+         */
         foreach ($value as $key => $item) {
             if (!empty($files) && in_array($item['file'], $files, true)) {
                 unset($value[$key]);

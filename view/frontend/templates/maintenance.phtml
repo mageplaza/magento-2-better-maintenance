@@ -127,7 +127,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
     }
 
     <?php if ($block->getClockSetting('clock_template') === 'stack') : ?>
-    <?php $inner = !empty($block->getClockSetting('clock_inner_color')) ? $block->getClockSetting('clock_inner_color') : '#FFFFFF'?>
+        <?php $inner = !empty($block->getClockSetting('clock_inner_color')) ? $block->getClockSetting('clock_inner_color') : '#FFFFFF'?>
     .stack-txt1 {
         background: <?= /* @noEscape */ $inner ?>;
     }

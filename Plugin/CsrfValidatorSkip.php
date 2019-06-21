@@ -31,7 +31,7 @@ class CsrfValidatorSkip
     /**
      * @param $subject
      * @param Closure $proceed
-     * @param $request
+     * @param RequestInterface $request
      * @param $action
      *
      * @SuppressWarnings("Unused")

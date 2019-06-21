@@ -21,7 +21,6 @@
 namespace Mageplaza\BetterMaintenance\Block;
 
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
@@ -125,7 +124,7 @@ class Maintenance extends Template
      *
      * @return array
      */
-    public static function getListMultipleImages($images)
+    public function getListMultipleImages($images)
     {
         $data = HelperData::jsonDecode($images);
         $list = [];
@@ -145,7 +144,7 @@ class Maintenance extends Template
     public function getMultipleImagesUrl($images)
     {
         $urls   = [];
-        $images = self::getListMultipleImages($images);
+        $images = $this->getListMultipleImages($images);
         if (empty($images)) {
             return null;
         }

@@ -62,7 +62,7 @@ class Image extends Media
     /**
      * @return string
      */
-    public static function getBaseTmpMediaPath()
+    public function getBaseTmpMediaPath()
     {
         return self::TEMPLATE_MEDIA_PATH . '/tmp';
     }
@@ -74,7 +74,7 @@ class Image extends Media
      */
     public function getTmpMediaPath($file)
     {
-        return self::getBaseTmpMediaPath() . '/' . $this->_prepareFile($file);
+        return $this->getBaseTmpMediaPath() . '/' . $this->_prepareFile($file);
     }
 
     /**
@@ -94,7 +94,7 @@ class Image extends Media
     public function getBaseTmpMediaUrl()
     {
         return $this->storeManager->getStore()
-            ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . self::getBaseTmpMediaPath();
+            ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $this->getBaseTmpMediaPath();
     }
 
     /**
