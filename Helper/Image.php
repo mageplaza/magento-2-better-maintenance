@@ -22,12 +22,19 @@
 namespace Mageplaza\BetterMaintenance\Helper;
 
 use Exception;
+use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Filesystem;
+use Magento\Framework\Image\AdapterFactory;
+use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\UrlInterface;
 use Magento\MediaStorage\Model\File\Uploader;
+use Magento\MediaStorage\Model\File\UploaderFactory;
+use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\Media;
+use Magento\Framework\Filesystem\Io\File;
 
 /**
  * Class Image
@@ -40,6 +47,37 @@ class Image extends Media
     const TEMPLATE_MEDIA_TYPE_IMAGE = 'image';
     const TEMPLATE_MEDIA_TYPE_LOGO  = 'logo';
     const TEMPLATE_MEDIA_TYPE_VIDEO = 'video';
+
+    /**
+     * @var File
+     */
+    protected $_file;
+
+    /**
+     * Image constructor.
+     *
+     * @param Context $context
+     * @param ObjectManagerInterface $objectManager
+     * @param StoreManagerInterface $storeManager
+     * @param Filesystem $filesystem
+     * @param UploaderFactory $uploaderFactory
+     * @param AdapterFactory $imageFactory
+     * @param File $file
+     *
+     * @throws FileSystemException
+     */
+    public function __construct(
+        Context $context,
+        ObjectManagerInterface $objectManager,
+        StoreManagerInterface $storeManager,
+        Filesystem $filesystem,
+        UploaderFactory $uploaderFactory,
+        AdapterFactory $imageFactory,
+        File $file
+    ) {
+        $this->_file = $file;
+        parent::__construct($context, $objectManager, $storeManager, $filesystem, $uploaderFactory, $imageFactory);
+    }
 
     /**
      * @param $fileName
@@ -79,6 +117,7 @@ class Image extends Media
 
     /**
      * @param $file
+     *
      * @return string
      * @throws NoSuchEntityException
      */
@@ -94,7 +133,7 @@ class Image extends Media
     public function getBaseTmpMediaUrl()
     {
         return $this->storeManager->getStore()
-            ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $this->getBaseTmpMediaPath();
+                ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $this->getBaseTmpMediaPath();
     }
 
     /**
@@ -165,7 +204,7 @@ class Image extends Media
                     continue;
                 }
 
-                $pathInfo = pathinfo($file);
+                $pathInfo = $this->_file->getPathInfo($file);
                 if (!isset($pathInfo['extension'])
                     || !in_array(strtolower($pathInfo['extension']), ['jpg', 'jpeg', 'gif', 'png'], true)
                 ) {

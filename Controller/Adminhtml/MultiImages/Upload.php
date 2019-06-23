@@ -112,7 +112,7 @@ class Upload extends Action
             $mediaDirectory = $this->_fileSystem->getDirectoryRead(DirectoryList::MEDIA);
             $result         = $uploader->save(
                 $mediaDirectory
-                    ->getAbsolutePath($this->getBaseTmpMediaPath())
+                    ->getAbsolutePath($this->_imageHelper->getBaseTmpMediaPath())
             );
 
             unset($result['tmp_name'], $result['path']);
