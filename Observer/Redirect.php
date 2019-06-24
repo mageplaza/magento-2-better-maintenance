@@ -23,7 +23,7 @@ namespace Mageplaza\BetterMaintenance\Observer;
 
 use Magento\Cms\Model\Page as CmsPage;
 use Magento\Framework\App\Http\Context as HttpContext;
-use Magento\Framework\App\Response\Http;
+use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\App\Response\HttpInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\ManagerInterface;
@@ -35,6 +35,7 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\App\State;
+use Magento\Cms\Api\PageRepositoryInterface;
 
 /**
  * Class Redirect
@@ -54,7 +55,7 @@ class Redirect implements ObserverInterface
     protected $_cmsPage;
 
     /**
-     * @var Http
+     * @var ResponseInterface
      */
     protected $_response;
 
@@ -94,11 +95,16 @@ class Redirect implements ObserverInterface
     protected $_state;
 
     /**
+     * @var PageRepositoryInterface
+     */
+    protected $_page;
+
+    /**
      * Redirect constructor.
      *
      * @param HelperData $helperData
      * @param CmsPage $cmsPage
-     * @param Http $response
+     * @param ResponseInterface $response
      * @param ManagerInterface $messageManager
      * @param HttpContext $httpContext
      * @param DateTime $date
@@ -106,18 +112,20 @@ class Redirect implements ObserverInterface
      * @param RequestInterface $request
      * @param UrlInterface $urlBuilder
      * @param State $state
+     * @param PageRepositoryInterface $page
      */
     public function __construct(
         HelperData $helperData,
         CmsPage $cmsPage,
-        Http $response,
+        ResponseInterface $response,
         ManagerInterface $messageManager,
         HttpContext $httpContext,
         DateTime $date,
         TimezoneInterface $localeDate,
         RequestInterface $request,
         UrlInterface $urlBuilder,
-        State $state
+        State $state,
+        PageRepositoryInterface $page
     ) {
         $this->_helperData     = $helperData;
         $this->_cmsPage        = $cmsPage;
@@ -129,6 +137,7 @@ class Redirect implements ObserverInterface
         $this->_request        = $request;
         $this->_urlBuilder     = $urlBuilder;
         $this->_state          = $state;
+        $this->_page           = $page;
     }
 
     /**
@@ -163,13 +172,13 @@ class Redirect implements ObserverInterface
 
             if (strtotime($this->_localeDate->date()->format('m/d/Y H:i:s'))
                 >= strtotime($this->_helperData->getConfigGeneral('end_time'))) {
-                return;
+                return false;
             }
 
             switch ($redirectTo) {
                 case 'maintenance_page':
                     if ($this->_request->getFullActionName() === 'mpbettermaintenance_maintenance_index') {
-                        return false;
+                        return;
                     }
                     $route = $this->_helperData->getMaintenanceRoute();
                     $route = isset($route) ? $route : HelperData::MAINTENANCE_ROUTE;
@@ -182,13 +191,15 @@ class Redirect implements ObserverInterface
                     $route = isset($route) ? $route : HelperData::COMING_SOON_ROUTE;
                     break;
                 default:
-                    $route = $redirectTo;
-                    if ($this->_cmsPage->getIdentifier() === $redirectTo) {
+                    $route  = $redirectTo;
+                    $pageId = $this->_request->getParam('page_id');
+                    $page   = $this->_page->getById($pageId);
+
+                    if ($page->getIdentifier() === $redirectTo) {
                         return false;
                     }
                     break;
             }
-
             $url = $this->_urlBuilder->getUrl($route);
 
             return $this->_response->setRedirect($url);
