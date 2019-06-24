@@ -64,10 +64,11 @@ class MaintenanceMultipleImages extends Field
         $html = '';
         $html .= $this->_layout
             ->createBlock(Images::class)
-            ->setTemplate('Mageplaza_BetterMaintenance::system/config/maintenanceGallery.phtml')
+            ->setTemplate('Mageplaza_BetterMaintenance::system/config/gallery.phtml')
             ->setId('media_gallery_content')
             ->setElement($this)
             ->setFormName('edit_form')
+            ->setResponse('maintenance')
             ->toHtml();
 
         return $html;

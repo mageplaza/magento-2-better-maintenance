@@ -26,7 +26,7 @@ define(
 
         function zeroPad(num) 
         {
-            return num < 10 ? '0' + num : num;
+            return String(num).padStart(2,'0');
         }
 
         $.widget(
@@ -63,7 +63,7 @@ define(
                 setCountdown: function () {
                     var element     = $(this.options.timer_id),
                         timezone    = this.options.timezone,
-                        endTime     = this.options.endtime,
+                        endTime     = this.options.endTime,
                         currentTime = this.options.currentTime;
 
                     var countDownHandler,
@@ -72,13 +72,11 @@ define(
                         daysSpan    = element.find('.mp-countdown-days'),
                         hoursSpan   = element.find('.mp-countdown-hours'),
                         minutesSpan = element.find('.mp-countdown-minutes'),
-                        secondsSpan = element.find('.mp-countdown-seconds');
+                        secondsSpan = element.find('.mp-countdown-seconds'),
+                        dataSpan    = element.find('.mp-countdown-data');
 
                     if (timeEnd < timeNow) {
-                        daysSpan.html(zeroPad(0));
-                        hoursSpan.html(zeroPad(0));
-                        minutesSpan.html(zeroPad(0));
-                        secondsSpan.html(zeroPad(0));
+                        dataSpan.text(zeroPad(0));
                     }
 
                     // Update the count down every 1 second
@@ -102,18 +100,15 @@ define(
                             seconds = Math.floor(distance % (1000 * 60) / 1000);
 
                             // Output the result in element
-                            daysSpan.html(zeroPad(days));
-                            hoursSpan.html(zeroPad(hours));
-                            minutesSpan.html(zeroPad(minutes));
-                            secondsSpan.html(zeroPad(seconds));
+                            daysSpan.text(zeroPad(days));
+                            hoursSpan.text(zeroPad(hours));
+                            minutesSpan.text(zeroPad(minutes));
+                            secondsSpan.text(zeroPad(seconds));
 
                             // If the count down is over, hide countdown
                             if (distance < 0) {
                                 clearInterval(countDownHandler);
-                                daysSpan.html(zeroPad(0));
-                                hoursSpan.html(zeroPad(0));
-                                minutesSpan.html(zeroPad(0));
-                                secondsSpan.html(zeroPad(0));
+                                dataSpan.text(zeroPad(0));
                             }
                         },
                         1000

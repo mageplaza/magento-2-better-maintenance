@@ -64,10 +64,11 @@ class ComingsoonMultipleImages extends Field
         $html = '';
         $html .= $this->_layout
             ->createBlock(Images::class)
-            ->setTemplate('Mageplaza_BetterMaintenance::system/config/comingsoonGallery.phtml')
+            ->setTemplate('Mageplaza_BetterMaintenance::system/config/gallery.phtml')
             ->setId('media_gallery_content')
             ->setElement($this)
             ->setFormName('edit_form')
+            ->setResponse('comingsoon')
             ->toHtml();
 
         return $html;

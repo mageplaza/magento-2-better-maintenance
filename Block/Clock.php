@@ -101,38 +101,38 @@ class Clock extends Template
 
         $template = '<div class="flex-box ' . $modern . '">
     <div class="' . $style . ' mp-countdown-clock">
-        <span class="' . $style . '-txt1 mp-countdown-days"></span>
+        <span class="' . $style . '-txt1 mp-countdown-days mp-countdown-data"></span>
         <span class="' . $style . '-txt2 mp-countdown-txt">' . __('Days') . '</span>
     </div>
     <div class="' . $style . ' mp-countdown-clock">
-        <span class="' . $style . '-txt1 mp-countdown-hours"></span>
+        <span class="' . $style . '-txt1 mp-countdown-hours mp-countdown-data"></span>
         <span class="' . $style . '-txt2 mp-countdown-txt">' . __('Hours') . '</span>
     </div>
     <div class="' . $style . ' mp-countdown-clock">
-        <span class="' . $style . '-txt1 mp-countdown-minutes"></span>
+        <span class="' . $style . '-txt1 mp-countdown-minutes mp-countdown-data"></span>
         <span class="' . $style . '-txt2 mp-countdown-txt">' . __('Minutes') . '</span>
     </div>
     <div class="' . $style . ' mp-countdown-clock">
-        <span class="' . $style . '-txt1 mp-countdown-seconds"></span>
+        <span class="' . $style . '-txt1 mp-countdown-seconds mp-countdown-data"></span>
         <span class="' . $style . '-txt2 mp-countdown-txt">' . __('Seconds') . '</span>
     </div>
 </div>';
 
         $template1 = '<div class="simple-container">
     <div class="' . $style . ' mp-countdown-clock">
-        <span class="' . $style . '-txt1 mp-countdown-days"></span>
+        <span class="' . $style . '-txt1 mp-countdown-days mp-countdown-data"></span>
         <span class="' . $style . '-txt2 mp-countdown-txt fs-45b">' . __('Days') . '</span>
     </div>
     <div class="' . $style . ' mp-countdown-clock">
-        <span class="' . $style . '-txt1 mp-countdown-hours"></span>
+        <span class="' . $style . '-txt1 mp-countdown-hours mp-countdown-data"></span>
         <span class="' . $style . '-txt2 mp-countdown-txt fs-45">:</span>
     </div>
     <div class="' . $style . ' mp-countdown-clock">
-        <span class="' . $style . '-txt1 mp-countdown-minutes"></span>
+        <span class="' . $style . '-txt1 mp-countdown-minutes mp-countdown-data"></span>
         <span class="' . $style . '-txt2 mp-countdown-txt fs-45">:</span>
     </div>
     <div class="' . $style . ' mp-countdown-clock">
-        <span class="' . $style . '-txt1 mp-countdown-seconds"></span>
+        <span class="' . $style . '-txt1 mp-countdown-seconds mp-countdown-data"></span>
     </div>
 </div>';
 
