@@ -41,13 +41,17 @@ use Magento\Customer\Block\Form\Register;
  */
 class Maintenance extends Template
 {
-    const PAGE_TITLE          = 'Under Maintenance';
-    const PAGE_DESCRIPTION    = 'We\'re currently down for maintenance. Be right back!';
-    const PROGRESS_VALUE      = '50';
-    const PAGE_LAYOUT         = 'single';
-    const SUBSCRIBE_TYPE      = 'email_form';
-    const SUBSCRIBE_LABEL     = 'Subscribe';
-    const DEFAULT_LABEL_COLOR = '#000000';
+    const PAGE_TITLE               = 'Under Maintenance';
+    const PAGE_DESCRIPTION         = 'We\'re currently down for maintenance. Be right back!';
+    const PROGRESS_VALUE           = '50';
+    const PAGE_LAYOUT              = 'single';
+    const SUBSCRIBE_TYPE           = 'email_form';
+    const SUBSCRIBE_LABEL          = 'Subscribe';
+    const DEFAULT_LABEL_COLOR      = '#000000';
+    const DEFAULT_MAINTENANCE_LOGO = 'Mageplaza_BetterMaintenance::media/maintenance_logo.png';
+    const DEFAULT_MAINTENANCE_BG   = 'Mageplaza_BetterMaintenance::media/maintenance_bg.jpg';
+    const DEFAULT_COMING_SOON_LOGO = 'Mageplaza_BetterMaintenance::media/coming_soon_logo.png';
+    const DEFAULT_COMING_SOON_BG   = 'Mageplaza_BetterMaintenance::media/coming_soon_bg.jpg';
 
     /**
      * @var PageFactory
@@ -95,12 +99,12 @@ class Maintenance extends Template
     /**
      * Preview constructor.
      *
-     * @param PageFactory       $pageFactory
-     * @param HelperData        $helperData
-     * @param BlockMaintenance  $maintenanceBlock
+     * @param PageFactory $pageFactory
+     * @param HelperData $helperData
+     * @param BlockMaintenance $maintenanceBlock
      * @param UrlRewriteFactory $urlRewrite
-     * @param HelperImage       $helperImage
-     * @param Context           $context
+     * @param HelperImage $helperImage
+     * @param Context $context
      */
     public function __construct(
         PageFactory $pageFactory,
@@ -295,14 +299,51 @@ class Maintenance extends Template
     }
 
     /**
-     * @param $logo
-     *
-     * @return string
+     * @return string|null
      * @throws NoSuchEntityException
      */
-    public function getLogo($logo)
+    public function getLogo()
     {
-        return $this->_maintenanceBlock->getLogo($logo);
+        $actionName      = $this->_request->getActionName();
+        $maintenanceLogo = $this->_helperData->getMaintenanceSetting('maintenance_logo');
+        $comingSoonLogo  = $this->_helperData->getComingSoonSetting('comingsoon_logo');
+
+        if ($actionName === 'maintenance') {
+            return $maintenanceLogo
+                ? $this->getUrlImage($maintenanceLogo, HelperImage::TEMPLATE_MEDIA_TYPE_LOGO)
+                : $this->getViewFileUrl(self::DEFAULT_MAINTENANCE_LOGO);
+        }
+
+        return $comingSoonLogo
+            ? $this->getUrlImage($comingSoonLogo, HelperImage::TEMPLATE_MEDIA_TYPE_LOGO)
+            : $this->getViewFileUrl(self::DEFAULT_COMING_SOON_LOGO);
+    }
+
+    /**
+     * @param $logo
+     * @param $type
+     *
+     * @return string
+     */
+    public function getUrlImage($logo, $type)
+    {
+        return $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($logo, $type));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaintenanceLogo()
+    {
+        return $this->_helperData->getMaintenanceSetting('maintenance_logo');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComingSoonLogo()
+    {
+        return $this->_helperData->getComingSoonSetting('comingsoon_logo');
     }
 
     /**
@@ -393,14 +434,23 @@ class Maintenance extends Template
     }
 
     /**
-     * @param $image
-     *
-     * @return string|null
-     * @throws NoSuchEntityException
+     * @return string
      */
-    public function getImageUrl($image)
+    public function getImageBg()
     {
-        return $this->_maintenanceBlock->getImageUrl($image);
+        $actionName      = $this->_request->getActionName();
+        $maintenanceBg = $this->_helperData->getMaintenanceSetting('maintenance_background_image');
+        $comingSoonBg  = $this->_helperData->getComingSoonSetting('comingsoon_background_image');
+
+        if ($actionName === 'maintenance') {
+            return $maintenanceBg
+                ? $this->getUrlImage($maintenanceBg, HelperImage::TEMPLATE_MEDIA_TYPE_IMAGE)
+                : $this->getViewFileUrl(self::DEFAULT_MAINTENANCE_BG);
+        }
+
+        return $comingSoonBg
+            ? $this->getUrlImage($comingSoonBg, HelperImage::TEMPLATE_MEDIA_TYPE_IMAGE)
+            : $this->getViewFileUrl(self::DEFAULT_COMING_SOON_BG);
     }
 
     /**
@@ -451,7 +501,7 @@ class Maintenance extends Template
      * Copy from the Magento core.
      *
      * @param string $string
-     * @param bool   $escapeSingleQuote
+     * @param bool $escapeSingleQuote
      *
      * @return string
      */

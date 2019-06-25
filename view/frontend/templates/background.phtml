@@ -61,11 +61,10 @@
 <?php endif; ?>
 
 <!--Single Image Background-->
-<?php if ($block->getBackgroundType() === 'image'
-    && $block->getBgImageUrl()) : ?>
+<?php if ($block->getBackgroundType() === 'image') : ?>
     <style>
         .page-wrapper {
-            background: url("<?= /* @noEscape */ $block->getBgImageUrl() ?>") no-repeat center center fixed;
+            background: url("<?= /* @noEscape */ $block->getBgImageUrl($block->getMaintenanceSetting('maintenance_background_image')) ?>") no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;

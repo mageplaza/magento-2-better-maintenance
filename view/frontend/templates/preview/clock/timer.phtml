@@ -20,7 +20,7 @@
  */
 
 /** @var \Mageplaza\BetterMaintenance\Block\Clock $block */
-$style = $block->getFormData()['[clock_template]'] === '1' ? 'simple' : $block->getFormData()['[clock_template]'];
+$style = $block->getFormData()['[clock_template]'] === '1' ? 'circle' : $block->getFormData()['[clock_template]'];
 $template = $block->getClockTemplate($style);
 $timerId  = uniqid('', false);
 if (strpos($template, 'simple') === false) {

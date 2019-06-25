@@ -60,12 +60,14 @@ $data = $block->getFormData();
 <?php endif; ?>
 
 <!--Single Image Background-->
-<?php if (array_key_exists($block->getImageCode(), $data)
-    && $block->getBgType() === 'image'
-    && $block->getImageUrl($data[$block->getImageCode()])) : ?>
+<?php //if (array_key_exists($block->getImageCode(), $data)
+//    && $block->getBgType() === 'image'
+//    && $block->getImageUrl($data[$block->getImageCode()])) : ?>
+
+<?php if ($block->getBgType() === 'image') : ?>
     <style>
         .mpbettermaintenance-preview-<?= /* @noEscape */ $block->getPage() ?> {
-            background: url("<?= /* @noEscape */ $block->getImageUrl($data[$block->getImageCode()]) ?>") no-repeat center center fixed;
+            background: url("<?= /* @noEscape */ $block->getImageBg() ?>") no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;

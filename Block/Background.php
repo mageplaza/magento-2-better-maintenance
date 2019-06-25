@@ -74,13 +74,23 @@ class Background extends Comingsoon
      * @return string|null
      * @throws NoSuchEntityException
      */
-    public function getBgImageUrl()
+    public function getBgImageUrl($image)
     {
         if ($this->redirectTo() === 'maintenance_page') {
+            if (!$image) {
+                return $this->getViewFileUrl('Mageplaza_BetterMaintenance::media/maintenance_bg.jpg');
+            }
             return $this->getImageUrl($this->getMaintenanceSetting('maintenance_background_image'));
         }
 
-        return $this->getImageUrl($this->getComingSoonSetting('comingsoon_background_image'));
+        if ($this->redirectTo() === 'coming_soon_page') {
+            if (!$image) {
+                return $this->getViewFileUrl('Mageplaza_BetterMaintenance::media/coming_soon_bg.jpg');
+            }
+            return $this->getImageUrl($this->getMaintenanceSetting('comingsoon_background_image'));
+        }
+
+        return '';
     }
 
     /**
