@@ -33,12 +33,12 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 <div id="mpbm-<?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_layout') ?>-column" class="mpbm-wrapper">
 
     <!--    Logo-->
-    <?php if (!empty($block->getMaintenanceSetting('maintenance_logo'))) : ?>
+<!--    --><?php //if (!empty($block->getMaintenanceSetting('maintenance_logo'))) : ?>
         <div id="mpbm-logo">
             <img src="<?= $block->escapeHtmlAttr($block->getLogo($block->getMaintenanceSetting('maintenance_logo'))) ?>"
                  alt="<?= /* @noEscape */  __('Logo') ?>" width="100">
         </div>
-    <?php endif; ?>
+<!--    --><?php //endif; ?>
 
     <!--    Page Title Area-->
     <div id="mpbm-page-title" class="mpbm-text">

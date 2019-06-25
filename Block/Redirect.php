@@ -24,6 +24,7 @@ namespace Mageplaza\BetterMaintenance\Block;
 use Magento\Cms\Model\Page as CmsPage;
 use Magento\Framework\App\Http\Context as HttpContext;
 use Magento\Framework\App\Response\Http;
+use Magento\Framework\App\Response\HttpInterface;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
@@ -127,7 +128,7 @@ class Redirect extends Template
     }
 
     /**
-     * @return bool|Http
+     * @return bool|Http|HttpInterface
      */
     public function redirectToUrl()
     {
@@ -157,27 +158,14 @@ class Redirect extends Template
             return false;
         }
 
-        switch ($redirectTo) {
-            case 'maintenance_page':
-                if ($this->_request->getFullActionName() === 'mpbettermaintenance_maintenance_index') {
-                    return false;
-                }
-                $route = $this->_helperData->getMaintenanceRoute();
-                $route = isset($route) ? $route : HelperData::MAINTENANCE_ROUTE;
-                break;
-            case 'coming_soon_page':
-                if ($this->_request->getFullActionName() === 'mpbettermaintenance_comingsoon_index') {
-                    return false;
-                }
-                $route = $this->_helperData->getComingSoonRoute();
-                $route = isset($route) ? $route : HelperData::COMING_SOON_ROUTE;
-                break;
-            default:
-                $route = $redirectTo;
-                if ($this->_cmsPage->getIdentifier() === $redirectTo) {
-                    return false;
-                }
-                break;
+        if ($redirectTo === 'maintenance_page' || $redirectTo === 'coming_soon_page') {
+            return false;
+        }
+
+        $route = $redirectTo;
+
+        if ($this->_cmsPage->getIdentifier() === $redirectTo) {
+            return false;
         }
 
         $url = $this->getUrl($route);

@@ -31,7 +31,7 @@
             <display_setting>
                 <clock_setting>
                     <clock_enabled>1</clock_enabled>
-                    <clock_template>simple</clock_template>
+                    <clock_template>circle</clock_template>
                     <clock_background_color>#999999</clock_background_color>
                     <clock_number_color>#000000</clock_number_color>
                 </clock_setting>

@@ -30,6 +30,14 @@ use Magento\Framework\Exception\NoSuchEntityException;
 class Background extends Comingsoon
 {
     /**
+     * @return array|mixed
+     */
+    public function redirectTo()
+    {
+        return $this->_helperData->getConfigGeneral('redirect_to');
+    }
+
+    /**
      * @return mixed
      */
     public function getFullActionName()
@@ -42,7 +50,7 @@ class Background extends Comingsoon
      */
     public function getBackgroundType()
     {
-        if ($this->getFullActionName() === 'mpbettermaintenance_maintenance_index') {
+        if ($this->redirectTo() === 'maintenance_page') {
             return $this->getMaintenanceSetting('maintenance_background');
         }
 
@@ -55,7 +63,7 @@ class Background extends Comingsoon
      */
     public function getListImagesUrl()
     {
-        if ($this->getFullActionName() === 'mpbettermaintenance_maintenance_index') {
+        if ($this->redirectTo() === 'maintenance_page') {
             return $this->getMultipleImagesUrl($this->getMaintenanceSetting('maintenance_background_multi_image'));
         }
 
@@ -68,7 +76,7 @@ class Background extends Comingsoon
      */
     public function getBgImageUrl()
     {
-        if ($this->getFullActionName() === 'mpbettermaintenance_maintenance_index') {
+        if ($this->redirectTo() === 'maintenance_page') {
             return $this->getImageUrl($this->getMaintenanceSetting('maintenance_background_image'));
         }
 
@@ -81,7 +89,7 @@ class Background extends Comingsoon
      */
     public function getBgVideoUrl()
     {
-        if ($this->getFullActionName() === 'mpbettermaintenance_maintenance_index') {
+        if ($this->redirectTo() === 'maintenance_page') {
             return $this->getVideoUrl($this->getMaintenanceSetting('maintenance_background_video'));
         }
 

@@ -73,6 +73,16 @@ class Maintenance extends Template
      */
     public function getLogo($logo)
     {
+        $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
+
+        if ($redirectTo === 'maintenance_page' && !$logo) {
+            return $this->getViewFileUrl('Mageplaza_BetterMaintenance::media/maintenance_logo.png');
+        }
+
+        if ($redirectTo === 'coming_soon_page' && !$logo) {
+            return $this->getViewFileUrl('Mageplaza_BetterMaintenance::media/coming_soon_logo.png');
+        }
+
         return $this->_helperImage->getMediaUrl(
             $this->_helperImage->getMediaPath(
                 $logo,
@@ -221,6 +231,7 @@ class Maintenance extends Template
         ];
         $url     = [];
         $imgPath = 'Mageplaza_BetterMaintenance::media/';
+
         foreach ($list as $value) {
             $url[] = [
                 'link' => $this->_helperData->getSocialSetting($value),

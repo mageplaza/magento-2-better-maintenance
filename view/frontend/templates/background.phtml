@@ -29,7 +29,7 @@
     && $block->getListImagesUrl()) : ?>
     <?php $listImagesUrl = implode(',', $block->getListImagesUrl()) ?>
     <style>
-        .mpbettermaintenance-<?= /* @noEscape */ $block->getPageClass() ?>-index {
+        .page-wrapper {
             background: no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -51,7 +51,7 @@
                 if (nextImage >= images.length) {
                     nextImage = 0;
                 }
-                $('.mpbettermaintenance-<?= /* @noEscape */ $block->getPageClass() ?>-index')
+                $('.page-wrapper')
                 .fadeIn('slow', function () {
                     setTimeout(doSlideShow, 5000);
                 }).css('background-image', 'url("' + images[nextImage++] + '")');
@@ -64,7 +64,7 @@
 <?php if ($block->getBackgroundType() === 'image'
     && $block->getBgImageUrl()) : ?>
     <style>
-        .mpbettermaintenance-<?= /* @noEscape */ $block->getPageClass() ?>-index {
+        .page-wrapper {
             background: url("<?= /* @noEscape */ $block->getBgImageUrl() ?>") no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
