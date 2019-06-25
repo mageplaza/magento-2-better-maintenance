@@ -34,7 +34,7 @@ define(
                     this.setCountdown(
                         $(this.options.timer_id),
                         this.options.timezone,
-                        this.options.endtime,
+                        this.options.endTime,
                         this.options.enabled,
                         this.options.currentTime,
                         this.options.baseUrl,

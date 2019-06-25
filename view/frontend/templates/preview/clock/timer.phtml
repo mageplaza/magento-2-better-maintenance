@@ -75,11 +75,14 @@ if (!empty($template)) : ?>
     <script type="text/x-magento-init">
     {
         ".mpbm-preview-wrapper": {
-            "Mageplaza_BetterMaintenance/js/preview/preview": {
+            "Mageplaza_BetterMaintenance/js/clock/mpcountdowntimer": {
                 "timer_id": "#mp-countdown-timer-<?= /* @noEscape */ $timerId ?>",
                 "timezone": "<?= /* @noEscape */ $block->getTimeZone() ?>",
                 "endTime": "<?= /* @noEscape */ $block->getFormData()['[end_time]'] ?>",
-                "currentTime": "<?= /* @noEscape */ $block->getCurrentTime() ?>"
+                "enabled": 1,
+                "currentTime": "<?= /* @noEscape */ $block->getCurrentTime() ?>",
+                "baseUrl": "<?= /* @noEscape */ $block->getBaseUrl() ?>",
+                "autoSwitch": 0
             }
         }
     }
