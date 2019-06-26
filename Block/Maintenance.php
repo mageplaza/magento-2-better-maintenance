@@ -28,6 +28,7 @@ use Magento\Cms\Block\Block;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Registry;
 use Magento\Framework\Session\SessionManager;
+use Magento\Framework\Stdlib\Cookie\PhpCookieManager;
 
 /**
  * Class Maintenance
@@ -63,6 +64,8 @@ class Maintenance extends Template
 
     protected $_sessionManager;
 
+    protected $_cookieManager;
+
     /**
      * Maintenance constructor.
      *
@@ -79,6 +82,7 @@ class Maintenance extends Template
         ManagerInterface $messageManager,
         Registry $registry,
         SessionManager $sessionManager,
+        PhpCookieManager $cookieManager,
         array $data = []
     ) {
         $this->_helperData     = $helperData;
@@ -86,6 +90,7 @@ class Maintenance extends Template
         $this->_messageManager = $messageManager;
         $this->_registry       = $registry;
         $this->_sessionManager = $sessionManager;
+        $this->_cookieManager = $cookieManager;
         parent::__construct($context, $data);
     }
 
@@ -340,8 +345,10 @@ class Maintenance extends Template
         $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
         $logger = new \Zend\Log\Logger();
         $logger->addWriter($writer);
-        $logger->info($this->_sessionManager->getMsg());
+        $logger->info($this->_cookieManager->getCookie('msg').'block');
 //        var_dump($this->_sessionManager->getMsg());die;
+//        var_dump($this->_registry->registry('msg'));die;
+//        var_dump($this->_cookieManager->getCookie('msg'));die;
         return $this->_registry->registry('msg');
     }
 }
