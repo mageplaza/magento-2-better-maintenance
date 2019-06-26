@@ -33,12 +33,10 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 <div id="mpbm-<?= /* @noEscape */ $block->getComingSoonSetting('comingsoon_layout') ?>-column" class="mpbm-wrapper">
 
     <!--    Logo-->
-<!--    --><?php //if (!empty($block->getComingSoonSetting('comingsoon_logo'))) : ?>
-        <div id="mpbm-logo">
-            <img src="<?= $block->escapeHtmlAttr($block->getLogo($block->getComingSoonSetting('comingsoon_logo'))) ?>" alt="<?= /* @noEscape */ __('Logo') ?>"
-                 width="100">
-        </div>
-<!--    --><?php //endif; ?>
+    <div id="mpbm-logo">
+        <img src="<?= $block->escapeHtmlAttr($block->getLogo($block->getComingSoonSetting('comingsoon_logo'))) ?>" alt="<?= /* @noEscape */ __('Logo') ?>"
+             width="100">
+    </div>
 
     <!--    Page Title Area-->
     <div id="mpbm-page-title" class="mpbm-text">

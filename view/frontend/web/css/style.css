@@ -80,8 +80,7 @@
 .circle {
     width: 150px;
     height: 150px;
-    background: #846add;
-    border: 2px solid #846add;
+    border: 1px solid #846add;
     border-radius: 50%;
     align-items: center;
     justify-content: center;

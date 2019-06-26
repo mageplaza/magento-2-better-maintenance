@@ -32,11 +32,11 @@ class Data extends AbstractData
 {
     const CONFIG_MODULE_PATH = 'mpbettermaintenance';
     const MAINTENANCE_ROUTE  = 'mpmaintenance';
-    const COMING_SOON_ROUTE   = 'mpcomingsoon';
+    const COMING_SOON_ROUTE  = 'mpcomingsoon';
 
     /**
      * @param string $code
-     * @param null   $storeId
+     * @param null $storeId
      *
      * @return array|mixed
      */

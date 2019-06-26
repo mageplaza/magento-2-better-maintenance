@@ -24,4 +24,7 @@
     <type name="Magento\Framework\App\Request\CsrfValidator">
         <plugin name="mpbettermaintenance_csrf_validator_skip" type="Mageplaza\BetterMaintenance\Plugin\CsrfValidatorSkip" />
     </type>
+    <type name="Magento\Newsletter\Controller\Subscriber\NewAction">
+        <plugin name="mpbettermaintenance_get_message" type="Mageplaza\BetterMaintenance\Plugin\GetMessage" />
+    </type>
 </config>

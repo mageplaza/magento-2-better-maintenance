@@ -31,6 +31,18 @@ class Comingsoon extends Maintenance
     const PAGE_DESCRIPTION = 'Our new site is coming soon. Stay tuned!';
 
     /**
+     * @return Maintenance
+     */
+    public function _prepareLayout()
+    {
+        $this->pageConfig->setMetaTitle($this->getComingSoonSetting('comingsoon_metatitle'));
+        $this->pageConfig->setDescription($this->getComingSoonSetting('comingsoon_metadescription'));
+        $this->pageConfig->setKeywords($this->getComingSoonSetting('comingsoon_metakeywords'));
+
+        return parent::_prepareLayout();
+    }
+
+    /**
      * @return mixed|string
      */
     public function getPageTitle()

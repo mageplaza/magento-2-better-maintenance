@@ -78,14 +78,14 @@ class Background extends Comingsoon
     {
         if ($this->redirectTo() === 'maintenance_page') {
             if (!$image) {
-                return $this->getViewFileUrl('Mageplaza_BetterMaintenance::media/maintenance_bg.jpg');
+                return $this->getViewFileUrl(self::DEFAULT_MAINTENANCE_BG);
             }
             return $this->getImageUrl($this->getMaintenanceSetting('maintenance_background_image'));
         }
 
         if ($this->redirectTo() === 'coming_soon_page') {
             if (!$image) {
-                return $this->getViewFileUrl('Mageplaza_BetterMaintenance::media/coming_soon_bg.jpg');
+                return $this->getViewFileUrl(self::DEFAULT_COMING_SOON_BG);
             }
             return $this->getImageUrl($this->getMaintenanceSetting('comingsoon_background_image'));
         }
@@ -107,14 +107,18 @@ class Background extends Comingsoon
     }
 
     /**
-     * @return string
+     * @return Comingsoon|Maintenance
      */
-    public function getPageClass()
+    public function _prepareLayout()
     {
-        if ($this->getFullActionName() === 'mpbettermaintenance_maintenance_index') {
-            return 'maintenance';
+        $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
+        if ($redirectTo === 'maintenance_page') {
+            $this->pageConfig->getTitle()->set($this->getMaintenanceSetting('maintenance_title'));
+        }
+        if ($redirectTo === 'coming_soon_page') {
+            $this->pageConfig->getTitle()->set($this->getComingSoonSetting('comingsoon_title'));
         }
 
-        return 'comingsoon';
+        return parent::_prepareLayout();
     }
 }

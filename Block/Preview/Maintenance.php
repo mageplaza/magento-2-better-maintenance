@@ -438,7 +438,7 @@ class Maintenance extends Template
      */
     public function getImageBg()
     {
-        $actionName      = $this->_request->getActionName();
+        $actionName    = $this->_request->getActionName();
         $maintenanceBg = $this->_helperData->getMaintenanceSetting('maintenance_background_image');
         $comingSoonBg  = $this->_helperData->getComingSoonSetting('comingsoon_background_image');
 

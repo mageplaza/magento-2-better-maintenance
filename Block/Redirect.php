@@ -22,10 +22,8 @@
 namespace Mageplaza\BetterMaintenance\Block;
 
 use Magento\Cms\Model\Page as CmsPage;
-use Magento\Framework\App\Http\Context as HttpContext;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\App\Response\HttpInterface;
-use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Magento\Framework\Stdlib\DateTime\DateTime;
@@ -55,16 +53,6 @@ class Redirect extends Template
     protected $_response;
 
     /**
-     * @var ManagerInterface
-     */
-    protected $_messageManager;
-
-    /**
-     * @var HttpContext
-     */
-    protected $_context;
-
-    /**
      * @var DateTime
      */
     protected $_date;
@@ -76,8 +64,6 @@ class Redirect extends Template
      * @param HelperData $helperData
      * @param CmsPage $cmsPage
      * @param Http $response
-     * @param ManagerInterface $messageManager
-     * @param HttpContext $httpContext
      * @param DateTime $date
      * @param array $data
      */
@@ -86,27 +72,15 @@ class Redirect extends Template
         HelperData $helperData,
         CmsPage $cmsPage,
         Http $response,
-        ManagerInterface $messageManager,
-        HttpContext $httpContext,
         DateTime $date,
         array $data = []
     ) {
         $this->_helperData     = $helperData;
         $this->_cmsPage        = $cmsPage;
         $this->_response       = $response;
-        $this->_messageManager = $messageManager;
-        $this->_context        = $httpContext;
         $this->_date           = $date;
 
         parent::__construct($context, $data);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFullActionName()
-    {
-        return $this->_request->getFullActionName();
     }
 
     /**

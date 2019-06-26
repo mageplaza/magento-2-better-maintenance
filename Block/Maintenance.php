@@ -25,6 +25,9 @@ use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
 use Magento\Cms\Block\Block;
+use Magento\Framework\Message\ManagerInterface;
+use Magento\Framework\Registry;
+use Magento\Framework\Session\SessionManager;
 
 /**
  * Class Maintenance
@@ -33,9 +36,13 @@ use Magento\Cms\Block\Block;
  */
 class Maintenance extends Template
 {
-    const PAGE_TITLE       = 'Under Maintenance';
-    const PAGE_DESCRIPTION = 'We\'re currently down for maintenance. Be right back!';
-    const PROGRESS_VALUE   = 50;
+    const PAGE_TITLE               = 'Under Maintenance';
+    const PAGE_DESCRIPTION         = 'We\'re currently down for maintenance. Be right back!';
+    const PROGRESS_VALUE           = 50;
+    const DEFAULT_MAINTENANCE_LOGO = 'Mageplaza_BetterMaintenance::media/maintenance_logo.png';
+    const DEFAULT_MAINTENANCE_BG   = 'Mageplaza_BetterMaintenance::media/maintenance_bg.jpg';
+    const DEFAULT_COMING_SOON_LOGO = 'Mageplaza_BetterMaintenance::media/coming_soon_logo.png';
+    const DEFAULT_COMING_SOON_BG   = 'Mageplaza_BetterMaintenance::media/coming_soon_bg.jpg';
 
     /**
      * @var HelperData
@@ -48,21 +55,37 @@ class Maintenance extends Template
     protected $_helperImage;
 
     /**
+     * @var ManagerInterface
+     */
+    protected $_messageManager;
+
+    protected $_registry;
+
+    protected $_sessionManager;
+
+    /**
      * Maintenance constructor.
      *
-     * @param HelperData       $helperData
-     * @param HelperImage      $helperImage
+     * @param HelperData $helperData
+     * @param HelperImage $helperImage
      * @param Template\Context $context
-     * @param array            $data
+     * @param ManagerInterface $messageManager
+     * @param array $data
      */
     public function __construct(
         HelperData $helperData,
         HelperImage $helperImage,
         Template\Context $context,
+        ManagerInterface $messageManager,
+        Registry $registry,
+        SessionManager $sessionManager,
         array $data = []
     ) {
-        $this->_helperData  = $helperData;
-        $this->_helperImage = $helperImage;
+        $this->_helperData     = $helperData;
+        $this->_helperImage    = $helperImage;
+        $this->_messageManager = $messageManager;
+        $this->_registry       = $registry;
+        $this->_sessionManager = $sessionManager;
         parent::__construct($context, $data);
     }
 
@@ -76,11 +99,11 @@ class Maintenance extends Template
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
 
         if ($redirectTo === 'maintenance_page' && !$logo) {
-            return $this->getViewFileUrl('Mageplaza_BetterMaintenance::media/maintenance_logo.png');
+            return $this->getViewFileUrl(self::DEFAULT_MAINTENANCE_LOGO);
         }
 
         if ($redirectTo === 'coming_soon_page' && !$logo) {
-            return $this->getViewFileUrl('Mageplaza_BetterMaintenance::media/coming_soon_logo.png');
+            return $this->getViewFileUrl(self::DEFAULT_COMING_SOON_LOGO);
         }
 
         return $this->_helperImage->getMediaUrl(
@@ -303,12 +326,22 @@ class Maintenance extends Template
      * Copy from the Magento core.
      *
      * @param string $string
-     * @param bool   $escapeSingleQuote
+     * @param bool $escapeSingleQuote
      *
      * @return string
      */
     public function escapeHtmlAttr($string, $escapeSingleQuote = true)
     {
         return $this->_escaper->escapeHtmlAttr($string, $escapeSingleQuote);
+    }
+
+    public function getMessage()
+    {
+        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
+        $logger = new \Zend\Log\Logger();
+        $logger->addWriter($writer);
+        $logger->info($this->_sessionManager->getMsg());
+//        var_dump($this->_sessionManager->getMsg());die;
+        return $this->_registry->registry('msg');
     }
 }

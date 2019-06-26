@@ -32,7 +32,7 @@
                 <clock_setting>
                     <clock_enabled>1</clock_enabled>
                     <clock_template>circle</clock_template>
-                    <clock_background_color>#999999</clock_background_color>
+                    <clock_background_color>#ffffff00</clock_background_color>
                     <clock_number_color>#000000</clock_number_color>
                 </clock_setting>
                 <subscribe_setting>

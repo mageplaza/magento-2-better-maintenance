@@ -212,10 +212,6 @@
             </group>
             <group id="maintenance_setting" translate="label" type="text" sortOrder="330" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                 <label>Maintenance Page Setting</label>
-<!--                <field id="maintenance_route" translate="label" type="text" sortOrder="340" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">-->
-<!--                    <label>Page Route</label>-->
-<!--                    <validate>validate-identifier</validate>-->
-<!--                </field>-->
                 <field id="maintenance_layout" translate="label" type="select" sortOrder="350" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Select Layout</label>
                     <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\LayoutOptions</source_model>
@@ -306,10 +302,6 @@
                     </depends>
                     <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
                 </field>
-<!--                <field id="maintenance_http_response" translate="label" type="select" sortOrder="490" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">-->
-<!--                    <label>HTTP Response Header</label>-->
-<!--                    <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\HttpResponse</source_model>-->
-<!--                </field>-->
                 <field id="maintenance_preview" translate="label comment" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
                     <button_label>Preview</button_label>
                     <comment>If uploading files, please save configuration before preview.</comment>
@@ -318,10 +310,6 @@
             </group>
             <group id="comingsoon_setting" translate="label" type="text" sortOrder="510" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                 <label>Coming Soon Page Setting</label>
-<!--                <field id="comingsoon_route" translate="label" type="text" sortOrder="520" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">-->
-<!--                    <label>Page Route</label>-->
-<!--                    <validate>validate-identifier</validate>-->
-<!--                </field>-->
                 <field id="comingsoon_layout" translate="label" type="select" sortOrder="530" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Select Layout</label>
                     <source_model>Mageplaza\BetterMaintenance\Model\Config\Source\System\LayoutOptions</source_model>
