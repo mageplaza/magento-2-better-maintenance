@@ -26,7 +26,7 @@ use Magento\Framework\App\Response\Http;
 use Magento\Framework\App\Response\HttpInterface;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
-use Magento\Framework\Stdlib\DateTime\DateTime;
+use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 
 /**
  * Class Redirect
@@ -53,9 +53,9 @@ class Redirect extends Template
     protected $_response;
 
     /**
-     * @var DateTime
+     * @var RemoteAddress
      */
-    protected $_date;
+    protected $_remoteAddress;
 
     /**
      * Redirect constructor.
@@ -64,7 +64,7 @@ class Redirect extends Template
      * @param HelperData $helperData
      * @param CmsPage $cmsPage
      * @param Http $response
-     * @param DateTime $date
+     * @param RemoteAddress $remoteAddress
      * @param array $data
      */
     public function __construct(
@@ -72,13 +72,13 @@ class Redirect extends Template
         HelperData $helperData,
         CmsPage $cmsPage,
         Http $response,
-        DateTime $date,
+        RemoteAddress $remoteAddress,
         array $data = []
     ) {
         $this->_helperData     = $helperData;
         $this->_cmsPage        = $cmsPage;
         $this->_response       = $response;
-        $this->_date           = $date;
+        $this->_remoteAddress = $remoteAddress;
 
         parent::__construct($context, $data);
     }
@@ -88,9 +88,7 @@ class Redirect extends Template
      */
     public function getWhiteListPage()
     {
-        $links = preg_split("/(\r\n|\n|\r)/", $this->_helperData->getConfigGeneral('whitelist_page'));
-
-        return $links;
+        return preg_split("/(\r\n|\n|\r)/", $this->_helperData->getWhitelistPage());
     }
 
     /**
@@ -98,7 +96,7 @@ class Redirect extends Template
      */
     public function getWhiteListIp()
     {
-        return explode(',', $this->_helperData->getConfigGeneral('whitelist_ip'));
+        return explode(',', $this->_helperData->getWhitelistIp());
     }
 
     /**
@@ -109,13 +107,13 @@ class Redirect extends Template
         $this->_response->setNoCacheHeaders();
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
         $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
-        $currentIp  = $this->_request->getClientIp();
+        $currentIp  = $this->_remoteAddress->getRemoteAddress();
 
         if (!$this->_helperData->isEnabled()) {
             return false;
         }
 
-        foreach ($this->getWhiteListIp() as $value) {
+        foreach ($this->getWhitelistIp() as $value) {
             if ($this->_helperData->checkIp($currentIp, $value)) {
                 return false;
             }
@@ -128,7 +126,7 @@ class Redirect extends Template
         }
 
         if (strtotime($this->_localeDate->date()->format('m/d/Y H:i:s'))
-            >= strtotime($this->_helperData->getConfigGeneral('end_time'))) {
+            >= strtotime($this->_helperData->getEndTime())) {
             return false;
         }
 

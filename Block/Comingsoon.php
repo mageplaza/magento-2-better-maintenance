@@ -35,9 +35,15 @@ class Comingsoon extends Maintenance
      */
     public function _prepareLayout()
     {
-        $this->pageConfig->setMetaTitle($this->getComingSoonSetting('comingsoon_metatitle'));
-        $this->pageConfig->setDescription($this->getComingSoonSetting('comingsoon_metadescription'));
-        $this->pageConfig->setKeywords($this->getComingSoonSetting('comingsoon_metakeywords'));
+        $data = [
+            'title' => $this->getComingSoonSetting('comingsoon_metatitle'),
+            'description' => $this->getComingSoonSetting('comingsoon_metadescription'),
+            'keywords' => $this->getComingSoonSetting('comingsoon_metakeywords')
+        ];
+
+        foreach ($data as $key => $value) {
+            $this->pageConfig->setMetadata($key, $value);
+        }
 
         return parent::_prepareLayout();
     }

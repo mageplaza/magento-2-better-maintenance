@@ -74,20 +74,22 @@ class Background extends Comingsoon
      * @return string|null
      * @throws NoSuchEntityException
      */
-    public function getBgImageUrl($image)
+    public function getBgImageUrl()
     {
         if ($this->redirectTo() === 'maintenance_page') {
+            $image = $this->getMaintenanceSetting('maintenance_background_image');
             if (!$image) {
                 return $this->getViewFileUrl(self::DEFAULT_MAINTENANCE_BG);
             }
-            return $this->getImageUrl($this->getMaintenanceSetting('maintenance_background_image'));
+            return $this->getImageUrl($image);
         }
 
         if ($this->redirectTo() === 'coming_soon_page') {
+            $image = $this->getComingSoonSetting('comingsoon_background_image');
             if (!$image) {
                 return $this->getViewFileUrl(self::DEFAULT_COMING_SOON_BG);
             }
-            return $this->getImageUrl($this->getMaintenanceSetting('comingsoon_background_image'));
+            return $this->getImageUrl($image);
         }
 
         return '';

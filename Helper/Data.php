@@ -134,8 +134,8 @@ class Data extends AbstractData
     }
 
     /**
-     * @param $ip
-     * @param $range
+     * @param string $ip
+     * @param string $range
      *
      * @return bool
      */
@@ -181,5 +181,29 @@ class Data extends AbstractData
         }
 
         return ($op === 0);
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function getWhitelistIp()
+    {
+        return $this->getConfigGeneral('whitelist_ip');
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function getEndTime()
+    {
+        return $this->getConfigGeneral('end_time');
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function getWhitelistPage()
+    {
+        return $this->getConfigGeneral('whitelist_page');
     }
 }

@@ -30,9 +30,10 @@ $fieldName   = $blockName === 'maintenance'
 $imageJson   = $blockName === 'maintenance'
     ? 'mpbettermaintenance/maintenance_setting/maintenance_background_multi_image'
     : 'mpbettermaintenance/comingsoon_setting/comingsoon_background_multi_image';
+
 ?>
 <div id="template-images-gallery" class="gallery"
-     data-mage-init='{"productGallery":{}}'
+     data-mage-init='{"Mageplaza_BetterMaintenance/js/image-gallery":{}}'
      data-images="<?= $block->escapeHtmlAttr($block->getImagesJson($imageJson)) ?>">
     <div class="image image-placeholder">
         <?= /* @noEscape */
