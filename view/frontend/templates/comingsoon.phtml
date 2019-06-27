@@ -57,7 +57,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 
     <!--    Subscribe area-->
     <?php if ($block->getSubscribeSetting('subscribe_type') === 'email_form') : ?>
-        <div id="mpbm-subscribe" class="mpbm-subscribe-box">
+        <div id="mpbm-subscribe" class="mpbm-subscribe-box" data-mage-init='{"Mageplaza_BetterMaintenance/js/message/submit":{}}'>
             <?php if ($block->getSubscribeSetting('subscribe_label')) : ?>
                 <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
             <?php endif; ?>
@@ -69,6 +69,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
                 <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
             <?php endif; ?>
             <?= /* @noEscape */ $block->getChildHtml('register') ?>
+            <?= /* @noEscape */ $block->checkRegister() ?>
         </div>
     <?php endif; ?>
 

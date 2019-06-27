@@ -32,12 +32,10 @@ $data = $block->getFormData();
 <div id="mpbm-<?=  /* @noEscape */ $block->getPageLayout('[maintenance_layout]') ?>-column" class="mpbm-wrapper mpbm-preview-wrapper">
 
     <!--    Logo-->
-<!--    --><?php //if (!empty($data['[maintenance_logo]'])) : ?>
-        <div id="mpbm-logo">
-            <img src="<?= $block->escapeHtmlAttr($block->getLogo()) ?>"
-                 alt="<?= /* @noEscape */ __('Logo') ?>" width="100">
-        </div>
-<!--    --><?php //endif; ?>
+    <div id="mpbm-logo">
+        <img src="<?= $block->escapeHtmlAttr($block->getLogo()) ?>"
+             alt="<?= /* @noEscape */ __('Logo') ?>" width="100">
+    </div>
 
     <!--    Page Title Area-->
     <div id="mpbm-page-title">

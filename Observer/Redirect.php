@@ -30,10 +30,6 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\UrlInterface;
 use Mageplaza\BetterMaintenance\Block\Redirect as BlockRedirect;
-use Magento\Framework\Message\ManagerInterface;
-use Magento\Framework\Registry;
-use Magento\Framework\Session\SessionManager;
-use Magento\Framework\Stdlib\Cookie\PhpCookieManager;
 
 /**
  * Class Redirect
@@ -41,12 +37,6 @@ use Magento\Framework\Stdlib\Cookie\PhpCookieManager;
  */
 class Redirect implements ObserverInterface
 {
-    protected $_messageManager;
-
-    protected $_registry;
-
-    protected $_sessionManager;
-    protected $_cookieManager;
     /**
      * @var HelperData
      */
@@ -94,10 +84,6 @@ class Redirect implements ObserverInterface
      * @param BlockRedirect $blockRedirect
      */
     public function __construct(
-        ManagerInterface $messageManager,
-        Registry $registry,
-        SessionManager $sessionManager,
-        PhpCookieManager $cookieManager,
         HelperData $helperData,
         Http $response,
         TimezoneInterface $localeDate,
@@ -106,17 +92,13 @@ class Redirect implements ObserverInterface
         ViewInterface $view,
         BlockRedirect $blockRedirect
     ) {
-        $this->_messageManager = $messageManager;
-        $this->_registry = $registry;
-        $this->_sessionManager = $sessionManager;
-        $this->_cookieManager = $cookieManager;
-        $this->_helperData    = $helperData;
-        $this->_response      = $response;
-        $this->_localeDate    = $localeDate;
-        $this->_request       = $request;
-        $this->_urlBuilder    = $urlBuilder;
-        $this->_view          = $view;
-        $this->_blockRedirect = $blockRedirect;
+        $this->_helperData     = $helperData;
+        $this->_response       = $response;
+        $this->_localeDate     = $localeDate;
+        $this->_request        = $request;
+        $this->_urlBuilder     = $urlBuilder;
+        $this->_view           = $view;
+        $this->_blockRedirect  = $blockRedirect;
     }
 
     /**
@@ -126,7 +108,6 @@ class Redirect implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        die('3333');
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
         $currentUrl = $this->_urlBuilder->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
         $currentIp  = $this->_request->getClientIp();
@@ -156,18 +137,15 @@ class Redirect implements ObserverInterface
         if ($redirectTo === 'maintenance_page' && $ctlName !== 'preview') {
             $this->_view->loadLayout(['default', 'mpbettermaintenance_maintenance_index'], true, true, false);
             $this->_response->setHttpResponseCode(503);
-            $this->_request->setDispatched(true);
-            $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
-            $logger = new \Zend\Log\Logger();
-            $logger->addWriter($writer);
-            $logger->info($this->_cookieManager->getCookie('msg').'obs');
         }
 
         if ($redirectTo === 'coming_soon_page' && $ctlName !== 'preview') {
             $this->_view->loadLayout(['default', 'mpbettermaintenance_comingsoon_index'], true, true, false);
             $this->_response->setHttpResponseCode(503);
-            $this->_request->setDispatched(true);
+
         }
+
+        $this->_request->setDispatched(true);
 
         return false;
     }

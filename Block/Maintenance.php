@@ -21,14 +21,12 @@
 namespace Mageplaza\BetterMaintenance\Block;
 
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Phrase;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
 use Magento\Cms\Block\Block;
-use Magento\Framework\Message\ManagerInterface;
-use Magento\Framework\Registry;
-use Magento\Framework\Session\SessionManager;
-use Magento\Framework\Stdlib\Cookie\PhpCookieManager;
+use Magento\Customer\Model\CustomerFactory;
 
 /**
  * Class Maintenance
@@ -56,15 +54,9 @@ class Maintenance extends Template
     protected $_helperImage;
 
     /**
-     * @var ManagerInterface
+     * @var CustomerFactory
      */
-    protected $_messageManager;
-
-    protected $_registry;
-
-    protected $_sessionManager;
-
-    protected $_cookieManager;
+    protected $_customerFactory;
 
     /**
      * Maintenance constructor.
@@ -72,25 +64,19 @@ class Maintenance extends Template
      * @param HelperData $helperData
      * @param HelperImage $helperImage
      * @param Template\Context $context
-     * @param ManagerInterface $messageManager
+     * @param CustomerFactory $customerFactory
      * @param array $data
      */
     public function __construct(
         HelperData $helperData,
         HelperImage $helperImage,
         Template\Context $context,
-        ManagerInterface $messageManager,
-        Registry $registry,
-        SessionManager $sessionManager,
-        PhpCookieManager $cookieManager,
+        CustomerFactory $customerFactory,
         array $data = []
     ) {
-        $this->_helperData     = $helperData;
-        $this->_helperImage    = $helperImage;
-        $this->_messageManager = $messageManager;
-        $this->_registry       = $registry;
-        $this->_sessionManager = $sessionManager;
-        $this->_cookieManager = $cookieManager;
+        $this->_helperData      = $helperData;
+        $this->_helperImage     = $helperImage;
+        $this->_customerFactory = $customerFactory;
         parent::__construct($context, $data);
     }
 
@@ -340,15 +326,22 @@ class Maintenance extends Template
         return $this->_escaper->escapeHtmlAttr($string, $escapeSingleQuote);
     }
 
-    public function getMessage()
+    /**
+     * @return Phrase|string
+     */
+    public function checkRegister()
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-        $logger->info($this->_cookieManager->getCookie('msg').'block');
-//        var_dump($this->_sessionManager->getMsg());die;
-//        var_dump($this->_registry->registry('msg'));die;
-//        var_dump($this->_cookieManager->getCookie('msg'));die;
-        return $this->_registry->registry('msg');
+        $currentTime      = strtotime($this->_localeDate->date()->format('m/d/Y H:i:s'));
+        $lastRegisterTime = strtotime($this->_customerFactory->create()
+            ->getCollection()
+            ->getLastItem()
+            ->getCreatedAt());
+        $compare = $currentTime - $lastRegisterTime;
+
+        if ($compare < 3) {
+            return __('Thank you for registering');
+        }
+
+        return '';
     }
 }

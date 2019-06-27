@@ -25,7 +25,6 @@
 
 $subscribeLabel      = $block->getSubscribeSetting('subscribe_label');
 $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
-echo 'test' .  $block->getMessage();
 ?>
 
 <?=  $block->getChildHtml('background') ?>
@@ -75,18 +74,20 @@ echo 'test' .  $block->getMessage();
 
     <!--    Subscribe area-->
     <?php if ($block->getSubscribeSetting('subscribe_type') === 'email_form') : ?>
-        <div id="mpbm-subscribe" class="mpbm-subscribe-box">
+        <div id="mpbm-subscribe" class="mpbm-subscribe-box" data-mage-init='{"Mageplaza_BetterMaintenance/js/message/submit":{}}'>
             <?php if ($subscribeLabel) : ?>
                 <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
             <?php endif; ?>
             <?= /* @noEscape */ $block->getChildHtml('subscribe') ?>
         </div>
+        <p id="mpbm-success-msg"></p>
     <?php elseif ($block->getSubscribeSetting('subscribe_type') === 'register_form') : ?>
         <div id="mpbm-register" class="mpbm-subscribe-box">
             <?php if ($subscribeLabel) : ?>
                 <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
             <?php endif; ?>
             <?= $block->getChildHtml('register') ?>
+            <?= /* @noEscape */ $block->checkRegister() ?>
         </div>
     <?php endif; ?>
 
