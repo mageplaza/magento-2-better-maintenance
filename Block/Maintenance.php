@@ -332,11 +332,12 @@ class Maintenance extends Template
     public function checkRegister()
     {
         $currentTime      = strtotime($this->_localeDate->date()->format('m/d/Y H:i:s'));
-        $lastRegisterTime = strtotime($this->_customerFactory->create()
+        $lastRegisterTime = $this->_customerFactory->create()
             ->getCollection()
             ->getLastItem()
-            ->getCreatedAt());
-        $compare = $currentTime - $lastRegisterTime;
+            ->getCreatedAt();
+        $realTime = strtotime($this->_localeDate->date($lastRegisterTime)->format('m/d/y H:i:s'));
+        $compare = $currentTime - $realTime;
 
         if ($compare < 3) {
             return __('Thank you for registering');

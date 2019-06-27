@@ -79,8 +79,8 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
                 <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
             <?php endif; ?>
             <?= /* @noEscape */ $block->getChildHtml('subscribe') ?>
+            <p id="mpbm-success-msg"></p>
         </div>
-        <p id="mpbm-success-msg"></p>
     <?php elseif ($block->getSubscribeSetting('subscribe_type') === 'register_form') : ?>
         <div id="mpbm-register" class="mpbm-subscribe-box">
             <?php if ($subscribeLabel) : ?>
