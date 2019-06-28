@@ -110,6 +110,7 @@ class NewAction extends CoreNewAction
                 $this->validateGuestSubscription();
                 $this->validateEmailAvailable($email);
                 $subscriber = $this->_subscriberFactory->create()->loadByEmail($email);
+                $this->_subscriberFactory->create()->subscribe($email);
 
                 if ($subscriber->getId()
                     && (int) $subscriber->getSubscriberStatus() === Subscriber::STATUS_SUBSCRIBED) {
