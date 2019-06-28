@@ -32,7 +32,7 @@ abstract class MultipleImages extends Field
     /**
      * @return mixed
      */
-    public function setElement()
+    public function setMultiImgElement()
     {
         return $this->_layout
             ->createBlock(Images::class)

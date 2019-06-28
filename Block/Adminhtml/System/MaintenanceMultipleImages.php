@@ -36,7 +36,7 @@ class MaintenanceMultipleImages extends MultipleImages
     protected function _getElementHtml(AbstractElement $element)
     {
         $html = '';
-        $html .= $this->setElement()->setResponse('maintenance')->toHtml();
+        $html .= $this->setMultiImgElement()->setResponse('maintenance')->toHtml();
 
         return $html;
     }

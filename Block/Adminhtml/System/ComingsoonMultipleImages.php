@@ -36,7 +36,7 @@ class ComingsoonMultipleImages extends MultipleImages
     protected function _getElementHtml(AbstractElement $element)
     {
         $html = '';
-        $html .= $this->setElement()->setResponse('comingsoon')->toHtml();
+        $html .= $this->setMultiImgElement()->setResponse('comingsoon')->toHtml();
 
         return $html;
     }
