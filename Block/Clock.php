@@ -49,10 +49,10 @@ class Clock extends Template
     /**
      * Clock constructor.
      *
-     * @param HelperData       $helperData
-     * @param PreviewBlock     $previewBlock
+     * @param HelperData $helperData
+     * @param PreviewBlock $previewBlock
      * @param Template\Context $context
-     * @param array            $data
+     * @param array $data
      */
     public function __construct(
         HelperData $helperData,
@@ -171,9 +171,13 @@ class Clock extends Template
      */
     public function getClockNumberColor()
     {
-        $color = $this->getFormData()['[clock_number_color]'];
+        if ($this->getCtrlName()) {
+            $color = $this->getFormData()['[clock_number_color]'];
 
-        return $color === '1' ? self::CLOCK_NUMBER_COLOR : $color;
+            return $color === '1' ? self::CLOCK_NUMBER_COLOR : $color;
+        }
+
+        return $this->getClockSetting('clock_number_color');
     }
 
     /**
@@ -181,22 +185,60 @@ class Clock extends Template
      */
     public function getClockBgColor()
     {
-        $color = $this->getFormData()['[clock_background_color]'];
+        if ($this->getCtrlName()) {
+            $color = $this->getFormData()['[clock_background_color]'];
 
-        return $color === '1' ? self::CLOCK_BG_COLOR : $color;
+            return $color === '1' ? self::CLOCK_BG_COLOR : $color;
+        }
+
+        return $this->getClockSetting('clock_background_color');
     }
 
     /**
-     * @param $area
-     *
-     * @return mixed
+     * @return mixed|string
      */
-    public function getClockStyle($area)
+    public function getClockStyle()
     {
-        if ($area === 'clock_template') {
-            return $this->_helperData->getClockSetting($area);
+        if ($this->getCtrlName()) {
+            return $this->getFormData()['[clock_template]'] === '1'
+                ? 'circle'
+                : $this->getFormData()['[clock_template]'];
         }
 
-        return $this->getFormData()['$area'] === '1' ? 'circle' : $this->getFormData()['$area'];
+        return $this->getClockSetting('clock_template');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndTime()
+    {
+        if ($this->getCtrlName()) {
+            return $this->getFormData()['[end_time]'];
+        }
+
+        return $this->getConfigGeneral('end_time');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCtrlName()
+    {
+        $ctrlName = $this->_request->getControllerName();
+
+        return $ctrlName === 'preview';
+    }
+
+    /**
+     * @return array|int|mixed
+     */
+    public function getAutoSwitch()
+    {
+        if ($this->getCtrlName()) {
+            return 0;
+        }
+
+        return $this->getConfigGeneral('auto_switch');
     }
 }

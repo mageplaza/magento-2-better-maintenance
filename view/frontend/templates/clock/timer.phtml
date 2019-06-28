@@ -20,12 +20,15 @@
  */
 
 /** @var \Mageplaza\BetterMaintenance\Block\Clock $block */
-$clockBackgroundColor = $block->getClockSetting('clock_background_color');
-$clockNumberColor     = $block->getClockSetting('clock_number_color');
 
-$template   = $block->getClockTemplate($block->getClockSetting('clock_template'));
-$timerId    = uniqid('', false);
-$clockStyle = $block->getClockStyle('clock_template');
+$clockStyle = $this->getClockStyle();
+if ($clockStyle !== 'simple') {
+    $clockBackgroundColor = $block->getClockBgColor();
+}
+$clockNumberColor     = $block->getClockNumberColor();
+$template             = $block->getClockTemplate($clockStyle);
+$timerId              = uniqid('', false);
+
 if (!empty($template)) : ?>
     <div id="mp-countdown-timer-<?= /* @noEscape */ $timerId ?>">
         <?= /* @noEscape */ $template ?>
@@ -70,17 +73,17 @@ if (!empty($template)) : ?>
 
     <script type="text/x-magento-init">
     {
-        "#mp-countdown-timer-<?= /* @noEscape */ $timerId ?>": {
+        "#mp-countdown-timer-<?= /* @noEscape */$timerId ?>": {
             "Mageplaza_BetterMaintenance/js/clock/mpcountdowntimer": {
                 "timer_id": "#mp-countdown-timer-<?= /* @noEscape */ $timerId ?>",
                 "timezone": "<?= /* @noEscape */ $block->getTimeZone() ?>",
-                "endTime": "<?= /* @noEscape */ $block->getConfigGeneral('end_time') ?>",
-                "enabled": <?= /* @noEscape */ $block->isEnabled() ?>,
+                "endTime": "<?= /* @noEscape */ $block->getEndTime() ?>",
                 "currentTime": "<?= /* @noEscape */ $block->getCurrentTime() ?>",
                 "baseUrl": "<?= /* @noEscape */ $block->getBaseUrl() ?>",
-                "autoSwitch": <?= /* @noEscape */ $block->getConfigGeneral('auto_switch') ?>
+                "autoSwitch": <?= /* @noEscape */ $block->getAutoSwitch() ?>
             }
         }
     }
+
     </script>
 <?php endif; ?>

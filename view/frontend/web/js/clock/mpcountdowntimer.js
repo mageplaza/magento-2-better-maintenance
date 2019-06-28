@@ -35,14 +35,13 @@ define(
                         $(this.options.timer_id),
                         this.options.timezone,
                         this.options.endTime,
-                        this.options.enabled,
                         this.options.currentTime,
                         this.options.baseUrl,
                         this.options.autoSwitch
                     );
                 },
 
-                setCountdown: function (element, timezone, endTime, enabled, currentTime, baseUrl, autoSwitch) {
+                setCountdown: function (element, timezone, endTime, currentTime, baseUrl, autoSwitch) {
 
                     // Set the date we're counting down to
                     var countDownHandler,
@@ -67,7 +66,7 @@ define(
                                 now        = Date.parse(formatDate),
                                 distance   = -1;
 
-                            if (enabled === 1 && timeEnd > now) {
+                            if (timeEnd > now) {
                                 distance = timeEnd - now;
                             }
 

@@ -381,7 +381,7 @@ class Maintenance extends Template
     {
         $block = $this->getLayout()
             ->createBlock(Clock::class)
-            ->setTemplate('Mageplaza_BetterMaintenance::preview/clock/timer.phtml')
+            ->setTemplate('Mageplaza_BetterMaintenance::clock/timer.phtml')
             ->toHtml();
 
         return $block;
