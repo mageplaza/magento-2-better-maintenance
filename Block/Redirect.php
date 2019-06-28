@@ -27,6 +27,7 @@ use Magento\Framework\App\Response\HttpInterface;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
+use Mageplaza\BetterMaintenance\Model\Config\Source\System\RedirectTo;
 
 /**
  * Class Redirect
@@ -130,7 +131,7 @@ class Redirect extends Template
             return false;
         }
 
-        if ($redirectTo === 'maintenance_page' || $redirectTo === 'coming_soon_page') {
+        if ($redirectTo === RedirectTo::MAINTENANCE_PAGE || $redirectTo === RedirectTo::COMING_SOON_PAGE) {
             return false;
         }
 

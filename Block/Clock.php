@@ -24,7 +24,6 @@ namespace Mageplaza\BetterMaintenance\Block;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Model\Config\Source\System\ClockTemplate;
-use Magento\Framework\Stdlib\DateTime\DateTime;
 use Mageplaza\BetterMaintenance\Block\Preview\Maintenance as PreviewBlock;
 
 /**
@@ -43,11 +42,6 @@ class Clock extends Template
     protected $_helperData;
 
     /**
-     * @var DateTime
-     */
-    protected $_date;
-
-    /**
      * @var PreviewBlock
      */
     protected $_previewBlock;
@@ -56,20 +50,17 @@ class Clock extends Template
      * Clock constructor.
      *
      * @param HelperData       $helperData
-     * @param DateTime         $date
      * @param PreviewBlock     $previewBlock
      * @param Template\Context $context
      * @param array            $data
      */
     public function __construct(
         HelperData $helperData,
-        DateTime $date,
         PreviewBlock $previewBlock,
         Template\Context $context,
         array $data = []
     ) {
         $this->_helperData   = $helperData;
-        $this->_date         = $date;
         $this->_previewBlock = $previewBlock;
         parent::__construct($context, $data);
     }
@@ -193,5 +184,19 @@ class Clock extends Template
         $color = $this->getFormData()['[clock_background_color]'];
 
         return $color === '1' ? self::CLOCK_BG_COLOR : $color;
+    }
+
+    /**
+     * @param $area
+     *
+     * @return mixed
+     */
+    public function getClockStyle($area)
+    {
+        if ($area === 'clock_template') {
+            return $this->_helperData->getClockSetting($area);
+        }
+
+        return $this->getFormData()['$area'] === '1' ? 'circle' : $this->getFormData()['$area'];
     }
 }

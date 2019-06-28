@@ -23,7 +23,9 @@
  * @var \Mageplaza\BetterMaintenance\Block\Background $block ;
  */
 ?>
-
+<div id="mpbm-notice-msg">
+    <?= /* @noEscape */ $block->checkRegister() ?>
+</div>
 <!--Multiple Image Background-->
 <?php if ($block->getBackgroundType() === 'multiple_images'
     && $block->getListImagesUrl()) : ?>

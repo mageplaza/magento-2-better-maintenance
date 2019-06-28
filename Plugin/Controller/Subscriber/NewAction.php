@@ -28,12 +28,15 @@ use Magento\Customer\Model\Url as CustomerUrl;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Message\MessageInterface;
 use Magento\Newsletter\Controller\Subscriber\NewAction as CoreNewAction;
-use Magento\Newsletter\Model\Subscriber;
 use Magento\Newsletter\Model\SubscriberFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\BetterMaintenance\Helper\Data;
+use Psr\Log\LoggerInterface;
+use Magento\Framework\View\Element\Messages;
+use Magento\Framework\View\LayoutInterface;
+use Magento\Framework\Message\ManagerInterface;
 
 /**
  * Class NewAction
@@ -52,6 +55,21 @@ class NewAction extends CoreNewAction
     protected $_helperData;
 
     /**
+     * @var LoggerInterface
+     */
+    protected $_logger;
+
+    /**
+     * @var LayoutInterface
+     */
+    protected $_layout;
+
+    /**
+     * @var ManagerInterface
+     */
+    protected $_message;
+
+    /**
      * NewAction constructor.
      *
      * @param Context $context
@@ -62,6 +80,9 @@ class NewAction extends CoreNewAction
      * @param CustomerAccountManagement $customerAccountManagement
      * @param JsonFactory $resultJsonFactory
      * @param Data $helperData
+     * @param LoggerInterface $logger
+     * @param LayoutInterface $layout
+     * @param ManagerInterface $message
      */
     public function __construct(
         Context $context,
@@ -71,10 +92,16 @@ class NewAction extends CoreNewAction
         CustomerUrl $customerUrl,
         CustomerAccountManagement $customerAccountManagement,
         JsonFactory $resultJsonFactory,
-        Data $helperData
+        Data $helperData,
+        LoggerInterface $logger,
+        LayoutInterface $layout,
+        ManagerInterface $message
     ) {
         $this->resultJsonFactory = $resultJsonFactory;
         $this->_helperData       = $helperData;
+        $this->_logger           = $logger;
+        $this->_layout           = $layout;
+        $this->_message          = $message;
 
         parent::__construct(
             $context,
@@ -87,57 +114,38 @@ class NewAction extends CoreNewAction
     }
 
     /**
-     * @param $subject
-     * @param $proceed
+     * @param CoreNewAction $subject
+     * @param $result
      *
      * @return Json
-     *
      * @SuppressWarnings("Unused")
      */
-    public function aroundExecute($subject, $proceed)
+    public function afterExecute(CoreNewAction $subject, $result)
     {
         if (!$this->_helperData->isEnabled() || !$this->getRequest()->isAjax()) {
-            return $proceed();
+            return $result;
         }
 
-        $response = [];
+        /** @var MessageInterface $value */
+        $msgs = $this->_message->getMessages(1);
 
-        if ($this->getRequest()->isPost() && $this->getRequest()->getPost('email')) {
-            $email = (string) $this->getRequest()->getPost('email');
+        foreach ($msgs->getItems() as $value) {
+            $msg[]  = $value->getText();
+            $type[] = $value->getType();
+        }
 
-            try {
-                $this->validateEmailFormat($email);
-                $this->validateGuestSubscription();
-                $this->validateEmailAvailable($email);
-                $subscriber = $this->_subscriberFactory->create()->loadByEmail($email);
-                $this->_subscriberFactory->create()->subscribe($email);
+        $msgBlock = $this->_layout->createBlock(Messages::class);
+        foreach ($type as $key => $value) {
+            if ($value === 'error') {
+                $html[] = $msgBlock->addError($msg[$key])->toHtml();
+            }
 
-                if ($subscriber->getId()
-                    && (int) $subscriber->getSubscriberStatus() === Subscriber::STATUS_SUBSCRIBED) {
-                    $response = [
-                        'success' => true,
-                        'msg'     => __('This email address is already subscribed.')
-                    ];
-                } else {
-                    $response = [
-                        'success' => true,
-                        'msg'     => __('Thank you for your subscription.')
-                    ];
-                }
-            } catch (LocalizedException $e) {
-                $response = [
-                    'status' => 'ERROR',
-                    'msg'    => __('There was a problem with the subscription: %1', $e->getMessage())
-                ];
-
-            } catch (Exception $e) {
-                $response = [
-                    'status' => 'ERROR',
-                    'msg'    => __('Something went wrong with the subscription. %1', $e->getMessage())
-                ];
+            if ($value === 'success') {
+                $html[] = $msgBlock->addSuccess($msg[$key])->toHtml();
             }
         }
+        $this->getResponse()->clearHeader('location');
 
-        return $this->resultJsonFactory->create()->setData($response);
+        return $this->resultJsonFactory->create()->setData($html);
     }
 }

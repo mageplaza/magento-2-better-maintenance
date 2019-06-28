@@ -21,10 +21,7 @@
 namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 
 use Magento\Config\Block\System\Config\Form\Field;
-use Magento\Backend\Block\Template\Context;
-use Magento\Framework\Registry;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Magento\Framework\Stdlib\DateTime\DateTime;
 
 /**
  * Class RealTime
@@ -33,35 +30,6 @@ use Magento\Framework\Stdlib\DateTime\DateTime;
  */
 class RealTime extends Field
 {
-    /**
-     * @var Registry
-     */
-    protected $_coreRegistry;
-
-    /**
-     * @var DateTime
-     */
-    protected $_date;
-
-    /**
-     * RealTime constructor.
-     *
-     * @param Registry $coreRegistry
-     * @param DateTime $date
-     * @param Context  $context
-     * @param array    $data
-     */
-    public function __construct(
-        Registry $coreRegistry,
-        DateTime $date,
-        Context $context,
-        array $data = []
-    ) {
-        $this->_coreRegistry = $coreRegistry;
-        $this->_date         = $date;
-        parent::__construct($context, $data);
-    }
-
     /**
      * @param AbstractElement $element
      *

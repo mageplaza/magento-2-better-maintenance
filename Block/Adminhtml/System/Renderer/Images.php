@@ -55,11 +55,11 @@ class Images extends Widget
     /**
      * Images constructor.
      *
-     * @param Context                $context
-     * @param HelperImage            $imageHelper
-     * @param HelperData             $helperData
+     * @param Context $context
+     * @param HelperImage $imageHelper
+     * @param HelperData $helperData
      * @param ObjectManagerInterface $objectManager
-     * @param array                  $data
+     * @param array $data
      */
     public function __construct(
         Context $context,
@@ -146,7 +146,7 @@ class Images extends Widget
                 $images   = $this->sortImagesByPosition($value);
                 foreach ($images as $key => &$image) {
                     $image['url'] = $this->_imageHelper
-                        ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
+                            ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
                     try {
                         $fileHandler   = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
                         $image['size'] = $fileHandler['size'];
@@ -186,12 +186,36 @@ class Images extends Widget
      * Copy from the Magento core.
      *
      * @param string $string
-     * @param bool   $escapeSingleQuote
+     * @param bool $escapeSingleQuote
      *
      * @return string
      */
     public function escapeHtmlAttr($string, $escapeSingleQuote = true)
     {
         return $this->_escaper->escapeHtmlAttr($string, $escapeSingleQuote);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFieldName()
+    {
+        $response = $this->getResponse();
+
+        return $response === 'maintenance'
+            ? 'groups[maintenance_setting][fields][maintenance_background_multi_image]'
+            : 'groups[comingsoon_setting][fields][comingsoon_background_multi_image]';
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageJson()
+    {
+        $response = $this->getResponse();
+
+        return $response === 'maintenance'
+            ? 'mpbettermaintenance/maintenance_setting/maintenance_background_multi_image'
+            : 'mpbettermaintenance/comingsoon_setting/comingsoon_background_multi_image';
     }
 }

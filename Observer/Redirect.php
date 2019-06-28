@@ -30,6 +30,8 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\UrlInterface;
 use Mageplaza\BetterMaintenance\Block\Redirect as BlockRedirect;
+use Mageplaza\BetterMaintenance\Model\Config\Source\System\RedirectTo;
+use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 
 /**
  * Class Redirect
@@ -73,6 +75,11 @@ class Redirect implements ObserverInterface
     protected $_blockRedirect;
 
     /**
+     * @var RemoteAddress
+     */
+    protected $_remoteAddress;
+
+    /**
      * Redirect constructor.
      *
      * @param HelperData $helperData
@@ -82,6 +89,7 @@ class Redirect implements ObserverInterface
      * @param UrlInterface $urlBuilder
      * @param ViewInterface $view
      * @param BlockRedirect $blockRedirect
+     * @param RemoteAddress $remoteAddress
      */
     public function __construct(
         HelperData $helperData,
@@ -90,15 +98,17 @@ class Redirect implements ObserverInterface
         RequestInterface $request,
         UrlInterface $urlBuilder,
         ViewInterface $view,
-        BlockRedirect $blockRedirect
+        BlockRedirect $blockRedirect,
+        RemoteAddress $remoteAddress
     ) {
-        $this->_helperData     = $helperData;
-        $this->_response       = $response;
-        $this->_localeDate     = $localeDate;
-        $this->_request        = $request;
-        $this->_urlBuilder     = $urlBuilder;
-        $this->_view           = $view;
-        $this->_blockRedirect  = $blockRedirect;
+        $this->_helperData    = $helperData;
+        $this->_response      = $response;
+        $this->_localeDate    = $localeDate;
+        $this->_request       = $request;
+        $this->_urlBuilder    = $urlBuilder;
+        $this->_view          = $view;
+        $this->_blockRedirect = $blockRedirect;
+        $this->_remoteAddress = $remoteAddress;
     }
 
     /**
@@ -110,7 +120,7 @@ class Redirect implements ObserverInterface
     {
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
         $currentUrl = $this->_urlBuilder->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
-        $currentIp  = $this->_request->getClientIp();
+        $currentIp  = $this->_remoteAddress->getRemoteAddress();
         $ctlName    = $this->_request->getControllerName();
 
         if (!$this->_helperData->isEnabled()) {
@@ -134,15 +144,14 @@ class Redirect implements ObserverInterface
             return;
         }
 
-        if ($redirectTo === 'maintenance_page' && $ctlName !== 'preview') {
+        if ($redirectTo === RedirectTo::MAINTENANCE_PAGE && $ctlName !== 'preview') {
             $this->_view->loadLayout(['default', 'mpbettermaintenance_maintenance_index'], true, true, false);
             $this->_response->setHttpResponseCode(503);
         }
 
-        if ($redirectTo === 'coming_soon_page' && $ctlName !== 'preview') {
+        if ($redirectTo === RedirectTo::COMING_SOON_PAGE && $ctlName !== 'preview') {
             $this->_view->loadLayout(['default', 'mpbettermaintenance_comingsoon_index'], true, true, false);
             $this->_response->setHttpResponseCode(503);
-
         }
 
         $this->_request->setDispatched(true);

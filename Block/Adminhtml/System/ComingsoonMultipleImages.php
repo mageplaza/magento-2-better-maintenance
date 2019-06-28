@@ -20,40 +20,14 @@
  */
 namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 
-use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Magento\Framework\Registry;
-use Magento\Backend\Block\Template\Context;
-use Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer\Images;
 
 /**
  * Class ComingsoonMultipleImages
- *
  * @package Mageplaza\BetterMaintenance\Block\Adminhtml\System
  */
-class ComingsoonMultipleImages extends Field
+class ComingsoonMultipleImages extends MultipleImages
 {
-    /**
-     * @var Registry
-     */
-    protected $_coreRegistry;
-
-    /**
-     * ComingsoonMultipleImages constructor.
-     *
-     * @param Registry $coreRegistry
-     * @param Context  $context
-     * @param array    $data
-     */
-    public function __construct(
-        Registry $coreRegistry,
-        Context $context,
-        array $data = []
-    ) {
-        $this->_coreRegistry = $coreRegistry;
-        parent::__construct($context, $data);
-    }
-
     /**
      * @param AbstractElement $element
      *
@@ -62,14 +36,7 @@ class ComingsoonMultipleImages extends Field
     protected function _getElementHtml(AbstractElement $element)
     {
         $html = '';
-        $html .= $this->_layout
-            ->createBlock(Images::class)
-            ->setTemplate('Mageplaza_BetterMaintenance::system/config/gallery.phtml')
-            ->setId('media_gallery_content')
-            ->setElement($this)
-            ->setFormName('edit_form')
-            ->setResponse('comingsoon')
-            ->toHtml();
+        $html .= $this->setElement()->setResponse('comingsoon')->toHtml();
 
         return $html;
     }

@@ -23,7 +23,6 @@ namespace Mageplaza\BetterMaintenance\Block\Preview;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Template\Context;
-use Magento\UrlRewrite\Model\UrlRewriteFactory;
 use Mageplaza\BetterMaintenance\Block\Maintenance as BlockMaintenance;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Result\PageFactory;
@@ -54,11 +53,6 @@ class Maintenance extends Template
     const DEFAULT_COMING_SOON_BG   = 'Mageplaza_BetterMaintenance::media/coming_soon_bg.jpg';
 
     /**
-     * @var PageFactory
-     */
-    protected $_pageFactory;
-
-    /**
      * @var HelperData
      */
     protected $_helperData;
@@ -67,11 +61,6 @@ class Maintenance extends Template
      * @var Maintenance
      */
     protected $_maintenanceBlock;
-
-    /**
-     * @var UrlRewriteFactory
-     */
-    protected $_urlRewrite;
 
     /**
      * @var HelperImage
@@ -99,25 +88,19 @@ class Maintenance extends Template
     /**
      * Preview constructor.
      *
-     * @param PageFactory $pageFactory
      * @param HelperData $helperData
      * @param BlockMaintenance $maintenanceBlock
-     * @param UrlRewriteFactory $urlRewrite
      * @param HelperImage $helperImage
      * @param Context $context
      */
     public function __construct(
-        PageFactory $pageFactory,
         HelperData $helperData,
         BlockMaintenance $maintenanceBlock,
-        UrlRewriteFactory $urlRewrite,
         HelperImage $helperImage,
         Context $context
     ) {
-        $this->_pageFactory      = $pageFactory;
         $this->_helperData       = $helperData;
         $this->_maintenanceBlock = $maintenanceBlock;
-        $this->_urlRewrite       = $urlRewrite;
         $this->_helperImage      = $helperImage;
         parent::__construct($context);
     }
@@ -131,6 +114,7 @@ class Maintenance extends Template
         $data    = $this->_request->getParam('formData');
         $data    = urldecode($data);
         $data    = explode('&', $data);
+
         foreach ($data as $value) {
             $val              = explode('=', $value);
             $val[0]           = $this->filterKey($val[0]);

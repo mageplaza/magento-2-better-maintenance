@@ -27,7 +27,4 @@
     <type name="Magento\Newsletter\Controller\Subscriber\NewAction">
         <plugin name="mpbettermaintenance_get_message" type="Mageplaza\BetterMaintenance\Plugin\Controller\Subscriber\NewAction" />
     </type>
-<!--    <type name="Magento\Customer\Controller\Account\CreatePost">-->
-<!--        <plugin name="mpbettermaintenance_get_message" type="Mageplaza\BetterMaintenance\Plugin\Controller\Account\CreatePost"/>-->
-<!--    </type>-->
 </config>

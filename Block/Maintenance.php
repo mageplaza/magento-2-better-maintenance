@@ -27,6 +27,8 @@ use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
 use Magento\Cms\Block\Block;
 use Magento\Customer\Model\CustomerFactory;
+use Mageplaza\BetterMaintenance\Model\Config\Source\System\RedirectTo;
+use Magento\Framework\View\Element\Messages;
 
 /**
  * Class Maintenance
@@ -37,6 +39,8 @@ class Maintenance extends Template
 {
     const PAGE_TITLE               = 'Under Maintenance';
     const PAGE_DESCRIPTION         = 'We\'re currently down for maintenance. Be right back!';
+    const PAGE_TITLE_CS            = 'Coming Soon';
+    const PAGE_DESCRIPTION_CS      = 'Our new site is coming soon. Stay tuned!';
     const PROGRESS_VALUE           = 50;
     const DEFAULT_MAINTENANCE_LOGO = 'Mageplaza_BetterMaintenance::media/maintenance_logo.png';
     const DEFAULT_MAINTENANCE_BG   = 'Mageplaza_BetterMaintenance::media/maintenance_bg.jpg';
@@ -89,11 +93,11 @@ class Maintenance extends Template
     {
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
 
-        if ($redirectTo === 'maintenance_page' && !$logo) {
+        if ($redirectTo === RedirectTo::MAINTENANCE_PAGE && !$logo) {
             return $this->getViewFileUrl(self::DEFAULT_MAINTENANCE_LOGO);
         }
 
-        if ($redirectTo === 'coming_soon_page' && !$logo) {
+        if ($redirectTo === RedirectTo::COMING_SOON_PAGE && !$logo) {
             return $this->getViewFileUrl(self::DEFAULT_COMING_SOON_LOGO);
         }
 
@@ -181,23 +185,38 @@ class Maintenance extends Template
     }
 
     /**
+     * @param $type
+     *
      * @return mixed|string
      */
-    public function getPageTitle()
+    public function getPageTitle($type)
     {
-        $title = $this->_helperData->getMaintenanceSetting('maintenance_title');
+        if ($type === 'maintenance_title') {
+            $title = $this->_helperData->getMaintenanceSetting($type);
 
-        return empty($title) ? self::PAGE_TITLE : $title;
+            return empty($title) ? self::PAGE_TITLE : $title;
+        }
+
+        $title = $this->_helperData->getComingSoonSetting($type);
+
+        return empty($title) ? self::PAGE_TITLE_CS : $title;
     }
 
     /**
+     * @param $type
+     *
      * @return mixed|string
      */
-    public function getPageDescription()
+    public function getPageDescription($type)
     {
-        $des = $this->_helperData->getMaintenanceSetting('maintenance_description');
+        if ($type === 'maintenance_description') {
+            $des = $this->_helperData->getMaintenanceSetting($type);
 
-        return empty($des) ? self::PAGE_DESCRIPTION : $des;
+            return empty($des) ? self::PAGE_DESCRIPTION : $des;
+        }
+        $des = $this->_helperData->getComingSoonSetting($type);
+
+        return empty($des) ? self::PAGE_DESCRIPTION_CS : $des;
     }
 
     /**
@@ -336,11 +355,14 @@ class Maintenance extends Template
             ->getCollection()
             ->getLastItem()
             ->getCreatedAt();
-        $realTime = strtotime($this->_localeDate->date($lastRegisterTime)->format('m/d/y H:i:s'));
-        $compare = $currentTime - $realTime;
+        $realTime         = strtotime($this->_localeDate->date($lastRegisterTime)->format('m/d/y H:i:s'));
+        $compare          = $currentTime - $realTime;
 
         if ($compare < 3) {
-            return __('Thank you for registering');
+            $msg = $this->_layout->createBlock(Messages::class)
+                ->addSuccess(__('Thank you for registering.'))->toHtml();
+
+            return $msg;
         }
 
         return '';

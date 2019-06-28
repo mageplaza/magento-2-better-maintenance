@@ -37,7 +37,7 @@ define(
                     type: 'POST',
                     data: {email: email},
                     error: function (res) {
-                        $('#mpbm-success-msg').html(res.responseJSON.msg);
+                        $('#mpbm-notice-msg').html(res.responseJSON);
                     }
                 });
             }

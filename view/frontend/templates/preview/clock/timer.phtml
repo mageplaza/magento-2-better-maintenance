@@ -20,9 +20,9 @@
  */
 
 /** @var \Mageplaza\BetterMaintenance\Block\Clock $block */
-$style = $block->getFormData()['[clock_template]'] === '1' ? 'circle' : $block->getFormData()['[clock_template]'];
-$template = $block->getClockTemplate($style);
-$timerId  = uniqid('', false);
+$clockStyle = $block->getClockStyle('[clock_template]');
+$template   = $block->getClockTemplate($style);
+$timerId    = uniqid('', false);
 if (strpos($template, 'simple') === false) {
     $clockBackgroundColor = $block->getClockBgColor();
 }
@@ -54,16 +54,14 @@ if (!empty($template)) : ?>
             color: <?= /* @noEscape */ $clockNumberColor ?>;
         }
 
-        <?php if (strpos($template, 'circle') !== false
-        || strpos($template, 'square') !== false
-        || strpos($template, 'stack') !== false) : ?>
+        <?php if ($clockStyle === 'circle' || $clockStyle === 'square' || $clockStyle === 'stack') : ?>
         #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-clock {
             background-color: <?= /* @noEscape */ $clockBackgroundColor ?>;
             border-color: <?= /* @noEscape */ '#cccccc' ?>;
         }
 
         <?php endif; ?>
-        <?php if (strpos($template, 'modern') !== false) : ?>
+        <?php if ($clockStyle === 'modern') : ?>
         #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .countdown-modern {
             background: <?= /* @noEscape */ $clockBackgroundColor ?>;
             border-color: <?= /* @noEscape */ $clockBackgroundColor ?>;

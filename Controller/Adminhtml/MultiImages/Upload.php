@@ -64,11 +64,6 @@ class Upload extends Action
     protected $_imageHelper;
 
     /**
-     * @var Value
-     */
-    protected $_value;
-
-    /**
      * Upload constructor.
      *
      * @param Action\Context  $context
@@ -76,21 +71,18 @@ class Upload extends Action
      * @param UploaderFactory $uploaderFactory
      * @param Filesystem      $filesystem
      * @param Image           $imageHelper
-     * @param Value           $value
      */
     public function __construct(
         Action\Context $context,
         RawFactory $resultRawFactory,
         UploaderFactory $uploaderFactory,
         Filesystem $filesystem,
-        Image $imageHelper,
-        Value $value
+        Image $imageHelper
     ) {
         $this->resultRawFactory = $resultRawFactory;
         $this->_uploaderFactory = $uploaderFactory;
         $this->_fileSystem      = $filesystem;
         $this->_imageHelper     = $imageHelper;
-        $this->_value           = $value;
 
         parent::__construct($context);
     }

@@ -40,12 +40,12 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
 
     <!--    Page Title Area-->
     <div id="mpbm-page-title" class="mpbm-text">
-        <h1 style="margin-bottom: 0"><?= /* @noEscape */ $block->getPageTitle() ?></h1>
+        <h1 style="margin-bottom: 0"><?= /* @noEscape */ $block->getPageTitle('maintenance_title') ?></h1>
     </div>
 
     <!--    Page Description Area-->
     <div id="mpbm-page-description" class="mpbm-text">
-        <h3><?= /* @noEscape */ $block->getPageDescription() ?></h3>
+        <h3><?= /* @noEscape */ $block->getPageDescription('maintenance_description') ?></h3>
     </div>
 
     <!--    Clock area-->
@@ -79,7 +79,6 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
                 <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
             <?php endif; ?>
             <?= /* @noEscape */ $block->getChildHtml('subscribe') ?>
-            <p id="mpbm-success-msg"></p>
         </div>
     <?php elseif ($block->getSubscribeSetting('subscribe_type') === 'register_form') : ?>
         <div id="mpbm-register" class="mpbm-subscribe-box">
@@ -87,7 +86,6 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
                 <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
             <?php endif; ?>
             <?= $block->getChildHtml('register') ?>
-            <?= /* @noEscape */ $block->checkRegister() ?>
         </div>
     <?php endif; ?>
 

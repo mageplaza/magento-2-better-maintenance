@@ -20,6 +20,8 @@
  */
 namespace Mageplaza\BetterMaintenance\Block;
 
+use Mageplaza\BetterMaintenance\Model\Config\Source\System\RedirectTo;
+
 /**
  * Class Comingsoon
  *
@@ -27,45 +29,21 @@ namespace Mageplaza\BetterMaintenance\Block;
  */
 class Comingsoon extends Maintenance
 {
-    const PAGE_TITLE       = 'Coming Soon';
-    const PAGE_DESCRIPTION = 'Our new site is coming soon. Stay tuned!';
-
     /**
      * @return Maintenance
      */
     public function _prepareLayout()
     {
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
-        if ($redirectTo === 'coming_soon_page') {
+        if ($redirectTo === RedirectTo::COMING_SOON_PAGE) {
             if ($this->_helperData->versionCompare('2.2.0')) {
                 $this->pageConfig->setMetaTitle($this->getComingSoonSetting('comingsoon_metatitle'));
             }
-            $this->pageConfig->getTitle()->set('test');
             $this->pageConfig->setDescription($this->getComingSoonSetting('comingsoon_metadescription'));
             $this->pageConfig->setKeywords($this->getComingSoonSetting('comingsoon_metakeywords'));
         }
 
         return parent::_prepareLayout();
-    }
-
-    /**
-     * @return mixed|string
-     */
-    public function getPageTitle()
-    {
-        $title = $this->_helperData->getComingSoonSetting('comingsoon_title');
-
-        return empty($title) ? self::PAGE_TITLE : $title;
-    }
-
-    /**
-     * @return mixed|string
-     */
-    public function getPageDescription()
-    {
-        $des = $this->_helperData->getMaintenanceSetting('comingsoon_description');
-
-        return empty($des) ? self::PAGE_DESCRIPTION : $des;
     }
 
     /**

@@ -23,9 +23,9 @@
 $clockBackgroundColor = $block->getClockSetting('clock_background_color');
 $clockNumberColor     = $block->getClockSetting('clock_number_color');
 
-$template = $block->getClockTemplate($block->getClockSetting('clock_template'));
-$timerId  = uniqid('', false);
-
+$template   = $block->getClockTemplate($block->getClockSetting('clock_template'));
+$timerId    = uniqid('', false);
+$clockStyle = $block->getClockStyle('clock_template');
 if (!empty($template)) : ?>
     <div id="mp-countdown-timer-<?= /* @noEscape */ $timerId ?>">
         <?= /* @noEscape */ $template ?>
@@ -52,16 +52,14 @@ if (!empty($template)) : ?>
             color: <?= /* @noEscape */ $clockNumberColor ?>;
         }
 
-        <?php if (strpos($template, 'circle') !== false
-        || strpos($template, 'square') !== false
-        || strpos($template, 'stack') !== false) : ?>
+        <?php if ($clockStyle === 'circle' || $clockStyle === 'square' || $clockStyle === 'stack') : ?>
         #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-clock {
             background-color: <?= /* @noEscape */ $clockBackgroundColor ?>;
             border-color: <?= /* @noEscape */ '#cccccc' ?>;
         }
 
         <?php endif; ?>
-        <?php if (strpos($template, 'modern') !== false) : ?>
+        <?php if ($clockStyle === 'modern') : ?>
         #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .countdown-modern {
             background: <?= /* @noEscape */ $clockBackgroundColor ?>;
             border-color: <?= /* @noEscape */ $clockBackgroundColor ?>;

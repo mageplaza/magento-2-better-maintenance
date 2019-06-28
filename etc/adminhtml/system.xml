@@ -76,7 +76,7 @@
                     </field>
                     <field id="clock_background_color" translate="label"  sortOrder="110" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Clock Background Color</label>
-                        <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
+                        <frontend_class>jscolor{hash:true}</frontend_class>
                         <depends>
                             <field id="clock_enabled">1</field>
                             <field id="clock_template" separator=",">circle,square,stack,modern</field>
@@ -84,7 +84,7 @@
                     </field>
                     <field id="clock_inner_color" translate="label"  sortOrder="115" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Clock Inner Background Color</label>
-                        <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
+                        <frontend_class>jscolor{hash:true}</frontend_class>
                         <depends>
                             <field id="clock_enabled">1</field>
                             <field id="clock_template">stack</field>
@@ -92,7 +92,7 @@
                     </field>
                     <field id="clock_number_color" translate="label"  sortOrder="120" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Clock Number Color</label>
-                        <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
+                        <frontend_class>jscolor{hash:true}</frontend_class>
                         <depends>
                             <field id="clock_enabled">1</field>
                         </depends>
@@ -112,7 +112,7 @@
                     </field>
                     <field id="subscribe_label_color" translate="label" sortOrder="160" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Description Text Color</label>
-                        <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
+                        <frontend_class>jscolor{hash:true}</frontend_class>
                         <depends>
                             <field id="subscribe_type" separator=",">register_form,email_form</field>
                         </depends>
@@ -126,14 +126,14 @@
                     </field>
                     <field id="button_label_color" translate="label" sortOrder="180" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Button Text Color</label>
-                        <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
+                        <frontend_class>jscolor{hash:true}</frontend_class>
                         <depends>
                             <field id="subscribe_type" separator=",">register_form,email_form</field>
                         </depends>
                     </field>
                     <field id="button_background_color" translate="label" sortOrder="190" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Button Background Color</label>
-                        <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
+                        <frontend_class>jscolor{hash:true}</frontend_class>
                         <depends>
                             <field id="subscribe_type" separator=",">register_form,email_form</field>
                         </depends>
@@ -164,7 +164,7 @@
                         <depends>
                             <field id="social_enabled">1</field>
                         </depends>
-                        <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
+                        <frontend_class>jscolor{hash:true}</frontend_class>
                     </field>
                     <field id="social_facebook" translate="label" type="text" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Facebook Page Link</label>
@@ -224,7 +224,7 @@
                 </field>
                 <field id="maintenance_color" translate="label" sortOrder="380" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Text Color</label>
-                    <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
+                    <frontend_class>jscolor{hash:true}</frontend_class>
                 </field>
                 <field id="maintenance_logo" translate="label comment" type="image" sortOrder="390" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Logo</label>
@@ -293,14 +293,14 @@
                     <depends>
                         <field id="maintenance_progress_enabled">1</field>
                     </depends>
-                    <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
+                    <frontend_class>jscolor{hash:true}</frontend_class>
                 </field>
                 <field id="maintenance_progress_bar_color" translate="label" sortOrder="480" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Progress Bar Color</label>
                     <depends>
                         <field id="maintenance_progress_enabled">1</field>
                     </depends>
-                    <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
+                    <frontend_class>jscolor{hash:true}</frontend_class>
                 </field>
                 <field id="maintenance_preview" translate="label comment" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
                     <button_label>Preview</button_label>
@@ -322,7 +322,7 @@
                 </field>
                 <field id="comingsoon_color" translate="label" sortOrder="560" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Text Color</label>
-                    <frontend_model>Mageplaza\BetterMaintenance\Block\Adminhtml\System\ColorPicker</frontend_model>
+                    <frontend_class>jscolor{hash:true}</frontend_class>
                 </field>
                 <field id="comingsoon_logo" translate="label comment" type="image" sortOrder="570" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Logo</label>

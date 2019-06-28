@@ -21,6 +21,7 @@
 namespace Mageplaza\BetterMaintenance\Block;
 
 use Magento\Framework\Exception\NoSuchEntityException;
+use Mageplaza\BetterMaintenance\Model\Config\Source\System\RedirectTo;
 
 /**
  * Class Background
@@ -50,7 +51,7 @@ class Background extends Comingsoon
      */
     public function getBackgroundType()
     {
-        if ($this->redirectTo() === 'maintenance_page') {
+        if ($this->redirectTo() === RedirectTo::MAINTENANCE_PAGE) {
             return $this->getMaintenanceSetting('maintenance_background');
         }
 
@@ -63,7 +64,7 @@ class Background extends Comingsoon
      */
     public function getListImagesUrl()
     {
-        if ($this->redirectTo() === 'maintenance_page') {
+        if ($this->redirectTo() === RedirectTo::MAINTENANCE_PAGE) {
             return $this->getMultipleImagesUrl($this->getMaintenanceSetting('maintenance_background_multi_image'));
         }
 
@@ -76,7 +77,7 @@ class Background extends Comingsoon
      */
     public function getBgImageUrl()
     {
-        if ($this->redirectTo() === 'maintenance_page') {
+        if ($this->redirectTo() === RedirectTo::MAINTENANCE_PAGE) {
             $image = $this->getMaintenanceSetting('maintenance_background_image');
             if (!$image) {
                 return $this->getViewFileUrl(self::DEFAULT_MAINTENANCE_BG);
@@ -84,7 +85,7 @@ class Background extends Comingsoon
             return $this->getImageUrl($image);
         }
 
-        if ($this->redirectTo() === 'coming_soon_page') {
+        if ($this->redirectTo() === RedirectTo::COMING_SOON_PAGE) {
             $image = $this->getComingSoonSetting('comingsoon_background_image');
             if (!$image) {
                 return $this->getViewFileUrl(self::DEFAULT_COMING_SOON_BG);
@@ -101,7 +102,7 @@ class Background extends Comingsoon
      */
     public function getBgVideoUrl()
     {
-        if ($this->redirectTo() === 'maintenance_page') {
+        if ($this->redirectTo() === RedirectTo::MAINTENANCE_PAGE) {
             return $this->getVideoUrl($this->getMaintenanceSetting('maintenance_background_video'));
         }
 
@@ -114,10 +115,10 @@ class Background extends Comingsoon
     public function _prepareLayout()
     {
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
-        if ($redirectTo === 'maintenance_page') {
+        if ($redirectTo === RedirectTo::MAINTENANCE_PAGE) {
             $this->pageConfig->getTitle()->set($this->getMaintenanceSetting('maintenance_title'));
         }
-        if ($redirectTo === 'coming_soon_page') {
+        if ($redirectTo === RedirectTo::COMING_SOON_PAGE) {
             $this->pageConfig->getTitle()->set($this->getComingSoonSetting('comingsoon_title'));
         }
 

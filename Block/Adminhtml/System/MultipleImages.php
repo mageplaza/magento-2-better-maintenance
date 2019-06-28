@@ -20,24 +20,25 @@
  */
 namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 
-use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Config\Block\System\Config\Form\Field;
+use Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer\Images;
 
 /**
- * Class MaintenanceMultipleImages
+ * Class MultipleImages
  * @package Mageplaza\BetterMaintenance\Block\Adminhtml\System
  */
-class MaintenanceMultipleImages extends MultipleImages
+abstract class MultipleImages extends Field
 {
     /**
-     * @param AbstractElement $element
-     *
-     * @return string
+     * @return mixed
      */
-    protected function _getElementHtml(AbstractElement $element)
+    public function setElement()
     {
-        $html = '';
-        $html .= $this->setElement()->setResponse('maintenance')->toHtml();
-
-        return $html;
+        return $this->_layout
+            ->createBlock(Images::class)
+            ->setTemplate('Mageplaza_BetterMaintenance::system/config/gallery.phtml')
+            ->setId('media_gallery_content')
+            ->setElement($this)
+            ->setFormName('edit_form');
     }
 }

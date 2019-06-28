@@ -23,8 +23,6 @@ namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Magento\Framework\Registry;
-use Magento\Backend\Block\Template\Context;
 
 /**
  * Class DatePicker
@@ -33,27 +31,6 @@ use Magento\Backend\Block\Template\Context;
  */
 class DatePicker extends Field
 {
-    /**
-     * @var Registry
-     */
-    protected $_coreRegistry;
-
-    /**
-     * DatePicker constructor.
-     *
-     * @param Context  $context
-     * @param Registry $coreRegistry
-     * @param array    $data
-     */
-    public function __construct(
-        Context $context,
-        Registry $coreRegistry,
-        array $data = []
-    ) {
-        $this->_coreRegistry = $coreRegistry;
-        parent::__construct($context, $data);
-    }
-
     /**
      * @param AbstractElement $element
      * @return string
