@@ -35,6 +35,7 @@ define(
                     url: url,
                     dataType: 'json',
                     type: 'POST',
+                    showLoader: true,
                     data: {email: email},
                     error: function (res) {
                         $('#mpbm-notice-msg').html(res.responseJSON);
