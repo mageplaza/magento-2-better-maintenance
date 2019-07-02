@@ -21,22 +21,18 @@
 
 namespace Mageplaza\BetterMaintenance\Plugin\Controller\Subscriber;
 
-use Exception;
 use Magento\Customer\Api\AccountManagementInterface as CustomerAccountManagement;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Model\Url as CustomerUrl;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
-use Magento\Framework\Message\MessageInterface;
 use Magento\Newsletter\Controller\Subscriber\NewAction as CoreNewAction;
 use Magento\Newsletter\Model\SubscriberFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\BetterMaintenance\Helper\Data;
-use Psr\Log\LoggerInterface;
 use Magento\Framework\View\Element\Messages;
 use Magento\Framework\View\LayoutInterface;
-use Magento\Framework\Message\ManagerInterface;
 
 /**
  * Class NewAction
@@ -55,19 +51,9 @@ class NewAction extends CoreNewAction
     protected $_helperData;
 
     /**
-     * @var LoggerInterface
-     */
-    protected $_logger;
-
-    /**
      * @var LayoutInterface
      */
     protected $_layout;
-
-    /**
-     * @var ManagerInterface
-     */
-    protected $_message;
 
     /**
      * NewAction constructor.
@@ -80,9 +66,7 @@ class NewAction extends CoreNewAction
      * @param CustomerAccountManagement $customerAccountManagement
      * @param JsonFactory $resultJsonFactory
      * @param Data $helperData
-     * @param LoggerInterface $logger
      * @param LayoutInterface $layout
-     * @param ManagerInterface $message
      */
     public function __construct(
         Context $context,
@@ -93,15 +77,11 @@ class NewAction extends CoreNewAction
         CustomerAccountManagement $customerAccountManagement,
         JsonFactory $resultJsonFactory,
         Data $helperData,
-        LoggerInterface $logger,
-        LayoutInterface $layout,
-        ManagerInterface $message
+        LayoutInterface $layout
     ) {
         $this->resultJsonFactory = $resultJsonFactory;
         $this->_helperData       = $helperData;
-        $this->_logger           = $logger;
         $this->_layout           = $layout;
-        $this->_message          = $message;
 
         parent::__construct(
             $context,
@@ -126,8 +106,7 @@ class NewAction extends CoreNewAction
             return $result;
         }
 
-        /** @var MessageInterface $value */
-        $msgs = $this->_message->getMessages(1);
+        $msgs = $this->messageManager->getMessages(1);
 
         foreach ($msgs->getItems() as $value) {
             $msg[]  = $value->getText();
