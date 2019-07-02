@@ -28,7 +28,7 @@ define(
         }
 
         $.widget(
-            'mageplaza.mpcountdowntimer',
+            'mageplaza.mpCountdownTimer',
             {
                 _create: function () {
                     this.setCountdown(
@@ -97,6 +97,6 @@ define(
             }
         );
 
-        return $.mageplaza.mpcountdowntimer;
+        return $.mageplaza.mpCountdownTimer;
     }
 );
