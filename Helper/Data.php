@@ -206,4 +206,12 @@ class Data extends AbstractData
     {
         return $this->getConfigGeneral('whitelist_page');
     }
+
+    /**
+     * @return mixed
+     */
+    public function getClientIp()
+    {
+        return $this->_request->getClientIp();
+    }
 }

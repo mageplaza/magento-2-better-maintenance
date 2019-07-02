@@ -75,11 +75,6 @@ class Redirect implements ObserverInterface
     protected $_blockRedirect;
 
     /**
-     * @var RemoteAddress
-     */
-    protected $_remoteAddress;
-
-    /**
      * Redirect constructor.
      *
      * @param HelperData $helperData
@@ -89,7 +84,6 @@ class Redirect implements ObserverInterface
      * @param UrlInterface $urlBuilder
      * @param ViewInterface $view
      * @param BlockRedirect $blockRedirect
-     * @param RemoteAddress $remoteAddress
      */
     public function __construct(
         HelperData $helperData,
@@ -98,8 +92,7 @@ class Redirect implements ObserverInterface
         RequestInterface $request,
         UrlInterface $urlBuilder,
         ViewInterface $view,
-        BlockRedirect $blockRedirect,
-        RemoteAddress $remoteAddress
+        BlockRedirect $blockRedirect
     ) {
         $this->_helperData    = $helperData;
         $this->_response      = $response;
@@ -108,7 +101,6 @@ class Redirect implements ObserverInterface
         $this->_urlBuilder    = $urlBuilder;
         $this->_view          = $view;
         $this->_blockRedirect = $blockRedirect;
-        $this->_remoteAddress = $remoteAddress;
     }
 
     /**
@@ -120,7 +112,7 @@ class Redirect implements ObserverInterface
     {
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
         $currentUrl = $this->_urlBuilder->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
-        $currentIp  = $this->_remoteAddress->getRemoteAddress();
+        $currentIp  = $this->_request->getClientIp();
         $ctlName    = $this->_request->getControllerName();
 
         if (!$this->_helperData->isEnabled()) {

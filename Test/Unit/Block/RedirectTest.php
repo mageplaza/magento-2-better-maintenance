@@ -81,11 +81,6 @@ class RedirectTest extends TestCase
     protected $_localeDate;
 
     /**
-     * @var RemoteAddress|\PHPUnit_Framework_MockObject_MockObject
-     */
-    protected $_remoteAddress;
-
-    /**
      * @var Redirect
      */
     protected $_object;
@@ -96,7 +91,6 @@ class RedirectTest extends TestCase
         $this->_helperData    = $this->getMockBuilder(HelperData::class)->disableOriginalConstructor()->getMock();
         $this->_cmsPage       = $this->getMockBuilder(CmsPage::class)->disableOriginalConstructor()->getMock();
         $this->_response      = $this->getMockBuilder(Http::class)->disableOriginalConstructor()->getMock();
-        $this->_remoteAddress = $this->getMockBuilder(RemoteAddress::class)->disableOriginalConstructor()->getMock();
         $this->_date          = $this->getMockBuilder(DateTime::class)->disableOriginalConstructor()->getMock();
         $this->_urlBuilder    = $this->getMockBuilder(UrlInterface::class)->getMock();
         $this->_request       = $this->getMockBuilder(RequestInterface::class)->getMock();
@@ -111,7 +105,6 @@ class RedirectTest extends TestCase
             $this->_helperData,
             $this->_cmsPage,
             $this->_response,
-            $this->_remoteAddress,
             []
         );
     }
@@ -124,7 +117,7 @@ class RedirectTest extends TestCase
         $this->_response->method('setNoCacheHeaders');
         $this->_helperData->method('getConfigGeneral')->with('redirect_to')->willReturn('about-us');
         $currentUrl = 'http://example.com/women/tops-women.html';
-        $this->_remoteAddress->method('getRemoteAddress')->willReturn('192.168.1.100');
+        $this->_helperData->method('getClientIp')->willReturn('192.168.1.100');
         $this->_urlBuilder->expects($this->at(0))
             ->method('getUrl')
             ->with('*/*/*', ['_current' => true, '_use_rewrite' => true])

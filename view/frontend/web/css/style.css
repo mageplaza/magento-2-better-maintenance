@@ -105,6 +105,7 @@
 
 .square {
     font-family: Verdana, Geneva, sans-serif;
+    border: solid 1px;
     background-color: #333333;
     color: #ffffff;
     border-radius: 10px;
@@ -130,6 +131,7 @@
 
 .stack {
     font-family: Tahoma, Verdana, Segoe, sans-serif;
+    border: solid 1px;
     border-radius: 3px;
     background: #00BF96;
     color: #ffffff;
@@ -343,14 +345,14 @@
     position: absolute;
     width: 40%;
     margin: auto;
-    top: 250px;
+    top: 160px;
 }
 
 #mpbm-double-column #mpbm-progress-bar {
     position: absolute;
     width: 40%;
     margin: auto;
-    top: 470px;
+    top: 395px;
 }
 
 #mpbm-double-column .block.newsletter {
