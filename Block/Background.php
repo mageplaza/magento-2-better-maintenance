@@ -60,7 +60,6 @@ class Background extends Comingsoon
 
     /**
      * @return array|null
-     * @throws NoSuchEntityException
      */
     public function getListImagesUrl()
     {
@@ -73,7 +72,6 @@ class Background extends Comingsoon
 
     /**
      * @return string|null
-     * @throws NoSuchEntityException
      */
     public function getBgImageUrl()
     {
@@ -98,7 +96,6 @@ class Background extends Comingsoon
 
     /**
      * @return string|null
-     * @throws NoSuchEntityException
      */
     public function getBgVideoUrl()
     {

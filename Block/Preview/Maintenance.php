@@ -282,8 +282,7 @@ class Maintenance extends Template
     }
 
     /**
-     * @return string|null
-     * @throws NoSuchEntityException
+     * @return string
      */
     public function getLogo()
     {

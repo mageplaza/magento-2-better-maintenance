@@ -115,6 +115,7 @@ class NewAction extends CoreNewAction
 
         /** @var Messages $msgBlock */
         $msgBlock = $this->_layout->createBlock(Messages::class);
+        
         foreach ($type as $key => $value) {
             if ($value === 'error') {
                 $html[] = $msgBlock->addError($msg[$key])->toHtml();
