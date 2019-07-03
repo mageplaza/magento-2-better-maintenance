@@ -142,7 +142,8 @@ class Data extends AbstractData
     public function checkIp($ip, $range)
     {
         if (strpos($range, '*') !== false) {
-            $low = $high = $range;
+            $high = $range;
+            $low  = $high;
             if (strpos($range, '-') !== false) {
                 list($low, $high) = explode('-', $range, 2);
             }
