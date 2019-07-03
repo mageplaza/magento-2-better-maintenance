@@ -26,60 +26,63 @@
 <div id="mpbm-notice-msg">
     <?= /* @noEscape */ $block->checkRegister() ?>
 </div>
-<!--Multiple Image Background-->
-<?php if ($block->getBackgroundType() === 'multiple_images'
-    && $block->getListImagesUrl()) : ?>
-    <?php $listImagesUrl = implode(',', $block->getListImagesUrl()) ?>
-    <style>
-        .page-wrapper {
-            background: no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            transition-delay: 2s;
-        }
-    </style>
-    <script>
-        require([
-            'jquery'
-        ], function ($) {
-            var images    = '<?= /* @noEscape */ $listImagesUrl ?>';
-            images        = images.split(',');
-            var nextImage = 0;
-            doSlideShow();
 
-            function doSlideShow () {
-                if (nextImage >= images.length) {
-                    nextImage = 0;
-                }
-                $('.page-wrapper')
-                .fadeIn('slow', function () {
-                    setTimeout(doSlideShow, 5000);
-                }).css('background-image', 'url("' + images[nextImage++] + '")');
+<div id="mpbm-background">
+    <!--Multiple Image Background-->
+    <?php if ($block->getBackgroundType() === 'multiple_images'
+        && $block->getListImagesUrl()) : ?>
+        <?php $listImagesUrl = implode(',', $block->getListImagesUrl()) ?>
+        <style>
+            #mpbm-background {
+                background: no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                transition-delay: 2s;
             }
-        });
-    </script>
-<?php endif; ?>
+        </style>
+        <script>
+            require([
+                'jquery'
+            ], function ($) {
+                var images    = '<?= /* @noEscape */ $listImagesUrl ?>';
+                images        = images.split(',');
+                var nextImage = 0;
+                doSlideShow();
 
-<!--Single Image Background-->
-<?php if ($block->getBackgroundType() === 'image') : ?>
-    <style>
-        .page-wrapper {
-            background: url("<?= /* @noEscape */ $block->getBgImageUrl() ?>") no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
-    </style>
-<?php endif; ?>
+                function doSlideShow () {
+                    if (nextImage >= images.length) {
+                        nextImage = 0;
+                    }
+                    $('#mpbm-background')
+                    .fadeIn('slow', function () {
+                        setTimeout(doSlideShow, 5000);
+                    }).css('background-image', 'url("' + images[nextImage++] + '")');
+                }
+            });
+        </script>
+    <?php endif; ?>
 
-<!--Video Background-->
-<?php if ($block->getBackgroundType() === 'video'
-    && $block->getBgVideoUrl()) : ?>
-    <video autoplay muted loop id="mpbm-video">
-        <source src="<?= $block->escapeHtmlAttr($block->getBgVideoUrl()) ?>"
-                type="video/mp4">
-    </video>
-<?php endif; ?>
+    <!--Single Image Background-->
+    <?php if ($block->getBackgroundType() === 'image') : ?>
+        <style>
+            #mpbm-background {
+                background: url("<?= /* @noEscape */ $block->getBgImageUrl() ?>") no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>
+    <?php endif; ?>
+
+    <!--Video Background-->
+    <?php if ($block->getBackgroundType() === 'video'
+        && $block->getBgVideoUrl()) : ?>
+        <video autoplay muted loop id="mpbm-video">
+            <source src="<?= $block->escapeHtmlAttr($block->getBgVideoUrl()) ?>"
+                    type="video/mp4">
+        </video>
+    <?php endif; ?>
+</div>

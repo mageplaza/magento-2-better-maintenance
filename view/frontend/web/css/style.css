@@ -105,7 +105,6 @@
 
 .square {
     font-family: Verdana, Geneva, sans-serif;
-    border: solid 1px;
     background-color: #333333;
     color: #ffffff;
     border-radius: 10px;
@@ -131,7 +130,6 @@
 
 .stack {
     font-family: Tahoma, Verdana, Segoe, sans-serif;
-    border: solid 1px;
     border-radius: 3px;
     background: #00BF96;
     color: #ffffff;
@@ -345,14 +343,14 @@
     position: absolute;
     width: 40%;
     margin: auto;
-    top: 160px;
+    top: 250px;
 }
 
 #mpbm-double-column #mpbm-progress-bar {
     position: absolute;
     width: 40%;
     margin: auto;
-    top: 395px;
+    top: 470px;
 }
 
 #mpbm-double-column .block.newsletter {
@@ -529,4 +527,17 @@
 
 .mpbm-subscribe-box .actions-toolbar .action.submit.primary {
     margin: 0 0 20px 0;
+}
+
+.page-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+#mpbm-background {
+    filter: blur(5px);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
