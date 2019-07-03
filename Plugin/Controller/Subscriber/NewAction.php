@@ -113,6 +113,7 @@ class NewAction extends CoreNewAction
             $type[] = $value->getType();
         }
 
+        /** @var Messages $msgBlock */
         $msgBlock = $this->_layout->createBlock(Messages::class);
         foreach ($type as $key => $value) {
             if ($value === 'error') {

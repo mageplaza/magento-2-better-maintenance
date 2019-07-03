@@ -32,7 +32,6 @@ use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Directory\Read;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Mageplaza\BetterMaintenance\Helper\Image;
-use Magento\Framework\App\Config\Value;
 
 /**
  * Class Upload

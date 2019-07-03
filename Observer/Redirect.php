@@ -31,7 +31,6 @@ use Magento\Framework\App\RequestInterface;
 use Magento\Framework\UrlInterface;
 use Mageplaza\BetterMaintenance\Block\Redirect as BlockRedirect;
 use Mageplaza\BetterMaintenance\Model\Config\Source\System\RedirectTo;
-use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 
 /**
  * Class Redirect

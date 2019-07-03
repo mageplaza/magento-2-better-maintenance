@@ -32,7 +32,6 @@ use Mageplaza\BetterMaintenance\Block\Redirect;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
-use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 
 /**
  * Class RedirectTest

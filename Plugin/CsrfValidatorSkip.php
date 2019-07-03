@@ -21,6 +21,7 @@
 namespace Mageplaza\BetterMaintenance\Plugin;
 
 use Closure;
+use Magento\Framework\App\Request\CsrfValidator;
 
 /**
  * Class CsrfValidatorSkip
@@ -37,7 +38,7 @@ class CsrfValidatorSkip
      * @SuppressWarnings("Unused")
      */
     public function aroundValidate(
-        $subject,
+        CsrfValidator $subject,
         Closure $proceed,
         $request,
         $action

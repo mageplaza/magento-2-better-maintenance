@@ -25,7 +25,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Template\Context;
 use Mageplaza\BetterMaintenance\Block\Maintenance as BlockMaintenance;
 use Magento\Framework\View\Element\Template;
-use Magento\Framework\View\Result\PageFactory;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
 use Magento\Cms\Block\Block;
