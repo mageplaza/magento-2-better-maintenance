@@ -20,10 +20,8 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Mageplaza_BetterMaintenance" setup_version="1.0.0">
-        <sequence>
-            <module name="Mageplaza_Core"/>
-        </sequence>
-    </module>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_predispatch">
+        <observer name="mpbettermaintenance_redirect" instance="Mageplaza\BetterMaintenance\Observer\Redirect"/>
+    </event>
 </config>

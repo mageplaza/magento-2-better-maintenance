@@ -1,0 +1,167 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  Mageplaza
+ * @package   Mageplaza_BetterMaintenance
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
+ */
+
+/**
+ * @var \Mageplaza\BetterMaintenance\Block\Maintenance $block ;
+ */
+
+$subscribeLabel      = $block->getSubscribeSetting('subscribe_label');
+$subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
+?>
+
+<?=  $block->getChildHtml('background') ?>
+
+<!--WRAPPER-->
+<div id="mpbm-<?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_layout') ?>-column" class="mpbm-wrapper">
+
+    <!--    Logo-->
+    <div id="mpbm-logo">
+        <img src="<?= $block->escapeHtmlAttr($block->getLogo($block->getMaintenanceSetting('maintenance_logo'))) ?>"
+             alt="<?= /* @noEscape */  __('Logo') ?>" width="100">
+    </div>
+
+    <!--    Page Title Area-->
+    <div id="mpbm-page-title" class="mpbm-text">
+        <h1 style="margin-bottom: 0"><?= /* @noEscape */ $block->getPageTitle('maintenance_title') ?></h1>
+    </div>
+
+    <!--    Page Description Area-->
+    <div id="mpbm-page-description" class="mpbm-text">
+        <h3><?= /* @noEscape */ $block->getPageDescription('maintenance_description') ?></h3>
+    </div>
+
+    <!--    Clock area-->
+    <?php if ($block->getClockSetting('clock_enabled')) : ?>
+        <div id="mpbm-clock">
+            <?= /* @noEscape */ $block->getChildHtml('clock_countdown') ?>
+        </div>
+    <?php endif; ?>
+
+    <!--    Progress Area-->
+    <?php if ($block->getMaintenanceSetting('maintenance_progress_enabled')) : ?>
+        <div id="mpbm-progress-bar">
+            <div class="row">
+                <div class="mp-md-6">
+                    <div class="progress mp-md-3">
+                        <div class="progress-bar" role="progressbar"
+                             aria-valuenow="<?= $block->escapeHtmlAttr($block->getProgressValue()) ?>"
+                             aria-valuemin="0"
+                             aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <!--    Subscribe area-->
+    <?php if ($block->getSubscribeSetting('subscribe_type') === 'email_form') : ?>
+        <div id="mpbm-subscribe" class="mpbm-subscribe-box" data-mage-init='{"Mageplaza_BetterMaintenance/js/message/submit":{}}'>
+            <?php if ($subscribeLabel) : ?>
+                <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
+            <?php endif; ?>
+            <?= /* @noEscape */ $block->getChildHtml('subscribe') ?>
+        </div>
+    <?php elseif ($block->getSubscribeSetting('subscribe_type') === 'register_form') : ?>
+        <div id="mpbm-register" class="mpbm-subscribe-box">
+            <?php if ($subscribeLabel) : ?>
+                <h4 style="color: <?= /* @noEscape */ $subscribeLabelColor ?>"><?= /* @noEscape */ $subscribeLabel ?></h4>
+            <?php endif; ?>
+            <?= $block->getChildHtml('register') ?>
+        </div>
+    <?php endif; ?>
+
+    <!--    Social area-->
+    <?php if ($block->getSocialSetting('social_enabled')) : ?>
+        <div id="mpbm-social-contact">
+            <div id="mpbm-social-label" style="display: inline-block">
+                <p><?= /* @noEscape */ $block->getSocialLabel() ?></p>
+            </div>
+            <?php foreach ($block->getSocialList() as $value) : ?>
+                <?php if ($value['link']) : ?>
+                    <div class="mpbm-social-box" style="display: inline-block; vertical-align: middle">
+                        <a href="<?= $block->escapeHtmlAttr($value['link']) ?>" target="_blank">
+                            <img src="<?= $block->escapeHtmlAttr($value['img']) ?>" alt="<?= /* @noEscape */ __('Social Logo') ?>" width="20">
+                        </a>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+    <!--    CMS Block-->
+    <?php if ($block->getBlockCms()) : ?>
+        <div id="mpbm-footer-block">
+            <?= /* @noEscape */ $block->getBlockCms() ?>
+        </div>
+    <?php endif; ?>
+</div>
+
+<style>
+    .mpbm-text {
+        color: <?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_color') ?>;
+    }
+
+    #mpbm-social-label {
+        color: <?= /* @noEscape */ $block->getSocialSetting('social_label_color') ?>;
+    }
+
+    <?php if ($block->getClockSetting('clock_template') === 'stack') : ?>
+        <?php $inner = !empty($block->getClockSetting('clock_inner_color')) ? $block->getClockSetting('clock_inner_color') : '#FFFFFF'?>
+    .stack-txt1 {
+        background: <?= /* @noEscape */ $inner ?>;
+    }
+    <?php endif; ?>
+
+    .progress-bar {
+        height: 45px;
+        font-size: 100%;
+        font-weight: bold;
+        border-radius: 50px;
+        line-height: 45px;
+        color: <?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_progress_label_color') ?>;
+        background-color: <?= /* @noEscape */ $block->getMaintenanceSetting('maintenance_progress_bar_color') ?>;
+        width: 0;
+    }
+</style>
+
+<?php if ($block->getSubscribeSetting('subscribe_type') !== 'none') : ?>
+    <script>
+        require([
+            'jquery'
+        ], function ($) {
+            var subBtn = $('.mpbm-subscribe-box .action.primary span');
+            subBtn.text("<?= /* @noEscape */ $block->getSubscribeSetting('button_label') ?>")
+            .css("color", "<?= /* @noEscape */ $block->getSubscribeSetting('button_label_color') ?>");
+            $('.mpbm-subscribe-box .action.primary').css("background", "<?= /* @noEscape */ $block->getSubscribeSetting('button_background_color') ?>");
+        });
+    </script>
+<?php endif; ?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Mageplaza_BetterMaintenance/js/progress/bar": {
+                "progressLabel": "<?= /* @noEscape */ $block->getProgressLabel() ?>"
+            }
+        }
+    }
+</script>

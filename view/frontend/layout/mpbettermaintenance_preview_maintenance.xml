@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterMaintenance
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="empty" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Mageplaza_BetterMaintenance::css/style.css"/>
+    </head>
+    <body>
+        <referenceContainer name="page.wrapper">
+            <referenceContainer name="main.content" remove="true"/>
+            <referenceContainer name="copyright" remove="true"/>
+            <referenceContainer name="content" remove="true"/>
+            <block class="Mageplaza\BetterMaintenance\Block\Preview\Maintenance" name="mpbettermaintenance.maintenance.preview" template="Mageplaza_BetterMaintenance::preview/maintenance.phtml">
+                <block class="Mageplaza\BetterMaintenance\Block\Preview\Background" name="mpbettermaintenance.background.preview" as="background" template="Mageplaza_BetterMaintenance::preview/background.phtml"/>
+                <block class="Magento\Newsletter\Block\Subscribe" name="form.subscribe" as="subscribe" template="subscribe.phtml"/>
+                <block class="Magento\Customer\Block\Form\Register" name="customer_form_register" as="register" template="form/register.phtml"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

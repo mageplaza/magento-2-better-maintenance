@@ -19,10 +19,6 @@
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
-use Magento\Framework\Component\ComponentRegistrar;
+/** @var \Mageplaza\BetterMaintenance\Block\Redirect $block */
 
-ComponentRegistrar::register(
-    ComponentRegistrar::MODULE,
-    'Mageplaza_BetterMaintenance',
-    __DIR__
-);
+$block->redirectToUrl();

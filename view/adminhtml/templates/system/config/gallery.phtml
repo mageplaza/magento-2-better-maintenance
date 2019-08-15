@@ -1,0 +1,89 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterMaintenance
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer\Images $block */
+$element     = $block->getElement();
+$formName    = $block->getFormName();
+$elementName = $element->getName();
+$fieldName   = $block->getFieldName();
+$imageJson   = $block->getImageJson();
+?>
+<div id="template-images-gallery" class="gallery"
+     data-mage-init='{"productGallery":{"types":{}}}'
+     data-images="<?= $block->escapeHtmlAttr($block->getImagesJson($imageJson)) ?>">
+    <div class="image image-placeholder">
+        <?= /* @noEscape */ $block->getUploaderHtml() ?>
+        <div class="product-image-wrapper">
+            <p class="image-placeholder-text">
+                <?= /* @noEscape */ __('Browse to find or drag image here') ?>
+            </p>
+        </div>
+    </div>
+    <script id="template-images-gallery-template" data-template="image" type="text/x-magento-template">
+        <div class="image item" data-role="image">
+            <input type="hidden"
+                   name="<?= /* @noEscape */ $fieldName ?>[value][<%- data.file_id %>][position]"
+                   value="<%- data.position %>"
+                   data-form-part="<?= $block->escapeHtmlAttr($formName) ?>"
+                   class="position"/>
+            <input type="hidden"
+                   name="<?= /* @noEscape */ $fieldName ?>[value][<%- data.file_id %>][file]"
+                   value="<%- data.file %>"
+                   data-form-part="<?= $block->escapeHtmlAttr($formName) ?>"/>
+            <input type="hidden"
+                   name="<?= /* @noEscape */ $fieldName ?>[value][<%- data.file_id %>][label]"
+                   value="<%- data.label %>"
+                   data-form-part="<?= $block->escapeHtmlAttr($formName) ?>"/>
+            <input type="hidden"
+                   name="<?= /* @noEscape */ $fieldName ?>[value][<%- data.file_id %>][removed]"
+                   value="" class="is-removed"
+                   data-form-part="<?= $block->escapeHtmlAttr($formName) ?>"/>
+            <div class="product-image-wrapper">
+                <img class="product-image" data-role="image-element" src="<%- data.url %>" alt="<%- data.label %>"/>
+                <div class="actions">
+                    <button type="button"
+                            class="action-remove"
+                            data-role="delete-button"
+                            title="<?= $block->escapeHtmlAttr(__('Delete image')) ?>">
+                        <span><?= $block->escapeHtml(__('Delete image')) ?></span>
+                    </button>
+                    <div class="draggable-handle"></div>
+                </div>
+                <div class="image-fade"><span><?= $block->escapeHtml(__('Hidden')) ?></span></div>
+            </div>
+            <div class="item-description">
+                <div class="item-title" data-role="img-title"><%- data.label %></div>
+                <div class="item-size">
+                    <span data-role="image-dimens"></span>, <span
+                            data-role="image-size"><%- data.sizeLabel %></span>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script data-role="img-dialog-tmpl" type="text/x-magento-template">
+        <div class="image-panel-preview">
+            <img src="<%- data.url %>" alt="<%- data.label %>"/>
+        </div>
+        <div class="image-panel-controls">
+            <strong class="image-name"><%- data.label %></strong>
+        </div>
+    </script>
+</div>

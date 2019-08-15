@@ -1,0 +1,96 @@
+"Images (.gif, .jpg, .png)","Images (.gif, .jpg, .png)"
+Days,Days
+Hours,Hours
+Minutes,Minutes
+Seconds,Seconds
+"Under Maintenance","Under Maintenance"
+"Coming Soon","Coming Soon"
+"We're currently down for maintenance. Be right back!","We're currently down for maintenance. Be right back!"
+"Our new site is coming soon. Stay tuned!","Our new site is coming soon. Stay tuned!"
+"Thank you for registering.","Thank you for registering."
+Subscribe,Subscribe
+"Coming Soon Preview","Coming Soon Preview"
+"Maintenance Preview","Maintenance Preview"
+"We couldn't move this file: %1.","We couldn't move this file: %1."
+Video,Video
+Image,Image
+"Multiple Images","Multiple Images"
+Simple,Simple
+Circle,Circle
+Square,Square
+Stack,Stack
+Modern,Modern
+"--Please Select--","--Please Select--"
+Single-column,Single-column
+Double-columns,Double-columns
+"Double-columns with Left-side content","Double-columns with Left-side content"
+"Maintenance Page","Maintenance Page"
+"Coming Soon Page","Coming Soon Page"
+None,None
+"Account Registration","Account Registration"
+"Newsletter Subscription","Newsletter Subscription"
+"Browse to find or drag image here","Browse to find or drag image here"
+"Delete image","Delete image"
+Hidden,Hidden
+Logo,Logo
+"Social logo","Social logo"
+"Social Logo","Social Logo"
+"Mageplaza Better Maintenance","Mageplaza Better Maintenance"
+"Better Maintenance","Better Maintenance"
+General,General
+Enable,Enable
+"Select <strong>Yes</strong> to enable the module","Select <strong>Yes</strong> to enable the module"
+"Real Time of Website","Real Time of Website"
+"End Date Time","End Date Time"
+"Redirect To Page","Redirect To Page"
+"Auto Switch to Live Site Mode","Auto Switch to Live Site Mode"
+"Your website will automatically switch back to Live Site Mode when configured time ends.","Your website will automatically switch back to Live Site Mode when configured time ends."
+"Whitelist IP(s)","Whitelist IP(s)"
+"Separated by comma(s).","Separated by comma(s)."
+"Whitelist Page Link(s)","Whitelist Page Link(s)"
+"Separated by break line(s).","Separated by break line(s)."
+"Display Setting","Display Setting"
+"Clock Setting","Clock Setting"
+"Countdown Clock Style","Countdown Clock Style"
+"Clock Background Color","Clock Background Color"
+"Clock Inner Background Color","Clock Inner Background Color"
+"Clock Number Color","Clock Number Color"
+"Subscribe Setting","Subscribe Setting"
+"Subscription Type","Subscription Type"
+"Subscription Description","Subscription Description"
+"Description Text Color","Description Text Color"
+"Button Label","Button Label"
+"Better less than 15 characters.","Better less than 15 characters."
+"Button Text Color","Button Text Color"
+"Button Background Color","Button Background Color"
+"Footer Block","Footer Block"
+"Select CMS Block","Select CMS Block"
+"Selected CMS Block(s) are the footer(s) of the Maitenance / Coming Soon Page. Therefore, it is recommended to select CMS Block Link(s) as Whitelist Page Link (s) so that customers can access.","Selected CMS Block(s) are the footer(s) of the Maitenance / Coming Soon Page. Therefore, it is recommended to select CMS Block Link(s) as Whitelist Page Link (s) so that customers can access."
+"Social Contact","Social Contact"
+Label,Label
+"Label Color","Label Color"
+"Facebook Page Link","Facebook Page Link"
+"Twitter Page Link","Twitter Page Link"
+"Instagram Page Link","Instagram Page Link"
+"Google+ Page Link","Google+ Page Link"
+"Youtube Page Link","Youtube Page Link"
+"Pinterest Page Link","Pinterest Page Link"
+"Maintenance Page Setting","Maintenance Page Setting"
+"Select Layout","Select Layout"
+"Page Title","Page Title"
+"Page Description","Page Description"
+"Text Color","Text Color"
+"Supported image formats: gif, jpg, jpeg, png.<br>Recommended size: less than 2MB.","Supported image formats: gif, jpg, jpeg, png.<br>Recommended size: less than 2MB."
+"Background Type","Background Type"
+"For Video type, please check your upload_max_size PHP value. If the size of uploaded video is greater than this value, the video will not be uploaded.","For Video type, please check your upload_max_size PHP value. If the size of uploaded video is greater than this value, the video will not be uploaded."
+"Upload File","Upload File"
+"Supported video formats: mp4","Supported video formats: mp4"
+"Show Progress Bar","Show Progress Bar"
+"Progress Value","Progress Value"
+"percentages (%). Default = 50.","percentages (%). Default = 50."
+"Progress Bar Color","Progress Bar Color"
+"If uploading files, please save configuration before preview.","If uploading files, please save configuration before preview."
+"Coming Soon Page Setting","Coming Soon Page Setting"
+"Meta Title","Meta Title"
+"Meta Keywords","Meta Keywords"
+"Meta Description","Meta Description"

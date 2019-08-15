@@ -19,10 +19,22 @@
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
-use Magento\Framework\Component\ComponentRegistrar;
+namespace Mageplaza\BetterMaintenance\Model\Config\Backend;
 
-ComponentRegistrar::register(
-    ComponentRegistrar::MODULE,
-    'Mageplaza_BetterMaintenance',
-    __DIR__
-);
+use Magento\Config\Model\Config\Backend\File;
+
+/**
+ * Class Video
+ *
+ * @package Mageplaza\BetterMaintenance\Model\Config\Backend
+ */
+class Video extends File
+{
+    /**
+     * @return array
+     */
+    protected function _getAllowedExtensions()
+    {
+        return ['mp4'];
+    }
+}

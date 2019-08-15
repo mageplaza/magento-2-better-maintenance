@@ -1,0 +1,86 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  Mageplaza
+ * @package   Mageplaza_BetterMaintenance
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
+ */
+
+/**
+ * @var \Mageplaza\BetterMaintenance\Block\Preview\Background $block ;
+ */
+$data = $block->getFormData();
+?>
+
+<div id="mpbm-background">
+    <!--Multiple Image Background-->
+    <?php if ($block->getBgType() === 'multiple_images') : ?>
+        <?php $listImagesUrl = $block->getListImagesUrls(); ?>
+        <style>
+            .mpbettermaintenance-preview-<?= /* @noEscape */ $block->getPage() ?> {
+                background: no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                transition-delay: 2s;
+            }
+        </style>
+        <script>
+            require([
+                'jquery'
+            ], function ($) {
+                var images    = '<?= /* @noEscape */ $listImagesUrl ?>';
+                images        = images.split(',');
+                var nextImage = 0;
+                doSlideShow();
+
+                function doSlideShow () {
+                    if (nextImage >= images.length) {
+                        nextImage = 0;
+                    }
+                    $('.mpbettermaintenance-preview-<?= /* @noEscape */ $block->getPage() ?>')
+                    .fadeIn('slow', function () {
+                        setTimeout(doSlideShow, 5000);
+                    }).css('background-image', 'url("' + images[nextImage++] + '")');
+                }
+            });
+        </script>
+    <?php endif; ?>
+
+    <!--Single Image Background-->
+    <?php if ($block->getBgType() === 'image') : ?>
+        <style>
+            .mpbettermaintenance-preview-<?= /* @noEscape */ $block->getPage() ?> {
+                background: url("<?= /* @noEscape */ $block->getImageBg() ?>") no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>
+    <?php endif; ?>
+
+    <!--Video Background-->
+    <?php if (array_key_exists($block->getVideoCode(), $data)
+        && $block->getBgType() === 'video'
+        && $block->getVideoUrl($data[$block->getVideoCode()])) : ?>
+        <video autoplay muted loop id="mpbm-video">
+            <source src="<?= $block->escapeHtmlAttr($block->getVideoUrl($data[$block->getVideoCode()])) ?>"
+                    type="video/mp4">
+        </video>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,73 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterMaintenance
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\BetterMaintenance\Block\Clock $block */
+
+$clockStyle = $block->getClockStyle();
+if ($clockStyle !== 'simple') {
+    $clockBackgroundColor = $block->getClockBgColor();
+}
+$clockNumberColor     = $block->getClockNumberColor();
+$template             = $block->getClockTemplate($clockStyle);
+$timerId              = uniqid('', false);
+
+if (!empty($template)) : ?>
+    <div id="mp-countdown-timer-<?= /* @noEscape */ $timerId ?>">
+        <?= /* @noEscape */ $template ?>
+    </div>
+    <style type="text/css">
+        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-txt,
+        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-days,
+        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-hours,
+        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-minutes,
+        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-seconds {
+            color: <?= /* @noEscape */ $clockNumberColor ?>;
+        }
+
+        <?php if ($clockStyle === 'circle' || $clockStyle === 'square' || $clockStyle === 'stack') : ?>
+        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-clock {
+            background-color: <?= /* @noEscape */ $clockBackgroundColor ?>;
+            border-color: <?= /* @noEscape */ '#cccccc' ?>;
+        }
+        <?php endif; ?>
+        <?php if ($clockStyle === 'modern') : ?>
+        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .countdown-modern {
+            background: <?= /* @noEscape */ $clockBackgroundColor ?>;
+            border-color: <?= /* @noEscape */ $clockBackgroundColor ?>;
+        }
+        <?php endif; ?>
+    </style>
+
+    <script type="text/x-magento-init">
+    {
+        "#mp-countdown-timer-<?= /* @noEscape */$timerId ?>": {
+            "Mageplaza_BetterMaintenance/js/clock/mpcountdowntimer": {
+                "timer_id": "#mp-countdown-timer-<?= /* @noEscape */ $timerId ?>",
+                "timezone": "<?= /* @noEscape */ $block->getTimeZone() ?>",
+                "endTime": "<?= /* @noEscape */ $block->getEndTime() ?>",
+                "currentTime": "<?= /* @noEscape */ $block->getCurrentTime() ?>",
+                "baseUrl": "<?= /* @noEscape */ $block->getBaseUrl() ?>",
+                "autoSwitch": <?= /* @noEscape */ $block->getAutoSwitch() ?>
+            }
+        }
+    }
+    </script>
+<?php endif; ?>
