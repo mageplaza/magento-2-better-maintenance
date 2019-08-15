@@ -18,6 +18,7 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\BetterMaintenance\Model\Config\Source\System;
 
 use Magento\Cms\Model\BlockFactory;
@@ -40,9 +41,8 @@ class CmsBlock implements ArrayInterface
      *
      * @param BlockFactory $blockFactory
      */
-    public function __construct(
-        BlockFactory $blockFactory
-    ) {
+    public function __construct(BlockFactory $blockFactory)
+    {
         $this->_blockFactory = $blockFactory;
     }
 
@@ -53,9 +53,9 @@ class CmsBlock implements ArrayInterface
     {
         $listBlock[] = [
             'value' => 0,
-            'label' => '--Please Select--'
+            'label' => __('--Please Select--')
         ];
-        $data        = $this->_blockFactory->create()->getCollection()->getData();
+        $data = $this->_blockFactory->create()->getCollection()->getData();
         foreach ($data as $value) {
             $listBlock[] = [
                 'value' => $value['identifier'],

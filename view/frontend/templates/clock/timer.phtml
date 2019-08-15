@@ -33,24 +33,11 @@ if (!empty($template)) : ?>
     <div id="mp-countdown-timer-<?= /* @noEscape */ $timerId ?>">
         <?= /* @noEscape */ $template ?>
     </div>
-
     <style type="text/css">
-        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-txt {
-            color: <?= /* @noEscape */ $clockNumberColor ?>;
-        }
-
-        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-days {
-            color: <?= /* @noEscape */ $clockNumberColor ?>;
-        }
-
-        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-hours {
-            color: <?= /* @noEscape */ $clockNumberColor ?>;
-        }
-
-        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-minutes {
-            color: <?= /* @noEscape */ $clockNumberColor ?>;
-        }
-
+        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-txt,
+        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-days,
+        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-hours,
+        #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-minutes,
         #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .mp-countdown-seconds {
             color: <?= /* @noEscape */ $clockNumberColor ?>;
         }
@@ -60,14 +47,12 @@ if (!empty($template)) : ?>
             background-color: <?= /* @noEscape */ $clockBackgroundColor ?>;
             border-color: <?= /* @noEscape */ '#cccccc' ?>;
         }
-
         <?php endif; ?>
         <?php if ($clockStyle === 'modern') : ?>
         #mp-countdown-timer-<?= /* @noEscape */ $timerId ?> .countdown-modern {
             background: <?= /* @noEscape */ $clockBackgroundColor ?>;
             border-color: <?= /* @noEscape */ $clockBackgroundColor ?>;
         }
-
         <?php endif; ?>
     </style>
 
@@ -84,6 +69,5 @@ if (!empty($template)) : ?>
             }
         }
     }
-
     </script>
 <?php endif; ?>

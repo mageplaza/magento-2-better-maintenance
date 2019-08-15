@@ -21,15 +21,15 @@
 
 namespace Mageplaza\BetterMaintenance\Observer;
 
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\App\ViewInterface;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
-use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Framework\UrlInterface;
 use Mageplaza\BetterMaintenance\Block\Redirect as BlockRedirect;
+use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Model\Config\Source\System\RedirectTo;
 
 /**
@@ -93,12 +93,12 @@ class Redirect implements ObserverInterface
         ViewInterface $view,
         BlockRedirect $blockRedirect
     ) {
-        $this->_helperData    = $helperData;
-        $this->_response      = $response;
-        $this->_localeDate    = $localeDate;
-        $this->_request       = $request;
-        $this->_urlBuilder    = $urlBuilder;
-        $this->_view          = $view;
+        $this->_helperData = $helperData;
+        $this->_response = $response;
+        $this->_localeDate = $localeDate;
+        $this->_request = $request;
+        $this->_urlBuilder = $urlBuilder;
+        $this->_view = $view;
         $this->_blockRedirect = $blockRedirect;
     }
 
@@ -111,8 +111,8 @@ class Redirect implements ObserverInterface
     {
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
         $currentUrl = $this->_urlBuilder->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
-        $currentIp  = $this->_request->getClientIp();
-        $ctlName    = $this->_request->getControllerName();
+        $currentIp = $this->_request->getClientIp();
+        $ctlName = $this->_request->getControllerName();
 
         if (!$this->_helperData->isEnabled()) {
             return;

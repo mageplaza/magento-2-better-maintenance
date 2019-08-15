@@ -18,10 +18,11 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\BetterMaintenance\Model\Config\Source\System;
 
-use Magento\Framework\Option\ArrayInterface;
 use Magento\Cms\Model\ResourceModel\Page\CollectionFactory as PageFactory;
+use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class RedirectTo
@@ -43,9 +44,8 @@ class RedirectTo implements ArrayInterface
      *
      * @param PageFactory $pageFactory
      */
-    public function __construct(
-        PageFactory $pageFactory
-    ) {
+    public function __construct(PageFactory $pageFactory)
+    {
         $this->_pageFactory = $pageFactory;
     }
 
@@ -64,7 +64,7 @@ class RedirectTo implements ArrayInterface
             'label' => __('Coming Soon Page')
         ];
 
-        $pageList   = $this->_pageFactory->create()->toOptionIdArray();
+        $pageList = $this->_pageFactory->create()->toOptionIdArray();
         $pageList[] = $maintenance;
         $pageList[] = $comingSoon;
 

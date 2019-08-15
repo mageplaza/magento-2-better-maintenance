@@ -68,9 +68,9 @@ class Redirect extends Template
         Http $response,
         array $data = []
     ) {
-        $this->_helperData     = $helperData;
-        $this->_cmsPage        = $cmsPage;
-        $this->_response       = $response;
+        $this->_helperData = $helperData;
+        $this->_cmsPage = $cmsPage;
+        $this->_response = $response;
 
         parent::__construct($context, $data);
     }
@@ -99,7 +99,7 @@ class Redirect extends Template
         $this->_response->setNoCacheHeaders();
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
         $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
-        $currentIp  = $this->_helperData->getClientIp();
+        $currentIp = $this->_helperData->getClientIp();
 
         if (!$this->_helperData->isEnabled()) {
             return false;

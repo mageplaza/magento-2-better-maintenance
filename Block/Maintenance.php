@@ -18,17 +18,19 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\BetterMaintenance\Block;
 
+use Magento\Cms\Block\Block;
+use Magento\Customer\Model\CustomerFactory;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Phrase;
+use Magento\Framework\View\Element\Messages;
 use Magento\Framework\View\Element\Template;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
-use Magento\Cms\Block\Block;
-use Magento\Customer\Model\CustomerFactory;
 use Mageplaza\BetterMaintenance\Model\Config\Source\System\RedirectTo;
-use Magento\Framework\View\Element\Messages;
 
 /**
  * Class Maintenance
@@ -37,10 +39,6 @@ use Magento\Framework\View\Element\Messages;
  */
 class Maintenance extends Template
 {
-    const PAGE_TITLE               = 'Under Maintenance';
-    const PAGE_DESCRIPTION         = 'We\'re currently down for maintenance. Be right back!';
-    const PAGE_TITLE_CS            = 'Coming Soon';
-    const PAGE_DESCRIPTION_CS      = 'Our new site is coming soon. Stay tuned!';
     const PROGRESS_VALUE           = 50;
     const DEFAULT_MAINTENANCE_LOGO = 'Mageplaza_BetterMaintenance::media/maintenance_logo.png';
     const DEFAULT_MAINTENANCE_BG   = 'Mageplaza_BetterMaintenance::media/maintenance_bg.jpg';
@@ -78,9 +76,10 @@ class Maintenance extends Template
         CustomerFactory $customerFactory,
         array $data = []
     ) {
-        $this->_helperData      = $helperData;
-        $this->_helperImage     = $helperImage;
+        $this->_helperData = $helperData;
+        $this->_helperImage = $helperImage;
         $this->_customerFactory = $customerFactory;
+
         parent::__construct($context, $data);
     }
 
@@ -88,6 +87,7 @@ class Maintenance extends Template
      * @param $logo
      *
      * @return string
+     * @throws NoSuchEntityException
      */
     public function getLogo($logo)
     {
@@ -113,6 +113,7 @@ class Maintenance extends Template
      * @param $image
      *
      * @return string|null
+     * @throws NoSuchEntityException
      */
     public function getImageUrl($image)
     {
@@ -132,6 +133,7 @@ class Maintenance extends Template
      * @param $video
      *
      * @return string|null
+     * @throws NoSuchEntityException
      */
     public function getVideoUrl($video)
     {
@@ -168,10 +170,11 @@ class Maintenance extends Template
      * @param $images
      *
      * @return array|null
+     * @throws NoSuchEntityException
      */
     public function getMultipleImagesUrl($images)
     {
-        $urls   = [];
+        $urls = [];
         $images = $this->getListMultipleImages($images);
         if (empty($images)) {
             return null;
@@ -194,12 +197,12 @@ class Maintenance extends Template
         if ($type === 'maintenance_title') {
             $title = $this->_helperData->getMaintenanceSetting($type);
 
-            return empty($title) ? self::PAGE_TITLE : $title;
+            return empty($title) ? __('Under Maintenance') : $title;
         }
 
         $title = $this->_helperData->getComingSoonSetting($type);
 
-        return empty($title) ? self::PAGE_TITLE_CS : $title;
+        return empty($title) ? __('Coming Soon') : $title;
     }
 
     /**
@@ -212,11 +215,11 @@ class Maintenance extends Template
         if ($type === 'maintenance_description') {
             $des = $this->_helperData->getMaintenanceSetting($type);
 
-            return empty($des) ? self::PAGE_DESCRIPTION : $des;
+            return empty($des) ? __('We\'re currently down for maintenance. Be right back!') : $des;
         }
         $des = $this->_helperData->getComingSoonSetting($type);
 
-        return empty($des) ? self::PAGE_DESCRIPTION_CS : $des;
+        return empty($des) ? __('Our new site is coming soon. Stay tuned!') : $des;
     }
 
     /**
@@ -254,7 +257,7 @@ class Maintenance extends Template
      */
     public function getSocialList()
     {
-        $list    = [
+        $list = [
             'social_facebook',
             'social_twitter',
             'social_instagram',
@@ -262,7 +265,7 @@ class Maintenance extends Template
             'social_youtube',
             'social_pinterest'
         ];
-        $url     = [];
+        $url = [];
         $imgPath = 'Mageplaza_BetterMaintenance::media/';
 
         foreach ($list as $value) {
@@ -350,17 +353,18 @@ class Maintenance extends Template
      */
     public function checkRegister()
     {
-        $currentTime      = strtotime($this->_localeDate->date()->format('m/d/Y H:i:s'));
+        $currentTime = strtotime($this->_localeDate->date()->format('m/d/Y H:i:s'));
         $lastRegisterTime = $this->_customerFactory->create()
             ->getCollection()
             ->getLastItem()
             ->getCreatedAt();
-        $realTime         = strtotime($this->_localeDate->date($lastRegisterTime)->format('m/d/y H:i:s'));
-        $compare          = $currentTime - $realTime;
+        $realTime = strtotime($this->_localeDate->date($lastRegisterTime)->format('m/d/y H:i:s'));
+        $compare = $currentTime - $realTime;
 
         if ($compare < 3) {
             $msg = $this->_layout->createBlock(Messages::class)
-                ->addSuccess(__('Thank you for registering.'))->toHtml();
+                ->addSuccess(__('Thank you for registering.'))
+                ->toHtml();
 
             return $msg;
         }

@@ -22,9 +22,9 @@
 namespace Mageplaza\BetterMaintenance\Block;
 
 use Magento\Framework\View\Element\Template;
+use Mageplaza\BetterMaintenance\Block\Preview\Maintenance as PreviewBlock;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Model\Config\Source\System\ClockTemplate;
-use Mageplaza\BetterMaintenance\Block\Preview\Maintenance as PreviewBlock;
 
 /**
  * Class Clock
@@ -60,8 +60,9 @@ class Clock extends Template
         Template\Context $context,
         array $data = []
     ) {
-        $this->_helperData   = $helperData;
+        $this->_helperData = $helperData;
         $this->_previewBlock = $previewBlock;
+
         parent::__construct($context, $data);
     }
 

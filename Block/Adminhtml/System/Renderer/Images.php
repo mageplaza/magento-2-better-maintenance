@@ -18,17 +18,20 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System\Renderer;
 
 use Exception;
+use Magento\Backend\Block\DataProviders\ImageUploadConfig;
 use Magento\Backend\Block\Media\Uploader;
 use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Block\Widget;
 use Magento\Framework\App\Filesystem\DirectoryList;
-use Magento\Framework\View\Element\AbstractBlock;
-use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
-use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\ObjectManagerInterface;
+use Magento\Framework\View\Element\AbstractBlock;
+use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
+use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
 
 /**
  * Class Images
@@ -68,8 +71,8 @@ class Images extends Widget
         ObjectManagerInterface $objectManager,
         array $data = []
     ) {
-        $this->_imageHelper   = $imageHelper;
-        $this->_helperData    = $helperData;
+        $this->_imageHelper = $imageHelper;
+        $this->_helperData = $helperData;
         $this->_objectManager = $objectManager;
 
         parent::__construct($context, $data);
@@ -81,7 +84,7 @@ class Images extends Widget
     protected function _prepareLayout()
     {
         if ($this->_helperData->versionCompare('2.3.1')) {
-            $uploadConfig = $this->_objectManager->get('\Magento\Backend\Block\DataProviders\ImageUploadConfig');
+            $uploadConfig = $this->_objectManager->get(ImageUploadConfig::class);
             $this->addChild(
                 'uploader',
                 Uploader::class,
@@ -135,6 +138,7 @@ class Images extends Widget
      * @param $code
      *
      * @return string
+     * @throws NoSuchEntityException
      */
     public function getImagesJson($code)
     {
@@ -143,12 +147,12 @@ class Images extends Widget
             $value = HelperData::jsonDecode($data[$code]);
             if (is_array($value) && !empty($value)) {
                 $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
-                $images   = $this->sortImagesByPosition($value);
+                $images = $this->sortImagesByPosition($value);
                 foreach ($images as $key => &$image) {
                     $image['url'] = $this->_imageHelper
-                            ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
+                                        ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
                     try {
-                        $fileHandler   = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
+                        $fileHandler = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
                         $image['size'] = $fileHandler['size'];
                     } catch (Exception $e) {
                         $this->_logger->warning($e);

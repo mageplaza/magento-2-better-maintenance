@@ -27,6 +27,7 @@ use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Filesystem;
+use Magento\Framework\Filesystem\Io\File;
 use Magento\Framework\Image\AdapterFactory;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\UrlInterface;
@@ -34,7 +35,6 @@ use Magento\MediaStorage\Model\File\Uploader;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\Media;
-use Magento\Framework\Filesystem\Io\File;
 
 /**
  * Class Image
@@ -76,6 +76,7 @@ class Image extends Media
         File $file
     ) {
         $this->_file = $file;
+
         parent::__construct($context, $objectManager, $storeManager, $filesystem, $uploaderFactory, $imageFactory);
     }
 
@@ -88,7 +89,7 @@ class Image extends Media
     public function getNotDuplicatedFilename($fileName, $descriptionPath)
     {
         $fileMediaName = $descriptionPath . '/'
-            . Uploader::getNewFileName($this->mediaDirectory->getAbsolutePath($this->getMediaPath($fileName)));
+                         . Uploader::getNewFileName($this->mediaDirectory->getAbsolutePath($this->getMediaPath($fileName)));
 
         if ($fileMediaName !== $fileName) {
             return $this->getNotDuplicatedFilename($fileMediaName, $descriptionPath);
@@ -133,7 +134,7 @@ class Image extends Media
     public function getBaseTmpMediaUrl()
     {
         return $this->storeManager->getStore()
-                ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $this->getBaseTmpMediaPath();
+                   ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $this->getBaseTmpMediaPath();
     }
 
     /**
@@ -177,7 +178,7 @@ class Image extends Media
             }
 
             $fileName = $image['file'];
-            $pos      = strpos($fileName, '.tmp');
+            $pos = strpos($fileName, '.tmp');
 
             if (isset($image['removed'])) {
                 /**
@@ -187,7 +188,7 @@ class Image extends Media
 
                 if ($pos === false) {
                     $filePath = $this->getMediaPath($image['file']);
-                    $file     = $this->mediaDirectory->getRelativePath($filePath);
+                    $file = $this->mediaDirectory->getRelativePath($filePath);
                     if ($this->mediaDirectory->isFile($file)) {
                         $this->mediaDirectory->delete($filePath);
                     }
@@ -198,7 +199,7 @@ class Image extends Media
                  */
                 $fileName = substr($fileName, 0, $pos);
                 $filePath = $this->getTmpMediaPath($fileName);
-                $file     = $this->mediaDirectory->getRelativePath($filePath);
+                $file = $this->mediaDirectory->getRelativePath($filePath);
                 if (!$this->mediaDirectory->isFile($file)) {
                     unset($imageEntries[$key]);
                     continue;
@@ -212,11 +213,11 @@ class Image extends Media
                     continue;
                 }
 
-                $fileName       = Uploader::getCorrectFileName($pathInfo['basename']);
+                $fileName = Uploader::getCorrectFileName($pathInfo['basename']);
                 $dispretionPath = Uploader::getDispretionPath($fileName);
-                $fileName       = $dispretionPath . '/' . $fileName;
+                $fileName = $dispretionPath . '/' . $fileName;
 
-                $fileName        = $this->getNotDuplicatedFilename($fileName, $dispretionPath);
+                $fileName = $this->getNotDuplicatedFilename($fileName, $dispretionPath);
                 $destinationFile = $this->getMediaPath($fileName);
 
                 try {

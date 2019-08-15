@@ -30,12 +30,10 @@ $imageJson   = $block->getImageJson();
      data-mage-init='{"productGallery":{"types":{}}}'
      data-images="<?= $block->escapeHtmlAttr($block->getImagesJson($imageJson)) ?>">
     <div class="image image-placeholder">
-        <?= /* @noEscape */
-        $block->getUploaderHtml() ?>
+        <?= /* @noEscape */ $block->getUploaderHtml() ?>
         <div class="product-image-wrapper">
             <p class="image-placeholder-text">
-                <?= /* @noEscape */
-                __('Browse to find or drag image here') ?>
+                <?= /* @noEscape */ __('Browse to find or drag image here') ?>
             </p>
         </div>
     </div>
@@ -59,8 +57,7 @@ $imageJson   = $block->getImageJson();
                    value="" class="is-removed"
                    data-form-part="<?= $block->escapeHtmlAttr($formName) ?>"/>
             <div class="product-image-wrapper">
-                <img class="product-image" data-role="image-element" src="<%- data.url %>"
-                     alt="<%- data.label %>"/>
+                <img class="product-image" data-role="image-element" src="<%- data.url %>" alt="<%- data.label %>"/>
                 <div class="actions">
                     <button type="button"
                             class="action-remove"

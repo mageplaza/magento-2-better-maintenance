@@ -18,19 +18,20 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\BetterMaintenance\Block\Preview;
 
+use Magento\Cms\Block\Block;
+use Magento\Customer\Block\Form\Register;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\View\Element\Template\Context;
-use Mageplaza\BetterMaintenance\Block\Maintenance as BlockMaintenance;
 use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
+use Magento\Newsletter\Block\Subscribe;
+use Mageplaza\BetterMaintenance\Block\Clock;
+use Mageplaza\BetterMaintenance\Block\Maintenance as BlockMaintenance;
 use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\BetterMaintenance\Helper\Image as HelperImage;
-use Magento\Cms\Block\Block;
-use Mageplaza\BetterMaintenance\Block\Clock;
-use Magento\Newsletter\Block\Subscribe;
-use Magento\Customer\Block\Form\Register;
 
 /**
  * Class Maintenance
@@ -39,12 +40,9 @@ use Magento\Customer\Block\Form\Register;
  */
 class Maintenance extends Template
 {
-    const PAGE_TITLE               = 'Under Maintenance';
-    const PAGE_DESCRIPTION         = 'We\'re currently down for maintenance. Be right back!';
     const PROGRESS_VALUE           = '50';
     const PAGE_LAYOUT              = 'single';
     const SUBSCRIBE_TYPE           = 'email_form';
-    const SUBSCRIBE_LABEL          = 'Subscribe';
     const DEFAULT_LABEL_COLOR      = '#000000';
     const DEFAULT_MAINTENANCE_LOGO = 'Mageplaza_BetterMaintenance::media/maintenance_logo.png';
     const DEFAULT_MAINTENANCE_BG   = 'Mageplaza_BetterMaintenance::media/maintenance_bg.jpg';
@@ -98,9 +96,9 @@ class Maintenance extends Template
         HelperImage $helperImage,
         Context $context
     ) {
-        $this->_helperData       = $helperData;
+        $this->_helperData = $helperData;
         $this->_maintenanceBlock = $maintenanceBlock;
-        $this->_helperImage      = $helperImage;
+        $this->_helperImage = $helperImage;
         parent::__construct($context);
     }
 
@@ -110,13 +108,13 @@ class Maintenance extends Template
     public function getFormData()
     {
         $newData = [];
-        $data    = $this->_request->getParam('formData');
-        $data    = urldecode($data);
-        $data    = explode('&', $data);
+        $data = $this->_request->getParam('formData');
+        $data = urldecode($data);
+        $data = explode('&', $data);
 
         foreach ($data as $value) {
-            $val              = explode('=', $value);
-            $val[0]           = $this->filterKey($val[0]);
+            $val = explode('=', $value);
+            $val[0] = $this->filterKey($val[0]);
             $newData[$val[0]] = urldecode($val[1]);
         }
 
@@ -191,7 +189,7 @@ class Maintenance extends Template
     public function getPageTitle()
     {
         return $this->getFormData()['[maintenance_title]'] === '1'
-            ? self::PAGE_TITLE
+            ? __('Under Maintenance')
             : $this->getFormData()['[maintenance_title]'];
     }
 
@@ -214,7 +212,7 @@ class Maintenance extends Template
     {
         return $this->getFormData()['[maintenance_description]'] !== '1'
             ? $this->getFormData()['[maintenance_description]']
-            : self::PAGE_DESCRIPTION;
+            : __('We\'re currently down for maintenance. Be right back!');
     }
 
     /**
@@ -243,7 +241,7 @@ class Maintenance extends Template
     public function getSubscribeLabel()
     {
         return $this->getFormData()['[button_label]'] === '1'
-            ? self::SUBSCRIBE_LABEL
+            ? __('Subscribe')
             : $this->getFormData()['[button_label]'];
     }
 
@@ -283,12 +281,13 @@ class Maintenance extends Template
 
     /**
      * @return string
+     * @throws NoSuchEntityException
      */
     public function getLogo()
     {
-        $actionName      = $this->_request->getActionName();
+        $actionName = $this->_request->getActionName();
         $maintenanceLogo = $this->_helperData->getMaintenanceSetting('maintenance_logo');
-        $comingSoonLogo  = $this->_helperData->getComingSoonSetting('comingsoon_logo');
+        $comingSoonLogo = $this->_helperData->getComingSoonSetting('comingsoon_logo');
 
         if ($actionName === 'maintenance') {
             return $maintenanceLogo
@@ -306,6 +305,7 @@ class Maintenance extends Template
      * @param $type
      *
      * @return string
+     * @throws NoSuchEntityException
      */
     public function getUrlImage($logo, $type)
     {
@@ -333,7 +333,7 @@ class Maintenance extends Template
      */
     public function getSocialList()
     {
-        $list    = [
+        $list = [
             '[social_facebook]',
             '[social_twitter]',
             '[social_instagram]',
@@ -341,11 +341,11 @@ class Maintenance extends Template
             '[social_youtube]',
             '[social_pinterest]'
         ];
-        $url     = [];
+        $url = [];
         $imgPath = 'Mageplaza_BetterMaintenance::media/';
         foreach ($list as $value) {
             $filterValue = preg_replace('/[^A-Za-z0-9\_]/', '', $value);
-            $url[]       = [
+            $url[] = [
                 'link' => $this->getFormData()[$value],
                 'img'  => $this->getViewFileUrl($imgPath . $filterValue . '.png')
             ];
@@ -417,12 +417,13 @@ class Maintenance extends Template
 
     /**
      * @return string
+     * @throws NoSuchEntityException
      */
     public function getImageBg()
     {
-        $actionName    = $this->_request->getActionName();
+        $actionName = $this->_request->getActionName();
         $maintenanceBg = $this->_helperData->getMaintenanceSetting('maintenance_background_image');
-        $comingSoonBg  = $this->_helperData->getComingSoonSetting('comingsoon_background_image');
+        $comingSoonBg = $this->_helperData->getComingSoonSetting('comingsoon_background_image');
 
         if ($actionName === 'maintenance') {
             return $maintenanceBg
@@ -467,11 +468,12 @@ class Maintenance extends Template
      * @param $type
      *
      * @return array
+     * @throws NoSuchEntityException
      */
     public function getMultipleImagesUrl($type)
     {
         $images = $this->getListImages($type);
-        $urls   = [];
+        $urls = [];
         foreach ($images as $image) {
             $urls[] = $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($image));
         }

@@ -79,16 +79,14 @@ $data = $block->getFormData();
         <?php if ($block->getSubscribeType() === 'email_form') : ?>
             <div id="mpbm-subscribe" class="mpbm-subscribe-box">
                 <?php if ($block->getSubscribeDes()) : ?>
-                    <h4 style="color: <?= /* @noEscape */ $block->getSubscribeDesColor() ?>"><?= /* @noEscape */
-                        $block->getSubscribeDes() ?></h4>
+                    <h4 style="color: <?= /* @noEscape */ $block->getSubscribeDesColor() ?>"><?= /* @noEscape */ $block->getSubscribeDes() ?></h4>
                 <?php endif; ?>
                 <?= /* @noEscape */ $block->getChildHtml('subscribe') ?>
             </div>
         <?php elseif ($block->getSubscribeType() === 'register_form') : ?>
             <div id="mpbm-register" class="mpbm-subscribe-box">
                 <?php if ($block->getSubscribeDes()) : ?>
-                    <h4 style="color: <?= /* @noEscape */ $block->getSubscribeDesColor() ?>"><?= /* @noEscape */
-                        $block->getSubscribeDes() ?></h4>
+                    <h4 style="color: <?= /* @noEscape */ $block->getSubscribeDesColor() ?>"><?= /* @noEscape */ $block->getSubscribeDes() ?></h4>
                 <?php endif; ?>
                 <?= /* @noEscape */ $block->getChildHtml('register') ?>
             </div>

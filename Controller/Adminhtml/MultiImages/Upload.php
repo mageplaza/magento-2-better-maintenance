@@ -65,11 +65,11 @@ class Upload extends Action
     /**
      * Upload constructor.
      *
-     * @param Action\Context  $context
-     * @param RawFactory      $resultRawFactory
+     * @param Action\Context $context
+     * @param RawFactory $resultRawFactory
      * @param UploaderFactory $uploaderFactory
-     * @param Filesystem      $filesystem
-     * @param Image           $imageHelper
+     * @param Filesystem $filesystem
+     * @param Image $imageHelper
      */
     public function __construct(
         Action\Context $context,
@@ -80,8 +80,8 @@ class Upload extends Action
     ) {
         $this->resultRawFactory = $resultRawFactory;
         $this->_uploaderFactory = $uploaderFactory;
-        $this->_fileSystem      = $filesystem;
-        $this->_imageHelper     = $imageHelper;
+        $this->_fileSystem = $filesystem;
+        $this->_imageHelper = $imageHelper;
 
         parent::__construct($context);
     }
@@ -101,16 +101,15 @@ class Upload extends Action
              * @var Read $mediaDirectory
              */
             $mediaDirectory = $this->_fileSystem->getDirectoryRead(DirectoryList::MEDIA);
-            $result         = $uploader->save(
+            $result = $uploader->save(
                 $mediaDirectory
                     ->getAbsolutePath($this->_imageHelper->getBaseTmpMediaPath())
             );
 
             unset($result['tmp_name'], $result['path']);
 
-            $result['url']  = $this->_imageHelper->getTmpMediaUrl($result['file']);
+            $result['url'] = $this->_imageHelper->getTmpMediaUrl($result['file']);
             $result['file'] = 'tmp' . $result['file'];
-
         } catch (Exception $e) {
             $result = ['error' => $e->getMessage(), 'errorcode' => $e->getCode()];
         }

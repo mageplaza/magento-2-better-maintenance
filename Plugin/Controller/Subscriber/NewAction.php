@@ -27,12 +27,12 @@ use Magento\Customer\Model\Url as CustomerUrl;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
+use Magento\Framework\View\Element\Messages;
+use Magento\Framework\View\LayoutInterface;
 use Magento\Newsletter\Controller\Subscriber\NewAction as CoreNewAction;
 use Magento\Newsletter\Model\SubscriberFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\BetterMaintenance\Helper\Data;
-use Magento\Framework\View\Element\Messages;
-use Magento\Framework\View\LayoutInterface;
 
 /**
  * Class NewAction
@@ -80,8 +80,8 @@ class NewAction extends CoreNewAction
         LayoutInterface $layout
     ) {
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->_helperData       = $helperData;
-        $this->_layout           = $layout;
+        $this->_helperData = $helperData;
+        $this->_layout = $layout;
 
         parent::__construct(
             $context,
@@ -109,13 +109,13 @@ class NewAction extends CoreNewAction
         $msgs = $this->messageManager->getMessages(1);
 
         foreach ($msgs->getItems() as $value) {
-            $msg[]  = $value->getText();
+            $msg[] = $value->getText();
             $type[] = $value->getType();
         }
 
         /** @var Messages $msgBlock */
         $msgBlock = $this->_layout->createBlock(Messages::class);
-        
+
         foreach ($type as $key => $value) {
             if ($value === 'error') {
                 $html[] = $msgBlock->addError($msg[$key])->toHtml();

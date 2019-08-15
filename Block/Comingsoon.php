@@ -18,6 +18,7 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\BetterMaintenance\Block;
 
 use Mageplaza\BetterMaintenance\Model\Config\Source\System\RedirectTo;

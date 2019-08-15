@@ -18,12 +18,13 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\BetterMaintenance\Block\Adminhtml\System;
 
+use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Url;
-use Magento\Backend\Block\Template\Context;
 
 /**
  * Class PreviewButton
@@ -55,6 +56,7 @@ class PreviewButton extends Field
         array $data = []
     ) {
         $this->_frontendUrl = $frontendUrl;
+
         parent::__construct($context, $data);
     }
 
@@ -79,12 +81,10 @@ class PreviewButton extends Field
     {
         $originalData = $element->getOriginalData();
 
-        $this->addData(
-            [
-                'button_label' => $originalData['button_label'],
-                'html_id'      => $element->getHtmlId()
-            ]
-        );
+        $this->addData([
+            'button_label' => $originalData['button_label'],
+            'html_id'      => $element->getHtmlId()
+        ]);
 
         return $this->_toHtml();
     }
@@ -106,7 +106,7 @@ class PreviewButton extends Field
      * Copy from the Magento core.
      *
      * @param string $string
-     * @param bool   $escapeSingleQuote
+     * @param bool $escapeSingleQuote
      *
      * @return string
      */
@@ -118,7 +118,8 @@ class PreviewButton extends Field
     /**
      * Copy from the Magento core.
      *
-     * @param  string $string
+     * @param string $string
+     *
      * @return string
      */
     public function escapeJs($string)

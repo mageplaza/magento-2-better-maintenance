@@ -18,6 +18,7 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\BetterMaintenance\Block;
 
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -60,6 +61,7 @@ class Background extends Comingsoon
 
     /**
      * @return array|null
+     * @throws NoSuchEntityException
      */
     public function getListImagesUrl()
     {
@@ -72,6 +74,7 @@ class Background extends Comingsoon
 
     /**
      * @return string|null
+     * @throws NoSuchEntityException
      */
     public function getBgImageUrl()
     {
@@ -80,6 +83,7 @@ class Background extends Comingsoon
             if (!$image) {
                 return $this->getViewFileUrl(self::DEFAULT_MAINTENANCE_BG);
             }
+
             return $this->getImageUrl($image);
         }
 
@@ -88,6 +92,7 @@ class Background extends Comingsoon
             if (!$image) {
                 return $this->getViewFileUrl(self::DEFAULT_COMING_SOON_BG);
             }
+
             return $this->getImageUrl($image);
         }
 
@@ -96,6 +101,7 @@ class Background extends Comingsoon
 
     /**
      * @return string|null
+     * @throws NoSuchEntityException
      */
     public function getBgVideoUrl()
     {

@@ -105,17 +105,14 @@ $data = $block->getFormData();
     .mpbm-text {
         color: <?= /* @noEscape */ $block->getLabelColor('[comingsoon_color]') ?>;
     }
-
     #mpbm-social-label {
         color: <?= /* @noEscape */ $data['[social_label_color]'] ?>;
     }
-
     <?php if (array_key_exists('[clock_number_color]', $data) && $data['[clock_template]'] === 'stack') : ?>
         <?php $inner = $data['[clock_inner_color]'] ?>
     .stack-txt1 {
         background: <?= /* @noEscape */ $inner === '1' ? '#FFFFFF' : $inner ?>;
     }
-
     <?php endif; ?>
 </style>
 

@@ -18,6 +18,7 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\BetterMaintenance\Block\Preview;
 
 use Mageplaza\BetterMaintenance\Block\Preview\Maintenance as MPreview;
@@ -29,9 +30,6 @@ use Mageplaza\BetterMaintenance\Block\Preview\Maintenance as MPreview;
  */
 class Comingsoon extends MPreview
 {
-    const PAGE_TITLE       = 'Coming Soon';
-    const PAGE_DESCRIPTION = 'Our new site is coming soon. Stay tuned!';
-
     /**
      * @var string
      */
@@ -43,7 +41,7 @@ class Comingsoon extends MPreview
     public function getPageTitle()
     {
         return $this->getFormData()['[comingsoon_title]'] === '1'
-            ? self::PAGE_TITLE
+            ? __('Coming Soon')
             : $this->getFormData()['[comingsoon_title]'];
     }
 
@@ -54,6 +52,6 @@ class Comingsoon extends MPreview
     {
         return $this->getFormData()['[comingsoon_description]'] !== '1'
             ? $this->getFormData()['[comingsoon_description]']
-            : self::PAGE_DESCRIPTION;
+            : __('Our new site is coming soon. Stay tuned!');
     }
 }

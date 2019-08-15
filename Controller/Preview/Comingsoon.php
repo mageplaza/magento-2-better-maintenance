@@ -18,6 +18,7 @@
  * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license   https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\BetterMaintenance\Controller\Preview;
 
 use Magento\Framework\App\Action\Action;
@@ -42,7 +43,7 @@ class Comingsoon extends Action
     /**
      * Comingsoon constructor.
      *
-     * @param Context     $context
+     * @param Context $context
      * @param PageFactory $pageFactory
      */
     public function __construct(
@@ -50,6 +51,7 @@ class Comingsoon extends Action
         PageFactory $pageFactory
     ) {
         $this->_pageFactory = $pageFactory;
+
         parent::__construct($context);
     }
 
@@ -59,7 +61,7 @@ class Comingsoon extends Action
     public function execute()
     {
         $resultPageFactory = $this->_pageFactory->create();
-        $resultPageFactory->getConfig()->getTitle()->set('Coming Soon Preview');
+        $resultPageFactory->getConfig()->getTitle()->set(__('Coming Soon Preview'));
 
         return $resultPageFactory;
     }
