@@ -1,6 +1,6 @@
 # Better Maintenance For Magento 2
 
-Better Maintenance for Magento 2 helps you notify customers that your site is currently under maintenance or upgradation, and prepare for upcoming products/ services. Thanks to Better Maintenance module, store visitors are well informed about maintenance progress as well as the launch date with comfort.
+[Better Maintenance for Magento 2](https://www.mageplaza.com/magento-2-better-maintenance/) helps you notify customers that your site is currently under maintenance or upgradation, and prepare for upcoming products/ services. Thanks to Better Maintenance module, store visitors are well informed about maintenance progress as well as the launch date with comfort.
 
 
 ## 1. Documentation
