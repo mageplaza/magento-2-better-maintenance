@@ -52,7 +52,7 @@ php bin/magento setup:static-content:deploy
 
 ### Redirect Users to Coming Soon and Maintenance page
 
-![Imgur](https://i.imgur.com/LSzhMZg.gifv)
+![Imgur](https://i.imgur.com/LSzhMZg.gif)
 
 When the store site is off for an update, the prioritized task of the store owner is to make customers calm down to wait for site launching. Redirecting visitors to communicative Coming Soon or Maintenance Page is the ideal choice.
 
