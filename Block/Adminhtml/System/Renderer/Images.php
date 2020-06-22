@@ -95,7 +95,7 @@ class Images extends Widget
         }
 
         $this->getUploader()->getConfig()->setUrl(
-            $this->_urlBuilder->addSessionParam()->getUrl('mpbettermaintenance/multiimages/upload')
+            $this->_urlBuilder->getUrl('mpbettermaintenance/multiimages/upload')
         )->setFileField(
             'image'
         )->setFilters(
