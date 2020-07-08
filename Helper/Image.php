@@ -89,7 +89,7 @@ class Image extends Media
     public function getNotDuplicatedFilename($fileName, $descriptionPath)
     {
         $fileMediaName = $descriptionPath . '/'
-                         . Uploader::getNewFileName($this->mediaDirectory->getAbsolutePath($this->getMediaPath($fileName)));
+            . Uploader::getNewFileName($this->mediaDirectory->getAbsolutePath($this->getMediaPath($fileName)));
 
         if ($fileMediaName !== $fileName) {
             return $this->getNotDuplicatedFilename($fileMediaName, $descriptionPath);
@@ -134,7 +134,7 @@ class Image extends Media
     public function getBaseTmpMediaUrl()
     {
         return $this->storeManager->getStore()
-                   ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $this->getBaseTmpMediaPath();
+                ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $this->getBaseTmpMediaPath();
     }
 
     /**
@@ -178,7 +178,7 @@ class Image extends Media
             }
 
             $fileName = $image['file'];
-            $pos = strpos($fileName, '.tmp');
+            $pos      = strpos($fileName, '.tmp');
 
             if (isset($image['removed'])) {
                 /**
@@ -188,7 +188,7 @@ class Image extends Media
 
                 if ($pos === false) {
                     $filePath = $this->getMediaPath($image['file']);
-                    $file = $this->mediaDirectory->getRelativePath($filePath);
+                    $file     = $this->mediaDirectory->getRelativePath($filePath);
                     if ($this->mediaDirectory->isFile($file)) {
                         $this->mediaDirectory->delete($filePath);
                     }
@@ -199,7 +199,7 @@ class Image extends Media
                  */
                 $fileName = substr($fileName, 0, $pos);
                 $filePath = $this->getTmpMediaPath($fileName);
-                $file = $this->mediaDirectory->getRelativePath($filePath);
+                $file     = $this->mediaDirectory->getRelativePath($filePath);
                 if (!$this->mediaDirectory->isFile($file)) {
                     unset($imageEntries[$key]);
                     continue;
@@ -213,11 +213,11 @@ class Image extends Media
                     continue;
                 }
 
-                $fileName = Uploader::getCorrectFileName($pathInfo['basename']);
+                $fileName       = Uploader::getCorrectFileName($pathInfo['basename']);
                 $dispretionPath = Uploader::getDispretionPath($fileName);
-                $fileName = $dispretionPath . '/' . $fileName;
+                $fileName       = $dispretionPath . '/' . $fileName;
 
-                $fileName = $this->getNotDuplicatedFilename($fileName, $dispretionPath);
+                $fileName        = $this->getNotDuplicatedFilename($fileName, $dispretionPath);
                 $destinationFile = $this->getMediaPath($fileName);
 
                 try {

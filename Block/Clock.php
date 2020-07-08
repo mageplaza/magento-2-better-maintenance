@@ -60,7 +60,7 @@ class Clock extends Template
         Template\Context $context,
         array $data = []
     ) {
-        $this->_helperData = $helperData;
+        $this->_helperData   = $helperData;
         $this->_previewBlock = $previewBlock;
 
         parent::__construct($context, $data);

@@ -96,9 +96,9 @@ class Maintenance extends Template
         HelperImage $helperImage,
         Context $context
     ) {
-        $this->_helperData = $helperData;
+        $this->_helperData       = $helperData;
         $this->_maintenanceBlock = $maintenanceBlock;
-        $this->_helperImage = $helperImage;
+        $this->_helperImage      = $helperImage;
         parent::__construct($context);
     }
 
@@ -108,13 +108,13 @@ class Maintenance extends Template
     public function getFormData()
     {
         $newData = [];
-        $data = $this->_request->getParam('formData');
-        $data = urldecode($data);
-        $data = explode('&', $data);
+        $data    = $this->_request->getParam('formData');
+        $data    = urldecode($data);
+        $data    = explode('&', $data);
 
         foreach ($data as $value) {
-            $val = explode('=', $value);
-            $val[0] = $this->filterKey($val[0]);
+            $val              = explode('=', $value);
+            $val[0]           = $this->filterKey($val[0]);
             $newData[$val[0]] = urldecode($val[1]);
         }
 
@@ -285,9 +285,9 @@ class Maintenance extends Template
      */
     public function getLogo()
     {
-        $actionName = $this->_request->getActionName();
+        $actionName      = $this->_request->getActionName();
         $maintenanceLogo = $this->_helperData->getMaintenanceSetting('maintenance_logo');
-        $comingSoonLogo = $this->_helperData->getComingSoonSetting('comingsoon_logo');
+        $comingSoonLogo  = $this->_helperData->getComingSoonSetting('comingsoon_logo');
 
         if ($actionName === 'maintenance') {
             return $maintenanceLogo
@@ -333,7 +333,7 @@ class Maintenance extends Template
      */
     public function getSocialList()
     {
-        $list = [
+        $list    = [
             '[social_facebook]',
             '[social_twitter]',
             '[social_instagram]',
@@ -341,11 +341,11 @@ class Maintenance extends Template
             '[social_youtube]',
             '[social_pinterest]'
         ];
-        $url = [];
+        $url     = [];
         $imgPath = 'Mageplaza_BetterMaintenance::media/';
         foreach ($list as $value) {
             $filterValue = preg_replace('/[^A-Za-z0-9\_]/', '', $value);
-            $url[] = [
+            $url[]       = [
                 'link' => $this->getFormData()[$value],
                 'img'  => $this->getViewFileUrl($imgPath . $filterValue . '.png')
             ];
@@ -421,9 +421,9 @@ class Maintenance extends Template
      */
     public function getImageBg()
     {
-        $actionName = $this->_request->getActionName();
+        $actionName    = $this->_request->getActionName();
         $maintenanceBg = $this->_helperData->getMaintenanceSetting('maintenance_background_image');
-        $comingSoonBg = $this->_helperData->getComingSoonSetting('comingsoon_background_image');
+        $comingSoonBg  = $this->_helperData->getComingSoonSetting('comingsoon_background_image');
 
         if ($actionName === 'maintenance') {
             return $maintenanceBg
@@ -473,7 +473,7 @@ class Maintenance extends Template
     public function getMultipleImagesUrl($type)
     {
         $images = $this->getListImages($type);
-        $urls = [];
+        $urls   = [];
         foreach ($images as $image) {
             $urls[] = $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($image));
         }

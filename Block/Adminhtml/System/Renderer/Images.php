@@ -71,8 +71,8 @@ class Images extends Widget
         ObjectManagerInterface $objectManager,
         array $data = []
     ) {
-        $this->_imageHelper = $imageHelper;
-        $this->_helperData = $helperData;
+        $this->_imageHelper   = $imageHelper;
+        $this->_helperData    = $helperData;
         $this->_objectManager = $objectManager;
 
         parent::__construct($context, $data);
@@ -95,7 +95,7 @@ class Images extends Widget
         }
 
         $this->getUploader()->getConfig()->setUrl(
-            $this->_urlBuilder->addSessionParam()->getUrl('mpbettermaintenance/multiimages/upload')
+            $this->_urlBuilder->getUrl('mpbettermaintenance/multiimages/upload')
         )->setFileField(
             'image'
         )->setFilters(
@@ -147,12 +147,12 @@ class Images extends Widget
             $value = HelperData::jsonDecode($data[$code]);
             if (is_array($value) && !empty($value)) {
                 $mediaDir = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA);
-                $images = $this->sortImagesByPosition($value);
+                $images   = $this->sortImagesByPosition($value);
                 foreach ($images as $key => &$image) {
                     $image['url'] = $this->_imageHelper
-                                        ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
+                            ->getBaseMediaUrl() . '/' . $this->_imageHelper->getMediaPath($image['file']);
                     try {
-                        $fileHandler = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
+                        $fileHandler   = $mediaDir->stat($this->_imageHelper->getMediaPath($image['file']));
                         $image['size'] = $fileHandler['size'];
                     } catch (Exception $e) {
                         $this->_logger->warning($e);

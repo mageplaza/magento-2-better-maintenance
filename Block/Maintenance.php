@@ -76,8 +76,8 @@ class Maintenance extends Template
         CustomerFactory $customerFactory,
         array $data = []
     ) {
-        $this->_helperData = $helperData;
-        $this->_helperImage = $helperImage;
+        $this->_helperData      = $helperData;
+        $this->_helperImage     = $helperImage;
         $this->_customerFactory = $customerFactory;
 
         parent::__construct($context, $data);
@@ -174,7 +174,7 @@ class Maintenance extends Template
      */
     public function getMultipleImagesUrl($images)
     {
-        $urls = [];
+        $urls   = [];
         $images = $this->getListMultipleImages($images);
         if (empty($images)) {
             return null;
@@ -257,7 +257,7 @@ class Maintenance extends Template
      */
     public function getSocialList()
     {
-        $list = [
+        $list    = [
             'social_facebook',
             'social_twitter',
             'social_instagram',
@@ -265,7 +265,7 @@ class Maintenance extends Template
             'social_youtube',
             'social_pinterest'
         ];
-        $url = [];
+        $url     = [];
         $imgPath = 'Mageplaza_BetterMaintenance::media/';
 
         foreach ($list as $value) {
@@ -353,13 +353,13 @@ class Maintenance extends Template
      */
     public function checkRegister()
     {
-        $currentTime = strtotime($this->_localeDate->date()->format('m/d/Y H:i:s'));
+        $currentTime      = strtotime($this->_localeDate->date()->format('m/d/Y H:i:s'));
         $lastRegisterTime = $this->_customerFactory->create()
             ->getCollection()
             ->getLastItem()
             ->getCreatedAt();
-        $realTime = strtotime($this->_localeDate->date($lastRegisterTime)->format('m/d/y H:i:s'));
-        $compare = $currentTime - $realTime;
+        $realTime         = strtotime($this->_localeDate->date($lastRegisterTime)->format('m/d/y H:i:s'));
+        $compare          = $currentTime - $realTime;
 
         if ($compare < 3) {
             $msg = $this->_layout->createBlock(Messages::class)

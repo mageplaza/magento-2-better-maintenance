@@ -64,7 +64,7 @@ class RedirectTo implements ArrayInterface
             'label' => __('Coming Soon Page')
         ];
 
-        $pageList = $this->_pageFactory->create()->toOptionIdArray();
+        $pageList   = $this->_pageFactory->create()->toOptionIdArray();
         $pageList[] = $maintenance;
         $pageList[] = $comingSoon;
 

@@ -80,8 +80,8 @@ class NewAction extends CoreNewAction
         LayoutInterface $layout
     ) {
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->_helperData = $helperData;
-        $this->_layout = $layout;
+        $this->_helperData       = $helperData;
+        $this->_layout           = $layout;
 
         parent::__construct(
             $context,
@@ -107,9 +107,10 @@ class NewAction extends CoreNewAction
         }
 
         $msgs = $this->messageManager->getMessages(1);
-
+        $msg  = [];
+        $type = [];
         foreach ($msgs->getItems() as $value) {
-            $msg[] = $value->getText();
+            $msg[]  = $value->getText();
             $type[] = $value->getType();
         }
 
