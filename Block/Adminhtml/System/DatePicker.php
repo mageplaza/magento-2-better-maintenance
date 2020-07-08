@@ -41,7 +41,7 @@ class DatePicker extends Field
         $html = $element->getElementHtml();
 
         $html .= '<button type="button" style="display:none;" class="ui-datepicker-trigger '
-                 . 'v-middle"></button>';
+            . 'v-middle"></button>';
 
         $html .= '<script type="text/javascript">
         require(["jquery", "jquery/ui", "mage/calendar"], function ($) {

@@ -88,13 +88,13 @@ class RedirectTest extends TestCase
 
     public function setUp()
     {
-        $this->_context = $this->getMockBuilder(Template\Context::class)->disableOriginalConstructor()->getMock();
+        $this->_context    = $this->getMockBuilder(Template\Context::class)->disableOriginalConstructor()->getMock();
         $this->_helperData = $this->getMockBuilder(HelperData::class)->disableOriginalConstructor()->getMock();
-        $this->_cmsPage = $this->getMockBuilder(CmsPage::class)->disableOriginalConstructor()->getMock();
-        $this->_response = $this->getMockBuilder(Http::class)->disableOriginalConstructor()->getMock();
-        $this->_date = $this->getMockBuilder(DateTime::class)->disableOriginalConstructor()->getMock();
+        $this->_cmsPage    = $this->getMockBuilder(CmsPage::class)->disableOriginalConstructor()->getMock();
+        $this->_response   = $this->getMockBuilder(Http::class)->disableOriginalConstructor()->getMock();
+        $this->_date       = $this->getMockBuilder(DateTime::class)->disableOriginalConstructor()->getMock();
         $this->_urlBuilder = $this->getMockBuilder(UrlInterface::class)->getMock();
-        $this->_request = $this->getMockBuilder(RequestInterface::class)->getMock();
+        $this->_request    = $this->getMockBuilder(RequestInterface::class)->getMock();
         $this->_localeDate = $this->getMockBuilder(TimezoneInterface::class)->getMock();
 
         $this->_context->method('getUrlBuilder')->willReturn($this->_urlBuilder);

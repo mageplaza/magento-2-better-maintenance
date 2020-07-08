@@ -55,7 +55,7 @@ class CmsBlock implements ArrayInterface
             'value' => 0,
             'label' => __('--Please Select--')
         ];
-        $data = $this->_blockFactory->create()->getCollection()->getData();
+        $data        = $this->_blockFactory->create()->getCollection()->getData();
         foreach ($data as $value) {
             $listBlock[] = [
                 'value' => $value['identifier'],

@@ -93,12 +93,12 @@ class Redirect implements ObserverInterface
         ViewInterface $view,
         BlockRedirect $blockRedirect
     ) {
-        $this->_helperData = $helperData;
-        $this->_response = $response;
-        $this->_localeDate = $localeDate;
-        $this->_request = $request;
-        $this->_urlBuilder = $urlBuilder;
-        $this->_view = $view;
+        $this->_helperData    = $helperData;
+        $this->_response      = $response;
+        $this->_localeDate    = $localeDate;
+        $this->_request       = $request;
+        $this->_urlBuilder    = $urlBuilder;
+        $this->_view          = $view;
         $this->_blockRedirect = $blockRedirect;
     }
 
@@ -111,10 +111,10 @@ class Redirect implements ObserverInterface
     {
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
         $currentUrl = $this->_urlBuilder->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
-        $currentIp = $this->_request->getClientIp();
-        $ctlName = $this->_request->getControllerName();
+        $currentIp  = $this->_request->getClientIp();
+        $ctlName    = $this->_request->getControllerName();
 
-        $currentIp = str_replace(' ','', $currentIp);
+        $currentIp = str_replace(' ', '', $currentIp);
         $currentIp = explode(',', $currentIp);
 
         if (!$this->_helperData->isEnabled()) {
@@ -122,7 +122,7 @@ class Redirect implements ObserverInterface
         }
 
         foreach ($this->_blockRedirect->getWhiteListIp() as $value) {
-            $value = str_replace(' ','', $value);
+            $value = str_replace(' ', '', $value);
             if (in_array($value, $currentIp, true)) {
                 return;
             }
