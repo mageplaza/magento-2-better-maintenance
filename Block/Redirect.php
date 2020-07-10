@@ -101,16 +101,12 @@ class Redirect extends Template
         $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
         $currentIp  = $this->_helperData->getClientIp();
 
-        $currentIp = str_replace(' ', '', $currentIp);
-        $currentIp = explode(',', $currentIp);
-
         if (!$this->_helperData->isEnabled()) {
             return false;
         }
 
         foreach ($this->getWhitelistIp() as $value) {
-            $value = str_replace(' ', '', $value);
-            if (in_array($value, $currentIp, true)) {
+            if ($this->_helperData->checkIp($currentIp, trim($value))) {
                 return false;
             }
         }

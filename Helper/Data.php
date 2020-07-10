@@ -213,6 +213,29 @@ class Data extends AbstractData
      */
     public function getClientIp()
     {
+        $addressPath = [
+            'HTTP_CF_CONNECTING_IP',
+            'HTTP_X_REAL_IP',
+            'HTTP_CLIENT_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'REMOTE_ADDR'
+        ];
+        foreach ($addressPath as $path) {
+            $ip = $this->_request->getServer($path);
+            if ($ip) {
+                if (strpos($ip, ',') !== false) {
+                    $addresses = explode(',', $ip);
+                    foreach ($addresses as $address) {
+                        if (trim($address) !== '127.0.0.1') {
+                            return trim($address);
+                        }
+                    }
+                } elseif ($ip !== '127.0.0.1') {
+                    return $ip;
+                }
+            }
+        }
+
         return $this->_request->getClientIp();
     }
 }
