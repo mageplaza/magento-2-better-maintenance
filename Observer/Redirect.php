@@ -111,19 +111,15 @@ class Redirect implements ObserverInterface
     {
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
         $currentUrl = $this->_urlBuilder->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
-        $currentIp  = $this->_request->getClientIp();
+        $currentIp  = $this->_helperData->getClientIp();
         $ctlName    = $this->_request->getControllerName();
-
-        $currentIp = str_replace(' ', '', $currentIp);
-        $currentIp = explode(',', $currentIp);
 
         if (!$this->_helperData->isEnabled()) {
             return;
         }
 
         foreach ($this->_blockRedirect->getWhiteListIp() as $value) {
-            $value = str_replace(' ', '', $value);
-            if (in_array($value, $currentIp, true)) {
+            if ($this->_helperData->checkIp($currentIp, trim($value))) {
                 return;
             }
         }
