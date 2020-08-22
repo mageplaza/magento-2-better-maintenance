@@ -33,6 +33,8 @@ use Magento\Newsletter\Controller\Subscriber\NewAction as CoreNewAction;
 use Magento\Newsletter\Model\SubscriberFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\BetterMaintenance\Helper\Data;
+use Magento\Framework\App\ObjectManager;
+use Magento\Framework\App\Action\Action as Action;
 
 /**
  * Class NewAction
@@ -56,44 +58,6 @@ class NewAction extends CoreNewAction
     protected $_layout;
 
     /**
-     * NewAction constructor.
-     *
-     * @param Context $context
-     * @param SubscriberFactory $subscriberFactory
-     * @param Session $customerSession
-     * @param StoreManagerInterface $storeManager
-     * @param CustomerUrl $customerUrl
-     * @param CustomerAccountManagement $customerAccountManagement
-     * @param JsonFactory $resultJsonFactory
-     * @param Data $helperData
-     * @param LayoutInterface $layout
-     */
-    public function __construct(
-        Context $context,
-        SubscriberFactory $subscriberFactory,
-        Session $customerSession,
-        StoreManagerInterface $storeManager,
-        CustomerUrl $customerUrl,
-        CustomerAccountManagement $customerAccountManagement,
-        JsonFactory $resultJsonFactory,
-        Data $helperData,
-        LayoutInterface $layout
-    ) {
-        $this->resultJsonFactory = $resultJsonFactory;
-        $this->_helperData       = $helperData;
-        $this->_layout           = $layout;
-
-        parent::__construct(
-            $context,
-            $subscriberFactory,
-            $customerSession,
-            $storeManager,
-            $customerUrl,
-            $customerAccountManagement
-        );
-    }
-
-    /**
      * @param CoreNewAction $subject
      * @param $result
      *
@@ -102,7 +66,11 @@ class NewAction extends CoreNewAction
      */
     public function afterExecute(CoreNewAction $subject, $result)
     {
-        if (!$this->_helperData->isEnabled() || !$this->getRequest()->isAjax()) {
+        $resultJsonFactory = ObjectManager::getInstance()->get(JsonFactory::class);
+        $_helperData = ObjectManager::getInstance()->get(Data::class);
+        $_layout = ObjectManager::getInstance()->get(LayoutInterface::class);
+
+        if (!$_helperData->isEnabled() || !$this->getRequest()->isAjax()) {
             return $result;
         }
 
@@ -115,7 +83,7 @@ class NewAction extends CoreNewAction
         }
 
         /** @var Messages $msgBlock */
-        $msgBlock = $this->_layout->createBlock(Messages::class);
+        $msgBlock = $_layout->createBlock(Messages::class);
 
         foreach ($type as $key => $value) {
             if ($value === 'error') {
@@ -128,6 +96,6 @@ class NewAction extends CoreNewAction
         }
         $this->getResponse()->clearHeader('location');
 
-        return $this->resultJsonFactory->create()->setData($html);
+        return $resultJsonFactory->create()->setData($html);
     }
 }
