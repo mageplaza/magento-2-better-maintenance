@@ -52,6 +52,7 @@
                 </field>
                 <field id="whitelist_ip" translate="label comment" type="textarea" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Whitelist IP(s)</label>
+                    <backend_model>Mageplaza\BetterMaintenance\Model\Config\Backend\Validate</backend_model>
                     <comment>Separated by comma(s).</comment>
                 </field>
                 <field id="whitelist_page" translate="label comment" type="textarea" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
