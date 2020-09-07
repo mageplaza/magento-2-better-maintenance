@@ -128,6 +128,16 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
         color: <?= /* @noEscape */ $block->getSocialSetting('social_label_color') ?> !important;
     }
 
+    @media only screen and (max-width: 764px) {
+        #mpbm-progress-bar .progress{
+            width: 90% !important;
+        }
+        #mpbm-subscribe{
+            width: 90% !important;
+            margin: auto !important;
+        }
+    }
+
     <?php if ($block->getClockSetting('clock_template') === 'stack') : ?>
         <?php $inner = !empty($block->getClockSetting('clock_inner_color')) ? $block->getClockSetting('clock_inner_color') : '#FFFFFF'?>
     .stack-txt1 {
