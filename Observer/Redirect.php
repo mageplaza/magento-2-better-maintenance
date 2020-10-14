@@ -135,12 +135,12 @@ class Redirect implements ObserverInterface
             return;
         }
 
-        if ($redirectTo === RedirectTo::MAINTENANCE_PAGE && $ctlName !== 'preview') {
+        if ($redirectTo === RedirectTo::MAINTENANCE_PAGE && $ctlName !== 'preview' && $this->_request->getControllerName()) {
             $this->_view->loadLayout(['default', 'mpbettermaintenance_maintenance_index'], true, true, false);
             $this->_response->setHttpResponseCode(503);
         }
 
-        if ($redirectTo === RedirectTo::COMING_SOON_PAGE && $ctlName !== 'preview') {
+        if ($redirectTo === RedirectTo::COMING_SOON_PAGE && $ctlName !== 'preview' && $this->_request->getControllerName()) {
             $this->_view->loadLayout(['default', 'mpbettermaintenance_comingsoon_index'], true, true, false);
             $this->_response->setHttpResponseCode(503);
         }

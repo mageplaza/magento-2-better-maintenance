@@ -27,10 +27,12 @@ use Magento\Customer\Model\Url as CustomerUrl;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
+use Magento\Framework\Validator\EmailAddress as EmailValidator;
 use Magento\Framework\View\Element\Messages;
 use Magento\Framework\View\LayoutInterface;
 use Magento\Newsletter\Controller\Subscriber\NewAction as CoreNewAction;
 use Magento\Newsletter\Model\SubscriberFactory;
+use Magento\Newsletter\Model\SubscriptionManagerInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\BetterMaintenance\Helper\Data;
 
@@ -64,9 +66,11 @@ class NewAction extends CoreNewAction
      * @param StoreManagerInterface $storeManager
      * @param CustomerUrl $customerUrl
      * @param CustomerAccountManagement $customerAccountManagement
+     * @param SubscriptionManagerInterface $subscriptionManager
      * @param JsonFactory $resultJsonFactory
      * @param Data $helperData
      * @param LayoutInterface $layout
+     * @param EmailValidator|null $emailValidator
      */
     public function __construct(
         Context $context,
@@ -75,22 +79,18 @@ class NewAction extends CoreNewAction
         StoreManagerInterface $storeManager,
         CustomerUrl $customerUrl,
         CustomerAccountManagement $customerAccountManagement,
+        SubscriptionManagerInterface $subscriptionManager,
         JsonFactory $resultJsonFactory,
         Data $helperData,
-        LayoutInterface $layout
+        LayoutInterface $layout,
+        EmailValidator $emailValidator = null
     ) {
         $this->resultJsonFactory = $resultJsonFactory;
         $this->_helperData       = $helperData;
         $this->_layout           = $layout;
 
-        parent::__construct(
-            $context,
-            $subscriberFactory,
-            $customerSession,
-            $storeManager,
-            $customerUrl,
-            $customerAccountManagement
-        );
+        parent::__construct($context, $subscriberFactory, $customerSession, $storeManager, $customerUrl,
+            $customerAccountManagement, $subscriptionManager, $emailValidator);
     }
 
     /**
@@ -116,7 +116,7 @@ class NewAction extends CoreNewAction
 
         /** @var Messages $msgBlock */
         $msgBlock = $this->_layout->createBlock(Messages::class);
-
+        $html = [];
         foreach ($type as $key => $value) {
             if ($value === 'error') {
                 $html[] = $msgBlock->addError($msg[$key])->toHtml();
