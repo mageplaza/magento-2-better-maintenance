@@ -27,4 +27,16 @@
     <type name="Magento\Newsletter\Controller\Subscriber\NewAction">
         <plugin name="mpbettermaintenance_get_message" type="Mageplaza\BetterMaintenance\Plugin\Controller\Subscriber\NewAction" />
     </type>
+
+    <preference for="Mageplaza\BetterMaintenance\Api\ConfigRepositoryInterface" type="Mageplaza\BetterMaintenance\Model\ConfigRepository"/>
+    <preference for="Mageplaza\BetterMaintenance\Api\Data\ConfigInterface" type="Mageplaza\BetterMaintenance\Model\Config"/>
+    <preference for="Mageplaza\BetterMaintenance\Api\Data\Config\GeneralInterface" type="Mageplaza\BetterMaintenance\Model\Api\Config\General"/>
+    <preference for="Mageplaza\BetterMaintenance\Api\Data\Config\MaintenanceSettingInterface" type="Mageplaza\BetterMaintenance\Model\Api\Config\MaintenanceSetting"/>
+    <preference for="Mageplaza\BetterMaintenance\Api\Data\Config\ComingSoonSettingInterface" type="Mageplaza\BetterMaintenance\Model\Api\Config\ComingSoonSetting"/>
+    <preference for="Mageplaza\BetterMaintenance\Api\Data\Config\DisplaySettingInterface" type="Mageplaza\BetterMaintenance\Model\Api\Config\DisplaySetting"/>
+    <preference for="Mageplaza\BetterMaintenance\Api\Data\Config\DisplaySetting\ClockSettingInterface" type="Mageplaza\BetterMaintenance\Model\Api\Config\DisplaySetting\ClockSetting"/>
+    <preference for="Mageplaza\BetterMaintenance\Api\Data\Config\DisplaySetting\SubscribeSettingInterface" type="Mageplaza\BetterMaintenance\Model\Api\Config\DisplaySetting\SubscribeSetting"/>
+    <preference for="Mageplaza\BetterMaintenance\Api\Data\Config\DisplaySetting\FooterInterface" type="Mageplaza\BetterMaintenance\Model\Api\Config\DisplaySetting\FooterSetting"/>
+    <preference for="Mageplaza\BetterMaintenance\Api\Data\Config\DisplaySetting\SocialContactInterface" type="Mageplaza\BetterMaintenance\Model\Api\Config\DisplaySetting\SocialContact"/>
+
 </config>

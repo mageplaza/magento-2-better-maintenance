@@ -48,6 +48,16 @@ class Data extends AbstractData
     }
 
     /**
+     * @param string|int $storeId
+     *
+     * @return array|mixed
+     */
+    public function getBetterMaintenanceConfigs($storeId)
+    {
+        return $this->getConfigValue(static::CONFIG_MODULE_PATH, $storeId);
+    }
+
+    /**
      * @param $code
      * @param null $storeId
      *
