@@ -21,6 +21,7 @@
 
 namespace Mageplaza\BetterMaintenance\Model;
 
+use Magento\Framework\Exception\LocalizedException;
 use Mageplaza\BetterMaintenance\Api\ConfigRepositoryInterface;
 use Mageplaza\BetterMaintenance\Helper\Data;
 use Mageplaza\BetterMaintenance\Helper\Image;
@@ -76,6 +77,14 @@ class ConfigRepository implements ConfigRepositoryInterface
      */
     public function getConfigs($storeId = null)
     {
+        if ($storeId === null) {
+            $storeId = $this->helperData->getCurrentStoreId();
+        }
+
+        if (!$this->helperData->isEnabled($storeId)) {
+            throw new LocalizedException(__('Better Maintenance is disabled.'));
+        }
+
         $configModule               = $this->helperData->getBetterMaintenanceConfigs($storeId);
         $clockSettingObject         = new ClockSetting($configModule['display_setting']['clock_setting']);
         $subscribeSettingObject     = new SubscribeSetting($configModule['display_setting']['subscribe_setting']);
@@ -110,6 +119,9 @@ class ConfigRepository implements ConfigRepositoryInterface
         $maintenanceObject->setMaintenanceBackgroundVideo($videoUrl);
         $maintenanceObject->setMaintenanceBackgroundImage($backgroundImageUrl);
         $maintenanceObject->setMaintenanceBackgroundMultiImage($multiImage);
+        if (!$maintenanceObject->getMaintenanceProgressValue()) {
+            $maintenanceObject->setMaintenanceProgressValue(Image::PROGRESS_VALUE);
+        }
         $comingSoonObject  = new ComingSoonSetting($configModule['comingsoon_setting']);
 
         $logoUrl = $this->helperImage->getLogoUrl(
@@ -161,14 +173,5 @@ class ConfigRepository implements ConfigRepositoryInterface
         }
 
         return $socialContactSettingObject;
-    }
-
-    /**
-     * @param null $storeId
-     *
-     * @return array|mixed
-     */
-    public function getStoreConfigs($storeId = null)
-    {
     }
 }

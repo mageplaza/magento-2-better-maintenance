@@ -49,6 +49,7 @@ class Image extends Media
     const TEMPLATE_MEDIA_TYPE_IMAGE = 'image';
     const TEMPLATE_MEDIA_TYPE_LOGO  = 'logo';
     const TEMPLATE_MEDIA_TYPE_VIDEO = 'video';
+    const PROGRESS_VALUE            = 50;
 
     const DEFAULT_MAINTENANCE_LOGO = 'Mageplaza_BetterMaintenance::media/maintenance_logo.png';
     const DEFAULT_COMING_SOON_LOGO = 'Mageplaza_BetterMaintenance::media/coming_soon_logo.png';

@@ -187,7 +187,7 @@ class Maintenance extends Template
     {
         $value = $this->_helperData->getMaintenanceSetting('maintenance_progress_value');
 
-        return empty($value) ? self::PROGRESS_VALUE : $value;
+        return empty($value) ? HelperImage::PROGRESS_VALUE : $value;
     }
 
     /**

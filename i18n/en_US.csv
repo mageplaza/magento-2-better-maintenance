@@ -12,6 +12,7 @@ Subscribe,Subscribe
 "Coming Soon Preview","Coming Soon Preview"
 "Maintenance Preview","Maintenance Preview"
 "We couldn't move this file: %1.","We couldn't move this file: %1."
+"Whitelist IP(s) ' . . ' is not a valid IP address!","Whitelist IP(s) ' . . ' is not a valid IP address!"
 Video,Video
 Image,Image
 "Multiple Images","Multiple Images"
@@ -29,6 +30,7 @@ Double-columns,Double-columns
 None,None
 "Account Registration","Account Registration"
 "Newsletter Subscription","Newsletter Subscription"
+"Better Maintenance is disabled.","Better Maintenance is disabled."
 "Browse to find or drag image here","Browse to find or drag image here"
 "Delete image","Delete image"
 Hidden,Hidden

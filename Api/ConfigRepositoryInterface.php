@@ -31,6 +31,7 @@ interface ConfigRepositoryInterface
      * @param string|null $storeId
      *
      * @return \Mageplaza\BetterMaintenance\Api\Data\ConfigInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getConfigs($storeId = null);
 }

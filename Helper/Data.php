@@ -58,7 +58,7 @@ class Data extends AbstractData
     }
 
     /**
-     * @param $code
+     * @param string $code
      * @param null $storeId
      *
      * @return mixed
@@ -247,5 +247,14 @@ class Data extends AbstractData
         }
 
         return $this->_request->getClientIp();
+    }
+
+    /**
+     * @return int
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getCurrentStoreId()
+    {
+        return $this->storeManager->getStore()->getId();
     }
 }
