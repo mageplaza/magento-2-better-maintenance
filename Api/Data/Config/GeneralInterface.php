@@ -95,7 +95,7 @@ interface GeneralInterface
     public function setWhitelistIp($value);
 
     /**
-     * @return string
+     * @return array
      */
     public function getWhitelistPage();
 

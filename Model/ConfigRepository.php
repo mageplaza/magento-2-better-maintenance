@@ -100,6 +100,12 @@ class ConfigRepository implements ConfigRepositoryInterface
         ];
 
         $generalObject     = new General($configModule['general']);
+        $pageLinks = $generalObject->getWhitelistPage();
+        if ($pageLinks) {
+            $pageLinks = explode(PHP_EOL, $pageLinks);
+            $generalObject->setWhitelistPage($pageLinks);
+        }
+
         $displayObject     = new DisplaySetting($displaySetting);
         $maintenanceObject = new MaintenanceSetting($configModule['maintenance_setting']);
         $logoUrl = $this->helperImage->getLogoUrl(
