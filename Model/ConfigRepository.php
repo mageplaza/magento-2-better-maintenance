@@ -135,7 +135,7 @@ class ConfigRepository implements ConfigRepositoryInterface
             true,
             ['area' => 'frontend']
         );
-        $videoUrl = $this->helperImage->getVideoUrl($comingSoonObject->getComingsoonBackgroundImage());
+        $videoUrl = $this->helperImage->getVideoUrl($comingSoonObject->getComingsoonBackgroundVideo());
         $backgroundImageUrl = $this->helperImage->getBackGroundImageUrl(
             $comingSoonObject->getComingsoonBackgroundImage()
         );
