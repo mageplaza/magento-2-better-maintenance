@@ -91,4 +91,20 @@ class ClockSetting extends DataObject implements ClockSettingInterface
     {
         return $this->setData(self::CLOCK_NUMBER_COLOR, $value);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getClockInnerColor()
+    {
+        return $this->getData(self::CLOCK_INNER_COLOR);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setClockInnerColor($value)
+    {
+        return $this->setData(self::CLOCK_INNER_COLOR, $value);
+    }
 }

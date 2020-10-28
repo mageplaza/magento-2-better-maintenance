@@ -31,6 +31,7 @@ interface ClockSettingInterface
     const CLOCK_TEMPLATE         = 'clock_template';
     const CLOCK_BACKGROUND_COLOR = 'clock_background_color';
     const CLOCK_NUMBER_COLOR     = 'clock_number_color';
+    const CLOCK_INNER_COLOR      = 'clock_inner_color';
 
     /**
      * @return boolean
@@ -79,4 +80,16 @@ interface ClockSettingInterface
      * @return $this
      */
     public function setClockNumberColor($value);
+
+    /**
+     * @return string
+     */
+    public function getClockInnerColor();
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setClockInnerColor($value);
 }
