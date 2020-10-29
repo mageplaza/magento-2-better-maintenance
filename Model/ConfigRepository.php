@@ -91,6 +91,13 @@ class ConfigRepository implements ConfigRepositoryInterface
         $footerSettingBlockObject   = new FooterSetting($configModule['display_setting']['footer_block']);
         $socialContactSettingObject = new SocialContact($configModule['display_setting']['social_contact']);
         $this->setSocialIconUrl($socialContactSettingObject);
+        if (!$clockSettingObject->getClockBackgroundColor()) {
+            $clockSettingObject->setClockBackgroundColor('#FFFFFF');
+        }
+
+        if (!$clockSettingObject->getClockInnerColor()) {
+            $clockSettingObject->setClockInnerColor('#FFFFFF');
+        }
 
         $displaySetting = [
             'clock_setting'     => $clockSettingObject,
@@ -100,11 +107,11 @@ class ConfigRepository implements ConfigRepositoryInterface
         ];
 
         $generalObject     = new General($configModule['general']);
-        $pageLinks = $generalObject->getWhitelistPage() ?: $generalObject->setWhitelistPage([]);
-        if ($pageLinks) {
-            $pageLinks = explode(PHP_EOL, $pageLinks);
-            $generalObject->setWhitelistPage($pageLinks);
+        $pageLinks = [];
+        if ($generalObject->getWhitelistPage()) {
+            $pageLinks = explode(PHP_EOL, $generalObject->getWhitelistPage());
         }
+        $generalObject->setWhitelistPage($pageLinks);
 
         $displayObject     = new DisplaySetting($displaySetting);
         $maintenanceObject = new MaintenanceSetting($configModule['maintenance_setting']);
