@@ -21,7 +21,7 @@
 
 namespace Mageplaza\BetterMaintenance\Model\Api\Config\DisplaySetting;
 
-use Magento\Framework\DataObject;;
+use Magento\Framework\DataObject;
 use Mageplaza\BetterMaintenance\Api\Data\Config\DisplaySetting\SocialContactInterface;
 
 /**
