@@ -35,7 +35,7 @@ interface GeneralInterface
     const WHITELIST_PAGE = 'whitelist_page';
 
     /**
-     * @return string
+     * @return boolean
      */
     public function getEnabled();
 
@@ -59,7 +59,7 @@ interface GeneralInterface
     public function setRedirectTo($value);
 
     /**
-     * @return string
+     * @return boolean
      */
     public function getAutoSwitch();
 

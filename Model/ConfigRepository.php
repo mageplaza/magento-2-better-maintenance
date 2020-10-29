@@ -100,7 +100,7 @@ class ConfigRepository implements ConfigRepositoryInterface
         ];
 
         $generalObject     = new General($configModule['general']);
-        $pageLinks = $generalObject->getWhitelistPage();
+        $pageLinks = $generalObject->getWhitelistPage() ?: $generalObject->setWhitelistPage([]);
         if ($pageLinks) {
             $pageLinks = explode(PHP_EOL, $pageLinks);
             $generalObject->setWhitelistPage($pageLinks);
@@ -117,9 +117,12 @@ class ConfigRepository implements ConfigRepositoryInterface
         $backgroundImageUrl = $this->helperImage->getBackGroundImageUrl(
             $maintenanceObject->getMaintenanceBackgroundImage()
         );
-        $multiImage = $this->helperImage->getMultipleImagesUrl(
-            $maintenanceObject->getMaintenanceBackgroundMultiImage()
-        );
+        $multiImage = [];
+        if ($maintenanceObject->getMaintenanceBackgroundMultiImage()) {
+            $multiImage = $this->helperImage->getMultipleImagesUrl(
+                $maintenanceObject->getMaintenanceBackgroundMultiImage()
+            );
+        }
 
         $maintenanceObject->setMaintenanceLogo($logoUrl);
         $maintenanceObject->setMaintenanceBackgroundVideo($videoUrl);
@@ -139,9 +142,13 @@ class ConfigRepository implements ConfigRepositoryInterface
         $backgroundImageUrl = $this->helperImage->getBackGroundImageUrl(
             $comingSoonObject->getComingsoonBackgroundImage()
         );
-        $multiImage = $this->helperImage->getMultipleImagesUrl(
-            $comingSoonObject->getComingsoonBackgroundMultiImage()
-        );
+
+        $multiImage = [];
+        if ($comingSoonObject->getComingsoonBackgroundMultiImage()) {
+            $multiImage = $this->helperImage->getMultipleImagesUrl(
+                $comingSoonObject->getComingsoonBackgroundMultiImage()
+            );
+        }
 
         $comingSoonObject->setComingsoonLogo($logoUrl);
         $comingSoonObject->setComingsoonBackgroundVideo($videoUrl);
