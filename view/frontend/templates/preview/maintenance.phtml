@@ -96,7 +96,7 @@ $data = $block->getFormData();
     <!--    Social area-->
     <?php if ($data['[social_enabled]']) : ?>
         <div id="mpbm-social-contact">
-            <div id="mpbm-social-label" style="display: inline-block">
+            <div id="mpbm-social-label" style="display: inline-block; color: <?= /* @noEscape */ $data['[social_label_color]'] ?>;">
                 <p><?= /* @noEscape */ $block->getSocialLabel() ?></p>
             </div>
             <?php foreach ($block->getSocialList() as $value) : ?>
@@ -123,10 +123,6 @@ $data = $block->getFormData();
 <style>
     .mpbm-text {
         color: <?= /* @noEscape */ $block->getLabelColor('[maintenance_color]') ?>;
-    }
-
-    #mpbm-social-label {
-        color: <?= /* @noEscape */ $data['[social_label_color]'] ?>;
     }
 
     <?php if (array_key_exists('[clock_number_color]', $data) && $data['[clock_template]'] === 'stack') : ?>
