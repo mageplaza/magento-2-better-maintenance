@@ -134,15 +134,24 @@ class Redirect implements ObserverInterface
             >= strtotime($this->_helperData->getConfigGeneral('end_time'))) {
             return;
         }
+        $home = $this->_request->getFullActionName();
 
-        if ($redirectTo === RedirectTo::MAINTENANCE_PAGE && $ctlName !== 'preview' && $this->_request->getControllerName()) {
-            $this->_view->loadLayout(['default', 'mpbettermaintenance_maintenance_index'], true, true, false);
-            $this->_response->setHttpResponseCode(503);
-        }
+        if ($home == 'cms_index_index') {
 
-        if ($redirectTo === RedirectTo::COMING_SOON_PAGE && $ctlName !== 'preview' && $this->_request->getControllerName()) {
-            $this->_view->loadLayout(['default', 'mpbettermaintenance_comingsoon_index'], true, true, false);
-            $this->_response->setHttpResponseCode(503);
+            $url = $this->_blockRedirect->getUrl($redirectTo);
+            return $this->_response->setRedirect($url);
+
+        }else{
+            if ($home !== '_noroute_index' && !$this->_view->isLayoutLoaded()) {
+                if ($redirectTo === RedirectTo::MAINTENANCE_PAGE && $ctlName !== 'preview' && $this->_request->getControllerName()) {
+                    $this->_view->loadLayout(['default', 'mpbettermaintenance_maintenance_index'], true, true, false);
+                    $this->_response->setHttpResponseCode(503);
+                }
+                if ($redirectTo === RedirectTo::COMING_SOON_PAGE && $ctlName !== 'preview' && $this->_request->getControllerName()) {
+                    $this->_view->loadLayout(['default', 'mpbettermaintenance_comingsoon_index'], true, true, false);
+                    $this->_response->setHttpResponseCode(503);
+                }
+            }
         }
 
         $this->_request->setDispatched(true);
