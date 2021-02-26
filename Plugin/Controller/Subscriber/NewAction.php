@@ -35,8 +35,6 @@ use Magento\Newsletter\Model\SubscriberFactory;
 use Magento\Newsletter\Model\SubscriptionManagerInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\BetterMaintenance\Helper\Data;
-use Magento\Framework\App\ObjectManager;
-use Magento\Framework\App\Action\Action as Action;
 
 /**
  * Class NewAction
@@ -60,6 +58,50 @@ class NewAction extends CoreNewAction
     protected $_layout;
 
     /**
+     * NewAction constructor.
+     *
+     * @param Context $context
+     * @param SubscriberFactory $subscriberFactory
+     * @param Session $customerSession
+     * @param StoreManagerInterface $storeManager
+     * @param CustomerUrl $customerUrl
+     * @param CustomerAccountManagement $customerAccountManagement
+     * @param SubscriptionManagerInterface $subscriptionManager
+     * @param JsonFactory $jsonFactory
+     * @param Data $helperData
+     * @param LayoutInterface $layoutInterface
+     * @param EmailValidator|null $emailValidator
+     */
+    public function __construct(
+        Context $context,
+        SubscriberFactory $subscriberFactory,
+        Session $customerSession,
+        StoreManagerInterface $storeManager,
+        CustomerUrl $customerUrl,
+        CustomerAccountManagement $customerAccountManagement,
+        SubscriptionManagerInterface $subscriptionManager,
+        JsonFactory $jsonFactory,
+        Data $helperData,
+        LayoutInterface $layoutInterface,
+        EmailValidator $emailValidator = null
+    ) {
+        $this->resultJsonFactory = $jsonFactory;
+        $this->_helperData       = $helperData;
+        $this->_layout           = $layoutInterface;
+
+        parent::__construct(
+            $context,
+            $subscriberFactory,
+            $customerSession,
+            $storeManager,
+            $customerUrl,
+            $customerAccountManagement,
+            $subscriptionManager,
+            $emailValidator
+        );
+    }
+
+    /**
      * @param CoreNewAction $subject
      * @param $result
      *
@@ -68,11 +110,7 @@ class NewAction extends CoreNewAction
      */
     public function afterExecute(CoreNewAction $subject, $result)
     {
-        $resultJsonFactory = ObjectManager::getInstance()->get(JsonFactory::class);
-        $_helperData = ObjectManager::getInstance()->get(Data::class);
-        $_layout = ObjectManager::getInstance()->get(LayoutInterface::class);
-
-        if (!$_helperData->isEnabled() || !$this->getRequest()->isAjax()) {
+        if (!$this->_helperData->isEnabled() || !$this->getRequest()->isAjax()) {
             return $result;
         }
 
@@ -85,8 +123,8 @@ class NewAction extends CoreNewAction
         }
 
         /** @var Messages $msgBlock */
-        $msgBlock = $_layout->createBlock(Messages::class);
-
+        $msgBlock = $this->_layout->createBlock(Messages::class);
+        $html     = [];
         foreach ($type as $key => $value) {
             if ($value === 'error') {
                 $html[] = $msgBlock->addError($msg[$key])->toHtml();
@@ -98,6 +136,6 @@ class NewAction extends CoreNewAction
         }
         $this->getResponse()->clearHeader('location');
 
-        return $resultJsonFactory->create()->setData($html);
+        return $this->resultJsonFactory->create()->setData($html);
     }
 }
