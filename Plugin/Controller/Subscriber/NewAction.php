@@ -127,7 +127,7 @@ class NewAction extends CoreNewAction
         $html     = [];
         foreach ($type as $key => $value) {
             if ($value === 'error') {
-                $html[] = $msgBlock->addError($msg[$key])->toHtml();
+                $html[] = $msgBlock->addError($msg[$key] ?: __('This email address is already subscribed.'))->toHtml();
             }
 
             if ($value === 'success') {
