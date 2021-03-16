@@ -424,3 +424,30 @@ The settings here will apply to both Better Maintenance Page and Coming Soon Pag
 - **Preview button**: Admin can click **Preview** to quickly see the edited page. The **Preview** page has the same content as Frontend. If the admin uploads files, need to save the configuration before previewing.
 
 
+
+**Explore more Mageplaza extensions on Magento Marketplace, Github**
+
+☞ [Magento 2 OneStepCheckout](https://marketplace.magento.com/mageplaza-magento-2-one-step-checkout-extension.html)
+
+☞ [Magento 2 SEO extension](https://marketplace.magento.com/mageplaza-magento-2-seo-extension.html)
+
+☞ [Magento 2 Reward Points extension](https://marketplace.magento.com/mageplaza-module-reward-points.html)
+
+☞ [Magento 2 Blog extension](https://marketplace.magento.com/mageplaza-magento-2-blog-extension.html)
+
+☞ [Magento 2 Layered Navigation module](https://marketplace.magento.com/mageplaza-layered-navigation-m2.html)
+
+☞ [Magento 2 GDPR extension](https://marketplace.magento.com/mageplaza-module-gdpr.html)
+
+☞ [Magento 2 GTM extension](https://www.mageplaza.com/magento-2-google-tag-manager/)
+
+☞ [Magento 2 Social Login on Github](https://github.com/mageplaza/magento-2-social-login)
+
+☞ [Magento 2 SEO on Github](https://github.com/mageplaza/magento-2-seo)
+
+☞ [Magento 2 SMTP on Github](https://github.com/mageplaza/magento-2-smtp)
+
+☞ [Magento 2 GDPR on Github](https://github.com/mageplaza/magento-2-gdpr)
+
+☞ [Magento 2 Login As Customer on Github](https://github.com/mageplaza/magento-2-login-as-customer)
+
