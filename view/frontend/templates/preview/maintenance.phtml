@@ -125,9 +125,11 @@ $data = $block->getFormData();
         color: <?= /* @noEscape */ $block->getLabelColor('[maintenance_color]') ?>;
     }
 
+    <?php if (isset($data['[social_label_color]'])) : ?>
     #mpbm-social-label {
         color: <?= /* @noEscape */ $data['[social_label_color]'] ?>;
     }
+    <?php endif ?>
 
     <?php if (array_key_exists('[clock_number_color]', $data) && $data['[clock_template]'] === 'stack') : ?>
         <?php $inner = $data['[clock_inner_color]'] ?>

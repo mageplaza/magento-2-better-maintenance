@@ -67,9 +67,9 @@ class NewAction extends CoreNewAction
      * @param CustomerUrl $customerUrl
      * @param CustomerAccountManagement $customerAccountManagement
      * @param SubscriptionManagerInterface $subscriptionManager
-     * @param JsonFactory $resultJsonFactory
+     * @param JsonFactory $jsonFactory
      * @param Data $helperData
-     * @param LayoutInterface $layout
+     * @param LayoutInterface $layoutInterface
      * @param EmailValidator|null $emailValidator
      */
     public function __construct(
@@ -80,17 +80,25 @@ class NewAction extends CoreNewAction
         CustomerUrl $customerUrl,
         CustomerAccountManagement $customerAccountManagement,
         SubscriptionManagerInterface $subscriptionManager,
-        JsonFactory $resultJsonFactory,
+        JsonFactory $jsonFactory,
         Data $helperData,
-        LayoutInterface $layout,
+        LayoutInterface $layoutInterface,
         EmailValidator $emailValidator = null
     ) {
-        $this->resultJsonFactory = $resultJsonFactory;
+        $this->resultJsonFactory = $jsonFactory;
         $this->_helperData       = $helperData;
-        $this->_layout           = $layout;
+        $this->_layout           = $layoutInterface;
 
-        parent::__construct($context, $subscriberFactory, $customerSession, $storeManager, $customerUrl,
-            $customerAccountManagement, $subscriptionManager, $emailValidator);
+        parent::__construct(
+            $context,
+            $subscriberFactory,
+            $customerSession,
+            $storeManager,
+            $customerUrl,
+            $customerAccountManagement,
+            $subscriptionManager,
+            $emailValidator
+        );
     }
 
     /**
@@ -116,10 +124,10 @@ class NewAction extends CoreNewAction
 
         /** @var Messages $msgBlock */
         $msgBlock = $this->_layout->createBlock(Messages::class);
-        $html = [];
+        $html     = [];
         foreach ($type as $key => $value) {
             if ($value === 'error') {
-                $html[] = $msgBlock->addError($msg[$key])->toHtml();
+                $html[] = $msgBlock->addError($msg[$key] ?: __('This email address is already subscribed.'))->toHtml();
             }
 
             if ($value === 'success') {
