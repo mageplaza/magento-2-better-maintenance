@@ -80,20 +80,14 @@ class Background extends Comingsoon
     {
         if ($this->redirectTo() === RedirectTo::MAINTENANCE_PAGE) {
             $image = $this->getMaintenanceSetting('maintenance_background_image');
-            if (!$image) {
-                return $this->getViewFileUrl(self::DEFAULT_MAINTENANCE_BG);
-            }
 
-            return $this->getImageUrl($image);
+            return $this->_helperImage->getBackGroundImageUrl($image);
         }
 
         if ($this->redirectTo() === RedirectTo::COMING_SOON_PAGE) {
             $image = $this->getComingSoonSetting('comingsoon_background_image');
-            if (!$image) {
-                return $this->getViewFileUrl(self::DEFAULT_COMING_SOON_BG);
-            }
 
-            return $this->getImageUrl($image);
+            return $this->_helperImage->getBackGroundImageUrl($image, false);
         }
 
         return '';

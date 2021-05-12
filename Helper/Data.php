@@ -48,7 +48,17 @@ class Data extends AbstractData
     }
 
     /**
-     * @param $code
+     * @param string|int $storeId
+     *
+     * @return array|mixed
+     */
+    public function getBetterMaintenanceConfigs($storeId)
+    {
+        return $this->getConfigValue(static::CONFIG_MODULE_PATH, $storeId);
+    }
+
+    /**
+     * @param string $code
      * @param null $storeId
      *
      * @return mixed
@@ -237,5 +247,14 @@ class Data extends AbstractData
         }
 
         return $this->_request->getClientIp();
+    }
+
+    /**
+     * @return int
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getCurrentStoreId()
+    {
+        return $this->storeManager->getStore()->getId();
     }
 }

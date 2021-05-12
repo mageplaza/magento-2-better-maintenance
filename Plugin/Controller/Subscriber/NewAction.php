@@ -109,6 +109,8 @@ class NewAction extends CoreNewAction
         $msgs = $this->messageManager->getMessages(1);
         $msg  = [];
         $type = [];
+        $html = [];
+        
         foreach ($msgs->getItems() as $value) {
             $msg[]  = $value->getText();
             $type[] = $value->getType();

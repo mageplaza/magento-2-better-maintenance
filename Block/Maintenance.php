@@ -40,10 +40,6 @@ use Mageplaza\BetterMaintenance\Model\Config\Source\System\RedirectTo;
 class Maintenance extends Template
 {
     const PROGRESS_VALUE           = 50;
-    const DEFAULT_MAINTENANCE_LOGO = 'Mageplaza_BetterMaintenance::media/maintenance_logo.png';
-    const DEFAULT_MAINTENANCE_BG   = 'Mageplaza_BetterMaintenance::media/maintenance_bg.jpg';
-    const DEFAULT_COMING_SOON_LOGO = 'Mageplaza_BetterMaintenance::media/coming_soon_logo.png';
-    const DEFAULT_COMING_SOON_BG   = 'Mageplaza_BetterMaintenance::media/coming_soon_bg.jpg';
 
     /**
      * @var HelperData
@@ -93,20 +89,9 @@ class Maintenance extends Template
     {
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
 
-        if ($redirectTo === RedirectTo::MAINTENANCE_PAGE && !$logo) {
-            return $this->getViewFileUrl(self::DEFAULT_MAINTENANCE_LOGO);
-        }
+        $isMaintenance = $redirectTo === RedirectTo::MAINTENANCE_PAGE;
 
-        if ($redirectTo === RedirectTo::COMING_SOON_PAGE && !$logo) {
-            return $this->getViewFileUrl(self::DEFAULT_COMING_SOON_LOGO);
-        }
-
-        return $this->_helperImage->getMediaUrl(
-            $this->_helperImage->getMediaPath(
-                $logo,
-                HelperImage::TEMPLATE_MEDIA_TYPE_LOGO
-            )
-        );
+        return $this->_helperImage->getLogoUrl($logo, $isMaintenance);
     }
 
     /**
@@ -152,39 +137,12 @@ class Maintenance extends Template
     /**
      * @param $images
      *
-     * @return array
-     */
-    public function getListMultipleImages($images)
-    {
-        $data = HelperData::jsonDecode($images);
-        $list = [];
-
-        foreach ($data as $key => $value) {
-            $list[] = $value['file'];
-        }
-
-        return $list;
-    }
-
-    /**
-     * @param $images
-     *
      * @return array|null
      * @throws NoSuchEntityException
      */
     public function getMultipleImagesUrl($images)
     {
-        $urls   = [];
-        $images = $this->getListMultipleImages($images);
-        if (empty($images)) {
-            return null;
-        }
-
-        foreach ($images as $image) {
-            $urls[] = $this->_helperImage->getMediaUrl($this->_helperImage->getMediaPath($image));
-        }
-
-        return $urls;
+        return $this->_helperImage->getMultipleImagesUrl($images);
     }
 
     /**
@@ -229,7 +187,7 @@ class Maintenance extends Template
     {
         $value = $this->_helperData->getMaintenanceSetting('maintenance_progress_value');
 
-        return empty($value) ? self::PROGRESS_VALUE : $value;
+        return empty($value) ? HelperImage::PROGRESS_VALUE : $value;
     }
 
     /**

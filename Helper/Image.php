@@ -31,9 +31,11 @@ use Magento\Framework\Filesystem\Io\File;
 use Magento\Framework\Image\AdapterFactory;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\UrlInterface;
+use Magento\Framework\View\Asset\Repository;
 use Magento\MediaStorage\Model\File\Uploader;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Magento\Store\Model\StoreManagerInterface;
+use Mageplaza\BetterMaintenance\Helper\Data as HelperData;
 use Mageplaza\Core\Helper\Media;
 
 /**
@@ -47,11 +49,24 @@ class Image extends Media
     const TEMPLATE_MEDIA_TYPE_IMAGE = 'image';
     const TEMPLATE_MEDIA_TYPE_LOGO  = 'logo';
     const TEMPLATE_MEDIA_TYPE_VIDEO = 'video';
+    const PROGRESS_VALUE            = 50;
+
+    const DEFAULT_MAINTENANCE_LOGO = 'Mageplaza_BetterMaintenance::media/maintenance_logo.png';
+    const DEFAULT_COMING_SOON_LOGO = 'Mageplaza_BetterMaintenance::media/coming_soon_logo.png';
+    const DEFAULT_MAINTENANCE_BG   = 'Mageplaza_BetterMaintenance::media/maintenance_bg.jpg';
+    const DEFAULT_COMING_SOON_BG   = 'Mageplaza_BetterMaintenance::media/coming_soon_bg.jpg';
 
     /**
      * @var File
      */
     protected $_file;
+
+    /**
+     * Asset service
+     *
+     * @var Repository
+     */
+    protected $_assetRepo;
 
     /**
      * Image constructor.
@@ -63,6 +78,7 @@ class Image extends Media
      * @param UploaderFactory $uploaderFactory
      * @param AdapterFactory $imageFactory
      * @param File $file
+     * @param Repository $assetRepo
      *
      * @throws FileSystemException
      */
@@ -73,11 +89,147 @@ class Image extends Media
         Filesystem $filesystem,
         UploaderFactory $uploaderFactory,
         AdapterFactory $imageFactory,
-        File $file
+        File $file,
+        Repository $assetRepo
     ) {
-        $this->_file = $file;
+        $this->_file      = $file;
+        $this->_assetRepo = $assetRepo;
 
         parent::__construct($context, $objectManager, $storeManager, $filesystem, $uploaderFactory, $imageFactory);
+    }
+
+    /**
+     * Retrieve url of a view file
+     *
+     * @param string $fileId
+     * @param array $params
+     * @return string
+     */
+    public function getViewFileUrl($fileId, array $params = [])
+    {
+        try {
+            $params = array_merge(['_secure' => $this->_getRequest()->isSecure()], $params);
+            return $this->_assetRepo->getUrlWithParams($fileId, $params);
+        } catch (Exception $e) {
+            return '';
+        }
+    }
+
+    /**
+     * @param string $logo
+     * @param boolean $isMaintenance
+     * @param array $params
+     *
+     * @return string
+     * @throws NoSuchEntityException
+     */
+    public function getLogoUrl($logo, $isMaintenance = true, $params = [])
+    {
+        $defaultLogo = $isMaintenance ? self::DEFAULT_MAINTENANCE_LOGO : self::DEFAULT_COMING_SOON_LOGO;
+
+        return $this->getImageUrl($logo, self::TEMPLATE_MEDIA_TYPE_LOGO, $defaultLogo, $params);
+    }
+
+    /**
+     * @param string $background
+     * @param boolean $isMaintenance
+     * @param array $params
+     *
+     * @return string
+     * @throws NoSuchEntityException
+     */
+    public function getBackGroundImageUrl($background, $isMaintenance = true, $params = [])
+    {
+        $default = $isMaintenance ? self::DEFAULT_MAINTENANCE_BG : self::DEFAULT_COMING_SOON_BG;
+
+        return $this->getImageUrl($background, self::TEMPLATE_MEDIA_TYPE_IMAGE, $default, $params);
+    }
+
+    /**
+     * @param $imageValue
+     * @param $type
+     * @param $defaultValue
+     * @param array $params
+     *
+     * @return string
+     * @throws NoSuchEntityException
+     */
+    public function getImageUrl($imageValue, $type, $defaultValue, $params = [])
+    {
+        if (!$imageValue) {
+            return $this->getViewFileUrl($defaultValue, $params);
+        }
+
+        if (!$type) {
+            $type = self::TEMPLATE_MEDIA_TYPE_IMAGE;
+        }
+
+        return $this->getMediaUrlByType($imageValue, $type);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     * @throws NoSuchEntityException
+     */
+    public function getVideoUrl($value)
+    {
+        return $this->getMediaUrlByType($value, self::TEMPLATE_MEDIA_TYPE_VIDEO);
+    }
+
+    /**
+     * @param string $type
+     * @param string $value
+     *
+     * @return string
+     * @throws NoSuchEntityException
+     */
+    public function getMediaUrlByType($value, $type)
+    {
+        if (!$value) {
+            return '';
+        }
+
+        return $this->getMediaUrl($this->getMediaPath($value, $type));
+    }
+
+    /**
+     * @param $images
+     *
+     * @return array
+     */
+    public function getListMultipleImages($images)
+    {
+        $data = HelperData::jsonDecode($images);
+        $list = [];
+
+        foreach ($data as $key => $value) {
+            $list[] = $value['file'];
+        }
+
+        return $list;
+    }
+
+    /**
+     * @param $images
+     *
+     * @return array|null
+     * @throws NoSuchEntityException
+     */
+    public function getMultipleImagesUrl($images)
+    {
+        $urls   = [];
+        $images = $this->getListMultipleImages($images);
+        if (empty($images)) {
+            return null;
+        }
+
+        foreach ($images as $image) {
+            $urls[] = $this->getMediaUrl($this->getMediaPath($image));
+        }
+
+        return $urls;
     }
 
     /**
