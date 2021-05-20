@@ -99,6 +99,15 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
     <?php endif; ?>
 </div>
 
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $("#mpbm-single-column").attr('style','height:'+$(document).height()+'px !important;');
+        $('#html-body').attr('style','margin: 0;');
+    });
+</script>
+
 <?php if ($block->getSubscribeSetting('subscribe_type') !== 'none') : ?>
     <script>
         require([
@@ -134,7 +143,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
             margin: auto !important;
         }
     }
-    
+
     <?php if ($block->getClockSetting('clock_template') === 'stack') : ?>
         <?php $inner = !empty($block->getClockSetting('clock_inner_color')) ? $block->getClockSetting('clock_inner_color') : '#FFFFFF'?>
     .stack-txt1 {

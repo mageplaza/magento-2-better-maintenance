@@ -157,6 +157,15 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
     }
 </style>
 
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $("#mpbm-single-column").attr('style','height:'+$(document).height()+'px !important;');
+        $('#html-body').attr('style','margin: 0;');
+    });
+</script>
+
 <?php if ($block->getSubscribeSetting('subscribe_type') !== 'none') : ?>
     <script>
         require([
