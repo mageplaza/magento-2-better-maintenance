@@ -1,0 +1,96 @@
+"Images (.gif, .jpg, .png)","Resimler (.gif, .jpg, .png)"
+Days,Gün
+Hours,Saat
+Minutes,Dakika
+Seconds,Saniye
+"Under Maintenance","Şu An Bakımdayız"
+"Coming Soon","Çok Yakında Buradayız"
+"We're currently down for maintenance. Be right back!","Sistem bakımı ve güncellemesi nedeniyle kısa bir süre kapalıyız. En kısa zamanda buradayız!"
+"Our new site is coming soon. Stay tuned!","Yeni sitemiz yakında hizmetinizde. Bizi izlemeye devam edin!"
+"Thank you for registering.","Kaydolduğunuz için teşekkür ederiz."
+Subscribe,Abone Ol
+"Coming Soon Preview","Yakında Buradayız Önizlemesi"
+"Maintenance Preview","Bakım Önizlemesi"
+"We couldn't move this file: %1.","Bu dosya taşınamadı : %1."
+Video,Video
+Image,Resim
+"Multiple Images","Çoklu Resim"
+Simple,Basit
+Circle,Daire
+Square,Kare
+Stack,Yığın
+Modern,Modern
+"--Please Select--","--Lütfen Seçiniz--"
+Single-column,Tek kolon
+Double-columns,Çift kolon
+"Double-columns with Left-side content","Çift kolon içerik solda"
+"Maintenance Page","Bakımdayız Sayfası"
+"Coming Soon Page","Yakında Buradayız Sayfası"
+None,Hiç
+"Account Registration","Üyelik"
+"Newsletter Subscription","Duyuru Aboneliği"
+"Browse to find or drag image here","Resmi bulmak için bilgisayarınıza göz atın ya da resmi sürükleyip buraya bırakın"
+"Delete image","Resmi sil"
+Hidden,Gizli
+Logo,Logo
+"Social logo","Sosyal logo"
+"Social Logo","Sosyal Logo"
+"Mageplaza Better Maintenance","Mageplaza Gelişmiş Bakım Sayfası"
+"Better Maintenance","Gelişmiş Bakım Sayfası"
+General,Genel
+Enable,Etkinleştir
+"Select <strong>Yes</strong> to enable the module","Modülü etkinleştirmek için <strong>Evet</strong> seçiniz"
+"Real Time of Website","Sitenin Gerçek Saati"
+"End Date Time","Bitiş Tarihi"
+"Redirect To Page","Bu Sayfaya Yönlendir"
+"Auto Switch to Live Site Mode","Canlı Siteye Otomatik Geçiş Yap"
+"Your website will automatically switch back to Live Site Mode when configured time ends.","Belirlenen süre sona erdiğinde web siteniz otomatik olarak Canlı Siteye geri dönecektir."
+"Whitelist IP(s)","İzin verilen IP adresleri"
+"Separated by comma(s).","Virgülle ayır."
+"Whitelist Page Link(s)","İzin verilen sayfalar"
+"Separated by break line(s).","Her satıra bir kayıt giriniz."
+"Display Setting","Gösterim Ayarları"
+"Clock Setting","Saat Ayarları"
+"Countdown Clock Style","Geri Sayım Saat Stili"
+"Clock Background Color","Saat Arka Plan Rengi"
+"Clock Inner Background Color","Saat İç Arka Plan Rengi"
+"Clock Number Color","Saat Rakam Rengi"
+"Subscribe Setting","Abonelik Ayarları"
+"Subscription Type","Abonelik Tipi"
+"Subscription Description","Abonelik Açıklaması"
+"Description Text Color","Açıklama Yazı Rengi"
+"Button Label","Buton Rengi"
+"Better less than 15 characters.","15 harften az olmasına gayret ediniz."
+"Button Text Color","Buton Yazı Rengi"
+"Button Background Color","Buton Arka Plan Rengi"
+"Footer Block","Alt Kısım Bloku"
+"Select CMS Block","Statik Blok Seçiniz"
+"Selected CMS Block(s) are the footer(s) of the Maitenance / Coming Soon Page. Therefore, it is recommended to select CMS Block Link(s) as Whitelist Page Link (s) so that customers can access.","Seçilen Statik Bloklar, Bakım / Çok Yakında Sayfasının alt bilgileridir. Bu nedenle, müşterilerin erişebilmesi için Beyaz Liste Sayfa Bağlantıları olarak Statik Blok Bağlantılarının seçilmesi önerilir."
+"Social Contact","Sosyal Bağlantı"
+Label,Etiket
+"Label Color","Etiket Rengi"
+"Facebook Page Link","Facebook Sayfa Bağlantısı"
+"Twitter Page Link","Twitter Sayfa Bağlantısı"
+"Instagram Page Link","Instagram Sayfa Bağlantısı"
+"Google+ Page Link","Google+ Sayfa Bağlantısı"
+"Youtube Page Link","Youtube Sayfa Bağlantısı"
+"Pinterest Page Link","Pinterest Sayfa Bağlantısı"
+"Maintenance Page Setting","Bakım Sayfası Ayarları"
+"Select Layout","Yapı Seçiniz"
+"Page Title","Sayfa Başlığı"
+"Page Description","Sayfa Açıklaması"
+"Text Color","Yazı Rengi"
+"Supported image formats: gif, jpg, jpeg, png.<br>Recommended size: less than 2MB.","Desteklenen resim dosyası tipleri : gif, jpg, jpeg, png.<br>Önerilen boyut: 2MB'den az."
+"Background Type","Arka Plan Tipi"
+"For Video type, please check your upload_max_size PHP value. If the size of uploaded video is greater than this value, the video will not be uploaded.","Video türü için lütfen upload_max_size PHP değerinizi kontrol edin. Yüklenen videonun boyutu bu değerden büyükse, video yüklenmeyecektir."
+"Upload File","Dosya Yükle"
+"Supported video formats: mp4","Desteklenen video formatları : mp4"
+"Show Progress Bar","İlerleme Göstergesini Göster"
+"Progress Value","İlerleme Değeri"
+"percentages (%). Default = 50.","yüzdeler (%). Varsayılan = 50."
+"Progress Bar Color","İlerleme Göstergesi Rengi"
+"If uploading files, please save configuration before preview.","Dosya yüklüyorsanız, lütfen ön izlemeden önce ayarları kaydedin."
+"Coming Soon Page Setting","Yakında Buradayız Sayfası Ayarları"
+"Meta Title","Meta Başlığı"
+"Meta Keywords","Meta Kelimeleri"
+"Meta Description","Meta Açıklaması"
