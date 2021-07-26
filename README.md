@@ -41,6 +41,13 @@ A: You can easily do it by accessing the Layout section and select style: Double
 
 Install via composer (recommend): Run the following command in Magento 2 root folder:
 
+With Marketing Automation (recommend):
+```
+composer require mageplaza/module-better-maintenance mageplaza/module-smtp
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy
+```
+Without Marketing Automation:
 ```
 composer require mageplaza/module-better-maintenance
 php bin/magento setup:upgrade
