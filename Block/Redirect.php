@@ -96,14 +96,19 @@ class Redirect extends Template
      */
     public function redirectToUrl()
     {
+        if (!$this->_helperData->isEnabled()) {
+            return false;
+        }
+
+        if (strtotime($this->_localeDate->date()->format('m/d/Y H:i:s'))
+            >= strtotime($this->_helperData->getEndTime())) {
+            return false;
+        }
+
         $this->_response->setNoCacheHeaders();
         $redirectTo = $this->_helperData->getConfigGeneral('redirect_to');
         $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
         $currentIp  = $this->_helperData->getClientIp();
-
-        if (!$this->_helperData->isEnabled()) {
-            return false;
-        }
 
         foreach ($this->getWhitelistIp() as $value) {
             if ($this->_helperData->checkIp($currentIp, trim($value))) {
@@ -115,11 +120,6 @@ class Redirect extends Template
             if ($currentUrl === $value) {
                 return false;
             }
-        }
-
-        if (strtotime($this->_localeDate->date()->format('m/d/Y H:i:s'))
-            >= strtotime($this->_helperData->getEndTime())) {
-            return false;
         }
 
         if ($redirectTo === RedirectTo::MAINTENANCE_PAGE || $redirectTo === RedirectTo::COMING_SOON_PAGE) {
