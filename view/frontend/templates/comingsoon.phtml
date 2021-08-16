@@ -21,10 +21,13 @@
 
 /**
  * @var \Mageplaza\BetterMaintenance\Block\Comingsoon $block ;
+ * @var $helper \Mageplaza\Search\Helper\Data
  */
 
+$helper              = $this->helper(\Mageplaza\BetterMaintenance\Helper\Data::class);
 $subscribeLabel      = $block->getSubscribeSetting('subscribe_label');
 $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
+$emailData           = $helper->getCustomerEmail();
 ?>
 
 <?= /* @noEscape */ $block->getChildHtml('background') ?>
@@ -70,6 +73,17 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
             <?php endif; ?>
             <?= /* @noEscape */ $block->getChildHtml('register') ?>
         </div>
+
+        <div id="mpbm-js" style="display: none;"></div>
+        <script type="text/x-magento-init">
+        {
+            "#mpbm-js": {
+                "Mageplaza_BetterMaintenance/js/message/submit-account":{
+                    "data": {"emails": <?= /** @noEscape */ json_encode($emailData) ?>}
+                }
+            }
+        }
+        </script>
     <?php endif; ?>
 
     <!--    Social area-->
@@ -98,6 +112,15 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
         </div>
     <?php endif; ?>
 </div>
+
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $("#mpbm-single-column").attr('style','height:'+$(document).height()+'px !important;');
+        $('#html-body').attr('style','margin: 0;');
+    });
+</script>
 
 <?php if ($block->getSubscribeSetting('subscribe_type') !== 'none') : ?>
     <script>
@@ -134,7 +157,7 @@ $subscribeLabelColor = $block->getSubscribeSetting('subscribe_label_color');
             margin: auto !important;
         }
     }
-    
+
     <?php if ($block->getClockSetting('clock_template') === 'stack') : ?>
         <?php $inner = !empty($block->getClockSetting('clock_inner_color')) ? $block->getClockSetting('clock_inner_color') : '#FFFFFF'?>
     .stack-txt1 {

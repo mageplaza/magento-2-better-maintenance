@@ -21,7 +21,11 @@
 
 namespace Mageplaza\BetterMaintenance\Helper;
 
+use Magento\Framework\App\Helper\Context;
+use Magento\Framework\ObjectManagerInterface;
+use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\AbstractData;
+use Magento\Customer\Model\Customer;
 
 /**
  * Class Data
@@ -33,6 +37,29 @@ class Data extends AbstractData
     const CONFIG_MODULE_PATH = 'mpbettermaintenance';
     const MAINTENANCE_ROUTE  = 'mpmaintenance';
     const COMING_SOON_ROUTE  = 'mpcomingsoon';
+
+    /**
+     * @var Customer
+     */
+    protected $_customer;
+
+    /**
+     * Data constructor.
+     *
+     * @param Context $context
+     * @param ObjectManagerInterface $objectManager
+     * @param StoreManagerInterface $storeManager
+     * @param Customer $customer
+     */
+    public function __construct(
+        Context $context,
+        ObjectManagerInterface $objectManager,
+        StoreManagerInterface $storeManager,
+        Customer $customer
+    ) {
+        $this->_customer = $customer;
+        parent::__construct($context, $objectManager, $storeManager);
+    }
 
     /**
      * @param string $code
@@ -237,5 +264,19 @@ class Data extends AbstractData
         }
 
         return $this->_request->getClientIp();
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomerEmail(){
+        $emails = [];
+        $customers = $this->_customer->getCollection()->addAttributeToSelect("*")->load();
+
+        foreach ($customers as $customer){
+            $emails[] = $customer->getEmail();
+        }
+
+        return $emails;
     }
 }

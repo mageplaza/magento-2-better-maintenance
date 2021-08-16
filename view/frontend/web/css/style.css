@@ -18,6 +18,70 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
+.fieldset.create{
+    border: none;
+}
+
+.form.create.account{
+    margin: auto;
+    min-width: 600px;
+    width: 50%;
+    color: #333333d4;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.fieldset.create .legend{
+    margin: 0 0 20px;
+    padding: 0 0 10px;
+    width: 100%;
+    box-sizing: border-box;
+    float: left;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #c6c6c6;
+}
+
+.fieldset.create .field .label{
+    font-weight: 600;
+    margin: 10px 0 10px;
+    display: inline-block;
+}
+
+.fieldset.additional_info{
+    display: none;
+}
+
+.password-strength-meter{
+    background-color: #f4f4f4;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 9px;
+    position: relative;
+    z-index: 1;
+    font-size: 14px;
+}
+
+div.mage-error {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    color: #ff0000a8;
+}
+
+.fieldset.create .field .control .input-text{
+    background: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #c2c2c2;
+    border-radius: 1px;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    height: 32px;
+    line-height: 1.42857143;
+    padding: 0 9px;
+    vertical-align: baseline;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .flex-box {
     display: flex;
     justify-content: center;
