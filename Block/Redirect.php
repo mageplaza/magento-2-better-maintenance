@@ -80,7 +80,7 @@ class Redirect extends Template
      */
     public function getWhiteListPage()
     {
-        return preg_split("/(\r\n|\n|\r)/", $this->_helperData->getWhitelistPage());
+        return $mapValues = !empty($this->_helperData->getWhitelistPage()) ? preg_split("/(\r\n|\n|\r)/", $this->_helperData->getWhitelistPage()) : [];
     }
 
     /**
@@ -88,7 +88,7 @@ class Redirect extends Template
      */
     public function getWhiteListIp()
     {
-        return explode(',', $this->_helperData->getWhitelistIp());
+        return explode(',', $this->_helperData->getWhitelistIp() ?? '' );
     }
 
     /**
