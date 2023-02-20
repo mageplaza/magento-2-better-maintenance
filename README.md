@@ -1,6 +1,8 @@
 # Better Maintenance For Magento 2
 
-[Better Maintenance for Magento 2](https://www.mageplaza.com/magento-2-better-maintenance/) helps you notify customers that your site is currently under maintenance or upgradation, and prepare for upcoming products/ services. Thanks to Better Maintenance module, store visitors are well informed about maintenance progress as well as the launch date with comfort.
+> **(Update) 2023-02-20**: This project will be marked as a paid item and no longer be maintained as free. For further updates and technical support, please follow [Magento 2 Better Maintenance](https://www.mageplaza.com/magento-2-better-maintenance/) for more information. We understand that this change might create inconvenience for our users. However, this is to ensure that the module will be updated with more useful features to support Magento 2 stores better. If you have any concerns or ideas about any features you would like to see, don’t hesitate to [contact us](https://www.mageplaza.com/support/) and leave a request.
+
+Better Maintenance helps you notify customers that your site is currently under maintenance or upgradation, and prepare for upcoming products/ services. Thanks to Better Maintenance module, store visitors are well informed about maintenance progress as well as the launch date with comfort.
 
 **IMPORTANT NOTE:** This version of Mageplaza Better Maintenance extension on Github is free as a contribution to the Magento community from Mageplaza. This package does not include the technical support. Should you need technical support for this extension, you will have to buy a license from Mageplaza. [Click here to buy](https://www.mageplaza.com/magento-2-better-maintenance/).
 
